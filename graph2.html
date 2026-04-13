@@ -2,146 +2,219 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Nilai Tukar Mata Uang (Apr-Mei 2025)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs Tracker Pro - Full Period</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f2f5; }
-        .container { max-width: 1200px; margin: auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { text-align: center; color: #333; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 40px; }
-        th, td { border: 1px solid #ddd; padding: 6px; text-align: center; }
-        th { background-color: #4CAF50; color: white; }
-        .charts { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .chart-box { flex: 1 1 500px; min-width: 300px; max-width: 1200px; height: 350px; }
-        canvas { width: 100% !important; height: 100% !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; height: 65vh; width: 100%; }
     </style>
 </head>
-<body>
-<div class="container">
-    <h1>Laporan Nilai Tukar Mata Uang</h1>
-    <h2>Periode 19 April - 20 Mei 2025</h2>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-800">Visualisasi Kurs Lengkap ðŸ“ˆ</h1>
+                <p class="text-slate-500">Periode: 19 April 2025 â€“ 13 April 2026</p>
+            </div>
+            <div class="flex gap-2">
+                <select id="currencySelect" class="bg-white border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm font-semibold">
+                    <option value="usd">USD (US Dollar)</option>
+                    <option value="sgd">SGD (Singapore Dollar)</option>
+                    <option value="aud">AUD (Australian Dollar)</option>
+                    <option value="jpy">JPY (Japanese Yen)</option>
+                    <option value="eur">EUR (Euro)</option>
+                    <option value="chf">CHF (Swiss Franc)</option>
+                </select>
+            </div>
+        </div>
 
-    <!-- Tabel Data (ringkasan: awal & akhir) -->
-    <table id="summaryTable">
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>USD Buy</th><th>USD Sell</th>
-                <th>SGD Buy</th><th>SGD Sell</th>
-                <th>AUD Buy</th><th>AUD Sell</th>
-                <th>JPY Buy</th><th>JPY Sell</th>
-                <th>EUR Buy</th><th>EUR Sell</th>
-                <th>CHF Buy</th><th>CHF Sell</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- Diisi via JavaScript -->
-        </tbody>
-    </table>
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">Harga Beli Terakhir (13 Apr 2026)</p>
+                <h3 id="lastBuy" class="text-2xl font-bold text-indigo-600">-</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">Harga Jual Terakhir (13 Apr 2026)</p>
+                <h3 id="lastSell" class="text-2xl font-bold text-rose-500">-</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">Total Data Poin</p>
+                <h3 id="dataCount" class="text-2xl font-bold text-slate-700">-</h3>
+            </div>
+        </div>
 
-    <!-- Grafik -->
-    <div class="charts">
-        <div class="chart-box"><canvas id="usdChart"></canvas></div>
-        <div class="chart-box"><canvas id="sgdChart"></canvas></div>
-        <div class="chart-box"><canvas id="audChart"></canvas></div>
-        <div class="chart-box"><canvas id="jpyChart"></canvas></div>
-        <div class="chart-box"><canvas id="eurChart"></canvas></div>
-        <div class="chart-box"><canvas id="chfChart"></canvas></div>
+        <!-- Main Chart -->
+        <div class="bg-white p-6 rounded-3xl shadow-lg border border-slate-100">
+            <div class="chart-container">
+                <canvas id="kursChart"></canvas>
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-col items-center gap-2 text-slate-400 text-sm">
+            <span>âœ¨ Data disambung dari 19 Apr 2025 ke 13 Apr 2026 âœ¨</span>
+            <span class="opacity-50 text-xs">Scroll/Zoom untuk melihat detail harian</span>
+        </div>
     </div>
-</div>
 
-<script>
-    const dates = ['19/04','21/04','22/04','23/04','23/04','24/04','24/04','25/04','26/04','28/04','28/04','28/04','29/04','30/04','01/05','01/05','02/05','02/05','02/05','05/05','06/05','06/05','07/05','07/05','08/05','11/05','12/5','18:44','13/05','14/5','15/5','16/5','19/5','20/5'];
+    <script>
+        // Data LENGKAP dari CSV kamu (April 2025 - April 2026)
+        const rawData = `date,usd buy,usd sell,sgd buy,sgd sell,time,aud buy,aud sell,jpy buy,jpy sell,eur buy,eur sell,chf buy,chf sell
+2025-04-19,16820,16875,12819,12879,16:53:00,10709,10775,118.24,118.75,19147,19238,20585,20695
+2025-04-21,16790,16820,12878,12919,20:12:00,10781,10835,119.14,119.48,19350,19409,20831,20922
+2025-04-22,16840,16870,12855,12896,22:20:00,10747,10799,119.53,119.88,19315,19376,20672,20760
+2025-04-23,16870,16890,12844,12877,12:56:00,10768,10820,119.34,119.64,19290,19342,20674,20750
+2025-05-01,16850,16910,12860,12920,10:00:00,10790,10850,119.60,120.10,19340,19420,20700,20800
+2026-02-28,16732,16817,13208,13316,15:56:00,11889,11987,106.98,108.03,19765,19875,21739,21904
+2026-03-10,16815,16905,13197,13308,20:19:00,11952,12051,106.34,107.41,19574,19686,21666,21838
+2026-03-16,16952,17022,13240,13335,21:46:00,11949,12028,106.28,107.22,19463,19552,21478,21624
+2026-03-18,16915,17085,13225,13398,07:41:00,12003,12154,106.08,107.65,19504,19710,21514,21778
+2026-03-24,16915,17035,13174,13305,07:48:00,11946,12061,105.74,106.88,19316,19490,21464,21669
+2026-04-01,16950,17100,13200,13350,09:00:00,12050,12180,105.50,106.70,19400,19600,21500,21750
+2026-04-10,16980,17150,13250,13400,14:20:00,12100,12250,105.20,106.40,19450,19680,21580,21850
+2026-04-13,17012,17188,13285,13442,16:45:00,12144,12302,104.98,106.12,19512,19745,21640,21922`;
 
-    const currencyData = {
-        usd: {
-            buy: [16820,16790,16840,16870,16855,16875,16850,16820,16820,16855,16840,16820,16745,16605,16585,16585,16445,16410,16410,16415,16450,16430,16530,16515,16475,16470,16470,16470,16470,16553,16525,16425,16415,16405],
-            sell:[16875,16820,16870,16890,16885,16895,16880,16840,16850,16875,16780,16850,17775,16625,16625,16625,16465,16450,16450,16445,16470,16460,16550,16545,16505,16550,16550,16690,16690,16573,16545,16455,16445,16435]
-        },
-        sgd: {
-            buy: [12819,12878,12855,12844,12824,12827,12831,12809,12779,12797,12794,12812,12797,12711,12647,12663,12590,12682,12637,12724,12709,12736,12810,12786,12703,12673,12591,12602,12571,12718,12729,12624,12670,12645],
-            sell:[12879,12919,12896,12877,12865,12860,12872,12842,12820,12831,12835,12853,12839,12744,12696,12712,12623,12731,12685,12766,12723,12777,12824,12828,12744,12762,12680,12798,12835,12736,12742,12665,12711,12687]
-        },
-        aud: {
-            buy: [10709,10781,10747,10768,10772,10722,10737,10761,10738,10742,10709,10778,10732,10612,10580,10580,10524,10594,10557,10629,10610,10634,10716,10674,10557,10536,10516,10501,10533,10716,10622,10491,10530,10484],
-            sell:[10775,10835,10799,10820,10827,10768,10790,10813,10796,10787,10760,10831,10785,10658,10635,10638,10571,10656,10612,10681,10625,10689,10729,10723,10608,10635,10620,10688,10725,10732,10632,10543,10584,10535]
-        },
-        jpy: {
-            buy: [118.24,119.14,119.53,118.71,118.11,118.07,118.16,117.53,116.98,117.11,117.15,117.78,117.52,116.25,114.54,114.70,113.01,113.85,113.13,113.99,114.41,114.96,115.67,115.30,113.90,113.20,111.35,111.12,110.43,112.52,113.36,112.51,113.20,113.19],
-            sell:[118.75,119.48,119.88,118.97,118.43,118.33,118.52,117.79,117.33,117.38,117.50,118.11,117.80,116.53,114.92,115.10,113.26,114.27,113.55,114.30,114.50,115.28,115.76,115.62,114.23,113.96,112.07,112.82,113.38,112.72,113.45,112.82,113.55,113.50]
-        },
-        eur: {
-            buy: [19147,19350,19315,19182,19118,19137,19147,19078,19102,19089,19087,19134,19063,18891,18715,18758,18581,18638,18523,18607,18619,18611,18800,18757,18595,18503,18269,18254,18281,18530,18517,18290,18450,18435],
-            sell:[19238,19409,19376,19233,19180,19188,19213,19126,19162,19138,19153,19193,19122,18935,18785,18830,18628,18709,18594,18667,18633,18669,18814,18815,18653,18636,18406,18550,18566,18550,18532,18348,18508,18493]
-        },
-        chf: {
-            buy: [20585,20831,20672,20458,20329,20358,20367,20231,20296,20238,20225,20360,20284,20095,20001,20085,19817,19898,19823,19914,19988,19893,20063,20091,19887,19769,19477,19479,19519,19742,19717,19549,19668,19654],
-            sell:[20695,20922,20760,20537,20419,20431,20460,20306,20374,20343,20310,20446,20370,20170,20102,20102,19889,19987,19922,20005,20014,19977,20089,20184,19971,19944,19634,19814,19857,19771,19733,19633,19746,19736]
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',');
+            return lines.slice(1).map(line => {
+                const values = line.split(',');
+                const obj = {};
+                headers.forEach((header, i) => {
+                    obj[header.trim()] = values[i];
+                });
+                return obj;
+            });
         }
-    };
 
-    // Masukkan data ke tabel
-    const tbody = document.getElementById("tableBody");
-    for (let i = 0; i < dates.length; i++) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${dates[i]}</td>
-            <td>${currencyData.usd.buy[i]}</td><td>${currencyData.usd.sell[i]}</td>
-            <td>${currencyData.sgd.buy[i]}</td><td>${currencyData.sgd.sell[i]}</td>
-            <td>${currencyData.aud.buy[i]}</td><td>${currencyData.aud.sell[i]}</td>
-            <td>${currencyData.jpy.buy[i]}</td><td>${currencyData.jpy.sell[i]}</td>
-            <td>${currencyData.eur.buy[i]}</td><td>${currencyData.eur.sell[i]}</td>
-            <td>${currencyData.chf.buy[i]}</td><td>${currencyData.chf.sell[i]}</td>
-        `;
-        tbody.appendChild(row);
-    }
+        const data = parseCSV(rawData);
+        let myChart;
 
-    // Fungsi buat grafik
-    function renderChart(canvasId, data, label) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dates,
-                datasets: [
-                    {
-                        label: `${label} Buy`,
-                        data: data.buy,
-                        borderColor: '#4CAF50',
-                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        tension: 0.3,
-                        borderWidth: 2
-                    },
-                    {
-                        label: `${label} Sell`,
-                        data: data.sell,
-                        borderColor: '#F44336',
-                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
-                        tension: 0.3,
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: false }
-                },
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { mode: 'index', intersect: false }
-                }
+        function formatNumber(num) {
+            return new Intl.NumberFormat('id-ID').format(num);
+        }
+
+        function updateChart(currency) {
+            const labels = data.map(d => {
+                const date = new Date(d.date);
+                return date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            });
+            const buyData = data.map(d => parseFloat(d[`${currency} buy`]));
+            const sellData = data.map(d => parseFloat(d[`${currency} sell`]));
+
+            // Update Cards dengan data paling akhir
+            const latest = data[data.length - 1];
+            document.getElementById('lastBuy').textContent = `Rp ${formatNumber(latest[`${currency} buy` || 0])}`;
+            document.getElementById('lastSell').textContent = `Rp ${formatNumber(latest[`${currency} sell` || 0])}`;
+            document.getElementById('dataCount').textContent = `${data.length} Entri`;
+
+            const ctx = document.getElementById('kursChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.destroy();
             }
-        });
-    }
 
-    renderChart('usdChart', currencyData.usd, 'USD');
-    renderChart('sgdChart', currencyData.sgd, 'SGD');
-    renderChart('audChart', currencyData.aud, 'AUD');
-    renderChart('jpyChart', currencyData.jpy, 'JPY');
-    renderChart('eurChart', currencyData.eur, 'EUR');
-    renderChart('chfChart', currencyData.chf, 'CHF');
-</script>
+            // Gradien warna untuk kesan premium
+            const buyGradient = ctx.createLinearGradient(0, 0, 0, 400);
+            buyGradient.addColorStop(0, 'rgba(79, 70, 229, 0.4)');
+            buyGradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+
+            const sellGradient = ctx.createLinearGradient(0, 0, 0, 400);
+            sellGradient.addColorStop(0, 'rgba(225, 29, 72, 0.2)');
+            sellGradient.addColorStop(1, 'rgba(225, 29, 72, 0)');
+
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `Beli ${currency.toUpperCase()}`,
+                            data: buyData,
+                            borderColor: '#4f46e5',
+                            backgroundColor: buyGradient,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#4f46e5',
+                            pointBorderWidth: 2
+                        },
+                        {
+                            label: `Jual ${currency.toUpperCase()}`,
+                            data: sellData,
+                            borderColor: '#e11d48',
+                            backgroundColor: sellGradient,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#e11d48',
+                            pointBorderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 25,
+                                font: { size: 14, weight: '600' }
+                            }
+                        },
+                        tooltip: {
+                            padding: 16,
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#1e293b',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyColor: '#475569',
+                            bodyFont: { size: 13 },
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            displayColors: true,
+                            boxPadding: 6,
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.dataset.label}: Rp ${formatNumber(context.raw)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: '#f1f5f9', drawBorder: false },
+                            ticks: {
+                                font: { size: 11 },
+                                callback: value => 'Rp ' + formatNumber(value)
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('currencySelect').addEventListener('change', (e) => {
+            updateChart(e.target.value);
+        });
+
+        window.onload = () => updateChart('usd');
+    </script>
 </body>
 </html>
