@@ -103,3 +103,12 @@ td
 	border-left:none;
 	background:#FCD5B4;
 	mso-pattern:#FCD5B4 none;}
+.xl70
+	{mso-style-parent:style0;
+	mso-number-format:"Short Time";}
+.xl71
+	{mso-style-parent:style0;
+	mso-number-format:"\#\,\#\#0";}
+.xl72
+	{mso-style-parent:style0;
+	mso-number-format:Standard;}
