@@ -1,220 +1,632 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kurs Tracker Pro - Full Period</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .chart-container { position: relative; height: 65vh; width: 100%; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grafik Pergerakan Nilai Tukar Mata Uang & Saham</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.19/400.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.19/600.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.19/700.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-card: #1a2332;
+      --bg-card-hover: #1f2b3d;
+      --border: #2a3a52;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --orange: #f97316;
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --yellow: #eab308;
+      --gold: #f59e0b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 16px; }
+
+    /* TICKER */
+    .ticker-panel {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(59,130,246,0.08);
+    }
+    .ticker-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), var(--cyan), transparent);
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+    .ticker-live-dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .ticker-pair {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s ease;
+    }
+    .ticker-pair.active {
+      background: rgba(59,130,246,0.1);
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 0 15px rgba(59,130,246,0.1);
+    }
+    .ticker-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      min-width: 50px;
+    }
+    .ticker-values {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .ticker-value {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .ticker-value-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .ticker-value-price {
+      font-size: 22px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.5px;
+    }
+    .ticker-datetime {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .ticker-cycle-indicator {
+      position: absolute;
+      bottom: 6px;
+      right: 16px;
+      display: flex;
+      gap: 4px;
+    }
+    .cycle-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.3;
+      transition: all 0.3s;
+    }
+    .cycle-dot.active {
+      background: var(--blue);
+      opacity: 1;
+      box-shadow: 0 0 6px rgba(59,130,246,0.5);
+    }
+    .price-buy { color: var(--green); }
+    .price-sell { color: var(--red); }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+
+    /* SECTION */
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title .icon { font-size: 20px; }
+
+    /* TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      min-width: 900px;
+    }
+    thead th {
+      background: #0f172a;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 10px;
+      padding: 10px 8px;
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 7px 8px;
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    tbody tr:hover { background: rgba(59,130,246,0.04); }
+    tbody td:first-child { text-align: left; color: var(--text-secondary); }
+    .col-date { min-width: 110px; }
+    .col-empty { color: var(--text-muted); font-style: italic; }
+    .highlight-row { background: rgba(59,130,246,0.06); }
+
+    /* CHARTS */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .chart-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+    canvas { width: 100% !important; height: 260px !important; }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 10px; }
+      .ticker-content { flex-direction: column; gap: 10px; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .ticker-panel { min-height: 140px; padding: 16px; }
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-6xl mx-auto">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-            <div>
-                <h1 class="text-3xl font-bold text-slate-800">Visualisasi Kurs Lengkap ðŸ“ˆ</h1>
-                <p class="text-slate-500">Periode: 19 April 2025 â€“ 13 April 2026</p>
-            </div>
-            <div class="flex gap-2">
-                <select id="currencySelect" class="bg-white border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm font-semibold">
-                    <option value="usd">USD (US Dollar)</option>
-                    <option value="sgd">SGD (Singapore Dollar)</option>
-                    <option value="aud">AUD (Australian Dollar)</option>
-                    <option value="jpy">JPY (Japanese Yen)</option>
-                    <option value="eur">EUR (Euro)</option>
-                    <option value="chf">CHF (Swiss Franc)</option>
-                </select>
-            </div>
-        </div>
+<body>
+<div class="container">
 
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <p class="text-sm text-slate-500 mb-1">Harga Beli Terakhir (13 Apr 2026)</p>
-                <h3 id="lastBuy" class="text-2xl font-bold text-indigo-600">-</h3>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <p class="text-sm text-slate-500 mb-1">Harga Jual Terakhir (13 Apr 2026)</p>
-                <h3 id="lastSell" class="text-2xl font-bold text-rose-500">-</h3>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <p class="text-sm text-slate-500 mb-1">Total Data Poin</p>
-                <h3 id="dataCount" class="text-2xl font-bold text-slate-700">-</h3>
-            </div>
-        </div>
+  <!-- TICKER -->
+  <div class="ticker-panel" id="tickerPanel">
+    <div class="ticker-datetime" id="tickerDatetime"></div>
+    <div class="ticker-content" id="tickerContent"></div>
+    <div class="ticker-cycle-indicator" id="cycleIndicator"></div>
+  </div>
 
-        <!-- Main Chart -->
-        <div class="bg-white p-6 rounded-3xl shadow-lg border border-slate-100">
-            <div class="chart-container">
-                <canvas id="kursChart"></canvas>
-            </div>
-        </div>
-
-        <div class="mt-8 flex flex-col items-center gap-2 text-slate-400 text-sm">
-            <span>âœ¨ Data disambung dari 19 Apr 2025 ke 13 Apr 2026 âœ¨</span>
-            <span class="opacity-50 text-xs">Scroll/Zoom untuk melihat detail harian</span>
-        </div>
+  <!-- MAIN TABLE -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📋</span> Tabel Kurs Mata Uang</div>
+    <div class="table-wrapper">
+      <table id="mainTable">
+        <thead>
+          <tr>
+            <th class="col-date">Tanggal & Waktu</th>
+            <th>USD Buy</th><th>USD Sell</th>
+            <th>SGD Buy</th><th>SGD Sell</th>
+            <th>AUD Buy</th><th>AUD Sell</th>
+            <th>JPY Buy</th><th>JPY Sell</th>
+            <th>EUR Buy</th><th>EUR Sell</th>
+            <th>CHF Buy</th><th>CHF Sell</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
     </div>
+  </div>
 
-    <script>
-        // Data LENGKAP dari CSV kamu (April 2025 - April 2026)
-        const rawData = `date,usd buy,usd sell,sgd buy,sgd sell,time,aud buy,aud sell,jpy buy,jpy sell,eur buy,eur sell,chf buy,chf sell
-2025-04-19,16820,16875,12819,12879,16:53:00,10709,10775,118.24,118.75,19147,19238,20585,20695
-2025-04-21,16790,16820,12878,12919,20:12:00,10781,10835,119.14,119.48,19350,19409,20831,20922
-2025-04-22,16840,16870,12855,12896,22:20:00,10747,10799,119.53,119.88,19315,19376,20672,20760
-2025-04-23,16870,16890,12844,12877,12:56:00,10768,10820,119.34,119.64,19290,19342,20674,20750
-2025-05-01,16850,16910,12860,12920,10:00:00,10790,10850,119.60,120.10,19340,19420,20700,20800
-2026-02-28,16732,16817,13208,13316,15:56:00,11889,11987,106.98,108.03,19765,19875,21739,21904
-2026-03-10,16815,16905,13197,13308,20:19:00,11952,12051,106.34,107.41,19574,19686,21666,21838
-2026-03-16,16952,17022,13240,13335,21:46:00,11949,12028,106.28,107.22,19463,19552,21478,21624
-2026-03-18,16915,17085,13225,13398,07:41:00,12003,12154,106.08,107.65,19504,19710,21514,21778
-2026-03-24,16915,17035,13174,13305,07:48:00,11946,12061,105.74,106.88,19316,19490,21464,21669
-2026-04-01,16950,17100,13200,13350,09:00:00,12050,12180,105.50,106.70,19400,19600,21500,21750
-2026-04-10,16980,17150,13250,13400,14:20:00,12100,12250,105.20,106.40,19450,19680,21580,21850
-2026-04-13,17012,17188,13285,13442,16:45:00,12144,12302,104.98,106.12,19512,19745,21640,21922`;
+  <!-- KURS CHARTS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📈</span> Grafik Kurs Buy vs Sell</div>
+    <div class="chart-grid" id="kursCharts"></div>
+  </div>
 
-        function parseCSV(csv) {
-            const lines = csv.trim().split('\n');
-            const headers = lines[0].split(',');
-            return lines.slice(1).map(line => {
-                const values = line.split(',');
-                const obj = {};
-                headers.forEach((header, i) => {
-                    obj[header.trim()] = values[i];
-                });
-                return obj;
-            });
-        }
+  <!-- SAHAM CHARTS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span> Grafik Saham BMRI & BBCA</div>
+    <div class="chart-grid" id="sahamCharts"></div>
+  </div>
 
-        const data = parseCSV(rawData);
-        let myChart;
+  <div class="footer">
+    * Data kurs dari Kurs.xlsx | Data saham BMRI & BBCA terintegrasi | Terakhir diperbarui 16 April 2026
+  </div>
+</div>
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('id-ID').format(num);
-        }
+<script>
+// ==================== DATA ====================
+const kursData = [
+  {date:"2025-04-19",time:"16:53",usdB:16820,usdS:16875,sgdB:12819,sgdS:12879,audB:10709,audS:10775,jpyB:118.24,jpyS:118.75,eurB:19147,eurS:19238,chfB:20585,chfS:20695},
+  {date:"2025-04-21",time:"20:12",usdB:16790,usdS:16820,sgdB:12878,sgdS:12919,audB:10781,audS:10835,jpyB:119.14,jpyS:119.48,eurB:19350,eurS:19409,chfB:20831,chfS:20922},
+  {date:"2025-04-22",time:"22:20",usdB:16840,usdS:16870,sgdB:12855,sgdS:12896,audB:10747,audS:10799,jpyB:119.53,jpyS:119.88,eurB:19315,eurS:19376,chfB:20672,chfS:20760},
+  {date:"2025-04-23",time:"12:56",usdB:16870,usdS:16890,sgdB:12844,sgdS:12877,audB:10768,audS:10820,jpyB:118.71,jpyS:118.97,eurB:19182,eurS:19233,chfB:20458,chfS:20537},
+  {date:"2025-04-23",time:"22:03",usdB:16855,usdS:16885,sgdB:12824,sgdS:12865,audB:10772,audS:10827,jpyB:118.11,jpyS:118.43,eurB:19118,eurS:19180,chfB:20329,chfS:20419},
+  {date:"2025-04-24",time:"13:30",usdB:16875,usdS:16895,sgdB:12827,sgdS:12860,audB:10722,audS:10768,jpyB:118.07,jpyS:118.33,eurB:19137,eurS:19188,chfB:20358,chfS:20431},
+  {date:"2025-04-24",time:"20:45",usdB:16850,usdS:16880,sgdB:12831,sgdS:12872,audB:10737,audS:10790,jpyB:118.16,jpyS:118.52,eurB:19147,eurS:19213,chfB:20367,chfS:20460},
+  {date:"2025-04-25",time:"10:23",usdB:16820,usdS:16840,sgdB:12809,sgdS:12842,audB:10761,audS:10813,jpyB:117.53,jpyS:117.79,eurB:19078,eurS:19126,chfB:20231,chfS:20306},
+  {date:"2025-04-26",time:"04:17",usdB:16820,usdS:16850,sgdB:12779,sgdS:12820,audB:10738,audS:10796,jpyB:116.98,jpyS:117.33,eurB:19102,eurS:19162,chfB:20296,chfS:20374},
+  {date:"2025-04-28",time:"13:38",usdB:16855,usdS:16875,sgdB:12797,sgdS:12831,audB:10742,audS:10787,jpyB:117.11,jpyS:117.38,eurB:19089,eurS:19138,chfB:20238,chfS:20343},
+  {date:"2025-04-28",time:"15:18",usdB:16840,usdS:16780,sgdB:12794,sgdS:12835,audB:10709,audS:10760,jpyB:117.15,jpyS:117.50,eurB:19087,eurS:19153,chfB:20225,chfS:20310},
+  {date:"2025-04-28",time:"22:11",usdB:16820,usdS:16850,sgdB:12812,sgdS:12853,audB:10778,audS:10831,jpyB:117.78,jpyS:118.11,eurB:19134,eurS:19193,chfB:20360,chfS:20446},
+  {date:"2025-04-29",time:"15:15",usdB:16745,usdS:17775,sgdB:12797,sgdS:12839,audB:10732,audS:10785,jpyB:117.52,jpyS:117.80,eurB:19063,eurS:19122,chfB:20284,chfS:20370},
+  {date:"2025-04-30",time:"14:26",usdB:16605,usdS:16625,sgdB:12711,sgdS:12744,audB:10612,audS:10658,jpyB:116.25,jpyS:116.53,eurB:18891,eurS:18935,chfB:20095,chfS:20170},
+  {date:"2025-05-01",time:"14:10",usdB:16585,usdS:16625,sgdB:12647,sgdS:12696,audB:10580,audS:10635,jpyB:114.54,jpyS:114.92,eurB:18715,eurS:18785,chfB:20001,chfS:20102},
+  {date:"2025-05-01",time:"19:00",usdB:16585,usdS:16625,sgdB:12663,sgdS:12712,audB:10580,audS:10638,jpyB:114.70,jpyS:115.10,eurB:18758,eurS:18830,chfB:20085,chfS:20102},
+  {date:"2025-05-02",time:"13:34",usdB:16445,usdS:16465,sgdB:12590,sgdS:12623,audB:10524,audS:10571,jpyB:113.01,jpyS:113.26,eurB:18581,eurS:18628,chfB:19817,chfS:19889},
+  {date:"2025-05-02",time:"22:04",usdB:16410,usdS:16450,sgdB:12682,sgdS:12731,audB:10594,audS:10656,jpyB:113.85,jpyS:114.27,eurB:18638,eurS:18709,chfB:19898,chfS:19987},
+  {date:"2025-05-02",time:"05:31",usdB:16410,usdS:16450,sgdB:12637,sgdS:12685,audB:10557,audS:10612,jpyB:113.13,jpyS:113.55,eurB:18523,eurS:18594,chfB:19823,chfS:19922},
+  {date:"2025-05-05",time:"17:56",usdB:16415,usdS:16445,sgdB:12724,sgdS:12766,audB:10629,audS:10681,jpyB:113.99,jpyS:114.30,eurB:18607,eurS:18667,chfB:19914,chfS:20005},
+  {date:"2025-05-06",time:"12:53",usdB:16450,usdS:16470,sgdB:12709,sgdS:12723,audB:10610,audS:10625,jpyB:114.41,jpyS:114.50,eurB:18619,eurS:18633,chfB:19988,chfS:20014},
+  {date:"2025-05-06",time:"23:13",usdB:16430,usdS:16460,sgdB:12736,sgdS:12777,audB:10634,audS:10689,jpyB:114.96,jpyS:115.28,eurB:18611,eurS:18669,chfB:19893,chfS:19977},
+  {date:"2025-05-07",time:"13:45",usdB:16530,usdS:16550,sgdB:12810,sgdS:12824,audB:10716,audS:10729,jpyB:115.67,jpyS:115.76,eurB:18800,eurS:18814,chfB:20063,chfS:20089},
+  {date:"2025-05-07",time:"21:02",usdB:16515,usdS:16545,sgdB:12786,sgdS:12828,audB:10674,audS:10723,jpyB:115.30,jpyS:115.62,eurB:18757,eurS:18815,chfB:20091,chfS:20184},
+  {date:"2025-05-08",time:"15:14",usdB:16475,usdS:16505,sgdB:12703,sgdS:12744,audB:10557,audS:10608,jpyB:113.90,jpyS:114.23,eurB:18595,eurS:18653,chfB:19887,chfS:19971},
+  {date:"2025-05-11",time:"16:28",usdB:16470,usdS:16550,sgdB:12673,sgdS:12762,audB:10536,audS:10635,jpyB:113.20,jpyS:113.96,eurB:18503,eurS:18636,chfB:19769,chfS:19944},
+  {date:"2025-05-12",time:"14:44",usdB:16470,usdS:16550,sgdB:12591,sgdS:12680,audB:10516,audS:10620,jpyB:111.35,jpyS:112.07,eurB:18269,eurS:18406,chfB:19477,chfS:19634},
+  {date:"2025-05-12",time:"18:44",usdB:16470,usdS:16690,sgdB:12602,sgdS:12798,audB:10501,audS:10688,jpyB:111.12,jpyS:112.82,eurB:18264,eurS:18550,chfB:19479,chfS:19814},
+  {date:"2025-05-13",time:"19:22",usdB:16470,usdS:16690,sgdB:12571,sgdS:12835,audB:10533,audS:10725,jpyB:110.43,jpyS:113.38,eurB:18281,eurS:18566,chfB:19519,chfS:19857},
+  {date:"2025-05-14",time:"11:32",usdB:16553,usdS:16573,sgdB:12718,sgdS:12736,audB:10716,audS:10732,jpyB:112.52,jpyS:112.72,eurB:18530,eurS:18550,chfB:19742,chfS:19771},
+  {date:"2025-05-15",time:"14:38",usdB:16525,usdS:16545,sgdB:12729,sgdS:12742,audB:10622,audS:10632,jpyB:113.36,jpyS:113.45,eurB:18517,eurS:18532,chfB:19717,chfS:19733},
+  {date:"2025-05-16",time:"23:46",usdB:16425,usdS:16455,sgdB:12624,sgdS:12665,audB:10491,audS:10543,jpyB:112.51,jpyS:112.82,eurB:18290,eurS:18348,chfB:19549,chfS:19633},
+  {date:"2025-05-19",time:"15:35",usdB:16415,usdS:16445,sgdB:12670,sgdS:12711,audB:10530,audS:10548,jpyB:113.20,jpyS:113.55,eurB:18450,eurS:18508,chfB:19668,chfS:19746},
+  {date:"2025-05-20",time:"20:59",usdB:16405,usdS:16435,sgdB:12645,sgdS:12687,audB:10484,audS:10535,jpyB:113.19,jpyS:113.50,eurB:18435,eurS:18493,chfB:19645,chfS:19736},
+  {date:"2025-05-21",time:"13:47",usdB:16411,usdS:16431,sgdB:12720,sgdS:12736,audB:10589,audS:10600,jpyB:114.29,jpyS:114.40,eurB:18603,eurS:18621,chfB:19961,chfS:19987},
+  {date:"2025-05-22",time:"18:05",usdB:16310,usdS:16340,sgdB:12615,sgdS:12656,audB:10456,audS:10505,jpyB:113.40,jpyS:113.72,eurB:18412,eurS:18469,chfB:19698,chfS:19781},
+  {date:"2025-05-23",time:"22:56",usdB:16215,usdS:16245,sgdB:12610,sgdS:12652,audB:10483,audS:10536,jpyB:113.67,jpyS:113.99,eurB:18395,eurS:18453,chfB:19714,chfS:19803},
+  {date:"2025-05-24",time:"15:27",usdB:16215,usdS:16245,sgdB:12616,sgdS:12657,audB:10517,audS:10564,jpyB:113.66,jpyS:114.02,eurB:18415,eurS:18474,chfB:19719,chfS:19801},
+  {date:"2025-05-26",time:"12:24",usdB:16208,usdS:16228,sgdB:12634,sgdS:12653,audB:10567,audS:10583,jpyB:113.58,jpyS:113.71,eurB:18489,eurS:18509,chfB:19748,chfS:19770},
+  {date:"2025-05-26",time:"13:00",usdB:16213,usdS:16233,sgdB:12644,sgdS:12662,audB:10579,audS:10592,jpyB:113.76,jpyS:113.89,eurB:18510,eurS:18532,chfB:19763,chfS:19800},
+  {date:"2025-05-27",time:"18:34",usdB:16255,usdS:16285,sgdB:12614,sgdS:12656,audB:10465,audS:10515,jpyB:112.74,jpyS:113.08,eurB:18432,eurS:18492,chfB:19636,chfS:19719},
+  {date:"2025-05-28",time:"19:34",usdB:16270,usdS:16350,sgdB:12614,sgdS:12694,audB:10452,audS:10534,jpyB:112.61,jpyS:113.30,eurB:18399,eurS:18513,chfB:19654,chfS:19801},
+  {date:"2025-05-29",time:"19:40",usdB:16270,usdS:16350,sgdB:12626,sgdS:12706,audB:10484,audS:10517,jpyB:112.47,jpyS:113.13,eurB:18402,eurS:18517,chfB:19683,chfS:19827},
+  {date:"2025-06-01",time:"17:10",usdB:16270,usdS:16390,sgdB:12586,sgdS:12702,audB:10429,audS:10555,jpyB:112.43,jpyS:114.07,eurB:18407,eurS:18619,chfB:19723,chfS:19946},
+  {date:"2025-06-02",time:"18:05",usdB:16230,usdS:16260,sgdB:12605,sgdS:12647,audB:10504,audS:10557,jpyB:113.55,jpyS:113.89,eurB:18513,eurS:18572,chfB:19809,chfS:19887},
+  {date:"2025-06-04",time:"13:31",usdB:16295,usdS:16315,sgdB:12628,sgdS:12642,audB:10527,audS:10538,jpyB:113.20,jpyS:113.29,eurB:18533,eurS:18549,chfB:19792,chfS:19816},
+  {date:"2025-06-05",time:"14:01",usdB:16270,usdS:16290,sgdB:12645,sgdS:12659,audB:10569,audS:10579,jpyB:113.62,jpyS:113.73,eurB:18568,eurS:19584,chfB:19853,chfS:19877},
+  {date:"2025-06-10",time:"21:27",usdB:16225,usdS:16285,sgdB:12630,sgdS:12671,audB:10597,audS:10647,jpyB:112.27,jpyS:112.61,eurB:18567,eurS:18627,chfB:19770,chfS:19847},
+  {date:"2025-06-11",time:"17:01",usdB:16240,usdS:16270,sgdB:12618,sgdS:12660,audB:10564,audS:10613,jpyB:111.87,jpyS:112.21,eurB:18558,eurS:18618,chfB:19732,chfS:19817},
+  {date:"2025-06-12",time:"21:41",usdB:16205,usdS:16235,sgdB:12656,sgdS:12697,audB:10558,audS:10609,jpyB:112.72,jpyS:113.04,eurB:18757,eurS:18816,chfB:19905,chfS:19991},
+  {date:"2025-12-29",time:"07:53",usdB:16675,usdS:16775,sgdB:12980,sgdS:13076,audB:11186,audS:11283,jpyB:106.44,jpyS:107.58,eurB:19636,eurS:19763,chfB:21112,chfS:21301},
+  {date:"2026-01-01",time:"08:35",usdB:16655,usdS:16735,sgdB:12941,sgdS:13022,audB:11094,audS:11184,jpyB:106.02,jpyS:107.05,eurB:19557,eurS:19660,chfB:20989,chfS:21143},
+  {date:"2026-01-05",time:"23:57",usdB:16695,usdS:16755,sgdB:13002,sgdS:13022,audB:11191,audS:11263,jpyB:106.23,jpyS:107.12,eurB:19551,eurS:19629,chfB:21045,chfS:21166},
+  {date:"2026-01-06",time:"18:50",usdB:16710,usdS:16770,sgdB:13048,sgdS:13114,audB:11209,audS:11283,jpyB:106.56,jpyS:107.44,eurB:19557,eurS:19636,chfB:21042,chfS:21168},
+  {date:"2026-01-07",time:"23:56",usdB:16730,usdS:16790,sgdB:13034,sgdS:13099,audB:11233,audS:11303,jpyB:106.48,jpyS:107.37,eurB:19532,eurS:19609,chfB:20946,chfS:21074},
+  {date:"2026-01-09",time:"17:48",usdB:16765,usdS:16845,sgdB:13017,sgdS:13098,audB:11182,audS:11267,jpyB:106.06,jpyS:107.09,eurB:19514,eurS:19616,chfB:20935,chfS:21079},
+  {date:"2026-01-13",time:"21:29",usdB:16820,usdS:16880,sgdB:13062,sgdS:13128,audB:11275,audS:11347,jpyB:105.64,jpyS:106.51,eurB:19623,eurS:19701,chfB:21056,chfS:21176},
+  {date:"2026-01-14",time:"21:13",usdB:16820,usdS:16880,sgdB:13059,sgdS:13125,audB:11226,audS:11301,jpyB:106.00,jpyS:106.90,eurB:19601,eurS:19681,chfB:20993,chfS:21113},
+  {date:"2026-01-15",time:"21:52",usdB:16835,usdS:16915,sgdB:13041,sgdS:13142,audB:11229,audS:11314,jpyB:105.72,jpyS:106.85,eurB:19521,eurS:19622,chfB:20918,chfS:21072},
+  {date:"2026-01-16",time:"20:11",usdB:16835,usdS:16915,sgdB:13051,sgdS:13152,audB:11258,audS:11343,jpyB:106.16,jpyS:107.30,eurB:19548,eurS:19650,chfB:20970,chfS:21120},
+  {date:"2026-01-19",time:"23:57",usdB:16915,usdS:16995,sgdB:13154,sgdS:13235,audB:11342,audS:11426,jpyB:106.75,jpyS:107.75,eurB:19687,eurS:19788,chfB:21183,chfS:21334},
+  {date:"2026-01-20",time:"23:25",usdB:16915,usdS:16975,sgdB:13171,sgdS:13237,audB:11391,audS:11461,jpyB:106.88,jpyS:107.76,eurB:19842,eurS:19920,chfB:21389,chfS:21517},
+  {date:"2026-01-21",time:"23:56",usdB:16895,usdS:16955,sgdB:13135,sgdS:13201,audB:11396,audS:11470,jpyB:106.41,jpyS:107.31,eurB:19714,eurS:19802,chfB:21192,chfS:21324},
+  {date:"2026-01-22",time:"22:06",usdB:16855,usdS:16915,sgdB:13132,sgdS:13198,audB:11467,audS:11539,jpyB:106.02,jpyS:106.91,eurB:19755,eurS:19833,chfB:21270,chfS:21392},
+  {date:"2026-01-23",time:"22:01",usdB:16790,usdS:16850,sgdB:13127,sgdS:13193,audB:11510,audS:11583,jpyB:105.83,jpyS:106.70,eurB:19721,eurS:19799,chfB:21224,chfS:21351},
+  {date:"2026-01-26",time:"23:08",usdB:16727,usdS:16797,sgdB:13177,sgdS:13251,audB:11586,audS:11666,jpyB:108.43,jpyS:109.41,eurB:19895,eurS:19985,chfB:21584,chfS:21728},
+  {date:"2026-01-27",time:"22:58",usdB:16722,usdS:16782,sgdB:13220,sgdS:13287,audB:11631,audS:11707,jpyB:108.89,jpyS:109.81,eurB:19986,eurS:20067,chfB:21751,chfS:21887},
+  {date:"2026-01-28",time:"22:49",usdB:16672,usdS:16752,sgdB:13172,sgdS:13275,audB:11638,audS:11725,jpyB:108.40,jpyS:109.44,eurB:19906,eurS:20011,chfB:21638,chfS:21796},
+  {date:"2026-01-29",time:"15:05",usdB:16712,usdS:16772,sgdB:13223,sgdS:13290,audB:11793,audS:11873,jpyB:108.81,jpyS:109.73,eurB:20007,eurS:20091,chfB:21778,chfS:21911},
+  {date:"2026-01-31",time:"05:05",usdB:16737,usdS:16807,sgdB:13135,sgdS:13230,audB:11635,audS:11720,jpyB:107.89,jpyS:108.87,eurB:19830,eurS:19925,chfB:21619,chfS:21771},
+  {date:"2026-02-03",time:"07:29",usdB:16752,usdS:16812,sgdB:13160,sgdS:13247,audB:11653,audS:11730,jpyB:107.47,jpyS:108.38,eurB:19772,eurS:19852,chfB:21488,chfS:21624},
+  {date:"2026-02-04",time:"00:30",usdB:16712,usdS:16772,sgdB:13142,sgdS:13229,audB:11709,audS:11781,jpyB:107.12,jpyS:108.04,eurB:19748,eurS:19828,chfB:21545,chfS:21673},
+  {date:"2026-02-04",time:"22:16",usdB:16740,usdS:16800,sgdB:13142,sgdS:13229,audB:11733,audS:11807,jpyB:106.69,jpyS:107.59,eurB:19778,eurS:19856,chfB:21555,chfS:21683},
+  {date:"2026-02-05",time:"20:12",usdB:16800,usdS:16900,sgdB:13174,sgdS:13293,audB:11700,audS:11801,jpyB:106.85,jpyS:108.01,eurB:19813,eurS:19940,chfB:21618,chfS:21801},
+  {date:"2026-02-07",time:"05:06",usdB:16832,usdS:16892,sgdB:13222,sgdS:13310,audB:11795,audS:11870,jpyB:106.82,jpyS:107.72,eurB:19888,eurS:19968,chfB:21677,chfS:21802},
+  {date:"2026-02-09",time:"23:10",usdB:16772,usdS:16832,sgdB:13233,sgdS:13321,audB:11872,audS:11944,jpyB:107.33,jpyS:108.23,eurB:19970,eurS:20051,chfB:21850,chfS:21978},
+  {date:"2026-02-11",time:"22:56",usdB:16732,usdS:16802,sgdB:13228,sgdS:13224,audB:11882,audS:11966,jpyB:108.75,jpyS:109.73,eurB:19849,eurS:19941,chfB:21649,chfS:21793},
+  {date:"2026-02-12",time:"22:39",usdB:16767,usdS:16827,sgdB:13277,sgdS:13366,audB:11924,audS:11996,jpyB:109.43,jpyS:110.37,eurB:19920,eurS:20001,chfB:21810,chfS:21939},
+  {date:"2026-02-14",time:"07:00",usdB:16767,usdS:16857,sgdB:13264,sgdS:13376,audB:11847,audS:11945,jpyB:109.54,jpyS:110.69,eurB:19897,eurS:20015,chfB:21815,chfS:21993},
+  {date:"2026-02-16",time:"16:28",usdB:16767,usdS:16857,sgdB:13275,sgdS:13387,audB:11877,audS:11975,jpyB:109.06,jpyS:110.17,eurB:19895,eurS:20011,chfB:21787,chfS:21961},
+  {date:"2026-02-17",time:"18:27",usdB:16767,usdS:16857,sgdB:13264,sgdS:13376,audB:11837,audS:11931,jpyB:109.35,jpyS:110.48,eurB:19857,eurS:19972,chfB:21770,chfS:21944},
+  {date:"2026-02-18",time:"21:56",usdB:16837,usdS:16897,sgdB:13281,sgdS:13369,audB:11874,audS:11948,jpyB:108.80,jpyS:109.71,eurB:19891,eurS:19969,chfB:21793,chfS:21922},
+  {date:"2026-02-19",time:"18:43",usdB:16842,usdS:16902,sgdB:13265,sgdS:13353,audB:11856,audS:11928,jpyB:108.63,jpyS:109.54,eurB:19836,eurS:19914,chfB:21735,chfS:21861},
+  {date:"2026-02-22",time:"13:48",usdB:16842,usdS:16902,sgdB:13276,sgdS:13364,audB:11917,audS:11989,jpyB:108.35,jpyS:109.28,eurB:19839,eurS:19921,chfB:21687,chfS:21813},
+  {date:"2026-02-23",time:"23:20",usdB:16757,usdS:16817,sgdB:13219,sgdS:13307,audB:11823,audS:11895,jpyB:108.30,jpyS:109.21,eurB:19769,eurS:19848,chfB:21631,chfS:21759},
+  {date:"2026-02-25",time:"19:23",usdB:16752,usdS:16812,sgdB:13221,sgdS:13309,audB:11860,audS:11933,jpyB:106.66,jpyS:107.55,eurB:19735,eurS:19815,chfB:21596,chfS:21724},
+  {date:"2026-02-28",time:"15:56",usdB:16732,usdS:16817,sgdB:13208,sgdS:13316,audB:11889,audS:11987,jpyB:106.98,jpyS:108.03,eurB:19765,eurS:19875,chfB:21739,chfS:21904},
+  {date:"2026-03-10",time:"20:19",usdB:16815,usdS:16905,sgdB:13197,sgdS:13308,audB:11952,audS:12051,jpyB:106.34,jpyS:107.41,eurB:19574,eurS:19686,chfB:21666,chfS:21838},
+  {date:"2026-03-16",time:"21:46",usdB:16952,usdS:17022,sgdB:13240,sgdS:13335,audB:11949,audS:12028,jpyB:106.28,jpyS:107.22,eurB:19463,eurS:19552,chfB:21478,chfS:21624},
+  {date:"2026-03-18",time:"07:41",usdB:16915,usdS:17085,sgdB:13225,sgdS:13398,audB:12003,audS:12154,jpyB:106.08,jpyS:107.65,eurB:19504,eurS:19710,chfB:21514,chfS:21778},
+  {date:"2026-03-18",time:"22:57",usdB:16915,usdS:17085,sgdB:13194,sgdS:13367,audB:11954,audS:12104,jpyB:105.81,jpyS:107.37,eurB:19467,eurS:19672,chfB:21405,chfS:21673},
+  {date:"2026-03-23",time:"06:50",usdB:16915,usdS:17105,sgdB:13161,sgdS:13380,audB:11774,audS:12076,jpyB:105.60,jpyS:108.15,eurB:19493,eurS:19846,chfB:21393,chfS:21798},
+  {date:"2026-03-24",time:"07:36",usdB:16915,usdS:17105,sgdB:13172,sgdS:13476,audB:11700,audS:12082,jpyB:105.56,jpyS:109.06,eurB:19489,eurS:19957,chfB:21333,chfS:21867},
+  {date:"2026-04-01",time:"07:59",usdB:16985,usdS:17085,sgdB:13164,sgdS:13354,audB:11707,audS:11895,jpyB:106.45,jpyS:108.10,eurB:19579,eurS:19855,chfB:21216,chfS:21539},
+  {date:"2026-04-01",time:"22:30",usdB:16935,usdS:17015,sgdB:13134,sgdS:13328,audB:11655,audS:11885,jpyB:106.13,jpyS:107.88,eurB:19551,eurS:19849,chfB:21214,chfS:21544},
+  {date:"2026-04-03",time:"07:07",usdB:16945,usdS:17055,sgdB:13109,sgdS:13350,audB:11617,audS:11891,jpyB:105.45,jpyS:107.76,eurB:19443,eurS:19803,chfB:21081,chfS:21490},
+  {date:"2026-04-03",time:"21:23",usdB:16945,usdS:17055,sgdB:13091,sgdS:13332,audB:11583,audS:11862,jpyB:105.38,jpyS:107.69,eurB:19414,eurS:19774,chfB:21054,chfS:21474},
+  {date:"2026-04-06",time:"22:13",usdB:16995,usdS:17065,sgdB:13160,sgdS:13349,audB:11677,audS:11879,jpyB:105.76,jpyS:107.41,eurB:19516,eurS:19789,chfB:21169,chfS:21493},
+  {date:"2026-04-08",time:"03:26",usdB:17030,usdS:17130,sgdB:13206,sgdS:13442,audB:11763,audS:12060,jpyB:105.89,jpyS:108.22,eurB:19362,eurS:19993,chfB:21216,chfS:21615},
+  {date:"2026-04-09",time:"06:51",usdB:16965,usdS:17045,sgdB:13233,sgdS:13452,audB:11840,audS:12109,jpyB:106.15,jpyS:108.24,eurB:19659,eurS:19997,chfB:21305,chfS:21680},
+  {date:"2026-04-11",time:"10:42",usdB:17035,usdS:17135,sgdB:13294,sgdS:13527,audB:11923,audS:12206,jpyB:106.13,jpyS:108.37,eurB:19846,eurS:20199,chfB:21450,chfS:21849},
+  {date:"2026-04-13",time:"22:05",usdB:17070,usdS:17170,sgdB:13313,sgdS:13547,audB:11923,audS:12206,jpyB:106.13,jpyS:108.37,eurB:19846,eurS:20199,chfB:21450,chfS:21849},
+  {date:"2026-04-14",time:"06:45",usdB:17070,usdS:17170,sgdB:13341,sgdS:13575,audB:12020,audS:12287,jpyB:106.38,jpyS:108.63,eurB:19962,eurS:20319,chfB:21643,chfS:22063},
+  {date:"2026-04-15",time:"06:18",usdB:17070,usdS:17170,sgdB:13350,sgdS:13578,audB:12069,audS:12338,jpyB:106.68,jpyS:108.79,eurB:20021,eurS:20353,chfB:21720,chfS:22105},
+  {date:"2026-04-16",time:"07:04",usdB:17095,usdS:17175,sgdB:13373,sgdS:13592,audB:12156,audS:12421,jpyB:106.80,jpyS:108.94,eurB:20059,eurS:20391,chfB:21724,chfS:22127}
+];
 
-        function updateChart(currency) {
-            const labels = data.map(d => {
-                const date = new Date(d.date);
-                return date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-            });
-            const buyData = data.map(d => parseFloat(d[`${currency} buy`]));
-            const sellData = data.map(d => parseFloat(d[`${currency} sell`]));
+const sahamBMRI = [
+  {date:"2026-04-15",open:4750,close:4650,high:4770,low:4640,vol:"104.62M",change:"-1.27%"},
+  {date:"2026-04-14",open:4670,close:4710,high:4720,low:4650,vol:"135.50M",change:"2.39%"},
+  {date:"2026-04-13",open:4640,close:4600,high:4660,low:4600,vol:"103.20M",change:"-1.50%"},
+  {date:"2026-04-10",open:4580,close:4670,high:4700,low:4580,vol:"103.58M",change:"2.19%"},
+  {date:"2026-04-09",open:4650,close:4570,high:4650,low:4570,vol:"128.43M",change:"-2.14%"},
+  {date:"2026-04-08",open:4670,close:4670,high:4700,low:4630,vol:"169.87M",change:"3.55%"},
+  {date:"2026-04-07",open:4600,close:4510,high:4610,low:4500,vol:"190.85M",change:"-2.17%"},
+  {date:"2026-04-06",open:4650,close:4610,high:4700,low:4600,vol:"60.89M",change:"-0.86%"},
+  {date:"2026-04-02",open:4720,close:4650,high:4730,low:4640,vol:"109.50M",change:"-1.48%"},
+  {date:"2026-04-01",open:4800,close:4720,high:4830,low:4680,vol:"162.83M",change:"0.00%"},
+  {date:"2026-03-31",open:4710,close:4720,high:4790,low:4700,vol:"184.78M",change:"0.43%"},
+  {date:"2026-03-30",open:4710,close:4700,high:4750,low:4690,vol:"110.82M",change:"-1.26%"},
+  {date:"2026-03-27",open:4840,close:4760,high:4870,low:4760,vol:"73.16M",change:"-1.65%"},
+  {date:"2026-03-26",open:4970,close:4840,high:4980,low:4840,vol:"120.74M",change:"-2.62%"},
+  {date:"2026-03-25",open:4650,close:4970,high:4970,low:4650,vol:"389.35M",change:"5.07%"},
+  {date:"2026-03-17",open:4750,close:4730,high:4780,low:4710,vol:"274.98M",change:"0.64%"},
+  {date:"2026-03-16",open:4730,close:4700,high:4740,low:4630,vol:"149.04M",change:"-1.05%"},
+  {date:"2026-03-13",open:4900,close:4750,high:4920,low:4750,vol:"187.46M",change:"-4.23%"},
+  {date:"2026-03-12",open:4870,close:4960,high:4980,low:4870,vol:"85.99M",change:"1.64%"},
+  {date:"2026-03-11",open:4930,close:4880,high:4970,low:4880,vol:"86.76M",change:"-0.61%"},
+  {date:"2026-03-10",open:4920,close:4910,high:4990,low:4860,vol:"124.58M",change:"1.87%"}
+];
 
-            // Update Cards dengan data paling akhir
-            const latest = data[data.length - 1];
-            document.getElementById('lastBuy').textContent = `Rp ${formatNumber(latest[`${currency} buy` || 0])}`;
-            document.getElementById('lastSell').textContent = `Rp ${formatNumber(latest[`${currency} sell` || 0])}`;
-            document.getElementById('dataCount').textContent = `${data.length} Entri`;
+const sahamBBCA = [
+  {date:"2026-04-15",open:6775,close:6550,high:6800,low:6550,vol:"104.88M",change:"-2.96%"},
+  {date:"2026-04-14",open:6675,close:6750,high:6800,low:6675,vol:"105.01M",change:"2.66%"},
+  {date:"2026-04-13",open:6650,close:6575,high:6700,low:6575,vol:"81.96M",change:"-1.87%"},
+  {date:"2026-04-10",open:6525,close:6700,high:6700,low:6475,vol:"167.34M",change:"3.47%"},
+  {date:"2026-04-09",open:6775,close:6475,high:6800,low:6450,vol:"182.41M",change:"-4.07%"},
+  {date:"2026-04-08",open:6650,close:6750,high:6850,low:6625,vol:"163.59M",change:"3.85%"},
+  {date:"2026-04-07",open:6500,close:6500,high:6525,low:6450,vol:"65.20M",change:"0.00%"},
+  {date:"2026-04-06",open:6600,close:6500,high:6625,low:6450,vol:"57.91M",change:"-1.14%"},
+  {date:"2026-04-02",open:6550,close:6575,high:6600,low:6500,vol:"72.73M",change:"1.15%"},
+  {date:"2026-04-01",open:6550,close:6500,high:6650,low:6500,vol:"132.80M",change:"0.78%"},
+  {date:"2026-03-31",open:6450,close:6450,high:6550,low:6450,vol:"150.66M",change:"0.00%"},
+  {date:"2026-03-30",open:6400,close:6450,high:6500,low:6350,vol:"242.28M",change:"-3.73%"},
+  {date:"2026-03-27",open:6775,close:6700,high:6850,low:6700,vol:"283.56M",change:"-2.55%"},
+  {date:"2026-03-26",open:6900,close:6875,high:6975,low:6850,vol:"145.93M",change:"-0.36%"},
+  {date:"2026-03-25",open:6675,close:6900,high:6925,low:6675,vol:"314.35M",change:"1.85%"},
+  {date:"2026-03-17",open:6750,close:6775,high:6825,low:6750,vol:"160.90M",change:"0.37%"},
+  {date:"2026-03-16",open:6850,close:6750,high:6875,low:6700,vol:"127.76M",change:"-1.82%"},
+  {date:"2026-03-13",open:6850,close:6875,high:7025,low:6850,vol:"107.94M",change:"-0.36%"},
+  {date:"2026-03-12",open:6825,close:6900,high:7025,low:6825,vol:"98.79M",change:"1.10%"},
+  {date:"2026-03-11",open:6975,close:6825,high:7000,low:6825,vol:"91.92M",change:"-2.15%"},
+  {date:"2026-03-10",open:6950,close:6975,high:7050,low:6925,vol:"129.98M",change:"1.45%"}
+];
 
-            const ctx = document.getElementById('kursChart').getContext('2d');
-            
-            if (myChart) {
-                myChart.destroy();
-            }
+// Sort saham ascending (oldest first) for correct chart order
+sahamBMRI.sort((a,b) => new Date(a.date) - new Date(b.date));
+sahamBBCA.sort((a,b) => new Date(a.date) - new Date(b.date));
 
-            // Gradien warna untuk kesan premium
-            const buyGradient = ctx.createLinearGradient(0, 0, 0, 400);
-            buyGradient.addColorStop(0, 'rgba(79, 70, 229, 0.4)');
-            buyGradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+// Merge saham into kurs data
+const lastRow = kursData[kursData.length - 1];
+const sahamMap = {};
+sahamBMRI.forEach(d => sahamMap[d.date] = {...sahamMap[d.date], bmri:d});
+sahamBBCA.forEach(d => sahamMap[d.date] = {...sahamMap[d.date], bbca:d});
 
-            const sellGradient = ctx.createLinearGradient(0, 0, 0, 400);
-            sellGradient.addColorStop(0, 'rgba(225, 29, 72, 0.2)');
-            sellGradient.addColorStop(1, 'rgba(225, 29, 72, 0)');
+// ==================== TICKER ====================
+const tickerItems = [
+  {label:"USD", buy: lastRow.usdB, sell: lastRow.usdS, prefix:""},
+  {label:"SGD", buy: lastRow.sgdB, sell: lastRow.sgdS, prefix:""},
+  {label:"AUD", buy: lastRow.audB, sell: lastRow.audS, prefix:""},
+  {label:"JPY", buy: lastRow.jpyB, sell: lastRow.jpyS, prefix:""},
+  {label:"EUR", buy: lastRow.eurB, sell: lastRow.eurS, prefix:""},
+  {label:"CHF", buy: lastRow.chfB, sell: lastRow.chfS, prefix:""},
+  {label:"BMRI", buy: sahamBMRI[sahamBMRI.length-1]?.open, sell: sahamBMRI[sahamBMRI.length-1]?.close, prefix:""},
+  {label:"BBCA", buy: sahamBBCA[sahamBBCA.length-1]?.open, sell: sahamBBCA[sahamBBCA.length-1]?.close, prefix:""}
+];
 
-            myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: `Beli ${currency.toUpperCase()}`,
-                            data: buyData,
-                            borderColor: '#4f46e5',
-                            backgroundColor: buyGradient,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#fff',
-                            pointBorderColor: '#4f46e5',
-                            pointBorderWidth: 2
-                        },
-                        {
-                            label: `Jual ${currency.toUpperCase()}`,
-                            data: sellData,
-                            borderColor: '#e11d48',
-                            backgroundColor: sellGradient,
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#fff',
-                            pointBorderColor: '#e11d48',
-                            pointBorderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                usePointStyle: true,
-                                padding: 25,
-                                font: { size: 14, weight: '600' }
-                            }
-                        },
-                        tooltip: {
-                            padding: 16,
-                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            titleColor: '#1e293b',
-                            titleFont: { size: 14, weight: 'bold' },
-                            bodyColor: '#475569',
-                            bodyFont: { size: 13 },
-                            borderColor: '#e2e8f0',
-                            borderWidth: 1,
-                            displayColors: true,
-                            boxPadding: 6,
-                            callbacks: {
-                                label: function(context) {
-                                    return ` ${context.dataset.label}: Rp ${formatNumber(context.raw)}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: { color: '#f1f5f9', drawBorder: false },
-                            ticks: {
-                                font: { size: 11 },
-                                callback: value => 'Rp ' + formatNumber(value)
-                            }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
-        }
+let currentCycle = 0;
 
-        document.getElementById('currencySelect').addEventListener('change', (e) => {
-            updateChart(e.target.value);
-        });
+function updateDatetime() {
+  const now = new Date();
+  const opts = {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'};
+  document.getElementById('tickerDatetime').textContent = now.toLocaleDateString('id-ID', opts);
+}
 
-        window.onload = () => updateChart('usd');
-    </script>
+function buildCycleDots() {
+  const container = document.getElementById('cycleIndicator');
+  container.innerHTML = '';
+  for(let i = 0; i < tickerItems.length; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'cycle-dot' + (i === currentCycle ? ' active' : '');
+    container.appendChild(dot);
+  }
+}
+
+function updateTicker() {
+  const item = tickerItems[currentCycle];
+  const isStock = item.label === 'BMRI' || item.label === 'BBCA';
+  const buyLabel = isStock ? 'Open' : 'Buy';
+  const sellLabel = isStock ? 'Close' : 'Sell';
+
+  document.getElementById('tickerContent').innerHTML = `
+    <div class="ticker-pair active">
+      <span class="ticker-label">${item.label}</span>
+      <div class="ticker-values">
+        <div class="ticker-value">
+          <span class="ticker-value-label">${buyLabel}</span>
+          <span class="ticker-value-price price-buy">${item.buy ? item.buy.toLocaleString('id-ID') : '-'}</span>
+        </div>
+        <div class="ticker-value">
+          <span class="ticker-value-label">${sellLabel}</span>
+          <span class="ticker-value-price price-sell">${item.sell ? item.sell.toLocaleString('id-ID') : '-'}</span>
+        </div>
+      </div>
+    </div>
+  `;
+  buildCycleDots();
+  currentCycle = (currentCycle + 1) % tickerItems.length;
+}
+
+updateDatetime();
+updateTicker();
+setInterval(updateTicker, 60000);
+setInterval(updateDatetime, 100);
+
+// ==================== TABLE ====================
+const tbody = document.getElementById('tableBody');
+kursData.forEach((row, idx) => {
+  const tr = document.createElement('tr');
+  if(idx === kursData.length - 1) tr.classList.add('highlight-row');
+  const dt = row.date + ' ' + row.time;
+  tr.innerHTML = `
+    <td class="col-date">${dt}</td>
+    <td>${row.usdB.toLocaleString('id-ID')}</td><td>${row.usdS.toLocaleString('id-ID')}</td>
+    <td>${row.sgdB.toLocaleString('id-ID')}</td><td>${row.sgdS.toLocaleString('id-ID')}</td>
+    <td>${row.audB.toLocaleString('id-ID')}</td><td>${row.audS.toLocaleString('id-ID')}</td>
+    <td>${row.jpyB.toFixed(2)}</td><td>${row.jpyS.toFixed(2)}</td>
+    <td>${row.eurB.toLocaleString('id-ID')}</td><td>${row.eurS.toLocaleString('id-ID')}</td>
+    <td>${row.chfB.toLocaleString('id-ID')}</td><td>${row.chfS.toLocaleString('id-ID')}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// ==================== CHARTS ====================
+const kursLabels = kursData.map(d => d.date);
+const kursPairs = [
+  {id:'chart-usd', label:'USD', b:'usdB', s:'usdS', c1:'#22c55e', c2:'#ef4444'},
+  {id:'chart-sgd', label:'SGD', b:'sgdB', s:'sgdS', c1:'#3b82f6', c2:'#ef4444'},
+  {id:'chart-aud', label:'AUD', b:'audB', s:'audS', c1:'#06b6d4', c2:'#ef4444'},
+  {id:'chart-jpy', label:'JPY', b:'jpyB', s:'jpyS', c1:'#f97316', c2:'#ef4444'},
+  {id:'chart-eur', label:'EUR', b:'eurB', s:'eurS', c1:'#a855f7', c2:'#ef4444'},
+  {id:'chart-chf', label:'CHF', b:'chfB', s:'chfS', c1:'#ec4899', c2:'#ef4444'}
+];
+
+const kursContainer = document.getElementById('kursCharts');
+kursPairs.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'chart-card';
+  card.innerHTML = `<div class="chart-title">${p.label} Buy vs Sell</div><canvas id="${p.id}"></canvas>`;
+  kursContainer.appendChild(card);
+
+  new Chart(document.getElementById(p.id), {
+    type:'line',
+    data:{
+      labels: kursLabels,
+      datasets:[
+        {label:p.label+' Buy', data:kursData.map(d=>d[p.b]), borderColor:p.c1, backgroundColor:p.c1+'22', tension:0.2, pointRadius:0, borderWidth:1.5, fill:true},
+        {label:p.label+' Sell', data:kursData.map(d=>d[p.s]), borderColor:p.c2, backgroundColor:p.c2+'11', tension:0.2, pointRadius:0, borderWidth:1.5, fill:true}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#64748b',maxTicksLimit:8,maxRotation:45},grid:{color:'rgba(255,255,255,0.04)'}},
+        y:{ticks:{color:'#64748b'},grid:{color:'rgba(255,255,255,0.04)'}}
+      }
+    }
+  });
+});
+
+// Saham charts
+const sahamContainer = document.getElementById('sahamCharts');
+
+function buildSahamChart(id, title, data, openKey, closeKey, color1, color2) {
+  const card = document.createElement('div');
+  card.className = 'chart-card';
+  card.innerHTML = `<div class="chart-title">${title}</div><canvas id="${id}"></canvas>`;
+  sahamContainer.appendChild(card);
+
+  new Chart(document.getElementById(id), {
+    type:'line',
+    data:{
+      labels: data.map(d=>d.date),
+      datasets:[
+        {label:'Open', data:data.map(d=>d[openKey]), borderColor:color1, backgroundColor:color1+'22', tension:0.3, pointRadius:2, pointBackgroundColor:color1, borderWidth:2, fill:true},
+        {label:'Close', data:data.map(d=>d[closeKey]), borderColor:color2, backgroundColor:color2+'11', tension:0.3, pointRadius:2, pointBackgroundColor:color2, borderWidth:2, fill:true}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#64748b',maxTicksLimit:10,maxRotation:45},grid:{color:'rgba(255,255,255,0.04)'}},
+        y:{ticks:{color:'#64748b'},grid:{color:'rgba(255,255,255,0.04)'}}
+      }
+    }
+  });
+}
+
+buildSahamChart('chart-bmri', 'BMRI Open vs Close', sahamBMRI, 'open', 'close', '#22c55e', '#ef4444');
+buildSahamChart('chart-bbca', 'BBCA Open vs Close', sahamBBCA, 'open', 'close', '#3b82f6', '#ef4444');
+</script>
 </body>
 </html>
+
