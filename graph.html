@@ -2,13 +2,14 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Grafik pergerakkan Nilai Tukar Mata Uang (Apr 2025 - Apr 2026)</title>
+    <title>Grafik Pergerakan Nilai Tukar & Saham (Apr 2025 - Apr 2026)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
-        .container { max-width: 1400px; margin: auto; background: #fff; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 12px; }
+        .container { max-width: 1600px; margin: auto; background: #fff; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 12px; }
         h1, h2 { text-align: center; color: #2c3e50; }
         h2 { font-weight: 400; color: #5a6c7e; margin-top: -5px; }
+        .section-title { margin: 30px 0 15px; border-bottom: 2px solid #1e3a5f; padding-bottom: 6px; color: #1e3a5f; }
         .table-wrapper { overflow-x: auto; margin-bottom: 30px; border-radius: 8px; border: 1px solid #e2e8f0; }
         table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; }
         th, td { border: 1px solid #d1d9e6; padding: 8px 6px; text-align: center; }
@@ -17,14 +18,15 @@
         .charts { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
         .chart-box { flex: 1 1 480px; min-width: 320px; max-width: 100%; height: 360px; background: #fdfdfd; padding: 10px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
         canvas { width: 100% !important; height: 100% !important; }
-        .footer-note { text-align: right; font-size: 12px; color: #7f8c8d; margin-top: 15px; }
+        .footer-note { text-align: right; font-size: 12px; color: #7f8c8d; margin-top: 25px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Grafik pergerakkan Nilai Tukar Mata Uang</h1>
+    <h1>Grafik Pergerakan Nilai Tukar Mata Uang & Saham</h1>
     <h2>Periode 19 April 2025 s/d 16 April 2026</h2>
 
+    <!-- Tabel Data Nilai Tukar -->
     <div class="table-wrapper">
         <table id="summaryTable">
             <thead>
@@ -44,7 +46,9 @@
         </table>
     </div>
 
-    <div class="charts">
+    <!-- Grafik Mata Uang -->
+    <div class="section-title">📈 Nilai Tukar Mata Uang (Buy vs Sell)</div>
+    <div class="charts" id="currencyCharts">
         <div class="chart-box"><canvas id="usdChart"></canvas></div>
         <div class="chart-box"><canvas id="sgdChart"></canvas></div>
         <div class="chart-box"><canvas id="audChart"></canvas></div>
@@ -52,12 +56,19 @@
         <div class="chart-box"><canvas id="eurChart"></canvas></div>
         <div class="chart-box"><canvas id="chfChart"></canvas></div>
     </div>
-    <div class="footer-note">* Data diperbarui hingga 16 April 2026 (sumber: Kurs.xlsx berdasarkan kurs bca)</div>
+
+    <!-- Grafik Saham BMRI & BBCA -->
+    <div class="section-title">📊 Harga Saham BMRI & BBCA (Close vs Open)</div>
+    <div class="charts" id="stockCharts">
+        <div class="chart-box"><canvas id="bmriChart"></canvas></div>
+        <div class="chart-box"><canvas id="bbcaChart"></canvas></div>
+    </div>
+    
+    <div class="footer-note">* Data nilai tukar & saham diperbarui hingga 16 April 2026 (sumber: Kurs.xlsx)</div>
 </div>
 
 <script>
-    // Data lengkap dari Kurs.xlsx (19 Apr 2025 - 13 Apr 2026)
-    // Format tanggal: DD/MM HH:MM (waktu pengambilan data)
+    // ======================= DATA NILAI TUKAR MATA UANG =======================
     const dates = [
         "19/04 16:53", "21/04 20:12", "22/04 22:20", "23/04 12:56", "23/04 22:03", "24/04 13:30", "24/04 20:45", "25/04 10:23", "26/04 04:17",
         "28/04 13:38", "28/04 15:18", "28/04 22:11", "29/04 15:15", "30/04 14:26", "01/05 14:10", "01/05 19:00", "02/05 13:34", "02/05 22:04",
@@ -100,7 +111,7 @@
         }
     };
 
-    // Isi tabel
+    // Isi tabel mata uang
     const tbody = document.getElementById("tableBody");
     for (let i = 0; i < dates.length; i++) {
         const row = document.createElement("tr");
@@ -116,7 +127,7 @@
         tbody.appendChild(row);
     }
 
-    // Fungsi render grafik
+    // Fungsi render grafik mata uang (Buy & Sell)
     function renderChart(canvasId, data, label) {
         const ctx = document.getElementById(canvasId).getContext('2d');
         new Chart(ctx, {
@@ -174,6 +185,82 @@
     renderChart('jpyChart', currencyData.jpy, 'JPY');
     renderChart('eurChart', currencyData.eur, 'EUR');
     renderChart('chfChart', currencyData.chf, 'CHF');
+
+    // ======================= DATA SAHAM BMRI & BBCA =======================
+    // Data diambil dari Kurs.xlsx (kolom P-V)
+    // Format tanggal: "DD/MM" (untuk sumbu X saham)
+    const bmriDates = [
+        "15/04", "14/04", "13/04", "10/04", "09/04", "08/04", "07/04", "06/04", "02/04", "01/04",
+        "31/03", "30/03", "27/03", "26/03", "25/03", "17/03", "16/03", "13/03", "12/03", "11/03", "10/03"
+    ];
+    const bmriClose = [4650, 4710, 4600, 4670, 4570, 4670, 4510, 4610, 4650, 4720, 4720, 4700, 4760, 4840, 4970, 4730, 4700, 4750, 4960, 4880, 4910];
+    const bmriOpen  = [4750, 4670, 4640, 4580, 4650, 4670, 4600, 4650, 4720, 4800, 4710, 4710, 4840, 4970, 4650, 4750, 4730, 4900, 4870, 4930, 4920];
+
+    const bbcaDates = [
+        "15/04", "14/04", "13/04", "10/04", "09/04", "08/04", "07/04", "06/04", "02/04", "01/04",
+        "31/03", "30/03", "27/03", "26/03", "25/03", "17/03", "16/03", "13/03", "12/03", "11/03", "10/03"
+    ];
+    const bbcaClose = [6550, 6750, 6575, 6700, 6475, 6750, 6500, 6500, 6575, 6500, 6450, 6450, 6700, 6875, 6900, 6775, 6750, 6875, 6900, 6825, 6975];
+    const bbcaOpen  = [6775, 6675, 6650, 6525, 6775, 6650, 6500, 6600, 6550, 6550, 6450, 6400, 6775, 6900, 6675, 6750, 6850, 6850, 6825, 6975, 6950];
+
+    // Fungsi render grafik saham (Close & Open)
+    function renderStockChart(canvasId, labels, closeData, openData, label) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: `${label} Close`,
+                        data: closeData,
+                        borderColor: '#1e3a5f',
+                        backgroundColor: 'rgba(30, 58, 95, 0.05)',
+                        tension: 0.2,
+                        borderWidth: 2.5,
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: `${label} Open`,
+                        data: openData,
+                        borderColor: '#e67e22',
+                        backgroundColor: 'rgba(230, 126, 34, 0.05)',
+                        tension: 0.2,
+                        borderWidth: 2,
+                        borderDash: [5, 3],
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                scales: {
+                    y: { 
+                        beginAtZero: false,
+                        grid: { color: '#e0e0e0' },
+                        title: { display: true, text: 'Harga (IDR)' }
+                    },
+                    x: { 
+                        ticks: { maxRotation: 35, autoSkip: true, maxTicksLimit: 12 },
+                        grid: { display: false },
+                        title: { display: true, text: 'Tanggal (2026)' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } },
+                    tooltip: { backgroundColor: '#1e293b' }
+                }
+            }
+        });
+    }
+
+    renderStockChart('bmriChart', bmriDates, bmriClose, bmriOpen, 'BMRI');
+    renderStockChart('bbcaChart', bbcaDates, bbcaClose, bbcaOpen, 'BBCA');
+
 </script>
 </body>
 </html>
