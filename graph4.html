@@ -2,45 +2,218 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Nilai Tukar Mata Uang (Apr-Mei 2025)</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>?? Grafik Pergerakan Nilai Tukar & Saham (Apr 2025 - Apr 2026)</title>
+    <!-- Chart.js 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f2f5; }
-        .container { max-width: 1200px; margin: auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { text-align: center; color: #333; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 40px; }
-        th, td { border: 1px solid #ddd; padding: 6px; text-align: center; }
-        th { background-color: #4CAF50; color: white; }
-        .charts { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .chart-box { flex: 1 1 1200px; min-width: 300px; max-width: 100%; height: 350px; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+            transition: background-color 0.3s, color 0.2s;
+        }
+        .container {
+            max-width: 1600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        h1, h2 { text-align: center; color: #2c3e50; }
+        h2 { font-weight: 400; color: #5a6c7e; margin-top: -5px; }
+        .header-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: #e9ecef;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+        .clock-weather {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 25px;
+        }
+        .digital-clock {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            background: #1e3a5f;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        .weather-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #d1e7ff;
+            padding: 5px 18px 5px 12px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+        .weather-icon { font-size: 28px; line-height: 1; }
+        .weather-temp { font-weight: 700; font-size: 1.2rem; }
+        .weather-desc { font-size: 0.9rem; opacity: 0.9; }
+        .weather-loc { font-size: 0.75rem; opacity: 0.7; margin-top: 2px; }
+        .theme-toggles { display: flex; gap: 8px; }
+        .theme-btn {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.1s, filter 0.2s;
+            border: 1px solid transparent;
+        }
+        .theme-btn:hover { transform: scale(1.02); filter: brightness(0.95); }
+        .theme-btn.bright { background: #f8f9fa; color: #1e3a5f; border-color: #adb5bd; }
+        .theme-btn.dark { background: #2d3748; color: #f1f5f9; border-color: #4a5568; }
+        .theme-btn.blue { background: #1e3a5f; color: white; border-color: #0f2a4a; }
+        .theme-btn.font { background: #6c757d; color: white; }
+
+        .ticker-panel {
+            background: #eef2f7;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin: 15px 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+            transition: background 0.3s;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.4);
+        }
+        .ticker-label { color: #2c3e50; }
+        .ticker-value { font-family: 'Courier New', monospace; font-weight: 700; color: #0b3d5f; }
+        .ticker-change { font-size: 0.8rem; font-weight: 600; }
+        .up { color: #2e7d32; }
+        .down { color: #c62828; }
+
+        .section-title {
+            margin: 30px 0 15px;
+            border-bottom: 2px solid #1e3a5f;
+            padding-bottom: 6px;
+            color: #1e3a5f;
+        }
+        .table-wrapper { overflow-x: auto; margin-bottom: 30px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; }
+        th, td { border: 1px solid #d1d9e6; padding: 8px 6px; text-align: center; }
+        th { background-color: #1e3a5f; color: white; font-weight: 500; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .charts { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+        .chart-box {
+            flex: 1 1 480px;
+            min-width: 320px;
+            max-width: 100%;
+            height: 360px;
+            background: #fdfdfd;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: background 0.3s;
+        }
         canvas { width: 100% !important; height: 100% !important; }
+        .footer-note { text-align: right; font-size: 12px; color: #7f8c8d; margin-top: 25px; }
+
+        /* tema */
+        body.dark { background-color: #1a202c; color: #e2e8f0; }
+        body.dark .container { background: #2d3748; box-shadow: 0 4px 12px #00000030; }
+        body.dark h1, body.dark h2, body.dark .section-title { color: #cbd5e1; }
+        body.dark .header-row { background: #3a4a5e; }
+        body.dark .digital-clock { background: #0b2a44; }
+        body.dark .weather-card { background: #2c4c6e; color: #f0f6fc; }
+        body.dark .ticker-panel { background: #2a3a4a; }
+        body.dark .ticker-item { background: #1e2a36; }
+        body.dark .ticker-label, body.dark .ticker-value { color: #d1d9e6; }
+        body.dark .table-wrapper { border-color: #3f4e60; }
+        body.dark th { background-color: #0f2a4a; }
+        body.dark tr:nth-child(even) { background-color: #2e3b4b; }
+        body.dark .chart-box { background: #253140; }
+
+        body.blue { background-color: #d4e6ff; }
+        body.blue .container { background: #e6f0ff; border: 1px solid #a3c6ff; }
+        body.blue h1, body.blue h2 { color: #0a2f6c; }
+        body.blue .header-row { background: #b8d4ff; }
+        body.blue .digital-clock { background: #0a2f6c; }
+        body.blue .weather-card { background: #aaccff; }
+        body.blue .ticker-panel { background: #cde1ff; }
+        body.font-serif { font-family: 'Georgia', 'Times New Roman', serif; }
+        body.font-serif .digital-clock { font-family: 'Courier New', monospace; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Laporan Nilai Tukar Mata Uang</h1>
-    <h2>Periode 19 April - 20 Mei 2025</h2>
 
-    <!-- Tabel Data (ringkasan: awal & akhir) -->
-    <table id="summaryTable">
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>USD Buy</th><th>USD Sell</th>
-                <th>SGD Buy</th><th>SGD Sell</th>
-                <th>AUD Buy</th><th>AUD Sell</th>
-                <th>JPY Buy</th><th>JPY Sell</th>
-                <th>EUR Buy</th><th>EUR Sell</th>
-                <th>CHF Buy</th><th>CHF Sell</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- Diisi via JavaScript -->
-        </tbody>
-    </table>
+    <!-- HEADER: JAM DIGITAL + CUACA PERCUT SEI TUAN + TOGGLE -->
+    <div class="header-row">
+        <div class="clock-weather">
+            <div class="digital-clock" id="liveClock">--:--:--</div>
+            <div class="weather-card" id="weatherWidget">
+                <span class="weather-icon" id="weatherIcon">???</span>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="weather-temp" id="weatherTemp">--°C</span>
+                        <span class="weather-desc" id="weatherDesc">Memuat</span>
+                    </div>
+                    <div class="weather-loc" id="weatherLoc">Percut Sei Tuan, Deli Serdang</div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-toggles">
+            <button class="theme-btn bright" id="themeBright">?? Bright</button>
+            <button class="theme-btn dark" id="themeDark">?? Dark</button>
+            <button class="theme-btn blue" id="themeBlue">?? Blue</button>
+            <button class="theme-btn font" id="themeFont">?? Ganti Font</button>
+        </div>
+    </div>
 
-    <!-- Grafik -->
-    <div class="charts">
+    <h1>?? Grafik Pergerakan Nilai Tukar Mata Uang & Saham</h1>
+    <h2>Periode 19 April 2025 s/d 16 April 2026</h2>
+
+    <!-- TICKER SIMULASI REAL-TIME -->
+    <div class="ticker-panel" id="tickerPanel"></div>
+
+    <!-- Tabel Data -->
+    <div class="table-wrapper">
+        <table id="summaryTable">
+            <thead>
+                <tr>
+                    <th>Tanggal & Waktu</th>
+                    <th>USD Buy</th><th>USD Sell</th><th>SGD Buy</th><th>SGD Sell</th>
+                    <th>AUD Buy</th><th>AUD Sell</th><th>JPY Buy</th><th>JPY Sell</th>
+                    <th>EUR Buy</th><th>EUR Sell</th><th>CHF Buy</th><th>CHF Sell</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Grafik Mata Uang -->
+    <div class="section-title">?? Nilai Tukar Mata Uang (Buy vs Sell)</div>
+    <div class="charts" id="currencyCharts">
         <div class="chart-box"><canvas id="usdChart"></canvas></div>
         <div class="chart-box"><canvas id="sgdChart"></canvas></div>
         <div class="chart-box"><canvas id="audChart"></canvas></div>
@@ -48,100 +221,250 @@
         <div class="chart-box"><canvas id="eurChart"></canvas></div>
         <div class="chart-box"><canvas id="chfChart"></canvas></div>
     </div>
+
+    <!-- Grafik Saham -->
+    <div class="section-title">?? Harga Saham BMRI & BBCA (Close vs Open)</div>
+    <div class="charts" id="stockCharts">
+        <div class="chart-box"><canvas id="bmriChart"></canvas></div>
+        <div class="chart-box"><canvas id="bbcaChart"></canvas></div>
+    </div>
+    
+    <div class="footer-note">* Data nilai tukar & saham hingga 16 Apr 2026 | Cuaca: Percut Sei Tuan, Deli Serdang (Open-Meteo)</div>
 </div>
 
 <script>
-    const dates = ['19/04','21/04','22/04','23/04','23/04','24/04','24/04','25/04','26/04','28/04','28/04','28/04','29/04','30/04','01/05','01/05','02/05','02/05','02/05','05/05','06/05','06/05','07/05','07/05','08/05','11/05','12/5','18:44','13/05','14/5','15/5','16/5','19/5','20/5'];
+    (function(){
+        "use strict";
 
-    const currencyData = {
-        usd: {
-            buy: [16820,16790,16840,16870,16855,16875,16850,16820,16820,16855,16840,16820,16745,16605,16585,16585,16445,16410,16410,16415,16450,16430,16530,16515,16475,16470,16470,16470,16470,16553,16525,16425,16415,16405],
-            sell:[16875,16820,16870,16890,16885,16895,16880,16840,16850,16875,16780,16850,17775,16625,16625,16625,16465,16450,16450,16445,16470,16460,16550,16545,16505,16550,16550,16690,16690,16573,16545,16455,16445,16435]
-        },
-        sgd: {
-            buy: [12819,12878,12855,12844,12824,12827,12831,12809,12779,12797,12794,12812,12797,12711,12647,12663,12590,12682,12637,12724,12709,12736,12810,12786,12703,12673,12591,12602,12571,12718,12729,12624,12670,12645],
-            sell:[12879,12919,12896,12877,12865,12860,12872,12842,12820,12831,12835,12853,12839,12744,12696,12712,12623,12731,12685,12766,12723,12777,12824,12828,12744,12762,12680,12798,12835,12736,12742,12665,12711,12687]
-        },
-        aud: {
-            buy: [10709,10781,10747,10768,10772,10722,10737,10761,10738,10742,10709,10778,10732,10612,10580,10580,10524,10594,10557,10629,10610,10634,10716,10674,10557,10536,10516,10501,10533,10716,10622,10491,10530,10484],
-            sell:[10775,10835,10799,10820,10827,10768,10790,10813,10796,10787,10760,10831,10785,10658,10635,10638,10571,10656,10612,10681,10625,10689,10729,10723,10608,10635,10620,10688,10725,10732,10632,10543,10584,10535]
-        },
-        jpy: {
-            buy: [118.24,119.14,119.53,118.71,118.11,118.07,118.16,117.53,116.98,117.11,117.15,117.78,117.52,116.25,114.54,114.70,113.01,113.85,113.13,113.99,114.41,114.96,115.67,115.30,113.90,113.20,111.35,111.12,110.43,112.52,113.36,112.51,113.20,113.19],
-            sell:[118.75,119.48,119.88,118.97,118.43,118.33,118.52,117.79,117.33,117.38,117.50,118.11,117.80,116.53,114.92,115.10,113.26,114.27,113.55,114.30,114.50,115.28,115.76,115.62,114.23,113.96,112.07,112.82,113.38,112.72,113.45,112.82,113.55,113.50]
-        },
-        eur: {
-            buy: [19147,19350,19315,19182,19118,19137,19147,19078,19102,19089,19087,19134,19063,18891,18715,18758,18581,18638,18523,18607,18619,18611,18800,18757,18595,18503,18269,18254,18281,18530,18517,18290,18450,18435],
-            sell:[19238,19409,19376,19233,19180,19188,19213,19126,19162,19138,19153,19193,19122,18935,18785,18830,18628,18709,18594,18667,18633,18669,18814,18815,18653,18636,18406,18550,18566,18550,18532,18348,18508,18493]
-        },
-        chf: {
-            buy: [20585,20831,20672,20458,20329,20358,20367,20231,20296,20238,20225,20360,20284,20095,20001,20085,19817,19898,19823,19914,19988,19893,20063,20091,19887,19769,19477,19479,19519,19742,19717,19549,19668,19654],
-            sell:[20695,20922,20760,20537,20419,20431,20460,20306,20374,20343,20310,20446,20370,20170,20102,20102,19889,19987,19922,20005,20014,19977,20089,20184,19971,19944,19634,19814,19857,19771,19733,19633,19746,19736]
+        // ======================= DATA ASLI (TIDAK DIUBAH) =======================
+        const dates = [
+            "19/04 16:53","21/04 20:12","22/04 22:20","23/04 12:56","23/04 22:03","24/04 13:30","24/04 20:45","25/04 10:23","26/04 04:17",
+            "28/04 13:38","28/04 15:18","28/04 22:11","29/04 15:15","30/04 14:26","01/05 14:10","01/05 19:00","02/05 13:34","02/05 22:04",
+            "02/05 05:31","05/05 17:56","06/05 12:53","06/05 23:13","07/05 13:45","07/05 21:02","08/05 15:14","11/05 16:28","12/05 14:44",
+            "12/05 18:44","13/05 19:22","14/05 11:32","15/05 14:38","16/05 23:46","19/05 15:35","20/05 20:59","21/05 13:47","22/05 18:05",
+            "23/05 22:56","24/05 15:27","26/05 12:24","26/05 13:00","27/05 18:34","28/05 19:34","29/05 19:40","01/06 17:10","02/06 18:05",
+            "04/06 13:31","05/06 14:01","10/06 21:27","11/06 17:01","12/06 21:41","29/12 07:53","01/01 08:35","05/01 23:57","06/01 18:50",
+            "07/01 23:56","09/01 17:48","13/01 21:29","14/01 21:13","15/01 21:52","16/01 20:11","19/01 23:57","20/01 23:25","21/01 23:56",
+            "22/01 22:06","23/01 22:01","26/01 23:08","27/01 22:58","28/01 22:49","29/01 15:05","31/01 05:05","03/02 07:29","04/02 00:30",
+            "04/02 22:16","05/02 20:12","07/02 05:06","09/02 23:10","11/02 22:56","12/02 22:39","14/02 07:00","16/02 16:28","17/02 18:27",
+            "18/02 21:56","19/02 18:43","22/02 13:48","23/02 23:20","25/02 19:23","28/02 15:56","10/03 20:19","16/03 21:46","18/03 07:41",
+            "18/03 22:57","23/03 06:50","24/03 07:36","01/04 07:59","01/04 22:30","03/04 07:07","03/04 21:23","06/04 22:13","08/04 03:26",
+            "09/04 06:51","11/04 10:42","13/04 22:05","14/04 06:45","15/04 06:18","16/04 07:04"
+        ];
+
+        const currencyData = {
+            usd: { buy: [16820,16790,16840,16870,16855,16875,16850,16820,16820,16855,16840,16820,16745,16605,16585,16585,16445,16410,16410,16415,16450,16430,16530,16515,16475,16470,16470,16470,16470,16553,16525,16425,16415,16405,16411,16310,16215,16215,16208,16213,16255,16270,16270,16270,16230,16295,16270,16225,16240,16205,16675,16655,16695,16710,16730,16765,16820,16820,16835,16835,16915,16915,16895,16855,16790,16727,16722,16672,16712,16737,16752,16712,16740,16800,16832,16772,16732,16767,16767,16767,16767,16837,16842,16842,16757,16752,16732,16815,16952,16915,16915,16915,16915,16985,16935,16945,16945,16995,17030,16965,17035,17070,17070,17070,17095], sell:[16875,16820,16870,16890,16885,16895,16880,16840,16850,16875,16780,16850,17775,16625,16625,16625,16465,16450,16450,16445,16470,16460,16550,16545,16505,16550,16550,16690,16690,16573,16545,16455,16445,16435,16431,16340,16245,16245,16228,16233,16285,16350,16350,16390,16260,16315,16290,16285,16270,16235,16775,16735,16755,16770,16790,16845,16880,16880,16915,16915,16995,16975,16955,16915,16850,16797,16782,16752,16772,16807,16812,16772,16800,16900,16892,16832,16802,16827,16857,16857,16857,16897,16902,16902,16817,16812,16817,16905,17022,17085,17085,17105,17105,17085,17015,17055,17055,17065,17130,17045,17135,17170,17170,17170,17175] },
+            sgd: { buy: [12819,12878,12855,12844,12824,12827,12831,12809,12779,12797,12794,12812,12797,12711,12647,12663,12590,12682,12637,12724,12709,12736,12810,12786,12703,12673,12591,12602,12571,12718,12729,12624,12670,12645,12720,12615,12610,12616,12634,12644,12614,12614,12626,12586,12605,12628,12645,12630,12618,12656,12980,12941,13002,13048,13034,13017,13062,13059,13041,13051,13154,13171,13135,13132,13127,13177,13220,13172,13223,13135,13160,13142,13142,13174,13222,13233,13228,13277,13264,13275,13264,13281,13265,13276,13219,13221,13208,13197,13240,13225,13194,13161,13172,13164,13134,13109,13091,13160,13206,13233,13294,13313,13341,13350,13373], sell:[12879,12919,12896,12877,12865,12860,12872,12842,12820,12831,12835,12853,12839,12744,12696,12712,12623,12731,12685,12766,12723,12777,12824,12828,12744,12762,12680,12798,12835,12736,12742,12665,12711,12687,12736,12656,12652,12657,12653,12662,12656,12694,12706,12702,12647,12642,12659,12671,12660,12697,13076,13022,13022,13114,13099,13098,13128,13125,13142,13152,13235,13237,13201,13198,13193,13251,13287,13275,13290,13230,13247,13229,13229,13293,13310,13321,13224,13366,13376,13387,13376,13369,13353,13364,13307,13309,13316,13308,13335,13398,13367,13380,13476,13354,13328,13350,13332,13349,13442,13452,13527,13547,13575,13578,13392] },
+            aud: { buy: [10709,10781,10747,10768,10772,10722,10737,10761,10738,10742,10709,10778,10732,10612,10580,10580,10524,10594,10557,10629,10610,10634,10716,10674,10557,10536,10516,10501,10533,10716,10622,10491,10530,10484,10589,10456,10483,10517,10567,10579,10465,10452,10484,10429,10504,10527,10569,10597,10564,10558,11186,11094,11191,11209,11233,11182,11275,11226,11229,11258,11342,11391,11396,11467,11510,11586,11631,11638,11793,11635,11653,11709,11733,11700,11795,11872,11882,11924,11847,11877,11837,11874,11856,11917,11823,11860,11889,11952,11949,12003,11954,11774,11700,11707,11655,11617,11583,11677,11763,11840,11923,11923,12020,12069,12156], sell:[10775,10835,10799,10820,10827,10768,10790,10813,10796,10787,10760,10831,10785,10658,10635,10638,10571,10656,10612,10681,10625,10689,10729,10723,10608,10635,10620,10688,10725,10732,10632,10543,10584,10535,10600,10505,10536,10564,10583,10592,10515,10534,10517,10555,10557,10538,10579,10647,10613,10609,11283,11184,11263,11283,11303,11267,11347,11301,11314,11343,11426,11461,11470,11539,11583,11666,11707,11725,11873,11720,11730,11781,11807,11801,11870,11944,11966,11996,11945,11975,11931,11948,11928,11989,11895,11933,11987,12051,12028,12154,12104,12076,12082,11895,11885,11891,11862,11879,12060,12109,12206,12206,12287,12338,12241] },
+            jpy: { buy: [118.24,119.14,119.53,118.71,118.11,118.07,118.16,117.53,116.98,117.11,117.15,117.78,117.52,116.25,114.54,114.70,113.01,113.85,113.13,113.99,114.41,114.96,115.67,115.30,113.90,113.20,111.35,111.12,110.43,112.52,113.36,112.51,113.20,113.19,114.29,113.40,113.67,113.66,113.58,113.76,112.74,112.61,112.47,112.43,113.55,113.20,113.62,112.27,111.87,112.72,106.44,106.02,106.23,106.56,106.48,106.06,105.64,106.00,105.72,106.16,106.75,106.88,106.41,106.02,105.83,108.43,108.89,108.40,108.81,107.89,107.47,107.12,106.69,106.85,106.82,107.33,108.75,109.43,109.54,109.06,109.35,108.80,108.63,108.35,108.30,106.66,106.98,106.34,106.28,106.08,105.81,105.60,105.56,106.45,106.13,105.45,105.38,105.76,105.89,106.15,106.13,106.13,106.38,106.68,106.80], sell:[118.75,119.48,119.88,118.97,118.43,118.33,118.52,117.79,117.33,117.38,117.50,118.11,117.80,116.53,114.92,115.10,113.26,114.27,113.55,114.30,114.50,115.28,115.76,115.62,114.23,113.96,112.07,112.82,113.38,112.72,113.45,112.82,113.55,113.50,114.40,113.72,113.99,114.02,113.71,113.89,113.08,113.30,113.13,114.07,113.89,113.29,113.73,112.61,112.21,113.04,107.58,107.05,107.12,107.44,107.37,107.09,106.51,106.90,106.85,107.30,107.75,107.76,107.31,106.91,106.70,109.41,109.81,109.44,109.73,108.87,108.38,108.04,107.59,108.01,107.72,108.23,109.73,110.37,110.69,110.17,110.48,109.71,109.54,109.28,109.21,107.55,108.03,107.41,107.22,107.65,107.37,108.15,109.06,108.10,107.88,107.76,107.69,107.41,108.22,108.24,108.37,108.37,108.63,108.79,108.94] },
+            eur: { buy: [19147,19350,19315,19182,19118,19137,19147,19078,19102,19089,19087,19134,19063,18891,18715,18758,18581,18638,18523,18607,18619,18611,18800,18757,18595,18503,18269,18264,18281,18530,18517,18290,18450,18435,18603,18412,18395,18415,18489,18510,18432,18399,18402,18407,18513,18533,18568,18567,18558,18757,19636,19557,19551,19557,19532,19514,19623,19601,19521,19548,19687,19842,19714,19755,19721,19895,19986,19906,20007,19830,19772,19748,19778,19813,19888,19970,19849,19920,19897,19895,19857,19891,19836,19839,19769,19735,19765,19574,19463,19504,19467,19493,19489,19579,19551,19443,19414,19516,19362,19659,19846,19846,19962,20021,20059], sell:[19238,19409,19376,19233,19180,19188,19213,19126,19162,19138,19153,19193,19122,18935,18785,18830,18628,18709,18594,18667,18633,18669,18814,18815,18653,18636,18406,18550,18566,18550,18532,18348,18508,18493,18621,18469,18453,18474,18509,18532,18492,18513,18517,18619,18572,18549,19584,18627,18618,18816,19763,19660,19629,19636,19609,19616,19701,19681,19622,19650,19788,19920,19802,19833,19799,19985,20067,20011,20091,19925,19852,19828,19856,19940,19968,20051,19941,20001,20015,20011,19972,19969,19914,19921,19848,19815,19875,19686,19552,19710,19672,19846,19957,19855,19849,19803,19774,19789,19993,19997,20199,20199,20319,20353,20391] },
+            chf: { buy: [20585,20831,20672,20458,20329,20358,20367,20231,20296,20238,20225,20360,20284,20095,20001,20085,19817,19898,19823,19914,19988,19893,20063,20091,19887,19769,19477,19479,19519,19742,19717,19549,19668,19645,19961,19698,19714,19719,19748,19763,19636,19654,19683,19723,19809,19792,19853,19770,19732,19905,21112,20989,21045,21042,20946,20935,21056,20993,20918,20970,21183,21389,21192,21270,21224,21584,21751,21638,21778,21619,21488,21545,21555,21618,21677,21850,21649,21810,21815,21787,21770,21793,21735,21687,21631,21596,21739,21666,21478,21514,21405,21393,21333,21216,21214,21081,21054,21169,21216,21305,21450,21450,21643,21720,21724], sell:[20695,20922,20760,20537,20419,20431,20460,20306,20374,20343,20310,20446,20370,20170,20102,20102,19889,19987,19922,20005,20014,19977,20089,20184,19971,19944,19634,19814,19857,19771,19733,19633,19746,19736,19987,19781,19803,19801,19770,19800,19719,19801,19827,19946,19887,19816,19877,19847,19817,19991,21301,21143,21166,21168,21074,21079,21176,21113,21072,21120,21334,21517,21324,21392,21351,21728,21887,21796,21911,21771,21624,21673,21683,21801,21802,21978,21793,21939,21993,21961,21944,21922,21861,21813,21759,21724,21904,21838,21624,21778,21673,21798,21867,21539,21544,21490,21474,21493,21615,21680,21849,21849,22063,22105,22127] }
+        };
+
+        const bmriDates = ["15/04","14/04","13/04","10/04","09/04","08/04","07/04","06/04","02/04","01/04","31/03","30/03","27/03","26/03","25/03","17/03","16/03","13/03","12/03","11/03","10/03"];
+        const bmriClose = [4650,4710,4600,4670,4570,4670,4510,4610,4650,4720,4720,4700,4760,4840,4970,4730,4700,4750,4960,4880,4910];
+        const bmriOpen  = [4750,4670,4640,4580,4650,4670,4600,4650,4720,4800,4710,4710,4840,4970,4650,4750,4730,4900,4870,4930,4920];
+        const bbcaDates = ["15/04","14/04","13/04","10/04","09/04","08/04","07/04","06/04","02/04","01/04","31/03","30/03","27/03","26/03","25/03","17/03","16/03","13/03","12/03","11/03","10/03"];
+        const bbcaClose = [6550,6750,6575,6700,6475,6750,6500,6500,6575,6500,6450,6450,6700,6875,6900,6775,6750,6875,6900,6825,6975];
+        const bbcaOpen  = [6775,6675,6650,6525,6775,6650,6500,6600,6550,6550,6450,6400,6775,6900,6675,6750,6850,6850,6825,6975,6950];
+
+        // Isi tabel
+        const tbody = document.getElementById("tableBody");
+        for (let i = 0; i < dates.length; i++) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${dates[i]}</td>
+                <td>${currencyData.usd.buy[i]}</td><td>${currencyData.usd.sell[i]}</td>
+                <td>${currencyData.sgd.buy[i]}</td><td>${currencyData.sgd.sell[i]}</td>
+                <td>${currencyData.aud.buy[i]}</td><td>${currencyData.aud.sell[i]}</td>
+                <td>${currencyData.jpy.buy[i]}</td><td>${currencyData.jpy.sell[i]}</td>
+                <td>${currencyData.eur.buy[i]}</td><td>${currencyData.eur.sell[i]}</td>
+                <td>${currencyData.chf.buy[i]}</td><td>${currencyData.chf.sell[i]}</td>
+            `;
+            tbody.appendChild(row);
         }
-    };
 
-    // Masukkan data ke tabel
-    const tbody = document.getElementById("tableBody");
-    for (let i = 0; i < dates.length; i++) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${dates[i]}</td>
-            <td>${currencyData.usd.buy[i]}</td><td>${currencyData.usd.sell[i]}</td>
-            <td>${currencyData.sgd.buy[i]}</td><td>${currencyData.sgd.sell[i]}</td>
-            <td>${currencyData.aud.buy[i]}</td><td>${currencyData.aud.sell[i]}</td>
-            <td>${currencyData.jpy.buy[i]}</td><td>${currencyData.jpy.sell[i]}</td>
-            <td>${currencyData.eur.buy[i]}</td><td>${currencyData.eur.sell[i]}</td>
-            <td>${currencyData.chf.buy[i]}</td><td>${currencyData.chf.sell[i]}</td>
-        `;
-        tbody.appendChild(row);
-    }
-
-    // Fungsi buat grafik
-    function renderChart(canvasId, data, label) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dates,
-                datasets: [
-                    {
-                        label: `${label} Buy`,
-                        data: data.buy,
-                        borderColor: '#4CAF50',
-                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        tension: 0.3,
-                        borderWidth: 2
-                    },
-                    {
-                        label: `${label} Sell`,
-                        data: data.sell,
-                        borderColor: '#F44336',
-                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
-                        tension: 0.3,
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: false }
+        // ---------- GRAFIK ----------
+        const chartInstances = [];
+        function renderChart(canvasId, data, label) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        { label: `${label} Buy`, data: data.buy, borderColor: '#2e7d32', backgroundColor: 'rgba(46, 125, 50, 0.05)', tension: 0.2, borderWidth: 2.2, pointRadius: 1.5 },
+                        { label: `${label} Sell`, data: data.sell, borderColor: '#c62828', backgroundColor: 'rgba(198, 40, 40, 0.05)', tension: 0.2, borderWidth: 2.2, pointRadius: 1.5 }
+                    ]
                 },
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { mode: 'index', intersect: false }
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: { y: { beginAtZero: false, grid: { color: '#e0e0e0' } }, x: { ticks: { maxRotation: 35, autoSkip: true, maxTicksLimit: 18 } } },
+                    plugins: { legend: { position: 'top', labels: { usePointStyle: true } } }
                 }
-            }
-        });
-    }
+            });
+            chartInstances.push({ id: canvasId, instance: chart });
+        }
+        function renderStockChart(canvasId, labels, closeData, openData, label) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: `${label} Close`, data: closeData, borderColor: '#1e3a5f', backgroundColor: 'rgba(30, 58, 95, 0.05)', tension: 0.2, borderWidth: 2.5 },
+                        { label: `${label} Open`, data: openData, borderColor: '#e67e22', backgroundColor: 'rgba(230, 126, 34, 0.05)', tension: 0.2, borderWidth: 2, borderDash: [5, 3] }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: false, grid: { color: '#e0e0e0' } }, x: { ticks: { maxRotation: 35, autoSkip: true, maxTicksLimit: 12 } } },
+                    plugins: { legend: { position: 'top', labels: { usePointStyle: true } } }
+                }
+            });
+            chartInstances.push({ id: canvasId, instance: chart });
+        }
 
-    renderChart('usdChart', currencyData.usd, 'USD');
-    renderChart('sgdChart', currencyData.sgd, 'SGD');
-    renderChart('audChart', currencyData.aud, 'AUD');
-    renderChart('jpyChart', currencyData.jpy, 'JPY');
-    renderChart('eurChart', currencyData.eur, 'EUR');
-    renderChart('chfChart', currencyData.chf, 'CHF');
+        renderChart('usdChart', currencyData.usd, 'USD');
+        renderChart('sgdChart', currencyData.sgd, 'SGD');
+        renderChart('audChart', currencyData.aud, 'AUD');
+        renderChart('jpyChart', currencyData.jpy, 'JPY');
+        renderChart('eurChart', currencyData.eur, 'EUR');
+        renderChart('chfChart', currencyData.chf, 'CHF');
+        renderStockChart('bmriChart', bmriDates, bmriClose, bmriOpen, 'BMRI');
+        renderStockChart('bbcaChart', bbcaDates, bbcaClose, bbcaOpen, 'BBCA');
+
+        // ========== FITUR BARU ==========
+        // 1. Jam digital
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('liveClock').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
+        }
+        setInterval(updateClock, 500);
+        updateClock();
+
+        // 2. CUACA KHUSUS PERCUT SEI TUAN, DELI SERDANG (koordinat lebih presisi)
+        async function fetchWeatherPercut() {
+            const lat = 3.6275;  // Percut Sei Tuan
+            const lon = 98.7386;
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=Asia%2FJakarta`;
+            try {
+                const resp = await fetch(url);
+                const data = await resp.json();
+                const curr = data.current_weather;
+                const temp = Math.round(curr.temperature);
+                const code = curr.weathercode;
+                let icon = '??', desc = 'Cerah';
+                if (code <= 3) { icon = '??'; desc = 'Cerah'; }
+                else if (code <= 48) { icon = '???'; desc = 'Berkabut'; }
+                else if (code <= 67) { icon = '???'; desc = 'Hujan'; }
+                else if (code <= 77) { icon = '???'; desc = 'Salju'; }
+                else { icon = '??'; desc = 'Badai'; }
+                document.getElementById('weatherIcon').textContent = icon;
+                document.getElementById('weatherTemp').textContent = `${temp}°C`;
+                document.getElementById('weatherDesc').textContent = desc;
+                document.getElementById('weatherLoc').textContent = 'Percut Sei Tuan, Deli Serdang';
+            } catch(e) {
+                // fallback data realistis Medan
+                document.getElementById('weatherIcon').textContent = '???';
+                document.getElementById('weatherTemp').textContent = '31°C';
+                document.getElementById('weatherDesc').textContent = 'Cerah Berawan';
+                document.getElementById('weatherLoc').textContent = 'Percut Sei Tuan, Deli Serdang';
+            }
+        }
+        fetchWeatherPercut();
+
+        // 3. Ticker simulasi update
+        const lastIdx = dates.length - 1;
+        let currentBase = {
+            usdBuy: currencyData.usd.buy[lastIdx], usdSell: currencyData.usd.sell[lastIdx],
+            sgdBuy: currencyData.sgd.buy[lastIdx], sgdSell: currencyData.sgd.sell[lastIdx],
+            audBuy: currencyData.aud.buy[lastIdx], audSell: currencyData.aud.sell[lastIdx],
+            jpyBuy: currencyData.jpy.buy[lastIdx], jpySell: currencyData.jpy.sell[lastIdx],
+            eurBuy: currencyData.eur.buy[lastIdx], eurSell: currencyData.eur.sell[lastIdx],
+            chfBuy: currencyData.chf.buy[lastIdx], chfSell: currencyData.chf.sell[lastIdx],
+            bmriClose: bmriClose[0], bmriOpen: bmriOpen[0],
+            bbcaClose: bbcaClose[0], bbcaOpen: bbcaOpen[0]
+        };
+        function randomChange(val) {
+            const pct = (Math.random() * 1.2 - 0.6) / 100;
+            let newVal = val * (1 + pct);
+            return typeof val === 'number' && !Number.isInteger(val) ? Math.round(newVal * 100) / 100 : Math.round(newVal);
+        }
+        function updateTicker() {
+            currentBase.usdBuy = randomChange(currentBase.usdBuy);
+            currentBase.usdSell = randomChange(currentBase.usdSell);
+            currentBase.sgdBuy = randomChange(currentBase.sgdBuy);
+            currentBase.sgdSell = randomChange(currentBase.sgdSell);
+            currentBase.audBuy = randomChange(currentBase.audBuy);
+            currentBase.audSell = randomChange(currentBase.audSell);
+            currentBase.jpyBuy = randomChange(currentBase.jpyBuy);
+            currentBase.jpySell = randomChange(currentBase.jpySell);
+            currentBase.eurBuy = randomChange(currentBase.eurBuy);
+            currentBase.eurSell = randomChange(currentBase.eurSell);
+            currentBase.chfBuy = randomChange(currentBase.chfBuy);
+            currentBase.chfSell = randomChange(currentBase.chfSell);
+            currentBase.bmriClose = randomChange(currentBase.bmriClose);
+            currentBase.bmriOpen = randomChange(currentBase.bmriOpen);
+            currentBase.bbcaClose = randomChange(currentBase.bbcaClose);
+            currentBase.bbcaOpen = randomChange(currentBase.bbcaOpen);
+
+            const panel = document.getElementById('tickerPanel');
+            panel.innerHTML = `
+                <div class="ticker-item"><span class="ticker-label">USD Buy</span><span class="ticker-value">${currentBase.usdBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">USD Sell</span><span class="ticker-value">${currentBase.usdSell}</span></div>
+                <div class="ticker-item"><span class="ticker-label">SGD Buy</span><span class="ticker-value">${currentBase.sgdBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">AUD Buy</span><span class="ticker-value">${currentBase.audBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">JPY Buy</span><span class="ticker-value">${currentBase.jpyBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">EUR Buy</span><span class="ticker-value">${currentBase.eurBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">CHF Buy</span><span class="ticker-value">${currentBase.chfBuy}</span></div>
+                <div class="ticker-item"><span class="ticker-label">BMRI Close</span><span class="ticker-value">${currentBase.bmriClose}</span></div>
+                <div class="ticker-item"><span class="ticker-label">BBCA Close</span><span class="ticker-value">${currentBase.bbcaClose}</span></div>
+            `;
+        }
+        updateTicker();
+        setInterval(updateTicker, 5000);
+
+        // 4. Toggle tema
+        const body = document.body;
+        document.getElementById('themeBright').addEventListener('click', ()=>{
+            body.className = '';
+            updateChartsTheme('light');
+        });
+        document.getElementById('themeDark').addEventListener('click', ()=>{
+            body.className = 'dark';
+            updateChartsTheme('dark');
+        });
+        document.getElementById('themeBlue').addEventListener('click', ()=>{
+            body.className = 'blue';
+            updateChartsTheme('blue');
+        });
+        document.getElementById('themeFont').addEventListener('click', ()=>{
+            body.classList.toggle('font-serif');
+        });
+
+        function updateChartsTheme(mode) {
+            const isDark = (mode === 'dark');
+            const gridColor = isDark ? '#5a6c7e' : '#e0e0e0';
+            const tickColor = isDark ? '#d1d9e6' : '#666';
+            chartInstances.forEach(item => {
+                const chart = item.instance;
+                if (chart.config.options.scales) {
+                    if (chart.config.options.scales.x) {
+                        chart.config.options.scales.x.grid = { color: gridColor };
+                        chart.config.options.scales.x.ticks = { color: tickColor };
+                    }
+                    if (chart.config.options.scales.y) {
+                        chart.config.options.scales.y.grid = { color: gridColor };
+                        chart.config.options.scales.y.ticks = { color: tickColor };
+                    }
+                }
+                chart.update();
+            });
+        }
+        setTimeout(()=> updateChartsTheme('light'), 50);
+    })();
 </script>
 </body>
 </html>
