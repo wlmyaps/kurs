@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Grafik analis kurs berdasarkkan file csv by William Yap</title>
+    <!-- Chart.js & PapaParse -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- Font Awesome untuk ikon (opsional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+        body {
+            background: #f4f7fc;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            padding: 24px 16px;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            padding: 28px 24px 32px;
+            transition: all 0.2s;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+        h1 i {
+            color: #2563eb;
+            font-size: 1.8rem;
+        }
+        .subtitle {
+            color: #475569;
+            margin-bottom: 28px;
+            font-size: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            font-weight: 400;
+        }
+        .upload-area {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 32px 20px;
+            text-align: center;
+            margin-bottom: 28px;
+            transition: border 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .upload-area i {
+            font-size: 48px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+        .upload-area.dragover {
+            border-color: #2563eb;
+            background: #dbeafe;
+        }
+        #file-input {
+            display: none;
+        }
+        .file-label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.1rem;
+        }
+        .file-hint {
+            color: #64748b;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+        .info-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: 16px 0 20px;
+        }
+        .stats {
+            display: flex;
+            gap: 24px;
+            background: #f1f5f9;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+        }
+        .stats span {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .btn-primary {
+            background: #2563eb;
+            border: 1px solid #2563eb;
+            color: white;
+            box-shadow: 0 4px 8px rgba(37,99,235,0.2);
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .btn-outline:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .btn i {
+            font-size: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 420px;
+            width: 100%;
+            margin: 24px 0 10px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 8px;
+        }
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .footer-note {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        .error-message {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 12px 20px;
+            border-radius: 16px;
+            margin: 16px 0;
+            font-weight: 500;
+            display: none;
+        }
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>
+        <i class="fas fa-chart-line"></i> 
+        ForexChart · CSV Upload
+    </h1>
+    <div class="subtitle">
+        Upload CSV (USD, SGD, JPY, dll) · Grafik <strong>Terakhir</strong> dari tanggal terlama → terbaru
+    </div>
+
+    <!-- Area upload -->
+    <div class="upload-area" id="drop-area">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <div class="file-label">Klik atau seret file CSV ke sini</div>
+        <div class="file-hint">Format: Tanggal, Terakhir, Pembukaan, Tertinggi, Terendah, Vol., Perubahan%</div>
+        <input type="file" id="file-input" accept=".csv, text/csv, application/vnd.ms-excel">
+    </div>
+
+    <!-- Info & action bar -->
+    <div class="info-bar">
+        <div class="stats" id="stats-panel">
+            <span>📊 <span id="row-count">0</span> hari</span>
+            <span>📌 Terkini: <span id="latest-value">—</span></span>
+            <span>📅 <span id="date-range">—</span></span>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" id="download-btn" disabled>
+                <i class="fas fa-download"></i> Unduh Grafik (PNG) by: William Yap
+            </button>
+            <button class="btn btn-outline" id="reset-btn">
+                <i class="fas fa-rotate-left"></i> Reset
+            </button>
+        </div>
+    </div>
+
+    <!-- Pesan error -->
+    <div id="error-box" class="error-message"></div>
+
+    <!-- Loading -->
+    <div id="loading" class="loading-indicator">
+        <i class="fas fa-spinner fa-pulse"></i> Memproses CSV...
+    </div>
+
+    <!-- Canvas Chart -->
+    <div class="chart-container">
+        <canvas id="priceChart"></canvas>
+    </div>
+    <div class="footer-note">
+        <i class="far fa-calendar-alt"></i> Data diurutkan dari terlama (bawah file) → terbaru (atas file)
+    </div>
+</div>
+
+<script>
+    (function(){
+        "use strict";
+
+        // DOM elements
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const errorBox = document.getElementById('error-box');
+        const loadingEl = document.getElementById('loading');
+        const rowCountSpan = document.getElementById('row-count');
+        const latestValueSpan = document.getElementById('latest-value');
+        const dateRangeSpan = document.getElementById('date-range');
+        const downloadBtn = document.getElementById('download-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        
+        // Chart instance
+        let chartInstance = null;
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        
+        // Data holder
+        let currentChartData = { labels: [], values: [] };
+        let currentFileName = '';
+
+        // ----- Fungsi parsing angka Indonesia (17.185,0 -> 17185.0) -----
+        function parseIndonesianNumber(str) {
+            if (!str || typeof str !== 'string') return NaN;
+            // Hapus spasi, lalu: hilangkan titik (pemisah ribuan), ganti koma desimal jadi titik
+            let cleaned = str.trim();
+            // jika ada tanda kutip, hapus
+            cleaned = cleaned.replace(/^["']|["']$/g, '');
+            if (cleaned === '') return NaN;
+            // hilangkan semua titik (thousand separator)
+            let withoutDots = cleaned.replace(/\./g, '');
+            // ganti koma desimal dengan titik
+            let withDotDecimal = withoutDots.replace(/,/g, '.');
+            return parseFloat(withDotDecimal);
+        }
+
+        // ----- Parse tanggal dd/mm/yyyy ke format yyyy-mm-dd (untuk sorting & tampil) -----
+        function parseDateFromIndonesian(dateStr) {
+            if (!dateStr) return null;
+            const clean = dateStr.trim().replace(/^["']|["']$/g, '');
+            const parts = clean.split('/');
+            if (parts.length !== 3) return null;
+            const day = parts[0].padStart(2, '0');
+            const month = parts[1].padStart(2, '0');
+            const year = parts[2];
+            // return sebagai string terstandar dan juga timestamp
+            return {
+                formatted: `${day}/${month}/${year}`,
+                iso: `${year}-${month}-${day}`,
+                timestamp: new Date(`${year}-${month}-${day}T00:00:00`).getTime()
+            };
+        }
+
+        // ----- Fungsi utama parsing CSV dan generate chart -----
+        function processCSV(csvText, fileName) {
+            // Reset error
+            errorBox.style.display = 'none';
+            
+            // Parse dengan PapaParse (header true, skip empty lines)
+            Papa.parse(csvText, {
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: (h) => h.trim(),
+                complete: (results) => {
+                    const data = results.data;
+                    const errors = results.errors;
+                    
+                    if (errors.length > 0) {
+                        showError('⚠️ CSV mengandung error parsing. Pastikan format sesuai.');
+                        console.warn('PapaParse errors:', errors);
+                    }
+
+                    if (!data || data.length === 0) {
+                        showError('File CSV kosong atau tidak memiliki data.');
+                        return;
+                    }
+
+                    // Cek kolom wajib: Tanggal, Terakhir
+                    const firstRow = data[0];
+                    const hasTanggal = 'Tanggal' in firstRow;
+                    const hasTerakhir = 'Terakhir' in firstRow;
+                    
+                    if (!hasTanggal || !hasTerakhir) {
+                        showError('Kolom "Tanggal" dan "Terakhir" wajib ada. Pastikan header sesuai.');
+                        return;
+                    }
+
+                    // Array untuk menyimpan pasangan { dateObj, value }
+                    const rows = [];
+                    
+                    for (let row of data) {
+                        const tanggalRaw = row['Tanggal'];
+                        const terakhirRaw = row['Terakhir'];
+                        
+                        if (!tanggalRaw || terakhirRaw === undefined || terakhirRaw === '') continue;
+                        
+                        const dateInfo = parseDateFromIndonesian(tanggalRaw);
+                        if (!dateInfo) continue;
+                        
+                        const value = parseIndonesianNumber(terakhirRaw);
+                        if (isNaN(value)) continue;
+                        
+                        rows.push({
+                            timestamp: dateInfo.timestamp,
+                            formattedDate: dateInfo.formatted,
+                            isoDate: dateInfo.iso,
+                            value: value
+                        });
+                    }
+
+                    if (rows.length === 0) {
+                        showError('Tidak ada baris valid dengan tanggal & nilai "Terakhir". Periksa format angka (contoh: "17.185,0").');
+                        return;
+                    }
+
+                    // Urutkan berdasarkan timestamp ascending (terlama -> terbaru)
+                    rows.sort((a, b) => a.timestamp - b.timestamp);
+                    
+                    // Siapkan labels & values untuk chart
+                    const labels = rows.map(r => r.formattedDate);
+                    const values = rows.map(r => r.value);
+                    
+                    // Simpan ke current
+                    currentChartData = { labels, values };
+                    currentFileName = fileName || 'forex_chart';
+                    
+                    // Update statistik
+                    const count = rows.length;
+                    const latestVal = values[values.length-1];
+                    const firstDate = labels[0];
+                    const lastDate = labels[labels.length-1];
+                    
+                    rowCountSpan.textContent = count;
+                    latestValueSpan.textContent = latestVal.toLocaleString('id-ID', { minimumFractionDigits: 1, maximumFractionDigits: 4 });
+                    dateRangeSpan.textContent = `${firstDate} — ${lastDate}`;
+                    
+                    // Gambar chart
+                    renderChart(labels, values);
+                    
+                    // Enable download button
+                    downloadBtn.disabled = false;
+                },
+                error: (err) => {
+                    showError('Gagal membaca CSV: ' + err);
+                }
+            });
+        }
+
+		// Fungsi kalkulasi Moving Average
+function calculateMA(data, period) {
+    let ma = [];
+    for (let i = 0; i < data.length; i++) {
+        if (i < period - 1) {
+            ma.push(null);
+        } else {
+            const slice = data.slice(i - period + 1, i + 1);
+            const sum = slice.reduce((a, b) => a + b, 0);
+            ma.push(sum / period);
+        }
+    }
+    return ma;
+}
+
+// Fungsi kalkulasi Bollinger Bands
+function calculateBollingerBands(data, period, stdDevMultiplier) {
+    const ma = calculateMA(data, period);
+    let upperBand = [];
+    let lowerBand = [];
+
+    for (let i = 0; i < data.length; i++) {
+        if (i < period - 1) {
+            upperBand.push(null);
+            lowerBand.push(null);
+        } else {
+            const slice = data.slice(i - period + 1, i + 1);
+            const mean = ma[i];
+            const squareDiffs = slice.map(value => Math.pow(value - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / period;
+            const stdDev = Math.sqrt(avgSquareDiff);
+            
+            upperBand.push(mean + (stdDevMultiplier * stdDev));
+            lowerBand.push(mean - (stdDevMultiplier * stdDev));
+        }
+    }
+    return { upperBand, lowerBand };
+}
+		
+        // ----- Render Chart.js -----
+        function renderChart(labels, values) {
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    // === HITUNG INDIKATOR ===
+    const periodMA = 20;           // bisa diubah sesuai kebutuhan
+    const bbMultiplier = 2;
+    const ma20 = calculateMA(values, periodMA);
+    const bb = calculateBollingerBands(values, periodMA, bbMultiplier);
+    
+    // Tentukan warna dasar (sama seperti sebelumnya)
+    const startVal = values[0];
+    const endVal = values[values.length-1];
+    const isUp = endVal >= startVal;
+    const lineColor = isUp ? '#10b981' : '#ef4444';
+    const bgGradient = ctx.createLinearGradient(0, 0, 0, 400);
+    bgGradient.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)');
+    bgGradient.addColorStop(1, 'rgba(255,255,255,0)');
+    
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Harga Terakhir',
+                    data: values,
+                    borderColor: lineColor,
+                    backgroundColor: bgGradient,
+                    borderWidth: 2.5,
+                    pointRadius: 2,
+                    pointHoverRadius: 5,
+                    tension: 0.1,
+                    fill: true,
+                    order: 1
+                },
+                {
+                    label: `MA ${periodMA}`,
+                    data: ma20,
+                    borderColor: '#f97316',   // orange
+                    borderWidth: 1.8,
+                    borderDash: [5, 3],
+                    pointRadius: 0,
+                    fill: false,
+                    order: 2
+                },
+                {
+                    label: `BB Upper (${periodMA}, ${bbMultiplier})`,
+                    data: bb.upperBand,
+                    borderColor: 'rgba(239, 68, 68, 0.5)',
+                    borderWidth: 1.2,
+                    borderDash: [3, 3],
+                    pointRadius: 0,
+                    fill: false,
+                    order: 3
+                },
+                {
+                    label: `BB Lower (${periodMA}, ${bbMultiplier})`,
+                    data: bb.lowerBand,
+                    borderColor: 'rgba(239, 68, 68, 0.5)',
+                    borderWidth: 1.2,
+                    borderDash: [3, 3],
+                    pointRadius: 0,
+                    fill: false,
+                    order: 3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            let label = ctx.dataset.label || '';
+                            let val = ctx.raw;
+                            if (val === null) return label + ': -';
+                            return label + ': Rp ' + val.toLocaleString('id-ID', { minimumFractionDigits: 2 });
+                        }
+                    }
+                },
+                legend: { 
+                    display: true,
+                    position: 'top',
+                    labels: { usePointStyle: true, boxWidth: 8 }
+                }
+            },
+            scales: {
+                x: { 
+                    grid: { display: false },
+                    ticks: { maxRotation: 35, maxTicksLimit: 14 }
+                },
+                y: {
+                    position: 'right',
+                    grid: { color: '#e2e8f0' },
+                    ticks: {
+                        callback: (val) => 'Rp ' + val.toLocaleString('id-ID')
+                    }
+                }
+            }
+        }
+    });
+}
+
+        // ----- Tampilkan error -----
+        function showError(msg) {
+            errorBox.style.display = 'block';
+            errorBox.textContent = msg;
+            loadingEl.style.display = 'none';
+            // disable download
+            downloadBtn.disabled = true;
+            rowCountSpan.textContent = '0';
+            latestValueSpan.textContent = '—';
+            dateRangeSpan.textContent = '—';
+        }
+
+        // ----- Reset UI -----
+        function resetUI() {
+            if (chartInstance) {
+                chartInstance.destroy();
+                chartInstance = null;
+            }
+            // clear canvas
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            currentChartData = { labels: [], values: [] };
+            rowCountSpan.textContent = '0';
+            latestValueSpan.textContent = '—';
+            dateRangeSpan.textContent = '—';
+            downloadBtn.disabled = true;
+            errorBox.style.display = 'none';
+            fileInput.value = '';
+            // Gambar placeholder kosong (opsional)
+            // Bisa tulis teks
+            ctx.font = "16px 'Segoe UI', sans-serif";
+            ctx.fillStyle = "#94a3b8";
+            ctx.textAlign = "center";
+            ctx.fillText("📂 Upload CSV untuk menampilkan grafik", ctx.canvas.width/2, ctx.canvas.height/2);
+        }
+
+        // ----- Handle file yang dipilih / di-drop -----
+        function handleFile(file) {
+            if (!file) return;
+            
+            // Validasi ekstensi
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                showError('Hanya file .csv yang didukung.');
+                return;
+            }
+            
+            loadingEl.style.display = 'block';
+            errorBox.style.display = 'none';
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                loadingEl.style.display = 'none';
+                processCSV(content, file.name.replace('.csv', ''));
+            };
+            reader.onerror = () => {
+                loadingEl.style.display = 'none';
+                showError('Gagal membaca file.');
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        // ----- Download chart sebagai PNG -----
+        function downloadChart() {
+            if (!chartInstance) {
+                alert('Belum ada grafik untuk diunduh.');
+                return;
+            }
+            const canvas = document.getElementById('priceChart');
+            // Buat link download
+            const link = document.createElement('a');
+            link.download = `${currentFileName || 'chart'}_${new Date().toISOString().slice(0,10)}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // ----- Event Listeners -----
+        dropArea.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleFile(file);
+        });
+
+        // Drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+        
+        dropArea.addEventListener('dragover', () => dropArea.classList.add('dragover'));
+        dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+        
+        dropArea.addEventListener('drop', (e) => {
+            dropArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                // Jika lebih dari satu, ambil pertama saja
+                handleFile(files[0]);
+            }
+        });
+
+        // Download button
+        downloadBtn.addEventListener('click', downloadChart);
+        
+        // Reset button
+        resetBtn.addEventListener('click', resetUI);
+
+        // Inisialisasi tampilan awal
+        resetUI();
+        
+        // Tambahan: contoh jika user ingin mencoba dengan file contoh (tidak wajib)
+        // Bisa dikosongi
+        
+        // Handling jika pengguna mengklik label area tapi tidak memilih file
+        window.addEventListener('paste', (e) => {
+            // optional: bisa tambahkan paste nanti
+        });
+        
+        // Perbaikan tampilan canvas saat resize (tidak perlu aksi khusus)
+        // Jika ingin, bisa load data contoh (hardcode) tapi tidak perlu.
+        
+        // note: parser angka sudah siap untuk format Indonesia.
+    })();
+</script>
+
+<!-- Penjelasan singkat di bawah untuk pengguna -->
+<div style="max-width:1200px; margin:16px auto 0; padding:0 8px; color:#64748b; font-size:0.85rem; display:flex; gap:16px; flex-wrap:wrap;">
+    <span><i class="far fa-check-circle"></i> Format CSV: Tanggal (dd/mm/yyyy), Terakhir (dengan titik ribuan, koma desimal)</span>
+    <span><i class="far fa-clock"></i> Data diurutkan otomatis dari terlama → terbaru (row bawah file ke atas)</span>
+	<span><i class="far fa-clock"></i> ma = moving averange, dalam 20 hari terakhir</span>
+	<span><i class="far fa-clock"></i> BB Upper = MA + (2 × standar deviasi) → batas atas</span>
+	<span><i class="far fa-clock"></i> BB Lower = MA - (2 × standar deviasi) → batas bawah</span>
+	<span><i class="far fa-clock"></i> Fungsinya buat apa? Ukur volatilitas: Kalau band-nya melebar → pasar lagi liar/gak menentu. Kalau menyempit → pasar lagi adem/tenang (biasanya mau breakout)</span>
+</div>
+</body>
+</html>
