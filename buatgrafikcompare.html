@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Multi-Asset Compare · Upload CSV</title>
+    <!-- Chart.js & PapaParse -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; }
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            padding: 20px 16px;
+            color: #0f172a;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 24px 28px 32px;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.9rem;
+            margin-bottom: 6px;
+        }
+        h1 i { color: #2563eb; }
+        .subtitle {
+            color: #475569;
+            margin-bottom: 24px;
+            font-size: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+        }
+        .upload-area {
+            background: #f8fafc;
+            border: 2px dashed #94a3b8;
+            border-radius: 20px;
+            padding: 24px 20px;
+            text-align: center;
+            margin-bottom: 24px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .upload-area i { font-size: 40px; color: #64748b; margin-bottom: 10px; }
+        #file-input { display: none; }
+        .file-hint { color: #64748b; margin-top: 6px; font-size: 0.85rem; }
+
+        .assets-panel {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .asset-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .asset-tag {
+            background: white;
+            border-radius: 40px;
+            padding: 6px 14px 6px 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .asset-color {
+            width: 14px; height: 14px; border-radius: 4px;
+        }
+        .asset-name {
+            font-weight: 500;
+            max-width: 160px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .remove-asset {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0 4px;
+        }
+        .remove-asset:hover { color: #ef4444; }
+
+        .btn {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s;
+        }
+        .btn-primary {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-outline:hover { background: #f1f5f9; }
+
+        .chart-container {
+            position: relative;
+            height: 450px;
+            width: 100%;
+            margin-top: 16px;
+        }
+        canvas { display: block; width: 100% !important; height: 100% !important; }
+
+        .error-message {
+            background: #fee2e2; color: #b91c1c; padding: 12px 20px;
+            border-radius: 16px; margin: 16px 0; display: none;
+        }
+        .loading-indicator {
+            display: none; text-align: center; padding: 20px; color: #2563eb;
+        }
+        .footer-note {
+            margin-top: 16px; color: #64748b; font-size: 0.8rem;
+            display: flex; justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-chart-line"></i> Multi Compare · Forex & Saham</h1>
+    <div class="subtitle">Upload beberapa CSV (USD, SGD, JPY, Saham) → Bandingkan pergerakan "Terakhir"</div>
+
+    <!-- Upload Area -->
+    <div class="upload-area" id="drop-area">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <div class="file-label"><strong>Klik atau seret file CSV ke sini</strong> (bisa banyak)</div>
+        <div class="file-hint">Format: Tanggal, Terakhir, Pembukaan, Tertinggi, Terendah, Vol., Perubahan%</div>
+        <input type="file" id="file-input" accept=".csv, text/csv" multiple>
+    </div>
+
+    <!-- Panel Asset Terupload -->
+    <div class="assets-panel" id="assets-panel" style="display: none;">
+        <div class="panel-header">
+            <span><i class="fas fa-database"></i> Aset yang dibandingkan (<span id="asset-count">0</span>)</span>
+            <button class="btn btn-outline" id="clear-all-btn"><i class="fas fa-trash-alt"></i> Hapus Semua</button>
+        </div>
+        <div class="asset-list" id="asset-list"></div>
+    </div>
+
+    <!-- Info & Action -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px;">
+        <div style="display: flex; gap: 24px;">
+            <span><i class="far fa-calendar"></i> Rentang: <span id="date-range">—</span></span>
+            <span><i class="fas fa-chart-bar"></i> Total data point: <span id="data-points">0</span></span>
+        </div>
+        <div>
+            <button class="btn btn-primary" id="download-btn" disabled><i class="fas fa-download"></i> Unduh Grafik by William Yap</button>
+        </div>
+    </div>
+
+    <!-- Error & Loading -->
+    <div id="error-box" class="error-message"></div>
+    <div id="loading" class="loading-indicator"><i class="fas fa-spinner fa-pulse"></i> Memproses file...</div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+        <canvas id="mainChart"></canvas>
+    </div>
+    <div class="footer-note">
+        <span><i class="fas fa-mouse"></i> Klik legenda untuk sembunyikan/tampilkan aset</span>
+        <span><i class="far fa-clock"></i> Data diurutkan dari tanggal terlama → terbaru</span>
+    </div>
+</div>
+
+<script>
+    (function(){
+        "use strict";
+
+        // DOM Elements
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const errorBox = document.getElementById('error-box');
+        const loadingEl = document.getElementById('loading');
+        const assetListDiv = document.getElementById('asset-list');
+        const assetsPanel = document.getElementById('assets-panel');
+        const assetCountSpan = document.getElementById('asset-count');
+        const dateRangeSpan = document.getElementById('date-range');
+        const dataPointsSpan = document.getElementById('data-points');
+        const downloadBtn = document.getElementById('download-btn');
+        const clearAllBtn = document.getElementById('clear-all-btn');
+
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        let chartInstance = null;
+
+        // Penyimpanan dataset
+        let assetDatasets = []; // { id, name, color, data: Map<timestamp, value> }
+        let allTimestamps = [];  // sorted unique timestamps dari semua aset
+        let allLabels = [];      // formatted date string
+        
+        // Color palette
+        const colorPalette = [
+            '#2563eb', '#dc2626', '#16a34a', '#d97706', '#7c3aed', '#0891b2',
+            '#be123c', '#15803d', '#b45309', '#4f46e5', '#0d9488', '#c2410c'
+        ];
+
+        // ---------- Helper: Parse angka Indonesia ----------
+        function parseIndonesianNumber(str) {
+            if (!str || typeof str !== 'string') return NaN;
+            let cleaned = str.trim().replace(/^["']|["']$/g, '');
+            if (cleaned === '') return NaN;
+            let withoutDots = cleaned.replace(/\./g, '');
+            let withDotDecimal = withoutDots.replace(/,/g, '.');
+            return parseFloat(withDotDecimal);
+        }
+
+        // ---------- Parse tanggal dd/mm/yyyy -> timestamp ----------
+        function parseDateToTimestamp(dateStr) {
+            if (!dateStr) return null;
+            const clean = dateStr.trim().replace(/^["']|["']$/g, '');
+            const parts = clean.split('/');
+            if (parts.length !== 3) return null;
+            const day = parts[0].padStart(2, '0');
+            const month = parts[1].padStart(2, '0');
+            const year = parts[2];
+            return new Date(`${year}-${month}-${day}T00:00:00`).getTime();
+        }
+
+        function formatTimestamp(ts) {
+            const d = new Date(ts);
+            return `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`;
+        }
+
+        // ---------- Proses satu file CSV, return Map timestamp -> value ----------
+        function parseCSVToMap(csvText) {
+            return new Promise((resolve, reject) => {
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    transformHeader: h => h.trim(),
+                    complete: (results) => {
+                        const data = results.data;
+                        if (!data || data.length === 0) return reject('File kosong');
+                        const firstRow = data[0];
+                        if (!('Tanggal' in firstRow) || !('Terakhir' in firstRow)) {
+                            return reject('Kolom "Tanggal" dan "Terakhir" wajib ada.');
+                        }
+                        const map = new Map();
+                        for (let row of data) {
+                            const tgl = row['Tanggal'];
+                            const val = row['Terakhir'];
+                            if (!tgl || val === undefined || val === '') continue;
+                            const ts = parseDateToTimestamp(tgl);
+                            if (!ts) continue;
+                            const num = parseIndonesianNumber(val);
+                            if (isNaN(num)) continue;
+                            map.set(ts, num);
+                        }
+                        if (map.size === 0) return reject('Tidak ada data valid.');
+                        resolve(map);
+                    },
+                    error: (err) => reject(err)
+                });
+            });
+        }
+
+        // ---------- Gabungkan semua timestamps & siapkan data chart ----------
+        function rebuildChartData() {
+            if (assetDatasets.length === 0) {
+                if (chartInstance) chartInstance.destroy();
+                chartInstance = null;
+                assetsPanel.style.display = 'none';
+                dateRangeSpan.textContent = '—';
+                dataPointsSpan.textContent = '0';
+                downloadBtn.disabled = true;
+                return;
+            }
+
+            // Kumpulkan semua timestamp unik
+            const tsSet = new Set();
+            assetDatasets.forEach(asset => {
+                for (let ts of asset.data.keys()) tsSet.add(ts);
+            });
+            allTimestamps = Array.from(tsSet).sort((a,b) => a - b);
+            allLabels = allTimestamps.map(ts => formatTimestamp(ts));
+
+            // Update info
+            if (allTimestamps.length > 0) {
+                const first = formatTimestamp(allTimestamps[0]);
+                const last = formatTimestamp(allTimestamps[allTimestamps.length-1]);
+                dateRangeSpan.textContent = `${first} — ${last}`;
+                dataPointsSpan.textContent = allTimestamps.length;
+            }
+
+            // Render chart
+            renderChart();
+        }
+
+        // ---------- Render Chart.js dengan multiple datasets ----------
+        function renderChart() {
+            if (chartInstance) chartInstance.destroy();
+
+            const datasets = assetDatasets.map((asset, idx) => {
+                const dataPoints = allTimestamps.map(ts => asset.data.get(ts) ?? null);
+                return {
+                    label: asset.name,
+                    data: dataPoints,
+                    borderColor: asset.color,
+                    backgroundColor: 'transparent',
+                    borderWidth: 2.2,
+                    pointRadius: 1.5,
+                    pointHoverRadius: 5,
+                    tension: 0.05,
+                    spanGaps: false, // putus kalau tidak ada data
+                };
+            });
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: { labels: allLabels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    let label = ctx.dataset.label || '';
+                                    let val = ctx.raw;
+                                    if (val === null) return label + ': -';
+                                    return label + ': ' + val.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                                }
+                            }
+                        },
+                        legend: { 
+                            display: true, 
+                            position: 'top',
+                            labels: { usePointStyle: true, boxWidth: 8 }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            grid: { display: false },
+                            ticks: { maxRotation: 35, maxTicksLimit: 16 }
+                        },
+                        y: {
+                            position: 'right',
+                            grid: { color: '#e2e8f0' },
+                            ticks: {
+                                callback: (val) => val.toLocaleString('id-ID'),
+                            }
+                        }
+                    }
+                }
+            });
+
+            downloadBtn.disabled = false;
+        }
+
+        // ---------- Tambah asset baru ----------
+        async function addAssetFromFile(file) {
+            loadingEl.style.display = 'block';
+            errorBox.style.display = 'none';
+            try {
+                const text = await file.text();
+                const dataMap = await parseCSVToMap(text);
+                
+                // Generate warna
+                const color = colorPalette[assetDatasets.length % colorPalette.length];
+                const id = 'asset_' + Date.now() + Math.random();
+                const name = file.name.replace(/\.csv$/i, '').substring(0, 30);
+                
+                assetDatasets.push({ id, name, color, data: dataMap });
+                
+                updateAssetTags();
+                rebuildChartData();
+            } catch (err) {
+                errorBox.style.display = 'block';
+                errorBox.textContent = `❌ Gagal membaca ${file.name}: ${err}`;
+            } finally {
+                loadingEl.style.display = 'none';
+            }
+        }
+
+        // ---------- Hapus asset by id ----------
+        function removeAsset(id) {
+            assetDatasets = assetDatasets.filter(a => a.id !== id);
+            updateAssetTags();
+            rebuildChartData();
+            if (assetDatasets.length === 0) {
+                assetsPanel.style.display = 'none';
+                downloadBtn.disabled = true;
+            }
+        }
+
+        // ---------- Update UI tag aset ----------
+        function updateAssetTags() {
+            if (assetDatasets.length === 0) {
+                assetsPanel.style.display = 'none';
+                assetListDiv.innerHTML = '';
+                assetCountSpan.textContent = '0';
+                return;
+            }
+            assetsPanel.style.display = 'block';
+            assetCountSpan.textContent = assetDatasets.length;
+            
+            let html = '';
+            assetDatasets.forEach(asset => {
+                html += `
+                    <div class="asset-tag">
+                        <span class="asset-color" style="background: ${asset.color};"></span>
+                        <span class="asset-name" title="${asset.name}">${asset.name}</span>
+                        <button class="remove-asset" data-id="${asset.id}" title="Hapus"><i class="fas fa-times"></i></button>
+                    </div>
+                `;
+            });
+            assetListDiv.innerHTML = html;
+            
+            // Attach event remove
+            document.querySelectorAll('.remove-asset').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = btn.dataset.id;
+                    removeAsset(id);
+                });
+            });
+        }
+
+        // ---------- Handle multiple files ----------
+        async function handleFiles(files) {
+            if (!files || files.length === 0) return;
+            for (let file of files) {
+                if (!file.name.toLowerCase().endsWith('.csv')) {
+                    errorBox.style.display = 'block';
+                    errorBox.textContent = `⚠️ ${file.name} bukan CSV, dilewati.`;
+                    continue;
+                }
+                await addAssetFromFile(file);
+            }
+        }
+
+        // ---------- Reset semua ----------
+        function clearAllAssets() {
+            assetDatasets = [];
+            updateAssetTags();
+            rebuildChartData();
+            assetsPanel.style.display = 'none';
+            downloadBtn.disabled = true;
+        }
+
+        // ---------- Download PNG ----------
+        function downloadChart() {
+            if (!chartInstance) return;
+            const canvas = document.getElementById('mainChart');
+            const link = document.createElement('a');
+            link.download = `compare_${new Date().toISOString().slice(0,10)}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // ---------- Event Listeners ----------
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+            fileInput.value = ''; // allow re-upload same file
+        });
+
+        // Drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            dropArea.addEventListener(ev, (e) => e.preventDefault());
+        });
+        dropArea.addEventListener('dragover', () => dropArea.classList.add('dragover'));
+        dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+        dropArea.addEventListener('drop', (e) => {
+            dropArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.csv'));
+            if (files.length) handleFiles(files);
+        });
+
+        clearAllBtn.addEventListener('click', clearAllAssets);
+        downloadBtn.addEventListener('click', downloadChart);
+
+        // Inisialisasi
+        assetsPanel.style.display = 'none';
+        downloadBtn.disabled = true;
+    })();
+</script>
+
+</body>
+</html>
