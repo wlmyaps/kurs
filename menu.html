@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kurs Analis · 3D Central Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0b0c14;
+      --frame-bg: rgba(20, 22, 35, 0.8);
+      --neon-blue: #00d2ff;
+      --neon-glow: rgba(0, 210, 255, 0.5);
+      --text-main: #e2e8f0;
+      --text-dim: #94a3b8;
+      --gold: #ffd700;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg-dark);
+      font-family: 'Segoe UI', 'Inter', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+      overflow-x: hidden;
+      perspective: 1200px;
+    }
+
+    /* Background grid + starfield */
+    .bg-grid {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        linear-gradient(rgba(0,210,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,210,255,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: -2;
+      animation: gridMove 20s linear infinite;
+    }
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-60px, -60px); }
+    }
+    #starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      z-index: 1;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 25px var(--neon-glow);
+      margin: 0;
+    }
+    .header p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+    /* Frame 3D HP */
+    .phone-frame {
+      position: relative;
+      width: 90%;
+      max-width: 480px; /* lebar khas HP */
+      background: var(--frame-bg);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(0, 210, 255, 0.3);
+      border-radius: 48px; /* rounded ala HP */
+      padding: 30px 20px 20px;
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.7),
+        0 0 0 6px rgba(0,210,255,0.15),
+        0 0 0 12px rgba(0,210,255,0.05),
+        inset 0 0 30px rgba(0,210,255,0.1);
+      transform-style: preserve-3d;
+      transform: rotateY(0deg) rotateX(5deg);
+      transition: transform 0.2s;
+      margin-bottom: 20px;
+      animation: floatPhone 6s ease-in-out infinite;
+    }
+    @keyframes floatPhone {
+      0%, 100% { transform: rotateY(0deg) rotateX(5deg) translateY(0); }
+      50% { transform: rotateY(2deg) rotateX(5deg) translateY(-10px); }
+    }
+
+    /* Notch ala HP */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+    }
+
+    /* Daftar menu */
+    .menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+    }
+    .menu-list li {
+      margin: 14px 0;
+    }
+    .menu-list a {
+      display: block;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      color: #b0c0e0;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-list a::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--neon-blue), var(--gold));
+      border-radius: 0 4px 4px 0;
+      transform: scaleY(0);
+      transition: transform 0.3s;
+    }
+    .menu-list a:hover {
+      color: #fff;
+      background: rgba(0,210,255,0.1);
+      border-color: rgba(0,210,255,0.4);
+      box-shadow: 0 0 20px rgba(0,210,255,0.3);
+      transform: translateX(8px);
+    }
+    .menu-list a:hover::before {
+      transform: scaleY(1);
+    }
+    .menu-list i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+      color: var(--gold);
+    }
+
+    /* Pemutar musik */
+    .music-control {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #ccc;
+      font-size: 0.85rem;
+      z-index: 2;
+    }
+    .music-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      backdrop-filter: blur(5px);
+    }
+    .music-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--neon-blue);
+    }
+
+    @media (max-width: 500px) {
+      .phone-frame {
+        width: 95%;
+        padding: 25px 15px 15px;
+      }
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      .menu-list a {
+        font-size: 0.95rem;
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <canvas id="starfield"></canvas>
+
+  <div class="header">
+    <h1>KURS ANALIS</h1>
+    <p>3D Central Hub · William Yaps</p>
+  </div>
+
+  <!-- Frame HP 3D -->
+  <div class="phone-frame">
+    <ul class="menu-list">
+      <li><a href="https://wlmyaps.github.io/kurs/" target="_blank"><i class="fas fa-table"></i> Tabel Kurs Terkini</a></li>
+      <li><a href="https://wlmyaps.github.io/kurs/graph.html" target="_blank"><i class="fas fa-chart-line"></i> Grafik Pergerakan Kurs</a></li>
+      <li><a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank"><i class="fas fa-upload"></i> Analis Kurs (Upload CSV)</a></li>
+      <li><a href="https://wlmyaps.github.io/kurs/grafikcompare.html" target="_blank"><i class="fas fa-balance-scale"></i> Compare Kurs (Upload CSV)</a></li>
+    </ul>
+    <div class="music-control">
+      <button class="music-btn" id="musicToggle" title="Putar/Jeda Musik"><i class="fas fa-play"></i></button>
+      <span>Halleluyah</span>
+      <audio id="bgMusic" loop preload="auto">
+        <source src="https://priskilapeh.github.io/files/Halleluyah.mp3" type="audio/mpeg">
+        Browsermu tidak mendukung audio.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    /* ===== STARFIELD ===== */
+    (function() {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let stars = [];
+      const STAR_COUNT = 100;
+      const colors = [
+        'rgba(0,210,255,',
+        'rgba(180,77,255,',
+        'rgba(255,255,255,',
+        'rgba(255,215,0,',
+        'rgba(46,204,113,',
+      ];
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      function createStar() {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 2.2 + 0.6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 0.4 + 0.05,
+          phase: Math.random() * Math.PI * 2,
+          twinkle: Math.random() * 0.02 + 0.005
+        };
+      }
+      function initStars() {
+        for (let i = 0; i < STAR_COUNT; i++) stars.push(createStar());
+      }
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        for (let s of stars) {
+          const alpha = 0.3 + 0.4 * Math.sin(Date.now() * s.twinkle + s.phase);
+          ctx.fillStyle = s.color + alpha + ')';
+          ctx.shadowColor = s.color + '0.8)';
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+          s.y -= s.speed;
+          if (s.y < -10) {
+            s.y = height + 10;
+            s.x = Math.random() * width;
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      window.addEventListener('resize', () => {
+        resize();
+        stars = [];
+        initStars();
+      });
+      resize();
+      initStars();
+      draw();
+    })();
+
+    /* ===== MUSIC PLAYER ===== */
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+      } else {
+        bgMusic.play().catch(() => {
+          alert('Klik lagi untuk memutar musik setelah interaksi.');
+        });
+        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Autoplay attempt (browser mungkin memblokir)
+    window.addEventListener('load', () => {
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+      }).catch(() => {
+        // Blokir, biarkan user klik
+        isPlaying = false;
+      });
+    });
+  </script>
+</body>
+</html>
