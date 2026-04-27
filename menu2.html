@@ -76,16 +76,34 @@
       font-size: 0.9rem;
       margin-top: 5px;
     }
+    
+    /* Jam Digital */
+    .digital-clock {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+      margin: 10px auto 0;
+      padding: 8px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 40px;
+      display: inline-block;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      backdrop-filter: blur(5px);
+    }
+    .digital-clock .time {
+      color: #ffd700;
+    }
 
     /* Frame 3D HP */
     .phone-frame {
       position: relative;
       width: 90%;
-      max-width: 480px; /* lebar khas HP */
+      max-width: 480px;
       background: var(--frame-bg);
       backdrop-filter: blur(15px);
       border: 2px solid rgba(0, 210, 255, 0.3);
-      border-radius: 48px; /* rounded ala HP */
+      border-radius: 48px;
       padding: 30px 20px 20px;
       box-shadow: 
         0 30px 60px rgba(0,0,0,0.7),
@@ -220,8 +238,9 @@
   <canvas id="starfield"></canvas>
 
   <div class="header">
-    <h1>KURS ANALIS</h1>
+    <h1>?? KURS ANALIS</h1>
     <p>3D Central Hub · William Yaps</p>
+    <div class="digital-clock" id="liveClock">Memuat...</div>
   </div>
 
   <!-- Frame HP 3D -->
@@ -229,9 +248,10 @@
     <ul class="menu-list">
       <li><a href="https://wlmyaps.github.io/kurs/" target="_blank"><i class="fas fa-table"></i> Tabel Kurs Terkini</a></li>
       <li><a href="https://wlmyaps.github.io/kurs/graph.html" target="_blank"><i class="fas fa-chart-line"></i> Grafik Pergerakan Kurs</a></li>
-	  <li><a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank"><i class="fas fa-upload"></i> Upload CSV untuk buat grafik</a></li>
+      <li><a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank"><i class="fas fa-upload"></i> Upload CSV untuk buat grafik</a></li>
       <li><a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank"><i class="fas fa-upload"></i> Analis Kurs (Upload CSV)</a></li>
       <li><a href="https://wlmyaps.github.io/kurs/grafikcoompare.html" target="_blank"><i class="fas fa-balance-scale"></i> Compare Kurs (Upload CSV)</a></li>
+	  <li><a href="https://wlmyaps.github.io/kurs/menu.html" target="_blank"><i class="fas fa-radio"></i> Menu Kurs dengan Radio</a></li>
     </ul>
     <div class="music-control">
       <button class="music-btn" id="musicToggle" title="Putar/Jeda Musik"><i class="fas fa-play"></i></button>
@@ -307,6 +327,24 @@
       draw();
     })();
 
+    /* ===== JAM DIGITAL ===== */
+    function updateClock() {
+      const now = new Date();
+      const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+      const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+      const dayName = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('liveClock').innerHTML = 
+        `${dayName}, ${date} ${month} ${year} · <span class="time">${hours}:${minutes}:${seconds}</span>`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
     /* ===== MUSIC PLAYER ===== */
     const bgMusic = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
@@ -325,13 +363,12 @@
       isPlaying = !isPlaying;
     });
 
-    // Autoplay attempt (browser mungkin memblokir)
+    // Autoplay attempt
     window.addEventListener('load', () => {
       bgMusic.play().then(() => {
         isPlaying = true;
         musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
       }).catch(() => {
-        // Blokir, biarkan user klik
         isPlaying = false;
       });
     });
