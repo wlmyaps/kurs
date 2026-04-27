@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs Analis  3D Central Hub dengan Jam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* 3D Clock Container */
+        .clock-widget {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 3px solid #444;
+        }
+
+        .clock-3d {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .time-unit {
+            background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+            border-radius: 10px;
+            padding: 20px 15px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -1px 0 rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(5deg);
+            border: 2px solid #555;
+        }
+
+        .time-unit.digit {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 
+                0 0 10px rgba(0,255,136,0.8),
+                0 0 20px rgba(0,255,136,0.5),
+                0 0 30px rgba(0,255,136,0.3);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+        }
+
+        .time-unit.separator {
+            font-size: 48px;
+            color: #00ff88;
+            animation: blink 1s infinite;
+            text-shadow: 0 0 10px rgba(0,255,136,0.8);
+        }
+
+        .time-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Date Display */
+        .date-display {
+            text-align: center;
+            color: #aaa;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Weather Section */
+        .weather-section {
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .weather-title {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-lock {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lock-btn {
+            background: linear-gradient(145deg, #00ff88, #00cc6a);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #1a1a1a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,255,136,0.3);
+        }
+
+        .lock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,255,136,0.5);
+        }
+
+        .lock-btn.locked {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a5a);
+        }
+
+        .weather-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .temperature {
+            font-size: 56px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .temperature-unit {
+            font-size: 28px;
+            vertical-align: super;
+        }
+
+        .weather-info {
+            text-align: center;
+            color: white;
+        }
+
+        .weather-desc {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        .weather-details {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .weather-icon {
+            font-size: 64px;
+        }
+
+        .loading {
+            color: #aaa;
+            font-size: 16px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .nav-link {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: #00ff88;
+        }
+
+        .halleluyah {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>? KURS ANALIS<br><small>3D Central Hub  William Yaps</small></h1>
+
+        <!-- 3D Clock Widget -->
+        <div class="clock-widget">
+            <div class="clock-3d">
+                <div class="time-unit">
+                    <div class="time-unit digit" id="hours">00</div>
+                    <div class="time-label">Jam</div>
+                </div>
+                <div class="time-unit separator">:</div>
+                <div class="time-unit">
+                    <div class="time-unit digit" id="minutes">00</div>
+                    <div class="time-label">Menit</div>
+                </div>
+                <div class="time-unit separator">:</div>
+                <div class="time-unit">
+                    <div class="time-unit digit" id="seconds">00</div>
+                    <div class="time-label">Detik</div>
+                </div>
+            </div>
+            
+            <div class="date-display" id="dateDisplay">Memuat tanggal...</div>
+
+            <!-- Weather Section -->
+            <div class="weather-section">
+                <div class="weather-header">
+                    <div class="weather-title">
+                        <span>???</span>
+                        <span>Cuaca <span id="locationName">Medan</span></span>
+                    </div>
+                    <div class="location-lock">
+                        <button class="lock-btn" id="lockBtn" onclick="toggleLocationLock()">
+                            ?? Unlock
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="weather-content" id="weatherContent">
+                    <div class="loading">Memuat data cuaca...</div>
+                </div>
+                <div id="weatherError" class="error"></div>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="https://wlmyaps.github.io/kurs/" class="nav-link">?? Tabel Kurs Terkini</a>
+            <a href="https://wlmyaps.github.io/kurs/graph.html" class="nav-link">?? Grafik Pergerakan Kurs</a>
+            <a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" class="nav-link">?? Upload CSV untuk buat grafik</a>
+            <a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" class="nav-link">?? Analis Kurs (Upload CSV)</a>
+            <a href="https://wlmyaps.github.io/kurs/grafikcoompare.html" class="nav-link">?? Compare Kurs (Upload CSV)</a>
+        </div>
+
+        <div class="halleluyah">
+            <p>?? Halleluyah</p>
+            <audio controls>
+                <source src="https://priskilapeh.github.io/files/Halleluyah.mp3" type="audio/mpeg">
+                Browsermu tidak mendukung audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // Clock Functionality
+        function updateClock() {
+            const now = new Date();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+            
+            // Update date
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const dateStr = now.toLocaleDateString('id-ID', options);
+            document.getElementById('dateDisplay').textContent = dateStr;
+        }
+
+        // Weather API Configuration
+        let isLocationLocked = localStorage.getItem('medanLocked') === 'true';
+        const MEDAN_COORDS = { lat: 3.5952, lon: 98.6722 };
+        
+        // Weather API Options (gratis)
+        const WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast';
+        
+        function toggleLocationLock() {
+            isLocationLocked = !isLocationLocked;
+            localStorage.setItem('medanLocked', isLocationLocked);
+            updateLockButton();
+            fetchWeather();
+        }
+
+        function updateLockButton() {
+            const btn = document.getElementById('lockBtn');
+            if (isLocationLocked) {
+                btn.textContent = '?? Locked';
+                btn.classList.add('locked');
+                document.getElementById('locationName').textContent = 'Medan (Fixed)';
+            } else {
+                btn.textContent = '?? Unlock';
+                btn.classList.remove('locked');
+                document.getElementById('locationName').textContent = 'Lokasi Anda';
+            }
+        }
+
+        async function fetchWeather() {
+            const weatherContent = document.getElementById('weatherContent');
+            const weatherError = document.getElementById('weatherError');
+            
+            try {
+                weatherContent.innerHTML = '<div class="loading">?? Memuat data cuaca...</div>';
+                weatherError.textContent = '';
+                
+                let lat, lon;
+                
+                if (isLocationLocked) {
+                    lat = MEDAN_COORDS.lat;
+                    lon = MEDAN_COORDS.lon;
+                } else {
+                    // Try to get user location
+                    if ('geolocation' in navigator) {
+                        const position = await new Promise((resolve, reject) => {
+                            navigator.geolocation.getCurrentPosition(resolve, reject, {
+                                timeout: 10000
+                            });
+                        });
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+                    } else {
+                        // Default to Medan if geolocation not available
+                        lat = MEDAN_COORDS.lat;
+                        lon = MEDAN_COORDS.lon;
+                    }
+                }
+                
+                // Fetch weather data from Open-Meteo (free, no API key needed)
+                const response = await fetch(
+                    `${WEATHER_API_URL}?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&timezone=Asia%2FJakarta`
+                );
+                
+                if (!response.ok) throw new Error('Gagal mengambil data cuaca');
+                
+                const data = await response.json();
+                const current = data.current;
+                
+                // Weather code to description
+                const weatherCodes = {
+                    0: { desc: 'Cerah', icon: '??' },
+                    1: { desc: 'Cerah Berawan', icon: '???' },
+                    2: { desc: 'Berawan', icon: '?' },
+                    3: { desc: 'Mendung', icon: '??' },
+                    45: { desc: 'Kabut', icon: '???' },
+                    48: { desc: 'Kabut Beku', icon: '???' },
+                    51: { desc: 'Gerimis Ringan', icon: '???' },
+                    53: { desc: 'Gerimis', icon: '???' },
+                    55: { desc: 'Gerimis Lebat', icon: '???' },
+                    61: { desc: 'Hujan Ringan', icon: '???' },
+                    63: { desc: 'Hujan', icon: '???' },
+                    65: { desc: 'Hujan Lebat', icon: '??' },
+                    71: { desc: 'Salju Ringan', icon: '???' },
+                    73: { desc: 'Salju', icon: '???' },
+                    75: { desc: 'Salju Lebat', icon: '??' },
+                    95: { desc: 'Petir', icon: '?' },
+                    96: { desc: 'Petir & Hujan', icon: '??' },
+                    99: { desc: 'Petir & Hujan Es', icon: '??' }
+                };
+                
+                const weather = weatherCodes[current.weather_code] || { desc: 'Tidak Diketahui', icon: '?' };
+                
+                weatherContent.innerHTML = `
+                    <div class="weather-icon">${weather.icon}</div>
+                    <div class="temperature">
+                        ${Math.round(current.temperature_2m)}<span class="temperature-unit">°C</span>
+                    </div>
+                    <div class="weather-info">
+                        <div class="weather-desc">${weather.desc}</div>
+                        <div class="weather-details">
+                            <div>?? Kelembaban: ${current.relative_humidity_2m}%</div>
+                            <div>??? Terasa: ${Math.round(current.apparent_temperature)}°C</div>
+                        </div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Weather error:', error);
+                weatherContent.innerHTML = '';
+                weatherError.textContent = '?? Gagal memuat cuaca. Menggunakan data default Medan.';
+                
+                // Show default Medan weather
+                weatherContent.innerHTML = `
+                    <div class="weather-icon">???</div>
+                    <div class="temperature">
+                        32<span class="temperature-unit">°C</span>
+                    </div>
+                    <div class="weather-info">
+                        <div class="weather-desc">Cerah Berawan</div>
+                        <div class="weather-details">
+                            <div>?? Medan, Sumatera Utara</div>
+                            <div>?? Kelembaban: 75%</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize
+        updateClock();
+        setInterval(updateClock, 1000);
+        updateLockButton();
+        fetchWeather();
+        
+        // Refresh weather every 10 minutes
+        setInterval(fetchWeather, 600000);
+    </script>
+</body>
+</html>
