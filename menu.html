@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs Analis - 3D Central Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* Header full lebar */
+        .header-full {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        /* Penempatan */
+        .clock-container {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .weather-section {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .radio-section {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        .nav-links {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* ============ 3D BOX STYLE ============ */
+        .clock-container,
+        .weather-section,
+        .radio-section,
+        .nav-links {
+            position: relative;
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.5),
+                inset 0 -3px 8px rgba(0,0,0,0.6),
+                inset 0 3px 8px rgba(255,255,255,0.05),
+                0 0 0 2px #00ff88;
+            border: 5px solid transparent;
+            background-clip: padding-box;
+            transition: transform 0.3s, box-shadow 0.3s;
+            transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+            overflow: visible; /* biar glow keluar */
+            height: fit-content;
+        }
+
+        .clock-container::before,
+        .weather-section::before,
+        .radio-section::before,
+        .nav-links::before {
+            content: "";
+            position: absolute;
+            inset: -10px;
+            border-radius: 32px;
+            background: linear-gradient(145deg,
+                    rgba(0,255,136,0.35),
+                    rgba(102,126,234,0.2),
+                    rgba(118,75,162,0.4));
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.7;
+        }
+
+        .clock-container:hover,
+        .weather-section:hover,
+        .radio-section:hover,
+        .nav-links:hover {
+            transform: perspective(800px) rotateY(2deg) rotateX(2deg);
+            box-shadow:
+                0 25px 55px rgba(0,255,136,0.25),
+                inset 0 -3px 8px rgba(0,0,0,0.6),
+                inset 0 3px 8px rgba(255,255,255,0.08),
+                0 0 0 2px #00ff88;
+        }
+
+        /* ============ JAM ============ */
+        .clock-3d {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .time-box {
+            background: linear-gradient(145deg, #0f3443, #111122);
+            border-radius: 14px;
+            padding: 18px 14px;
+            min-width: 75px;
+            text-align: center;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.5),
+                inset 0 2px 4px rgba(255,255,255,0.08),
+                inset 0 -2px 4px rgba(0,0,0,0.4);
+            border: 2px solid #1a3a4a;
+        }
+
+        .time-digit {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 12px #00ff88;
+            font-family: 'Courier New', monospace;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .separator {
+            font-size: 48px;
+            color: #00ff88;
+            animation: blink 1s infinite;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        @keyframes blink {
+            0%,50%{opacity:1;} 51%,100%{opacity:0.2;}
+        }
+
+        .date-display {
+            text-align: center;
+            color: #aaa;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ============ CUACA ============ */
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .weather-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .lock-btn {
+            background: linear-gradient(145deg, #00ff88, #00b86a);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            color: #1a1a1a;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #007744, 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.15s;
+        }
+        .lock-btn:active { box-shadow: 0 2px 0 #007744; transform: translateY(4px); }
+        .lock-btn.locked { background: linear-gradient(145deg, #ff6b6b, #cc4444); box-shadow: 0 6px 0 #992222; }
+        .lock-btn.locked:active { box-shadow: 0 2px 0 #992222; }
+
+        .weather-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: white;
+        }
+
+        .temperature { font-size: 48px; font-weight: bold; }
+        .weather-desc { font-size: 20px; margin-bottom: 5px; }
+        .weather-details { font-size: 14px; color: #ccc; }
+
+        /* ============ RADIO ============ */
+        .radio-header {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .radio-station {
+            background: linear-gradient(145deg, #1a1a2e, #111122);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 2px solid #1a3a4a;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.04), inset 0 -3px 6px rgba(0,0,0,0.5);
+            transition: all 0.25s;
+        }
+		.radio-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 15px;
+		}
+        .radio-station:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,255,136,0.25), inset 0 3px 8px rgba(255,255,255,0.06);
+            border-color: #00ff88;
+        }
+        .radio-station.active { border-color: #00ff88 !important; box-shadow: 0 0 30px rgba(0,255,136,0.4); }
+
+        .station-name { color: white; font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+        .station-info { color: #888; font-size: 13px; margin-bottom: 14px; }
+
+        .radio-controls { display: flex; gap: 10px; align-items: center; }
+
+        .play-btn {
+            background: linear-gradient(145deg, #00ff88, #00b86a);
+            border: none;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            color: #1a1a1a;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 0 #007744, 0 12px 25px rgba(0,0,0,0.4);
+            transition: all 0.15s;
+        }
+        .play-btn:active { box-shadow: 0 2px 0 #007744; transform: translateY(4px); }
+        .play-btn.playing {
+            background: linear-gradient(145deg, #ff6b6b, #cc4444);
+            box-shadow: 0 6px 0 #992222, 0 12px 25px rgba(255,107,107,0.5);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%,100%{ box-shadow: 0 0 0 0 rgba(255,107,107,0.7),0 6px 0 #992222; }
+            50%{ box-shadow: 0 0 0 18px rgba(255,107,107,0),0 6px 0 #992222; }
+        }
+
+        .volume-control { flex:1; display: flex; align-items: center; gap:10px; }
+        .volume-control input[type="range"] { flex:1; height:6px; background:#1a3a4a; border-radius:3px; }
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            width:20px; height:20px; background:#00ff88; border-radius:50%; cursor:pointer; box-shadow:0 0 10px #00ff88;
+        }
+
+        .now-playing { color:#00ff88; font-size:14px; margin-top:12px; text-align:center; }
+
+        /* ============ MENU ============ */
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-link {
+            background: linear-gradient(145deg, #2a2a4a, #1a1a2e);
+            padding: 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 2px solid #3a3a5a;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.04), inset 0 -3px 5px rgba(0,0,0,0.4);
+            transition: all 0.25s;
+        }
+        .nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(0,255,136,0.35), inset 0 3px 8px rgba(255,255,255,0.06);
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        .nav-link i { font-size: 18px; transition: transform 0.3s; }
+        .nav-link:hover i { transform: scale(1.2); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 750px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .clock-container, .weather-section, .radio-section, .nav-links {
+                grid-column: auto;
+                grid-row: auto;
+            }
+            .time-digit { font-size: 36px; }
+            .time-box { min-width:60px; padding:14px 10px; }
+            .separator { font-size: 36px; }
+            .temperature { font-size: 36px; }
+            .radio-controls { flex-wrap: wrap; }
+            .volume-control { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header-full">
+            <h1><i class="fas fa-chart-line"></i> KURS ANALIS</h1>
+            <div class="subtitle">3D Central Hub - William Yaps</div>
+        </div>
+
+        <!-- Clock -->
+        <div class="clock-container">
+            <div class="clock-3d">
+                <div class="time-box">
+                    <div class="time-digit" id="hours">00</div>
+                    <div class="time-label">JAM</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <div class="time-digit" id="minutes">00</div>
+                    <div class="time-label">MENIT</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <div class="time-digit" id="seconds">00</div>
+                    <div class="time-label">DETIK</div>
+                </div>
+            </div>
+            <div class="date-display" id="dateDisplay">Memuat tanggal...</div>
+        </div>
+
+        <!-- Weather -->
+        <div class="weather-section">
+            <div class="weather-header">
+                <div class="weather-title"><i class="fas fa-cloud-sun"></i> Cuaca <span id="locationName">Medan</span></div>
+                <button class="lock-btn" id="lockBtn" onclick="toggleLocationLock()"><i class="fas fa-lock"></i> Locked</button>
+            </div>
+            <div class="weather-content" id="weatherContent"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>
+        </div>
+
+        <!-- Radio -->
+        <div class="radio-section">
+            <div class="radio-header"><i class="fas fa-radio"></i> Radio Streaming</div>
+            <div class="radio-station" data-url="https://22393.live.streamtheworld.com/LOVE972FMAAC.aac?dist=radiosingapore" data-name="Love 972 FM">
+                <div class="station-name"><i class="fas fa-heart"></i> Love 972 FM - Singapore</div>
+                <div class="station-info">Chinese & English Hits | 97.2 FM</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'love972')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('love972',this.value)"></div>
+                </div>
+            </div>
+            <div class="radio-station" data-url="https://22903.live.streamtheworld.com/YES933_PREM.aac?dist=radiosingapore" data-name="933 YES">
+                <div class="station-name"><i class="fas fa-music"></i> 933 YES FM - Singapore</div>
+                <div class="station-info">English Hits | Top 40</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'fm987')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('fm987',this.value)"></div>
+                </div>
+            </div>
+            <div class="radio-station" data-url="https://22393.live.streamtheworld.com/GOLD905AAC.aac?dist=radiosingapore" data-name="Gold 905">
+                <div class="station-name"><i class="fas fa-concierge-bell"></i> Gold 905 FM - Singapore</div>
+                <div class="station-info">Chinese Classics | 90.5 FM</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'gold905')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('gold905',this.value)"></div>
+                </div>
+            </div>
+			<div class="radio-station" data-url="https://28373.live.streamtheworld.com/OLI968FM_PREM.aac?dist=radiosingapore" data-name="Oli 968">
+                <div class="station-name"><i class="fas fa-cubes"></i> Oli 968 FM - Singapore</div>
+                <div class="station-info">Oli | 96.8 FM</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'oli968')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('oli968',this.value)"></div>
+                </div>
+            </div>
+			<div class="radio-station" data-url="https://28323.live.streamtheworld.com/CLASS95AAC_SC" data-name="Class 95">
+                <div class="station-name"><i class="fas fa-cube"></i> Class 95 FM - Singapore</div>
+                <div class="station-info">Class | 95 FM</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'class95')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('class95',this.value)"></div>
+                </div>
+            </div>
+			<div class="radio-station" data-url="https://22893.live.streamtheworld.com/987FMAAC.aac?dist=radiosingapore" data-name="987">
+                <div class="station-name"><i class="fas fa-radio"></i> 987 - Singapore</div>
+                <div class="station-info">987 FM</div>
+                <div class="radio-controls">
+                    <button class="play-btn" onclick="toggleRadio(this,'987')"><i class="fas fa-play"></i></button>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('987',this.value)"></div>
+                </div>
+            </div>
+            <div class="now-playing" id="nowPlaying"></div>
+        </div>
+
+        <!-- Menu Navigasi -->
+        <div class="nav-links">
+            <a href="https://wlmyaps.github.io/kurs/" target="_blank" class="nav-link"><i class="fas fa-table"></i> Tabel Kurs Terkini</a>
+            <a href="https://wlmyaps.github.io/kurs/graph.html" target="_blank" class="nav-link"><i class="fas fa-chart-area"></i> Grafik Pergerakan Kurs</a>
+            <a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank" class="nav-link"><i class="fas fa-upload"></i> Upload CSV untuk buat grafik</a>
+            <a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank" class="nav-link"><i class="fas fa-chart-line"></i> Analis Kurs (Upload CSV)</a>
+            <a href="https://wlmyaps.github.io/kurs/grafikcoompare.html" target="_blank" class="nav-link"><i class="fas fa-exchange-alt"></i> Compare Kurs (Upload CSV)</a>
+            <a href="https://wlmyaps.github.io/kurs/menu2.html" target="_blank" class="nav-link"><i class="fas fa-radio"></i> Menu Kurs tanpa Radio</a>
+        </div>
+    </div>
+
+    <audio id="audio-main" preload="none"></audio>
+
+    <script>
+        // Clock
+        function updateClock(){
+            const n=new Date();
+            document.getElementById('hours').textContent=String(n.getHours()).padStart(2,'0');
+            document.getElementById('minutes').textContent=String(n.getMinutes()).padStart(2,'0');
+            document.getElementById('seconds').textContent=String(n.getSeconds()).padStart(2,'0');
+            document.getElementById('dateDisplay').textContent=n.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        }
+        setInterval(updateClock,1000);
+        updateClock();
+
+        // Weather
+        let isLocationLocked=localStorage.getItem('medanLocked')==='true';
+        const MEDAN={lat:3.5952,lon:98.6722};
+        function toggleLocationLock(){
+            isLocationLocked=!isLocationLocked;
+            localStorage.setItem('medanLocked',isLocationLocked);
+            updateLockBtn();
+            fetchWeather();
+        }
+        function updateLockBtn(){
+            const b=document.getElementById('lockBtn'),l=document.getElementById('locationName');
+            if(isLocationLocked){
+                b.innerHTML='<i class="fas fa-lock"></i> Locked'; b.classList.add('locked'); l.textContent='Medan (Fixed)';
+            }else{
+                b.innerHTML='<i class="fas fa-unlock"></i> Unlock'; b.classList.remove('locked'); l.textContent='Lokasi Anda';
+            }
+        }
+        async function fetchWeather(){
+            const wc=document.getElementById('weatherContent');
+            try{
+                let lat,lon;
+                if(isLocationLocked){lat=MEDAN.lat;lon=MEDAN.lon;}
+                else if(navigator.geolocation){
+                    const pos=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:10000}));
+                    lat=pos.coords.latitude;lon=pos.coords.longitude;
+                }else{lat=MEDAN.lat;lon=MEDAN.lon;}
+                const resp=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&timezone=Asia%2FJakarta`);
+                const d=await resp.json();
+                const c=d.current;
+                const codes={0:{desc:'Cerah',icon:'fa-sun'},1:{desc:'Cerah Berawan',icon:'fa-cloud-sun'},2:{desc:'Berawan',icon:'fa-cloud'},3:{desc:'Mendung',icon:'fa-cloud-meatball'},45:{desc:'Kabut',icon:'fa-smog'},51:{desc:'Gerimis',icon:'fa-cloud-rain'},61:{desc:'Hujan',icon:'fa-cloud-showers-heavy'},80:{desc:'Hujan Lebat',icon:'fa-cloud-showers-water'},95:{desc:'Petir',icon:'fa-bolt'}};
+                const w=codes[c.weather_code]||{desc:'Unknown',icon:'fa-question'};
+                wc.innerHTML=`<div><i class="fas ${w.icon}" style="font-size:48px;"></i></div><div class="temperature">${Math.round(c.temperature_2m)}°C</div><div><div class="weather-desc">${w.desc}</div><div class="weather-details"><div><i class="fas fa-tint"></i> Kelembaban: ${c.relative_humidity_2m}%</div><div><i class="fas fa-thermometer-half"></i> Terasa: ${Math.round(c.apparent_temperature)}°C</div></div></div>`;
+            }catch(e){wc.innerHTML='<div><i class="fas fa-exclamation-triangle"></i> Gagal memuat cuaca</div>';}
+        }
+        updateLockBtn();fetchWeather();setInterval(fetchWeather,600000);
+
+        // Radio
+		let currStation = null;
+		const audioMain = document.getElementById('audio-main');
+
+		function toggleRadio(btn, id) {
+			const station = btn.closest('.radio-station');
+			const url = station.dataset.url;
+			const name = station.dataset.name;
+			const icon = btn.querySelector('i');
+
+			// Reset semua tombol dan highlight
+			document.querySelectorAll('.play-btn').forEach(b => {
+				if (b !== btn) {
+					b.classList.remove('playing');
+					b.innerHTML = '<i class="fas fa-play"></i>';
+				}
+			});
+			document.querySelectorAll('.radio-station').forEach(s => s.classList.remove('active'));
+
+			// Kalau tombol yang sama dipencet (pause)
+			if (btn.classList.contains('playing') && currStation === id) {
+				audioMain.pause();
+				btn.classList.remove('playing');
+				icon.className = 'fas fa-play';
+				currStation = null;
+				document.getElementById('nowPlaying').textContent = '';
+				return;
+			}
+
+			// Putar stasiun baru
+			audioMain.src = url;
+			audioMain.volume = 0.7;
+			audioMain.play().then(() => {
+				btn.classList.add('playing');
+				icon.className = 'fas fa-pause';
+				currStation = id;
+				document.getElementById('nowPlaying').textContent = ' Sekarang: ' + name;
+				station.classList.add('active');
+			}).catch(() => {
+				document.getElementById('nowPlaying').textContent = ' Gagal memutar radio';
+			});
+		}
+
+		function setVolume(id, v) {
+			// id sudah tidak terpakai, tapi kita biarkan untuk kompatibilitas onclick di HTML
+			audioMain.volume = v / 100;
+		}
+
+        document.querySelectorAll('audio').forEach(a=>a.addEventListener('error',()=>{document.getElementById('nowPlaying').textContent='? Stream tidak tersedia';}));
+    </script>
+</body>
+</html>
