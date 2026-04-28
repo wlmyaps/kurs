@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Font Awesome 6.4.0 - Semua Icon FAS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      padding: 25px;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      color: #00ff88;
+      text-align: center;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px #00ff88;
+    }
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+    .search-box input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 2px solid #00ff88;
+      background: #1a1a2e;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 0 15px rgba(0,255,136,0.3);
+    }
+    .search-box input::placeholder { color: #666; }
+    .info {
+      text-align: center;
+      color: #888;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+    }
+    .icon-item {
+      background: linear-gradient(145deg, #1a1a2e, #111122);
+      border-radius: 12px;
+      padding: 20px 10px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #2a2a4a;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 100px;
+    }
+    .icon-item:hover {
+      transform: translateY(-4px);
+      border-color: #00ff88;
+      box-shadow: 0 10px 25px rgba(0,255,136,0.2), inset 0 0 10px rgba(0,255,136,0.1);
+    }
+    .icon-item i {
+      font-size: 28px;
+      color: #00ff88;
+      text-shadow: 0 0 8px rgba(0,255,136,0.6);
+    }
+    .icon-item .class-name {
+      font-size: 11px;
+      color: #aaa;
+      word-break: break-all;
+      line-height: 1.2;
+    }
+    .copied-tooltip {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00ff88;
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .copied-tooltip.show {
+      opacity: 1;
+    }
+    .no-result {
+      text-align: center;
+      color: #888;
+      grid-column: 1 / -1;
+      padding: 40px;
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+      .icon-item { padding: 15px 5px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-icons"></i> Font Awesome 6.4.0 - Semua Icon FAS</h1>
+    <div class="subtitle">Klik icon untuk copy nama class (contoh: fas fa-heart) — cari icon buat radio lu!</div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Cari icon... (misal: play, heart, radio)">
+    </div>
+    <div class="info" id="iconCount">Memuat daftar icon...</div>
+    <div class="grid" id="iconGrid"></div>
+  </div>
+  <div class="copied-tooltip" id="tooltip">?? Nama class disalin!</div>
+
+  <script>
+    (async function() {
+      const grid = document.getElementById('iconGrid');
+      const searchInput = document.getElementById('searchInput');
+      const tooltip = document.getElementById('tooltip');
+      const iconCountSpan = document.getElementById('iconCount');
+
+      // Fungsi fetch & parse CSS dari CDN
+      async function fetchIcons() {
+        try {
+          const cssUrl = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+          const response = await fetch(cssUrl);
+          if (!response.ok) throw new Error('Gagal fetch CSS');
+          const cssText = await response.text();
+
+          // Regex ambil semua kelas .fa-xxxx:before
+          const regex = /\.(fa-[a-zA-Z0-9-]+):before/g;
+          const icons = new Set();
+          let match;
+          while ((match = regex.exec(cssText)) !== null) {
+            icons.add(match[1]); // contoh: fa-heart
+          }
+          return Array.from(icons).sort();
+        } catch (err) {
+          console.error('Fetch CSS gagal, pakai daftar offline?', err);
+          // Fallback daftar kecil agar tetap berfungsi
+          return ['fa-heart','fa-star','fa-play','fa-pause','fa-radio','fa-music','fa-headphones','fa-cloud','fa-sun','fa-bolt'];
+        }
+      }
+
+      const allIcons = await fetchIcons();
+      iconCountSpan.textContent = `Total ${allIcons.length} icon berhasil dimuat.`;
+
+      // Render grid
+      function renderIcons(filteredIcons) {
+        if (!filteredIcons.length) {
+          grid.innerHTML = '<div class="no-result">?? Tidak ada icon yang cocok.</div>';
+          return;
+        }
+        grid.innerHTML = filteredIcons.map(icon => {
+          return `
+            <div class="icon-item" data-class="fas ${icon}" title="fas ${icon}">
+              <i class="fas ${icon}"></i>
+              <span class="class-name">${icon}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderIcons(allIcons);
+
+      // Event klik untuk copy
+      grid.addEventListener('click', (e) => {
+        const item = e.target.closest('.icon-item');
+        if (!item) return;
+        const fullClass = item.dataset.class;
+        navigator.clipboard.writeText(fullClass).then(() => {
+          tooltip.classList.add('show');
+          setTimeout(() => tooltip.classList.remove('show'), 1500);
+        });
+      });
+
+      // Filter search
+      searchInput.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase().trim();
+        const filtered = allIcons.filter(icon => icon.toLowerCase().includes(keyword));
+        renderIcons(filtered);
+      });
+    })();
+  </script>
+</body>
+</html>
