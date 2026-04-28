@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Font Awesome 6.4.0 - Gallery Icon (Solid, Regular, Brands)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      padding: 25px;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      color: #00ff88;
+      text-align: center;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px #00ff88;
+    }
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    .search-box input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 2px solid #00ff88;
+      background: #1a1a2e;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 0 15px rgba(0,255,136,0.3);
+    }
+    .search-box input::placeholder { color: #666; }
+    .info {
+      text-align: center;
+      color: #888;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 15px;
+    }
+    .icon-item {
+      background: linear-gradient(145deg, #1a1a2e, #111122);
+      border-radius: 12px;
+      padding: 20px 10px 15px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #2a2a4a;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 110px;
+    }
+    .icon-item:hover {
+      transform: translateY(-4px);
+      border-color: #00ff88;
+      box-shadow: 0 10px 25px rgba(0,255,136,0.2), inset 0 0 10px rgba(0,255,136,0.1);
+    }
+    .icon-item i {
+      font-size: 28px;
+      color: #00ff88;
+      text-shadow: 0 0 8px rgba(0,255,136,0.6);
+    }
+    .class-name {
+      font-size: 11px;
+      color: #ccc;
+      word-break: break-all;
+      line-height: 1.2;
+    }
+    .category-badge {
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+    .badge-solid { background: #00ff88; color: #000; }
+    .badge-regular { background: #2196F3; color: #fff; }
+    .badge-brands { background: #FF9800; color: #000; }
+
+    .copied-tooltip {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00ff88;
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .copied-tooltip.show { opacity: 1; }
+    .no-result {
+      text-align: center;
+      color: #888;
+      grid-column: 1 / -1;
+      padding: 40px;
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+      .icon-item { padding: 15px 5px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-icons"></i> Font Awesome 6.4.0 - Gallery</h1>
+    <div class="subtitle">Klik icon untuk copy class lengkap (contoh: fas fa-heart) — ?? cari radio, hati, alat...</div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Cari icon...">
+    </div>
+    <div class="info" id="iconCount">Memuat icon...</div>
+    <div class="grid" id="iconGrid"></div>
+  </div>
+  <div class="copied-tooltip" id="tooltip">?? Class icon disalin!</div>
+
+  <script>
+    (async function() {
+      const grid = document.getElementById('iconGrid');
+      const searchInput = document.getElementById('searchInput');
+      const tooltip = document.getElementById('tooltip');
+      const iconCountSpan = document.getElementById('iconCount');
+
+      async function fetchIcons() {
+        try {
+          const cssUrl = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+          const response = await fetch(cssUrl);
+          if (!response.ok) throw new Error('Gagal fetch CSS');
+          const cssText = await response.text();
+
+          // Ambil SEMUA icon dari kelas .fa-xxx:before (solid, regular, brands)
+          const regex = /\.(fa-[a-zA-Z0-9-]+):before/g;
+          const icons = new Set();
+          let match;
+          while ((match = regex.exec(cssText)) !== null) {
+            icons.add(match[1]);
+          }
+          return Array.from(icons).sort();
+        } catch (err) {
+          console.error('Fetch error, fallback:', err);
+          return ['fa-heart','fa-star','fa-play','fa-pause','fa-radio','fa-music',
+                  'fa-facebook','fa-twitter','fa-instagram','fa-github',
+                  'fa-regular','fa-brands']; // sedikit contoh jika offline
+        }
+      }
+
+      const allIcons = await fetchIcons();
+      iconCountSpan.textContent = `Total ${allIcons.length} icon dimuat. (?? Solid | ?? Regular | ?? Brands)`;
+
+      // Fungsi untuk menentukan prefix & label
+      function getIconPrefixAndLabel(iconName) {
+        // Font Awesome 6 biasanya class-nya:
+        // Solid : fa-xxx (default, juga bisa dipanggil pakai fas fa-xxx)
+        // Regular : fa-xxx dengan style regular (pakai class far, biasanya ada di CSS terpisah)
+        // Brands : fa-xxx untuk merek (pakai class fab)
+        // Untuk memastikan dari parsing CSS, kita cek apakah ada nama 'brands' atau 'regular' dalam nama icon.
+        // Tapi lebih tepat, kita gunakan aturan: 
+        // - Jika icon mengandung 'brands' atau dimulai 'fa-brand' -> brands
+        // - Jika icon ada di daftar regular (biasanya fa-regular jarang, tapi bisa pakai 'far' class)
+        // - Sisa: solid
+        if (iconName.startsWith('fa-brands') || iconName.includes('brands')) {
+          return { prefix: 'fab', label: 'Brands', badgeClass: 'badge-brands' };
+        } else if (iconName.startsWith('fa-regular') || iconName.includes('regular')) {
+          return { prefix: 'far', label: 'Regular', badgeClass: 'badge-regular' };
+        } else {
+          return { prefix: 'fas', label: 'Solid', badgeClass: 'badge-solid' };
+        }
+      }
+
+      function renderIcons(filteredIcons) {
+        if (!filteredIcons.length) {
+          grid.innerHTML = '<div class="no-result">?? Tidak ada icon yang cocok.</div>';
+          return;
+        }
+        grid.innerHTML = filteredIcons.map(icon => {
+          const { prefix, label, badgeClass } = getIconPrefixAndLabel(icon);
+          return `
+            <div class="icon-item" data-class="${prefix} ${icon}" title="${prefix} ${icon}">
+              <i class="${prefix} ${icon}"></i>
+              <span class="class-name">${icon}</span>
+              <span class="category-badge ${badgeClass}">${label}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderIcons(allIcons);
+
+      // Klik copy
+      grid.addEventListener('click', (e) => {
+        const item = e.target.closest('.icon-item');
+        if (!item) return;
+        const fullClass = item.dataset.class;
+        navigator.clipboard.writeText(fullClass).then(() => {
+          tooltip.classList.add('show');
+          setTimeout(() => tooltip.classList.remove('show'), 1500);
+        });
+      });
+
+      // Search filter
+      searchInput.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase().trim();
+        const filtered = allIcons.filter(icon => icon.toLowerCase().includes(keyword));
+        renderIcons(filtered);
+      });
+    })();
+  </script>
+</body>
+</html>
