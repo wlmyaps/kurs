@@ -14,7 +14,6 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Background slow motion 7 warna kalem */
             background: linear-gradient(270deg,
                 #ffb3ba, #ffdfba, #ffffba,
                 #baffc9, #bae1ff, #d4baff, #ffb3ba);
@@ -43,13 +42,11 @@
             align-items: start;
         }
 
-        /* Header full lebar */
         .header-full {
             grid-column: 1 / -1;
             text-align: center;
         }
 
-        /* Penempatan */
         .clock-container { grid-column: 1; grid-row: 2; }
         .weather-section { grid-column: 2; grid-row: 2; }
         .radio-section { grid-column: 1; grid-row: 3; }
@@ -69,7 +66,6 @@
             letter-spacing: 2px;
         }
 
-        /* ============ 3D BOX STYLE ============ */
         .clock-container,
         .weather-section,
         .radio-section,
@@ -87,7 +83,6 @@
             background-clip: padding-box;
             transition: transform 0.3s, box-shadow 0.3s;
             transform: perspective(800px) rotateY(0deg) rotateX(0deg);
-            overflow: visible;
             height: fit-content;
         }
 
@@ -120,7 +115,6 @@
                 0 0 0 2px #00ff88;
         }
 
-        /* ============ JAM ============ */
         .clock-3d {
             display: flex;
             justify-content: center;
@@ -178,7 +172,6 @@
             text-transform: uppercase;
         }
 
-        /* ============ CUACA ============ */
         .weather-header {
             display: flex;
             justify-content: space-between;
@@ -222,7 +215,6 @@
         .weather-desc { font-size: 20px; margin-bottom: 5px; }
         .weather-details { font-size: 14px; color: #ccc; }
 
-        /* ============ RADIO ============ */
         .radio-header {
             color: white;
             font-size: 20px;
@@ -235,7 +227,6 @@
             gap: 10px;
         }
 
-        /* Grid untuk stasiun radio */
         .radio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -295,7 +286,6 @@
 
         .now-playing { color:#00ff88; font-size:14px; margin-top:12px; text-align:center; }
 
-        /* ============ MENU ============ */
         .nav-links {
             display: flex;
             flex-direction: column;
@@ -316,6 +306,9 @@
             border: 2px solid #3a3a5a;
             box-shadow: 0 10px 25px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.04), inset 0 -3px 5px rgba(0,0,0,0.4);
             transition: all 0.25s;
+            cursor: pointer;
+            font-size: inherit;
+            font-family: inherit;
         }
         .nav-link:hover {
             transform: translateY(-5px);
@@ -326,7 +319,6 @@
         .nav-link i { font-size: 18px; transition: transform 0.3s; }
         .nav-link:hover i { transform: scale(1.2); }
 
-        /* ============ RESPONSIVE ============ */
         @media (max-width: 750px) {
             .container { grid-template-columns: 1fr; }
             .clock-container, .weather-section, .radio-section, .nav-links {
@@ -343,13 +335,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header-full">
             <h1><i class="fas fa-chart-line"></i> KURS ANALIS</h1>
             <div class="subtitle">3D Central Hub - William Yaps</div>
         </div>
 
-        <!-- Clock -->
         <div class="clock-container">
             <div class="clock-3d">
                 <div class="time-box">
@@ -370,7 +360,6 @@
             <div class="date-display" id="dateDisplay">Memuat tanggal...</div>
         </div>
 
-        <!-- Weather -->
         <div class="weather-section">
             <div class="weather-header">
                 <div class="weather-title"><i class="fas fa-cloud-sun"></i> Cuaca <span id="locationName">Medan</span></div>
@@ -379,11 +368,9 @@
             <div class="weather-content" id="weatherContent"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>
         </div>
 
-        <!-- Radio -->
         <div class="radio-section">
             <div class="radio-header"><i class="fas fa-radio"></i> Radio Streaming</div>
             <div class="radio-grid">
-                <!-- Stasiun radio favorit Kanda -->
                 <div class="radio-station" data-url="https://22393.live.streamtheworld.com/LOVE972FMAAC.aac?dist=radiosingapore" data-name="Love 972 FM">
                     <div class="station-name"><i class="fas fa-heart"></i> Love 972 FM - Singapore</div>
                     <div class="station-info">Chinese & English Hits | 97.2 FM</div>
@@ -392,16 +379,14 @@
                         <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('love972',this.value)"></div>
                     </div>
                 </div>
-
                 <div class="radio-station" data-url="https://22903.live.streamtheworld.com/YES933_PREM.aac?dist=radiosingapore" data-name="933 YES">
                     <div class="station-name"><i class="fas fa-music"></i> 933 YES FM - Singapore</div>
                     <div class="station-info">English Hits | Top 40</div>
                     <div class="radio-controls">
-                        <button class="play-btn" onclick="toggleRadio(this,'fm987')"><i class="fas fa-play"></i></button>
-                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('fm987',this.value)"></div>
+                        <button class="play-btn" onclick="toggleRadio(this,'yes933')"><i class="fas fa-play"></i></button>
+                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('yes933',this.value)"></div>
                     </div>
-                </div><!--
-
+                </div>
                 <div class="radio-station" data-url="https://22393.live.streamtheworld.com/GOLD905AAC.aac?dist=radiosingapore" data-name="Gold 905">
                     <div class="station-name"><i class="fas fa-concierge-bell"></i> Gold 905 FM - Singapore</div>
                     <div class="station-info">Chinese Classics | 90.5 FM</div>
@@ -409,8 +394,7 @@
                         <button class="play-btn" onclick="toggleRadio(this,'gold905')"><i class="fas fa-play"></i></button>
                         <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('gold905',this.value)"></div>
                     </div>
-                </div>
-
+                </div> <!--
                 <div class="radio-station" data-url="https://28373.live.streamtheworld.com/OLI968FM_PREM.aac?dist=radiosingapore" data-name="Oli 968">
                     <div class="station-name"><i class="fas fa-cubes"></i> Oli 968 FM - Singapore</div>
                     <div class="station-info">Oli | 96.8 FM</div>
@@ -419,7 +403,6 @@
                         <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('oli968',this.value)"></div>
                     </div>
                 </div>
-
                 <div class="radio-station" data-url="https://28323.live.streamtheworld.com/CLASS95AAC_SC" data-name="Class 95">
                     <div class="station-name"><i class="fas fa-cube"></i> Class 95 FM - Singapore</div>
                     <div class="station-info">Class | 95 FM</div>
@@ -428,39 +411,34 @@
                         <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('class95',this.value)"></div>
                     </div>
                 </div>
-
                 <div class="radio-station" data-url="https://22893.live.streamtheworld.com/987FMAAC.aac?dist=radiosingapore" data-name="987">
                     <div class="station-name"><i class="fas fa-radio"></i> 987 - Singapore</div>
                     <div class="station-info">987 FM</div>
                     <div class="radio-controls">
-                        <button class="play-btn" onclick="toggleRadio(this,'987')"><i class="fas fa-play"></i></button>
-                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('987',this.value)"></div>
+                        <button class="play-btn" onclick="toggleRadio(this,'987fm')"><i class="fas fa-play"></i></button>
+                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('987fm',this.value)"></div>
                     </div>
                 </div>
-				
-				<div class="radio-station" data-url="https://28393.live.streamtheworld.com/RIA897FMAAC.aac?dist=radiosingapore" data-name="RIA 89,7">
+                <div class="radio-station" data-url="https://28393.live.streamtheworld.com/RIA897FMAAC.aac?dist=radiosingapore" data-name="RIA 89,7">
                     <div class="station-name"><i class="fas fa-arrows-to-eye"></i> Ria 89,7 FM - Singapore</div>
                     <div class="station-info">Ria | 89,7 FM</div>
                     <div class="radio-controls">
                         <button class="play-btn" onclick="toggleRadio(this,'ria897')"><i class="fas fa-play"></i></button>
-                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('987',this.value)"></div>
+                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('ria897',this.value)"></div>
                     </div>
                 </div>
-				
-				<div class="radio-station" data-url="https://28093.live.streamtheworld.com/KISS_92_SC" data-name="KISS 92">
+                <div class="radio-station" data-url="https://28093.live.streamtheworld.com/KISS_92_SC" data-name="KISS 92">
                     <div class="station-name"><i class="fas fa-kiss-wink-heart"></i> Kiss 92 FM - Singapore</div>
-                    <div class="station-info">Kiss | 89,7 FM</div>
+                    <div class="station-info">Kiss | 92 FM</div>
                     <div class="radio-controls">
-                        <button class="play-btn" onclick="toggleRadio(this,'ria897')"><i class="fas fa-play"></i></button>
-                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('987',this.value)"></div>
+                        <button class="play-btn" onclick="toggleRadio(this,'kiss92')"><i class="fas fa-play"></i></button>
+                        <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" min="0" max="100" value="70" onchange="setVolume('kiss92',this.value)"></div>
                     </div>
-                </div>
-                 TAMBAH STASIUN BARU DI SINI -->
+                </div> -->
             </div>
             <div class="now-playing" id="nowPlaying"></div>
         </div>
 
-        <!-- Menu Navigasi -->
         <div class="nav-links">
             <a href="https://wlmyaps.github.io/kurs/" target="_blank" class="nav-link"><i class="fas fa-table"></i> Tabel Kurs Terkini</a>
             <a href="https://wlmyaps.github.io/kurs/graph.html" target="_blank" class="nav-link"><i class="fas fa-chart-area"></i> Grafik Pergerakan Kurs</a>
@@ -468,7 +446,10 @@
             <a href="https://wlmyaps.github.io/kurs/buatgrafikcompare.html" target="_blank" class="nav-link"><i class="fas fa-chart-line"></i> Analis Kurs (Upload CSV)</a>
             <a href="https://wlmyaps.github.io/kurs/grafikcoompare.html" target="_blank" class="nav-link"><i class="fas fa-exchange-alt"></i> Compare Kurs (Upload CSV)</a>
             <a href="https://wlmyaps.github.io/kurs/menu2.html" target="_blank" class="nav-link"><i class="fas fa-radio"></i> Menu Kurs tanpa Radio</a>
-			<a href="https://wlmyaps.github.io/pdf/player.html" target="_blank" class="nav-link"><i class="fas fa-wand-magic-sparkles"></i> Player Pro & Recorder</a>
+            <a href="https://wlmyaps.github.io/player" target="_blank" class="nav-link"><i class="fas fa-wand-magic-sparkles"></i> Player Pro & Recorder</a>
+            <a href="#" class="nav-link" onclick="downloadPlayer(); return false;">
+                <i class="fas fa-download"></i> Download Player (Untuk Lokal/HP)
+            </a>
         </div>
     </div>
 
@@ -523,65 +504,81 @@
         updateLockBtn();fetchWeather();setInterval(fetchWeather,600000);
 
         // Radio
-		let currStation = null;
-		const audioMain = document.getElementById('audio-main');
+        let currStation = null;
+        const audioMain = document.getElementById('audio-main');
 
-		function toggleRadio(btn, id) {
-			const station = btn.closest('.radio-station');
-			const url = station.dataset.url;
-			const name = station.dataset.name;
-			const icon = btn.querySelector('i');
-			const volumeSlider = station.querySelector('input[type="range"]'); // slider milik stasiun ini
+        function toggleRadio(btn, id) {
+            const station = btn.closest('.radio-station');
+            const url = station.dataset.url;
+            const name = station.dataset.name;
+            const icon = btn.querySelector('i');
+            const volumeSlider = station.querySelector('input[type="range"]');
 
-			// Jika menekan tombol stasiun yang sama (pause/resume)
-			if (currStation === id) {
-				if (!audioMain.paused) {
-					audioMain.pause();
-					btn.classList.remove('playing');
-					icon.className = 'fas fa-play';
-					document.getElementById('nowPlaying').textContent = '?? Berhenti: ' + name;
-				} else {
-					audioMain.play();
-					btn.classList.add('playing');
-					icon.className = 'fas fa-pause';
-					document.getElementById('nowPlaying').textContent = '?? Sekarang: ' + name;
-				}
-				return;
-			}
+            if (currStation === id) {
+                if (!audioMain.paused) {
+                    audioMain.pause();
+                    btn.classList.remove('playing');
+                    icon.className = 'fas fa-play';
+                    document.getElementById('nowPlaying').textContent = '⏸️ Berhenti: ' + name;
+                } else {
+                    audioMain.play();
+                    btn.classList.add('playing');
+                    icon.className = 'fas fa-pause';
+                    document.getElementById('nowPlaying').textContent = '▶️ Sekarang: ' + name;
+                }
+                return;
+            }
 
-			// Reset tombol lain
-			document.querySelectorAll('.play-btn').forEach(b => {
-				b.classList.remove('playing');
-				b.innerHTML = '<i class="fas fa-play"></i>';
-			});
-			document.querySelectorAll('.radio-station').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.play-btn').forEach(b => {
+                b.classList.remove('playing');
+                b.innerHTML = '<i class="fas fa-play"></i>';
+            });
+            document.querySelectorAll('.radio-station').forEach(s => s.classList.remove('active'));
 
-			// Mainkan stasiun baru
-			audioMain.src = url;
-			// Sinkronisasi volume: ikuti slider stasiun yang baru ditekan
-			audioMain.volume = volumeSlider ? volumeSlider.value / 100 : 0.7;
-			audioMain.play().then(() => {
-				btn.classList.add('playing');
-				icon.className = 'fas fa-pause';
-				currStation = id;
-				document.getElementById('nowPlaying').textContent = '?? Sekarang: ' + name;
-				station.classList.add('active');
-			}).catch(() => {
-				document.getElementById('nowPlaying').textContent = '?? Gagal memutar radio';
-			});
-		}
+            audioMain.src = url;
+            audioMain.volume = volumeSlider ? volumeSlider.value / 100 : 0.7;
+            audioMain.play().then(() => {
+                btn.classList.add('playing');
+                icon.className = 'fas fa-pause';
+                currStation = id;
+                document.getElementById('nowPlaying').textContent = '▶️ Sekarang: ' + name;
+                station.classList.add('active');
+            }).catch(() => {
+                document.getElementById('nowPlaying').textContent = '❌ Gagal memutar radio';
+            });
+        }
 
-		function setVolume(id, v) {
-			// Hanya ubah volume jika stasiun yang digeser slidenya adalah stasiun yang sedang dimainkan,
-			// atau jika tidak ada stasiun yang aktif (currStation === null) untuk berjaga-jaga.
-			if (currStation === id || currStation === null) {
-				audioMain.volume = v / 100;
-			}
-		}
+        function setVolume(id, v) {
+            if (currStation === id || currStation === null) {
+                audioMain.volume = v / 100;
+            }
+        }
 
-		document.querySelectorAll('audio').forEach(a => a.addEventListener('error', () => {
-			document.getElementById('nowPlaying').textContent = '?? Stream tidak tersedia';
-		}));
-</script>
+        document.querySelectorAll('audio').forEach(a => a.addEventListener('error', () => {
+            document.getElementById('nowPlaying').textContent = '❌ Stream tidak tersedia';
+        }));
+    </script>
+
+    <script>
+        function downloadPlayer() {
+            const fileUrl = 'https://raw.githubusercontent.com/wlmyaps/player/main/player.html';
+            const fileName = 'player.html';
+
+            fetch(fileUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    alert('Mantap Bestie! player.html sudah meluncur ke folder Download-mu.');
+                })
+                .catch(() => alert('Waduh, koneksi ke GitHub lagi ngadat nih!'));
+        }
+    </script>
 </body>
 </html>
