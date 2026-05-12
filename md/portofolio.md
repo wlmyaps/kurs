@@ -38,6 +38,46 @@ Di bagian bawah, ada dua alat bantu praktis:
 
 ---
 
+Cara menggunakan:
+
+
 > **Catatan Penting (Limitasi Versi 1):**
 > Karena versi ini tidak punya fitur **LocalStorage**, semua data yang kamu masukkan akan **hilang** jika kamu me-*refresh* halaman atau menutup tab browser. Jadi, versi ini lebih cocok untuk simulasi cepat "bagaimana jika" daripada untuk memantau portofolio harian.
 
+---
+
+Berikut adalah panduan penggunaan detail untuk **Versi 2** :
+
+---
+
+### **Panduan Penggunaan Kalkulator Portofolio (Versi 2)**
+
+Versi ini dirancang untuk penggunaan jangka panjang dengan fitur penyimpanan data otomatis dan manajemen aset yang lebih fleksibel.
+
+#### **1. Sistem Penyimpanan Otomatis (Local Storage)**
+
+* Setiap data yang dimasukkan akan tersimpan secara otomatis di dalam memori browser.
+* Daftar saham tidak akan hilang meskipun halaman dimuat ulang (*refresh*) atau browser ditutup.
+
+#### **2. Manajemen Daftar Saham**
+
+* **Input Data:** Gunakan formulir input untuk memasukkan kode saham, harga rata-rata beli, harga pasar saat ini, dan jumlah lot.
+* **Fitur Edit:** Setiap baris saham memiliki tombol "Edit" yang memungkinkan perubahan harga pasar atau jumlah lot tanpa harus menghapus data lama.
+* **Penghapusan:** Gunakan tombol "Hapus" (X) untuk menghilangkan aset yang sudah tidak ada dalam portofolio nyata.
+
+#### **3. Analisis Penurunan & P&L**
+
+* **Dashboard Real-time:** Bagian atas menampilkan total modal, nilai pasar saat ini, serta total keuntungan atau kerugian (P&L) secara keseluruhan.
+* **Indikator Warna:** Angri merah menunjukkan posisi kerugian (*loss*), sementara angka hijau menunjukkan posisi keuntungan (*gain*).
+* **Kontributor Kerugian:** Sistem menganalisis secara mendalam saham mana yang memberikan dampak penurunan terbesar terhadap total modal, sehingga membantu prioritas pengambilan keputusan.
+
+#### **4. Kalkulator Strategi (Tools)**
+
+* **Average Down:** Fitur ini menghitung proyeksi harga rata-rata baru jika dilakukan pembelian tambahan di harga bawah (serok).
+* **Break Even Point (BEP):** Kalkulator ini menghitung harga jual minimum agar modal kembali utuh setelah dikurangi estimasi biaya transaksi (*fee* beli dan *fee* jual).
+
+#### **5. Alokasi Aset (Visual)**
+
+* **Grafik Lingkaran:** Menampilkan persentase sebaran modal pada setiap kode saham untuk memantau diversifikasi aset agar tidak terlalu dominan pada satu sektor saja.
+
+---
