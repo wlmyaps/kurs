@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan Portfolio Kalkulator — Brother Edyanto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --gold: #fbbf24;
+            --gold-light: #fef3c7;
+            --gold-dark: #b45309;
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.1);
+            --green: #22c55e;
+            --green-bg: rgba(34, 197, 94, 0.1);
+            --blue: #3b82f6;
+            --blue-bg: rgba(59, 130, 246, 0.1);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        /* Tabs */
+        .tabs-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 20px 0 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .tab {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+        .tab.active {
+            color: var(--gold);
+            background: rgba(251, 191, 36, 0.06);
+        }
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px 3px 0 0;
+        }
+        .tab .version-label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #475569;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .card-icon.gold { background: rgba(251, 191, 36, 0.12); }
+        .card-icon.blue { background: var(--blue-bg); }
+        .card-icon.red { background: var(--red-bg); }
+        .card-icon.green { background: var(--green-bg); }
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .card-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 36px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-title .num {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--gold);
+            color: #0f172a;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        .formula-box .label {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .formula-box code {
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        /* Calculation Table */
+        .calc-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .calc-table thead th {
+            background: #0f172a;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        .calc-table tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        .calc-table tbody tr:last-child td { border-bottom: none; }
+        .calc-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .calc-table .code-name {
+            font-weight: 700;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
+        .calc-table .negative { color: var(--red); }
+        .calc-table .positive { color: var(--green); }
+        .calc-table .total-row {
+            background: rgba(251, 191, 36, 0.05);
+            font-weight: 700;
+        }
+        .calc-table .total-row td {
+            border-top: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .steps li {
+            position: relative;
+            padding-left: 52px;
+            margin-bottom: 24px;
+            min-height: 40px;
+        }
+        .steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+        }
+        .steps li.active-step::before {
+            background: var(--gold);
+            color: #0f172a;
+            border-color: var(--gold);
+        }
+        .steps li h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .steps li p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tool Cards */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .tool-card {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 22px;
+            transition: all 0.2s ease;
+        }
+        .tool-card:hover {
+            border-color: #475569;
+            transform: translateY(-2px);
+        }
+        .tool-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .tool-card .tool-formula {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Alert */
+        .alert {
+            border-radius: var(--radius-sm);
+            padding: 18px 22px;
+            margin: 20px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .alert-warning {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+        .alert-danger {
+            background: var(--red-bg);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .alert-info {
+            background: var(--blue-bg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .alert-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .alert-warning .alert-icon { color: var(--gold); }
+        .alert-danger .alert-icon { color: var(--red); }
+        .alert-info .alert-icon { color: var(--blue); }
+        .alert-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .alert-warning .alert-content h4 { color: var(--gold); }
+        .alert-danger .alert-content h4 { color: var(--red); }
+        .alert-info .alert-content h4 { color: var(--blue); }
+        .alert-content p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* Highlight Text */
+        .hl-gold { color: var(--gold); font-weight: 600; }
+        .hl-red { color: var(--red); font-weight: 600; }
+        .hl-green { color: var(--green); font-weight: 600; }
+        .hl-blue { color: var(--blue); font-weight: 600; }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* Comparison Badge */
+        .compare-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .badge-light {
+            background: rgba(255,255,255,0.08);
+            color: #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge-dark {
+            background: rgba(15, 23, 42, 0.6);
+            color: #94a3b8;
+            border: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.7rem; }
+            .hero { padding: 40px 16px 30px; }
+            .tabs { padding: 0 10px; }
+            .tab { padding: 12px 10px; font-size: 0.8rem; }
+            .card { padding: 20px; }
+            .calc-table { font-size: 0.8rem; }
+            .calc-table thead th, .calc-table tbody td { padding: 10px 8px; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: black; }
+            .hero { background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+            .card { background: white; border: 1px solid #e2e8f0; break-inside: avoid; }
+            .tabs-wrapper { display: none; }
+            .tab-content { display: block !important; }
+            .tab-content:not(.active) { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-badge">📘 Panduan Lengkap</div>
+        <h1>Panduan Portfolio Kalkulator</h1>
+        <p>Khusus untuk <strong>Brother Edyanto</strong> — Panduan lengkap cara membaca, memahami, dan menggunakan kedua versi aplikasi kalkulator saham portofolio.</p>
+    </div>
+
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(0)">
+                <span>☀️ Versi 1</span>
+                <span class="version-label">portofolio.html</span>
+            </button>
+            <button class="tab" onclick="switchTab(1)">
+                <span>🌙 Versi 2</span>
+                <span class="version-label">portofolio2.html</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ==================== TAB 1: VERSI 1 ==================== -->
+        <div class="tab-content active" id="tab-0">
+
+            <div class="compare-badge badge-light">Tema Terang (Light Mode) · Chart.js · Input Form</div>
+
+            <!-- Cara Kerja -->
+            <div class="section-title"><span class="num">1</span> Cara Kerja Versi 1</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon gold">💰</div>
+                    <div>
+                        <div class="card-title">Logika Perhitungan Dasar</div>
+                        <div class="card-subtitle">Rumus-rumus yang digunakan di balik layar</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">
+                    Versi 1 bekerja dengan menghitung setiap posisi saham Bro berdasarkan <strong>4 input utama</strong>: Kode Saham, Harga Rata-rata Beli (Avg Price), Harga Pasar Terakhir (Last Price), dan Jumlah Lot. Satu lot sama dengan <span class="hl-gold">100 lembar saham</span>.
+                </p>
+
+                <div class="formula-box">
+                    <div class="label">Rumus Modal Awal per Saham</div>
+                    <code>Modal = Avg Price × (Lot × 100)</code>
+                </div>
+                <div class="formula-box">
+                    <div class="label">Rumus Nilai Pasar (Market Value)</div>
+                    <code>Nilai Pasar = Last Price × (Lot × 100)</code>
+                </div>
+                <div class="formula-box">
+                    <div class="label">Rumus Profit / Loss (P&L)</div>
+                    <code>P&L = Nilai Pasar − Modal</code><br>
+                    <code>P&L (%) = (P&L / Modal) × 100</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon blue">📊</div>
+                    <div>
+                        <div class="card-title">Contoh Perhitungan Real (Data Bro)</div>
+                        <div class="card-subtitle">Berdasarkan screenshot portofolio Bro Edyanto</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">
+                    Berikut cara membaca data portofolio Bro. Total modal awal yang sudah Bro investasikan adalah sebesar <span class="hl-gold">Rp 60.579.880</span>. Modal awal dihitung dengan rumus: <em>Nilai Pasar Saat Ini − Keuntungan/Kerugian (P&L)</em>.
+                </p>
+
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Saham</th>
+                            <th>Lot</th>
+                            <th>Nilai Pasar</th>
+                            <th>P&L</th>
+                            <th>Modal Awal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="code-name">BBCA</td>
+                            <td>65</td>
+                            <td>Rp 39.487.500</td>
+                            <td class="negative">−Rp 7.094.880</td>
+                            <td class="hl-gold">Rp 46.582.380</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BBRI</td>
+                            <td>15</td>
+                            <td>Rp 4.770.000</td>
+                            <td class="negative">−Rp 2.257.500</td>
+                            <td class="hl-gold">Rp 7.027.500</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BMRI</td>
+                            <td>10</td>
+                            <td>Rp 4.230.000</td>
+                            <td class="negative">−Rp 140.000</td>
+                            <td class="hl-gold">Rp 4.370.000</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BRIS</td>
+                            <td>10</td>
+                            <td>Rp 1.835.000</td>
+                            <td class="negative">−Rp 765.000</td>
+                            <td class="hl-gold">Rp 2.600.000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" style="text-align:right;">TOTAL MODAL AWAL</td>
+                            <td>Rp 60.579.880</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="formula-box" style="margin-top:12px;">
+                    <div class="label">Detail Perhitungan BBCA</div>
+                    <code>65 lot = 6.500 lembar</code><br>
+                    <code>Modal = 6.500 × 7.166,52 = Rp 46.582.380</code><br>
+                    <code>Nilai Pasar = 6.500 × 6.075 = Rp 39.487.500</code><br>
+                    <code>P&L = 39.487.500 − 46.582.380 = <span style="color:var(--red)">−Rp 7.094.880 (−15,23%)</span></code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon red">🩸</div>
+                    <div>
+                        <div class="card-title">Analisis Kontributor Penurunan</div>
+                        <div class="card-subtitle">Saham mana yang paling membuat portofolio "berdarah"?</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary);">
+                    Fitur ini menganalisis saham-saham yang sedang rugi dan menghitung <strong>kontribusi persentase</strong> masing-masing terhadap total kerugian portofolio. Semakin panjang bar merahnya, semakin besar "darah" yang dikeluarkan saham tersebut.
+                </p>
+                <div class="formula-box" style="margin-top:14px;">
+                    <div class="label">Rumus Kontribusi Kerugian</div>
+                    <code>Kontribusi (%) = (|P&L Saham| / Total |P&L Rugi|) × 100</code>
+                </div>
+            </div>
+
+            <!-- Cara Penggunaan -->
+            <div class="section-title"><span class="num">2</span> Cara Penggunaan Versi 1</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon green">📝</div>
+                    <div>
+                        <div class="card-title">Langkah-langkah Menggunakan Aplikasi</div>
+                        <div class="card-subtitle">Dari membuka file sampai melihat hasil analisis</div>
+                    </div>
+                </div>
+                <ol class="steps">
+                    <li class="active-step">
+                        <h4>Buka File <code>portofolio.html</code></h4>
+                        <p>File akan langsung menampilkan data demo (BBCA, BBRI, BMRI, BRIS) yang sama persis dengan screenshot portofolio Bro. Bro bisa langsung edit atau hapus sesuai kebutuhan.</p>
+                    </li>
+                    <li>
+                        <h4>Tambah / Edit Saham</h4>
+                        <p>Isi form di bagian <strong>Input Saham</strong>: masukkan Kode Saham, Avg Price (harga beli rata-rata), Last Price (harga pasar sekarang), dan Jumlah Lot. Klik tombol <span class="hl-gold">Add</span>. Data akan muncul di tabel bawahnya.</p>
+                    </li>
+                    <li>
+                        <h4>Baca Dashboard Ringkasan</h4>
+                        <p>Di bagian atas ada 4 kotak ringkasan: <strong>Total Modal</strong>, <strong>Nilai Pasar</strong>, <strong>P&L Nominal</strong>, dan <strong>P&L Persen</strong>. Warna merah = rugi, hijau = untung.</p>
+                    </li>
+                    <li>
+                        <h4>Lihat Pie Chart Alokasi Aset</h4>
+                        <p>Grafik donat menunjukkan sebaran modal Bro per saham. Ini membantu Bro melihat apakah portofolio terlalu terkonsentrasi di satu saham atau sudah cukup diversifikasi.</p>
+                    </li>
+                    <li>
+                        <h4>Cek Analisis Kontributor</h4>
+                        <p>Scroll ke bawah ke bagian <strong>Analisa Kontributor Penurunan</strong>. Di sini Bro bisa lihat saham mana yang paling banyak menyumbang kerugian. Kalau semua profit, akan muncul pesan "Alhamdulillah".</p>
+                    </li>
+                    <li>
+                        <h4>Hapus Saham (jika perlu)</h4>
+                        <p>Klik tombol <span class="hl-red">X</span> merah di sebelah kanan setiap baris saham untuk menghapusnya dari daftar.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Tools -->
+            <div class="section-title"><span class="num">3</span> Alat Bantu Praktis</div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>📉 Average Down Calculator</h4>
+                    <p>Gunakan ini kalau Bro mau "serok" atau beli tambahan saham yang sedang turun untuk menurunkan harga rata-rata kepemilikan.</p>
+                    <div class="tool-formula">
+                        <strong>Cara pakai:</strong><br>
+                        1. Masukkan <em>Harga Lama</em> (avg price saat ini)<br>
+                        2. Masukkan <em>Lot Lama</em> (jumlah lot yang sudah punya)<br>
+                        3. Masukkan <em>Harga Serok</em> (harga beli baru)<br>
+                        4. Masukkan <em>Lot Baru</em> (jumlah lot yang mau dibeli)<br>
+                        5. Klik <strong>Hitung Avg Baru</strong><br><br>
+                        <code>Avg Baru = ((HargaLama×LotLama) + (HargaBaru×LotBaru)) / (LotLama+LotBaru)</code>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>⚖️ Break Even Point (BEP)</h4>
+                    <p>Kalkulator ini menghitung apakah Bro sudah benar-benar untung setelah dikurangi estimasi fee transaksi.</p>
+                    <div class="tool-formula">
+                        <strong>Cara pakai:</strong><br>
+                        1. Masukkan <em>Avg Price Beli</em><br>
+                        2. Masukkan <em>Target Harga Jual</em><br>
+                        3. Klik <strong>Hitung BEP</strong><br><br>
+                        <code>Fee Beli: 0,15% | Fee Jual: 0,25%</code><br>
+                        Hasil menunjukkan estimasi profit bersih setelah biaya broker & pajak.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catatan Penting -->
+            <div class="alert alert-danger">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h4>Catatan Penting untuk Brother Edyanto</h4>
+                    <p>Karena versi ini <strong>tidak memiliki fitur LocalStorage</strong>, semua data yang Bro masukkan akan <span class="hl-red">hilang</span> jika Bro merefresh halaman atau menutup tab browser. Pastikan Bro sudah mencatat data penting di tempat lain sebelum menutup aplikasi.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==================== TAB 2: VERSI 2 ==================== -->
+        <div class="tab-content" id="tab-1">
+
+            <div class="compare-badge badge-dark">Tema Gelap (Dark Mode) · Table Inline Edit · Pie Chart</div>
+
+            <!-- Cara Kerja -->
+            <div class="section-title"><span class="num">1</span> Cara Kerja Versi 2</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon gold">🧠</div>
+                    <div>
+                        <div class="card-title">Perbedaan Fundamental dengan Versi 1</div>
+                        <div class="card-subtitle">Lebih cepat, lebih profesional, lebih lengkap</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">
+                    Versi 2 (<code>portofolio2.html</code>) menggunakan konsep <strong>inline table editing</strong>. Bro tidak perlu klik "Add" setiap kali input — cukup ketik langsung di dalam tabel seperti spreadsheet Excel. Semua perhitungan berjalan <em>real-time</em> (langsung update) begitu Bro selesai mengetik.
+                </p>
+
+                <ul class="feature-list">
+                    <li>Tema gelap profesional (GitHub-style dark mode) yang nyaman di mata</li>
+                    <li>Input langsung di tabel — tanpa form terpisah</li>
+                    <li>Kolom <strong>Kontribusi</strong> otomatis menghitung persentase P&L tiap saham terhadap total portofolio</li>
+                    <li>Average Down Calculator dengan <strong>dropdown pilih saham</strong> otomatis</li>
+                    <li>BEP Calculator dengan <strong>fee beli & jual yang bisa diubah</strong> (default 0,15% / 0,25%)</li>
+                    <li>BEP bisa dihitung per saham <strong>atau</strong> untuk seluruh portofolio (blended)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon blue">📐</div>
+                    <div>
+                        <div class="card-title">Rumus yang Digunakan di Versi 2</div>
+                        <div class="card-subtitle">Sama akurat, tampilan lebih detail</div>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    <div class="label">Rumus Dasar (sama dengan Versi 1)</div>
+                    <code>Modal = Avg Price × Lot × 100</code><br>
+                    <code>Nilai Pasar = Last Price × Lot × 100</code><br>
+                    <code>Rugi/Laba = Nilai Pasar − Modal</code><br>
+                    <code>Rugi/Laba % = (Rugi/Laba / Modal) × 100</code>
+                </div>
+
+                <div class="formula-box">
+                    <div class="label">Rumus Kontribusi (Baru di Versi 2)</div>
+                    <code>Kontribusi (%) = (Rugi/Laba Saham / Total Rugi/Laba Portofolio) × 100</code><br><br>
+                    <span style="color:var(--text-secondary); font-size:0.8rem;">
+                        Nilai positif = saham tersebut menyumbang profit.<br>
+                        Nilai negatif = saham tersebut menyumbang kerugian.
+                    </span>
+                </div>
+
+                <div class="formula-box">
+                    <div class="label">Rumus BEP per Saham (dengan Fee)</div>
+                    <code>BEP per Lembar = (Modal × (1 + FeeBeli)) / (Lembar × (1 − FeeJual))</code><br><br>
+                    <span style="color:var(--text-secondary); font-size:0.8rem;">
+                        Fee beli default: 0,15% | Fee jual default: 0,25% (sudah termasuk pajak & broker fee estimasi)
+                    </span>
+                </div>
+
+                <div class="formula-box">
+                    <div class="label">Rumus Average Down (dengan Unit Lembar)</div>
+                    <code>Avg Baru = ((AvgLama × LotLama × 100) + (HargaBaru × LotBaru × 100)) / ((LotLama + LotBaru) × 100)</code><br><br>
+                    <span style="color:var(--text-secondary); font-size:0.8rem;">
+                        Versi 2 langsung menampilkan total lembar, modal tambahan yang dibutuhkan, dan status apakah harga pasar saat ini sudah di atas atau di bawah rata-rata baru.
+                    </span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon green">📊</div>
+                    <div>
+                        <div class="card-title">Contoh Perhitungan Real (Data Bro)</div>
+                        <div class="card-subtitle">Hasil yang sama, tampilan lebih lengkap</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:16px;">
+                    Data yang sama persis dengan screenshot Bro akan muncul otomatis saat file dibuka. Berikut tampilan lengkap dengan kolom tambahan yang hanya ada di Versi 2:
+                </p>
+
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Saham</th>
+                            <th>Lot</th>
+                            <th>Lembar</th>
+                            <th>Modal</th>
+                            <th>Nilai Pasar</th>
+                            <th>Rugi/Laba</th>
+                            <th>Kontribusi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="code-name">BBCA</td>
+                            <td>65</td>
+                            <td>6.500</td>
+                            <td>Rp 46.582.380</td>
+                            <td>Rp 39.487.500</td>
+                            <td class="negative">−Rp 7.094.880</td>
+                            <td class="negative">−74,0%</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BBRI</td>
+                            <td>15</td>
+                            <td>1.500</td>
+                            <td>Rp 7.027.500</td>
+                            <td>Rp 4.770.000</td>
+                            <td class="negative">−Rp 2.257.500</td>
+                            <td class="negative">−23,5%</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BMRI</td>
+                            <td>10</td>
+                            <td>1.000</td>
+                            <td>Rp 4.370.000</td>
+                            <td>Rp 4.230.000</td>
+                            <td class="negative">−Rp 140.000</td>
+                            <td class="negative">−1,5%</td>
+                        </tr>
+                        <tr>
+                            <td class="code-name">BRIS</td>
+                            <td>10</td>
+                            <td>1.000</td>
+                            <td>Rp 2.600.000</td>
+                            <td>Rp 1.835.000</td>
+                            <td class="negative">−Rp 765.000</td>
+                            <td class="negative">−8,0%</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" style="text-align:right;">TOTAL</td>
+                            <td>Rp 50.322.500</td>
+                            <td class="negative">−Rp 10.257.380</td>
+                            <td>−16,93%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info" style="margin-top:16px;">
+                    <div class="alert-icon">💡</div>
+                    <div class="alert-content">
+                        <h4>Catatan Perhitungan Kontribusi</h4>
+                        <p>Kolom <strong>Kontribusi</strong> menunjukkan seberapa besar pengaruh satu saham terhadap total P&L portofolio. BBCA menyumbang <span class="hl-red">74%</span> dari total kerugian — artinya kalau BBCA pulih, dampaknya paling besar ke portofolio Bro.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cara Penggunaan -->
+            <div class="section-title"><span class="num">2</span> Cara Penggunaan Versi 2</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon green">🚀</div>
+                    <div>
+                        <div class="card-title">Langkah-langkah Menggunakan Aplikasi</div>
+                        <div class="card-subtitle">Workflow lebih cepat dengan inline editing</div>
+                    </div>
+                </div>
+                <ol class="steps">
+                    <li class="active-step">
+                        <h4>Buka File <code>portofolio2.html</code></h4>
+                        <p>File akan langsung menampilkan data default (BBCA, BBRI, BMRI, BRIS) di dalam tabel. Tampilan gelap dengan kartu ringkasan di bagian atas.</p>
+                    </li>
+                    <li>
+                        <h4>Edit Data Langsung di Tabel</h4>
+                        <p>Klik salah satu cell di tabel (Kode, Avg Price, Last Price, atau Lot) lalu ketik nilai baru. <strong>Tidak perlu tombol simpan</strong> — perhitungan otomatis update begitu Bro pindah cell atau tekan Enter.</p>
+                    </li>
+                    <li>
+                        <h4>Tambah Saham Baru</h4>
+                        <p>Klik tombol <span class="hl-gold">+ Tambah Saham</span> di bawah tabel. Baris baru akan muncul di bawah. Isi data dan perhitungan langsung jalan otomatis.</p>
+                    </li>
+                    <li>
+                        <h4>Hapus Saham</h4>
+                        <p>Klik tombol <span class="hl-red">🗑</span> (sampah) di kolom paling kanan. Kalau tinggal 1 baris, data akan dikosongkan (tidak dihapus) agar tabel tidak hilang total.</p>
+                    </li>
+                    <li>
+                        <h4>Baca Summary Cards</h4>
+                        <p>4 kartu di atas tabel menampilkan Total Modal, Nilai Pasar, Rugi/Laba Nominal, dan Persentase. Warna border kartu akan berubah: <span class="hl-red">merah</span> saat rugi, <span class="hl-green">hijau</span> saat profit, biru saat impas.</p>
+                    </li>
+                    <li>
+                        <h4>Lihat Pie Chart Alokasi</h4>
+                        <p>Grafik pie di bagian bawah menunjukkan sebaran modal. Legend di bawah chart juga menampilkan persentase tiap saham secara tekstual.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Tools -->
+            <div class="section-title"><span class="num">3</span> Alat Bantu Praktis</div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>📉 Average Down Calculator</h4>
+                    <p>Versi 2 lebih praktis: Bro tinggal <strong>pilih saham dari dropdown</strong>, lalu masukkan harga beli baru dan lot baru. Aplikasi otomatis mengambil data avg & lot lama dari tabel.</p>
+                    <div class="tool-formula">
+                        <strong>Cara pakai:</strong><br>
+                        1. Pilih saham dari dropdown <em>"Pilih Saham"</em><br>
+                        2. Masukkan <em>Harga Beli Baru</em><br>
+                        3. Masukkan <em>Jumlah Lot Baru</em><br>
+                        4. Hasil muncul otomatis — termasuk modal tambahan & status profit/rugi<br><br>
+                        <span style="color:var(--green)">✓ Keunggulan:</span> Tidak perlu ingat-ingat avg & lot lama — sudah otomatis terisi dari data tabel.
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>⚖️ Break Even Point (BEP) Calculator</h4>
+                    <p>Versi 2 memungkinkan Bro mengatur fee beli & jual sendiri, dan bisa menghitung BEP untuk <strong>satu saham</strong> atau <strong>seluruh portofolio</strong> (blended average).</p>
+                    <div class="tool-formula">
+                        <strong>Cara pakai:</strong><br>
+                        1. Atur <em>Fee Beli (%)</em> dan <em>Fee Jual (%)</em> (default sudah 0,15% / 0,25%)<br>
+                        2. Pilih saham dari dropdown, atau biarkan <em>"Semua Portfolio"</em> untuk BEP gabungan<br>
+                        3. Hasil muncul otomatis — termasuk berapa poin naik yang dibutuhkan untuk impas<br><br>
+                        <span style="color:var(--green)">✓ Keunggulan:</span> BEP Blended untuk seluruh portofolio + fee customizable.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catatan Penting -->
+            <div class="alert alert-danger">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h4>Catatan Penting untuk Brother Edyanto</h4>
+                    <p>Sama seperti Versi 1, aplikasi ini berjalan <strong>100% di browser</strong> (client-side) dan <strong>tidak menyimpan data ke server maupun LocalStorage</strong>. Segala perubahan yang Bro buat akan hilang begitu halaman direfresh atau ditutup. Pastikan data sudah dicatat manual jika diperlukan untuk referensi ke depannya.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <div class="alert-icon">🎯</div>
+                <div class="alert-content">
+                    <h4>Tips Memilih Versi</h4>
+                    <p><strong>Gunakan Versi 1</strong> kalau Bro suka tampilan bersih & terang dengan form input terpisah. <strong>Gunakan Versi 2</strong> kalau Bro butuh editing cepat ala spreadsheet, tema gelap, dan fitur BEP blended portofolio. Kedua versi sama-sama akurat.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach((t, i) => {
+                t.classList.toggle('active', i === index);
+            });
+
+            contents.forEach((c, i) => {
+                c.classList.toggle('active', i === index);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
