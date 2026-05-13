@@ -104,7 +104,7 @@
         </table>
     </div>
 
-    <div class="section-title">ðŸ“ˆ Nilai Tukar Mata Uang (Buy vs Sell)</div>
+    <div class="section-title">&#128202 Nilai Tukar Mata Uang (Buy vs Sell)</div>
     <div class="charts" id="currencyCharts">
         <div class="chart-box"><canvas id="usdChart"></canvas></div>
         <div class="chart-box"><canvas id="sgdChart"></canvas></div>
@@ -114,27 +114,27 @@
         <div class="chart-box"><canvas id="chfChart"></canvas></div>
     </div>
 
-    <div class="section-title">ðŸ“Š Harga Saham BMRI & BBCA (Close vs Open)</div>
+    <div class="section-title">&#128200 Harga Saham BMRI & BBCA (Close vs Open)</div>
     <div class="charts" id="stockCharts">
         <div class="chart-box"><canvas id="bmriChart"></canvas></div>
         <div class="chart-box"><canvas id="bbcaChart"></canvas></div>
     </div>
 
-    <div class="section-title">ðŸ“Š Perbandingan Multi-Mata Uang â€” Harga Beli (Normalized)</div>
+    <div class="section-title">&#128200 Perbandingan Multi-Mata Uang â€” Harga Beli (Normalized)</div>
     <div class="chart-note">* Base 100 = harga awal. Naik = IDR melemah.</div>
     <div class="charts"><div class="chart-box full-width"><canvas id="compareBuyChart"></canvas></div></div>
-    <div class="section-title">ðŸ“Š Perbandingan Multi-Mata Uang â€” Harga Jual (Normalized)</div>
+    <div class="section-title">&#128200 Perbandingan Multi-Mata Uang â€” Harga Jual (Normalized)</div>
     <div class="chart-note">* Base 100 = harga awal.</div>
     <div class="charts"><div class="chart-box full-width"><canvas id="compareSellChart"></canvas></div></div>
 
-    <div class="section-title">ðŸ“Š Perbandingan Saham â€” Harga Close</div>
+    <div class="section-title">&#128200 Perbandingan Saham â€” Harga Close</div>
     <div class="chart-note">* Support & Resistance periode penuh.</div>
     <div class="charts"><div class="chart-box full-width"><canvas id="compareStockCloseChart"></canvas></div></div>
-    <div class="section-title">ðŸ“Š Perbandingan Saham â€” Harga Open</div>
+    <div class="section-title">&#128200 Perbandingan Saham â€” Harga Open</div>
     <div class="chart-note">* Support & Resistance periode penuh.</div>
     <div class="charts"><div class="chart-box full-width"><canvas id="compareStockOpenChart"></canvas></div></div>
 
-    <div class="section-title">ðŸ“Š Google Finance Style Compare â€” Kurs</div>
+    <div class="section-title">&#128200 Google Finance Style Compare â€” Kurs</div>
     <div class="toggle-group">
         <button id="btn-curr-buy" class="active" onclick="switchCurrencyMode('buy')">Beli</button>
         <button id="btn-curr-sell" onclick="switchCurrencyMode('sell')">Jual</button>
@@ -142,7 +142,7 @@
     <div class="summary-cards" id="currencySummaryCards"></div>
     <div class="charts"><div class="chart-box full-width"><canvas id="gfCurrencyChart"></canvas></div></div>
 
-    <div class="section-title">ðŸ“Š Google Finance Style Compare â€” Saham</div>
+    <div class="section-title">&#128200 Google Finance Style Compare â€” Saham</div>
     <div class="toggle-group">
         <button id="btn-stock-close" class="active" onclick="switchStockMode('close')">Close</button>
         <button id="btn-stock-open" onclick="switchStockMode('open')">Open</button>
@@ -161,22 +161,22 @@
     </div>
     <div class="performer-cards" id="performerCards"></div>
 
-    <div class="section-title">ðŸ“‰ Volatility Gauge â€” Spread Buy vs Sell</div>
+    <div class="section-title">&#128202‰ Volatility Gauge &#128203 Spread Buy vs Sell</div>
     <div class="chart-note">* Spread = Selisih harga jual - harga beli. Semakin lebar = semakin berisiko / kurang likuid.</div>
     <div class="charts"><div class="chart-box full-width"><canvas id="volatilityChart"></canvas></div></div>
     <div class="stats-box" id="volatilityStats"></div>
 
-    <div class="section-title">ðŸ”— Correlation Matrix â€” Mata Uang vs Saham</div>
+    <div class="section-title">&#128203— Correlation Matrix &#128203 Mata Uang vs Saham</div>
     <div class="chart-note">* Korelasi Pearson: +1 = searah, -1 = berlawanan, 0 = tidak berkorelasi. Data saham (38 hari) vs data kurs terakhir 38 titik.</div>
     <div class="table-wrapper">
         <table class="corr-table" id="corrTable"></table>
     </div>
 
-    <div class="section-title">ðŸ“‹ Dynamic Stats Summary</div>
+    <div class="section-title">&#128202‹ Dynamic Stats Summary</div>
     <div class="chart-note">* Ringkasan otomatis titik harga tertinggi & terendah yang pernah tercatat.</div>
     <div id="dynamicStatsContainer"></div>
 
-    <div class="section-title">ðŸš¨ Visual Price Alert Simulator</div>
+    <div class="section-title">&#128202 Visual Price Alert Simulator</div>
     <div class="chart-note">* Masukkan target harga, lalu klik Apply. Garis merah akan muncul di grafik sebagai garis target.</div>
     <div class="alert-group">
         <label>USD:</label><input type="number" id="alertUSD" placeholder="17500">
@@ -190,7 +190,7 @@
     <div class="charts"><div class="chart-box full-width"><canvas id="alertCurrencyChart"></canvas></div></div>
     <div class="charts"><div class="chart-box full-width"><canvas id="alertStockChart"></canvas></div></div>
 
-    <div class="section-title">ðŸ” Dynamic Base & Zoom</div>
+    <div class="section-title">&#128202 Dynamic Base & Zoom</div>
     <div class="chart-note">* Pilih titik awal, scroll zoom, drag geser. Tooltip tampil harga asli + % perubahan.</div>
     <div class="range-group">
         <label>Base Tanggal:</label>
@@ -440,7 +440,7 @@ new Chart(document.getElementById('volatilityChart').getContext('2d'), {
                    legend: {position:'top'}, tooltip: { callbacks: { label: ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(2) } } }
     }
 });
-let volStatsHtml = '<strong>ðŸ“Š Statistik Spread:</strong><br>';
+let volStatsHtml = '<strong>&#128200 Statistik Spread:</strong><br>';
 ['usd','sgd','aud','jpy','eur','chf'].forEach(key=>{
     const arr = spreadData[key];
     const avg = (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2);
@@ -496,13 +496,13 @@ const currNames = {usd:'USD/IDR', sgd:'SGD/IDR', aud:'AUD/IDR', jpy:'JPY/IDR', e
 ['usd','sgd','aud','jpy','eur','chf'].forEach(key=>{
     const buy = findMinMax(currencyData[key].buy, dates);
     const sell = findMinMax(currencyData[key].sell, dates);
-    statsHtml += `<div class="stats-box"><strong>ðŸ“ˆ ${currNames[key]} (Buy)</strong> â€” Tertinggi: <strong>${buy.max.toLocaleString('id-ID')}</strong> pada ${buy.maxDate} | Terendah: <strong>${buy.min.toLocaleString('id-ID')}</strong> pada ${buy.minDate} | Range: ${(buy.max-buy.min).toLocaleString('id-ID')}<br><strong>ðŸ“‰ ${currNames[key]} (Sell)</strong> â€” Tertinggi: <strong>${sell.max.toLocaleString('id-ID')}</strong> pada ${sell.maxDate} | Terendah: <strong>${sell.min.toLocaleString('id-ID')}</strong> pada ${sell.minDate} | Range: ${(sell.max-sell.min).toLocaleString('id-ID')}</div>`;
+    statsHtml += `<div class="stats-box"><strong>&#128202ˆ ${currNames[key]} (Buy)</strong> â€” Tertinggi: <strong>${buy.max.toLocaleString('id-ID')}</strong> pada ${buy.maxDate} | Terendah: <strong>${buy.min.toLocaleString('id-ID')}</strong> pada ${buy.minDate} | Range: ${(buy.max-buy.min).toLocaleString('id-ID')}<br><strong>&#128202‰ ${currNames[key]} (Sell)</strong> â€” Tertinggi: <strong>${sell.max.toLocaleString('id-ID')}</strong> pada ${sell.maxDate} | Terendah: <strong>${sell.min.toLocaleString('id-ID')}</strong> pada ${sell.minDate} | Range: ${(sell.max-sell.min).toLocaleString('id-ID')}</div>`;
 });
 const bmriC = findMinMax(bmriClose, bmriDates);
 const bmriO = findMinMax(bmriOpen, bmriDates);
 const bbcaC = findMinMax(bbcaClose, bbcaDates);
 const bbcaO = findMinMax(bbcaOpen, bbcaDates);
-statsHtml += `<div class="stats-box"><strong>ðŸ“ˆ BMRI Close</strong> â€” Tertinggi: <strong>Rp ${bmriC.max.toLocaleString('id-ID')}</strong> pada ${bmriC.maxDate} | Terendah: <strong>Rp ${bmriC.min.toLocaleString('id-ID')}</strong> pada ${bmriC.minDate}<br><strong>ðŸ“ˆ BMRI Open</strong> â€” Tertinggi: <strong>Rp ${bmriO.max.toLocaleString('id-ID')}</strong> pada ${bmriO.maxDate} | Terendah: <strong>Rp ${bmriO.min.toLocaleString('id-ID')}</strong> pada ${bmriO.minDate}<br><strong>ðŸ“ˆ BBCA Close</strong> â€” Tertinggi: <strong>Rp ${bbcaC.max.toLocaleString('id-ID')}</strong> pada ${bbcaC.maxDate} | Terendah: <strong>Rp ${bbcaC.min.toLocaleString('id-ID')}</strong> pada ${bbcaC.minDate}<br><strong>ðŸ“ˆ BBCA Open</strong> â€” Tertinggi: <strong>Rp ${bbcaO.max.toLocaleString('id-ID')}</strong> pada ${bbcaO.maxDate} | Terendah: <strong>Rp ${bbcaO.min.toLocaleString('id-ID')}</strong> pada ${bbcaO.minDate}</div>`;
+statsHtml += `<div class="stats-box"><strong>&#128202ˆ BMRI Close</strong> â€” Tertinggi: <strong>Rp ${bmriC.max.toLocaleString('id-ID')}</strong> pada ${bmriC.maxDate} | Terendah: <strong>Rp ${bmriC.min.toLocaleString('id-ID')}</strong> pada ${bmriC.minDate}<br><strong>&#128202ˆ BMRI Open</strong> â€” Tertinggi: <strong>Rp ${bmriO.max.toLocaleString('id-ID')}</strong> pada ${bmriO.maxDate} | Terendah: <strong>Rp ${bmriO.min.toLocaleString('id-ID')}</strong> pada ${bmriO.minDate}<br><strong>&#128202ˆ BBCA Close</strong> â€” Tertinggi: <strong>Rp ${bbcaC.max.toLocaleString('id-ID')}</strong> pada ${bbcaC.maxDate} | Terendah: <strong>Rp ${bbcaC.min.toLocaleString('id-ID')}</strong> pada ${bbcaC.minDate}<br><strong>&#128202ˆ BBCA Open</strong> â€” Tertinggi: <strong>Rp ${bbcaO.max.toLocaleString('id-ID')}</strong> pada ${bbcaO.maxDate} | Terendah: <strong>Rp ${bbcaO.min.toLocaleString('id-ID')}</strong> pada ${bbcaO.minDate}</div>`;
 statsContainer.innerHTML = statsHtml;
 
 let alertCurrencyChart = null, alertStockChart = null;
@@ -531,7 +531,7 @@ function renderAlertCurrencyChart(){
         type: 'line', data: { labels: dates, datasets },
         options: { responsive: true, maintainAspectRatio: false, interaction: {mode:'index', intersect:false},
             scales: { y: { beginAtZero: false, grid:{color:'var(--grid)'} }, x: { ticks:{maxRotation:35,maxTicksLimit:18} } },
-            plugins: { title: {display:true, text:'Price Alert â€” Kurs (USD/SGD/AUD)', font:{size:14,weight:'bold'}, color:'var(--section)'},
+            plugins: { title: {display:true, text:'Price Alert Kurs (USD/SGD/AUD)', font:{size:14,weight:'bold'}, color:'var(--section)'},
                        legend: {position:'top'}, annotation: { annotations: buildAlertAnnotations() } }
         }
     });
