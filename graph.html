@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -560,6 +560,26 @@
                 0 0 20px rgba(99, 179, 237, 0.6);
             margin-bottom: 8px;
             letter-spacing: 3px;}
+#tripleClockTop #singaporeTime {color: #63b3ed;
+            text-shadow: 0 0 10px rgba(99, 179, 237, 0.8), 0 0 20px rgba(99, 179, 237, 0.45);}
+.dark-mode #tripleClockTop #singaporeTime {color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(99, 179, 237, 0.6);} 
+#tripleClockTop .timezone-select {width: 100%;
+            max-width: 250px;
+            margin: 8px auto 12px;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(99, 179, 237, 0.5);
+            background: rgba(15, 23, 42, 0.92);
+            color: #fff;
+            font-weight: 600;
+            font-size: 12px;
+            font-family: inherit;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.08);}
+#tripleClockTop .timezone-select:focus {outline: none;
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.25);}
 #tripleClockTop .date-display {color: #a0aec0;
             font-size: 14px;
             margin-bottom: 4px;}
@@ -916,6 +936,7 @@
         <!-- ========== KANAN: ARAB SAUDI (AST) + WEATHER ========== -->
         <div class="clock-box">
             <div class="timezone-label">🇸🇦 Arab Saudi (AST)</div>
+            <select id="saudiTimezoneSelect" class="timezone-select" onchange="updateAllClocks()"></select>
             <div class="digital-time" id="saudiTime">00:00:00</div>
             <div class="date-display" id="saudiDate">-- --- ----</div>
             <div class="day-display" id="saudiDay">LOADING...</div>
@@ -1003,7 +1024,7 @@
             </table>
         </div>
 		
-		<!-- 🔥 GOOGLE FINANCE STYLE CHART 🔥 -->
+		<!-- 🔥 GOOGLE FINANCE STYLE CHART 🔥 
 <div style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
     <h3 style="text-align: center; color: #333; margin-bottom: 10px;">📈 Perbandingan Saham - Google Finance Style (%)</h3>
     <p style="text-align: center; font-size: 12px; color: #666; margin-bottom: 15px;">
@@ -1011,7 +1032,7 @@
         * BMRI (Biru) vs BBCA (Merah) — Base 0% = harga pertama di rentang tanggal.
     </p>
     <canvas id="chartGoogleFinance" height="120"></canvas>
-</div>
+</div>-->
 
 <script>
 let financeChartInstance = null;
@@ -3570,6 +3591,22 @@ function update3DClock() {
             singapore: 8 * 60,
             saudi: 3 * 60
         };
+        const DEFAULT_SAUDI_TIMEZONE = 'Asia/Riyadh';
+        const SUPPORTED_TIMEZONES = (() => {
+            try {
+                if (Intl.supportedValuesOf) {
+                    return Intl.supportedValuesOf('timeZone');
+                }
+            } catch (e) {}
+            return [
+                'Asia/Riyadh', 'Asia/Jakarta', 'Asia/Singapore', 'Asia/Tokyo', 'Asia/Seoul',
+                'Asia/Shanghai', 'Asia/Hong_Kong', 'Asia/Bangkok', 'Asia/Dubai', 'Asia/Kolkata',
+                'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Europe/Madrid', 'Europe/Rome',
+                'Europe/Moscow', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles',
+                'America/Toronto', 'America/Vancouver', 'America/Mexico_City', 'America/Sao_Paulo', 'America/Argentina/Buenos_Aires',
+                'Australia/Sydney', 'Australia/Perth', 'Pacific/Auckland', 'Pacific/Honolulu', 'Africa/Cairo'
+            ];
+        })();
 
         // ========== ALARM VARIABLES ==========
         let alarmTime = null;
@@ -3633,6 +3670,64 @@ function update3DClock() {
             };
         }
 
+        // ========== TIMEZONE HELPERS ==========
+        function getTimezoneParts(timeZone) {
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat('id-ID', {
+                timeZone,
+                hour12: false,
+                hourCycle: 'h23',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            const parts = {};
+            formatter.formatToParts(now).forEach(part => {
+                if (part.type !== 'literal') parts[part.type] = part.value;
+            });
+
+            return {
+                hour: parseInt(parts.hour || '0', 10),
+                minute: parseInt(parts.minute || '0', 10),
+                second: parseInt(parts.second || '0', 10),
+                day: parts.weekday || '-',
+                date: `${parts.day || '--'} ${parts.month || '---'} ${parts.year || '----'}`
+            };
+        }
+
+        function populateTimezoneDropdown() {
+            const select = document.getElementById('saudiTimezoneSelect');
+            if (!select || select.dataset.populated === 'true') return;
+
+            const getOffsetLabel = (zone) => {
+                try {
+                    const parts = new Intl.DateTimeFormat('en-US', {
+                        timeZone: zone,
+                        timeZoneName: 'shortOffset',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }).formatToParts(new Date());
+                    return parts.find(p => p.type === 'timeZoneName')?.value || '';
+                } catch (e) {
+                    return '';
+                }
+            };
+
+            const optionHtml = SUPPORTED_TIMEZONES.map(zone => {
+                const offsetLabel = getOffsetLabel(zone);
+                const cleanZone = zone.replace(/_/g, ' ');
+                return `<option value="${zone}" ${zone === DEFAULT_SAUDI_TIMEZONE ? 'selected' : ''}>${offsetLabel ? offsetLabel + ' - ' : ''}${cleanZone}</option>`;
+            }).join('');
+
+            select.innerHTML = optionHtml;
+            select.dataset.populated = 'true';
+        }
+
         // ========== UPDATE ALL CLOCKS ==========
         function updateAllClocks() {
             const jakarta = getTimeForZone(TIMEZONES.jakarta);
@@ -3647,11 +3742,11 @@ function update3DClock() {
             document.getElementById('singaporeDate').textContent = singaporeInfo.date;
             document.getElementById('singaporeDay').textContent = singaporeInfo.day;
 
-            const saudi = getTimeForZone(TIMEZONES.saudi);
-            document.getElementById('saudiTime').textContent = formatDateTime(saudi);
-            const saudiInfo = formatDate(saudi);
-            document.getElementById('saudiDate').textContent = saudiInfo.date;
-            document.getElementById('saudiDay').textContent = saudiInfo.day;
+            const saudiZone = document.getElementById('saudiTimezoneSelect')?.value || DEFAULT_SAUDI_TIMEZONE;
+            const saudi = getTimezoneParts(saudiZone);
+            document.getElementById('saudiTime').textContent = `${String(saudi.hour).padStart(2, '0')}:${String(saudi.minute).padStart(2, '0')}:${String(saudi.second).padStart(2, '0')}`;
+            document.getElementById('saudiDate').textContent = saudi.date;
+            document.getElementById('saudiDay').textContent = saudi.day;
 
             const hourDeg = (singapore.getHours() % 12) * 30 + singapore.getMinutes() * 0.5;
             const minuteDeg = singapore.getMinutes() * 6 + singapore.getSeconds() * 0.1;
@@ -3809,6 +3904,7 @@ function update3DClock() {
 
         // ========== INIT ==========
         initAnalogClock();
+        populateTimezoneDropdown();
         updateAllClocks();
         setInterval(updateAllClocks, 1000);
     </script>
