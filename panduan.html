@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📘 Panduan Lengkap Graph.html — Interactive Guide</title>
@@ -137,6 +138,27 @@
   }
   .compare-demo .vs { font-size: 20px; font-weight: 800; color: var(--accent); }
 </style>
+
+<style>
+@media (max-width: 768px) {
+    #secretCommand {
+        width: 80%; /* Lebar input di HP */
+        left: 50%;
+        transform: translateX(-50%);
+        top: 60px; /* Posisikan lebih rendah agar tidak tabrakan dengan status bar */
+        margin-top: 10px;
+    }
+    #closeSecretBtn {
+        top: 60px; /* Sejajar dengan input */
+        left: calc(50% + 40% + 5px); /* Sesuaikan posisi tombol di samping input */
+        transform: translateX(0);
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    /* Anda bisa menambahkan lebih banyak CSS di sini untuk elemen lain */
+}
+</style>
+
 </head>
 <body>
 
