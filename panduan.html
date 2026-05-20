@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📘 Panduan Lengkap Graph.html — Interactive Guide</title>
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #fff; --text: #2c3e50; --primary: #1e3a5f;
+    --accent: #e94560; --success: #2e7d32; --warning: #f9a825; --info: #1565c0;
+    --shadow: rgba(0,0,0,0.08); --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7;
+    display: flex; min-height: 100vh;
+  }
+  /* Sidebar */
+  .sidebar {
+    width: 280px; background: var(--primary); color: #fff;
+    padding: 24px; position: fixed; height: 100vh; overflow-y: auto;
+    z-index: 100; transition: transform .3s;
+  }
+  .sidebar h1 { font-size: 20px; margin-bottom: 6px; }
+  .sidebar .version { font-size: 12px; opacity: .7; margin-bottom: 24px; }
+  .nav-item {
+    display: block; padding: 12px 14px; border-radius: 10px;
+    color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+    margin-bottom: 6px; transition: .2s; cursor: pointer;
+  }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,.15); }
+  .nav-item i { margin-right: 10px; font-style: normal; }
+  .sidebar-footer { margin-top: 40px; font-size: 11px; opacity: .6; }
+  /* Main */
+  .main {
+    margin-left: 280px; flex: 1; padding: 30px 40px; max-width: 1000px;
+  }
+  .section { display: none; animation: fadeIn .4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(12px);} to {opacity:1; transform: none;} }
+  .card {
+    background: var(--card); border-radius: var(--radius); padding: 28px;
+    box-shadow: 0 4px 16px var(--shadow); margin-bottom: 24px;
+  }
+  .card h2 { color: var(--primary); font-size: 22px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .card h3 { color: var(--primary); font-size: 17px; margin: 20px 0 10px; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    margin-right: 6px; margin-bottom: 6px;
+  }
+  .badge-red { background: #ffebee; color: #c62828; }
+  .badge-green { background: #e8f5e9; color: var(--success); }
+  .badge-blue { background: #e3f2fd; color: var(--info); }
+  .badge-orange { background: #fff3e0; color: #e65100; }
+  .badge-purple { background: #f3e5f5; color: #6a1b9a; }
+  .command-box {
+    background: #1a1a2e; color: #0f0; font-family: 'Courier New', monospace;
+    padding: 14px 18px; border-radius: 10px; border-left: 4px solid var(--accent);
+    margin: 14px 0; font-size: 14px; position: relative;
+  }
+  .command-box::before { content: "▶ "; color: var(--accent); }
+  .command-label {
+    position: absolute; top: -10px; right: 12px; background: var(--accent);
+    color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700;
+  }
+  .step {
+    display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start;
+  }
+  .step-num {
+    min-width: 36px; height: 36px; border-radius: 50%; background: var(--primary);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px; flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content strong { color: var(--primary); }
+  .tip {
+    background: #e8f5e9; border-left: 4px solid var(--success); padding: 14px 18px;
+    border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 14px;
+  }
+  .tip::before { content: "💡 "; }
+  .warning {
+    background: #fff3e0; border-left: 4px solid var(--warning); padding: 14px 18px;
+    border-radius: 0 10px 10px 0; margin: 16px 0; font-size: 14px;
+  }
+  .warning::before { content: "⚠️ "; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }
+  th { background: var(--primary); color: #fff; font-weight: 600; }
+  tr:nth-child(even) { background: #f8fafc; }
+  .kbd {
+    background: #eee; border: 1px solid #ccc; border-radius: 4px;
+    padding: 2px 6px; font-family: monospace; font-size: 13px;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--primary), #2c4f7c);
+    color: #fff; padding: 40px; border-radius: var(--radius); margin-bottom: 28px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 32px; margin-bottom: 10px; }
+  .hero p { font-size: 16px; opacity: .9; max-width: 600px; margin: 0 auto; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 20px; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  .menu-btn {
+    display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+    background: var(--primary); color: #fff; border: none; padding: 10px 14px;
+    border-radius: 8px; font-size: 18px; cursor: pointer;
+  }
+  @media(max-width: 900px) { .menu-btn { display: block; } }
+  .highlight { background: #fffde7; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+  .demo-area {
+    background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px;
+    padding: 24px; text-align: center; margin: 16px 0;
+  }
+  .secret-flow {
+    display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 20px 0;
+  }
+  .secret-flow .box {
+    background: var(--card); border: 2px solid var(--primary); padding: 14px 20px;
+    border-radius: 12px; font-weight: 700; font-size: 14px; text-align: center;
+    min-width: 120px;
+  }
+  .secret-flow .arrow { font-size: 24px; color: var(--primary); }
+  .compare-demo {
+    display: flex; gap: 12px; align-items: center; justify-content: center; margin: 16px 0; flex-wrap: wrap;
+  }
+  .compare-demo .curr-box {
+    width: 80px; height: 80px; border-radius: 16px; display: flex; align-items: center;
+    justify-content: center; font-weight: 800; font-size: 18px; color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  }
+  .compare-demo .vs { font-size: 20px; font-weight: 800; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<button class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <h1>📘 Panduan Graph</h1>
+  <div class="version">v2026.05.20 — Complete Guide</div>
+  <a class="nav-item active" onclick="showSection('intro', this)"><i>🏠</i> Pengenalan</a>
+  <a class="nav-item" onclick="showSection('secret-menu', this)"><i>🔐</i> Secret Menu & 7x Tap</a>
+  <a class="nav-item" onclick="showSection('commands', this)"><i>⌨️</i> 4 Command Rahasia</a>
+  <a class="nav-item" onclick="showSection('clock', this)"><i>🕐</i> Jam, Alarm & Cuaca</a>
+  <a class="nav-item" onclick="showSection('kurs', this)"><i>💱</i> Tabel & Grafik Kurs</a>
+  <a class="nav-item" onclick="showSection('compare', this)"><i>📊</i> Perbandingan Kurs</a>
+  <a class="nav-item" onclick="showSection('saham', this)"><i>📈</i> Saham BMRI & BBCA</a>
+  <a class="nav-item" onclick="showSection('tools', this)"><i>🛠️</i> Tools Lanjutan</a>
+  <a class="nav-item" onclick="showSection('tips', this)"><i>🎯</i> Tips & Troubleshoot</a>
+  <div class="sidebar-footer">
+    Dibuat khusus untuk user<br>
+    graph.html manual updater<br>
+    ❤️ Brother Kimi
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>📘 Panduan Lengkap Graph.html</h1>
+    <p>Panduan interaktif untuk menguasai semua fitur dashboard kurs & saham BCA — dari command rahasia hingga analisis multi-mata uang.</p>
+  </div>
+
+  <!-- SECTION: INTRO -->
+  <div id="intro" class="section active">
+    <div class="card">
+      <h2>🏠 Selamat Datang</h2>
+      <p><strong>Graph.html</strong> adalah dashboard HTML mandiri (standalone) untuk memantau pergerakan <strong>kurs valas BCA</strong> dan <strong>harga saham BMRI & BBCA</strong>. Semua data di-hardcode langsung di file, sehingga tidak perlu backend atau internet untuk melihat historis.</p>
+      <div class="tip">File ini berjalan 100% di browser kamu. Cukup buka file <code>graph.html</code> di Chrome/Edge/Firefox.</div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ Peta Fitur Utama</h2>
+      <div class="grid-2">
+        <div>
+          <span class="badge badge-blue">Kurs</span>
+          <span class="badge badge-green">Saham</span>
+          <span class="badge badge-red">Secret</span>
+          <span class="badge badge-orange">Tools</span>
+          <ul style="margin-top:12px; padding-left:20px;">
+            <li>Tabel kurs lengkap (Buy & Sell)</li>
+            <li>Grafik individual 6 mata uang</li>
+            <li>Spread analysis & volatility</li>
+            <li>Google Finance style comparison</li>
+            <li>Filter rentang tanggal dinamis</li>
+          </ul>
+        </div>
+        <div>
+          <span class="badge badge-purple">Advanced</span>
+          <span class="badge badge-blue">Export</span>
+          <ul style="margin-top:12px; padding-left:20px;">
+            <li>Correlation Matrix (korelasi mata uang vs saham)</li>
+            <li>Dynamic Zoom & Pan pada grafik</li>
+            <li>Price Alert Simulator (garis target)</li>
+            <li>Best & Worst Performer ranking</li>
+            <li>Export CSV & PNG grafik</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: SECRET MENU -->
+  <div id="secret-menu" class="section">
+    <div class="card">
+      <h2>🔐 Cara Membuka Secret Menu</h2>
+      <p>Secret Menu adalah pintu masuk ke fitur rahasia: <strong>update data manual</strong>, <strong>download HTML baru</strong>, dan <strong>mode Non-BCA</strong>.</p>
+      
+      <h3>🫵 Metode 1: Tap Layar 7x Cepat</h3>
+      <div class="secret-flow">
+        <div class="box">Tap 1</div><div class="arrow">→</div>
+        <div class="box">Tap 2</div><div class="arrow">→</div>
+        <div class="box">Tap 3</div><div class="arrow">→</div>
+        <div class="box">...</div><div class="arrow">→</div>
+        <div class="box" style="border-color:var(--accent); color:var(--accent);">Tap 7</div>
+      </div>
+      <div class="tip">Lakukan 7 kali klik/tap di area kosong mana saja pada halaman dalam jeda kurang dari 1,5 detik antar-tap. Akan muncul notifikasi "🔒 SECRET MODE ACTIVE!" dan kotak command muncul di bagian atas tengah layar.</div>
+
+      <h3>🫵 Metode 2: Klik Tombol Close (jika sudah pernah aktif)</h3>
+      <p>Jika kotak command sudah pernah muncul dan kamu menutupnya dengan tombol <span class="kbd">X CLOSE</span>, kamu bisa memunculkannya kembali dengan cara yang sama: <strong>tap layar 7x cepat</strong>.</p>
+
+      <div class="warning">Jangan tap pada tombol <span class="kbd">X CLOSE</span> atau kotak input command itu sendiri — karena tap di situ tidak akan dihitung oleh sistem secret counter.</div>
+    </div>
+
+    <div class="card">
+      <h2>📦 Apa yang Muncul?</h2>
+      <p>Setelah Secret Mode aktif, akan muncul:</p>
+      <table>
+        <tr><th>Elemen</th><th>Fungsi</th></tr>
+        <tr><td><span class="kbd">Kotak Command</span></td><td>Input teks di tengah atas layar untuk mengetik perintah rahasia</td></tr>
+        <tr><td><span class="kbd">X CLOSE</span></td><td>Menyembunyikan kotak command (bisa dipanggil ulang dengan tap 7x)</td></tr>
+        <tr><td><span class="kbd">🔴 MISI RAHASIA Panel</span></td><td>Panel samping kanan untuk form input data manual (muncul setelah ketik CSV)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION: 4 COMMANDS -->
+  <div id="commands" class="section">
+    <div class="card">
+      <h2>⌨️ 4 Command Rahasia</h2>
+      <p>Ketik salah satu perintah berikut di <strong>kotak command</strong> (tanpa tanda kutip), lalu tekan <span class="kbd">Enter</span>.</p>
+    </div>
+
+    <!-- COMMAND 1 -->
+    <div class="card">
+      <h2><span class="badge badge-red">#1</span> CSV — Update Data Manual</h2>
+      <div class="command-box">
+        <span class="command-label">KETIK</span>
+        CSV
+      </div>
+      <p>Perintah ini membuka <strong>form input data</strong> di panel samping kanan. Gunakan untuk menambahkan data kurs & saham terbaru secara manual.</p>
+      
+      <div class="step"><div class="step-num">1</div><div class="step-content">Ketik <strong>CSV</strong> di kotak command → tekan Enter.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Panel kanan terbuka. Isi <strong>Tanggal & Jam</strong> (format: <code>DD/MM HH:MM</code>, contoh: <code>21/05 14:30</code>).</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Masukkan harga <strong>Buy</strong> & <strong>Sell</strong> untuk USD, SGD, AUD, JPY, EUR, CHF.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">(Opsional) Masukkan harga saham <strong>BMRI</strong> & <strong>BBCA</strong> Open/Close jika hari kerja (Sen–Jumat).</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content">Klik tombol <span class="kbd">💾 SIMPAN DATA</span> atau <span class="kbd">🔄 SIMPAN & REFRESH</span>.</div></div>
+
+      <div class="tip">Gunakan "SIMPAN & REFRESH" agar data langsung diproses dan grafik otomatis diperbarui tanpa perlu ketik REFRESH lagi.</div>
+      <div class="warning">⚠️ <strong>PENTING:</strong> Jangan pernah mengedit langsung array data di dalam kode HTML (bagian <code>globalDates</code>, <code>globalCurrencyData</code>, dll.) karena risiko corrupt encoding. Selalu gunakan form CSV ini untuk menambah data baru.</div>
+    </div>
+
+    <!-- COMMAND 2 -->
+    <div class="card">
+      <h2><span class="badge badge-green">#2</span> REFRESH — Render Ulang Semua Grafik</h2>
+      <div class="command-box">
+        <span class="command-label">KETIK</span>
+        REFRESH
+      </div>
+      <p>Setelah menyimpan data via CSV, ketik perintah ini untuk <strong>memperbarui semua tabel dan grafik</strong> dengan data yang baru saja diinput.</p>
+      <div class="tip">REFRESH akan memanggil fungsi <code>rebuildAllTablesAndCharts()</code> yang merender ulang: tabel utama, tabel spread, grafik individu, grafik perbandingan, statistik, correlation matrix, dan alert simulator.</div>
+    </div>
+
+    <!-- COMMAND 3 -->
+    <div class="card">
+      <h2><span class="badge badge-blue">#3</span> HTML — Download File HTML Baru</h2>
+      <div class="command-box">
+        <span class="command-label">KETIK</span>
+        HTML
+      </div>
+      <p>Perintah ini akan <strong>mengunduh file HTML baru</strong> yang sudah berisi data terbaru (termasuk yang baru kamu input via CSV). File hasil download bisa langsung dibuka atau di-host di GitHub Pages.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Pastikan data sudah diinput dan di-refresh.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Ketik <strong>HTML</strong> → Enter.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Browser akan otomatis mendownload file bernama <code>graph-YYYY-MM-DD-HHMMSS.html</code>.</div></div>
+      <div class="tip">Gunakan ini sebagai backup harian. File yang didownload adalah snapshot lengkap dari state saat ini, termasuk semua data historis.</div>
+    </div>
+
+    <!-- COMMAND 4 -->
+    <div class="card">
+      <h2><span class="badge badge-purple">#4</span> NONBCA — Lihat Kurs 12 Mata Uang (Real-time API)</h2>
+      <div class="command-box">
+        <span class="command-label">KETIK</span>
+        NONBCA
+      </div>
+      <p>Mode ini akan <strong>membersihkan layar</strong> dan memuat dashboard kurs alternatif yang menampilkan <strong>12 mata uang vs IDR</strong> menggunakan data real-time dari API Frankfurter.</p>
+      
+      <h3>12 Mata Uang yang Tersedia:</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin:12px 0;">
+        <span class="badge badge-blue">USD</span><span class="badge badge-red">SGD</span>
+        <span class="badge badge-green">JPY</span><span class="badge badge-orange">AUD</span>
+        <span class="badge badge-purple">CHF</span><span class="badge badge-blue">EUR</span>
+        <span class="badge badge-green">HKD</span><span class="badge badge-red">CNY</span>
+        <span class="badge badge-orange">GBP</span><span class="badge badge-purple">KRW</span>
+        <span class="badge badge-blue">MYR</span><span class="badge badge-green">NZD</span>
+      </div>
+
+      <div class="step"><div class="step-num">1</div><div class="step-content">Ketik <strong>NONBCA</strong> → Enter.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Layar akan berubah menjadi dashboard baru dengan tampilan seperti Google Finance.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Pilih rentang tanggal (Mulai & Akhir) → klik <span class="kbd">Terapkan</span>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Pilih mode grafik: <strong>Nominal (IDR)</strong> atau <strong>Perubahan % (Indexed = 100 awal)</strong>.</div></div>
+
+      <div class="tip">Mode "Perubahan %" sangat cocok untuk melihat mata uang mana yang paling melemah/menguat relatif terhadap IDR dalam periode tertentu.</div>
+      <div class="warning">Mode NONBCA memerlukan koneksi internet karena mengambil data dari API Frankfurter. Jika offline, tampilan akan kosong.</div>
+    </div>
+  </div>
+
+  <!-- SECTION: CLOCK -->
+  <div id="clock" class="section">
+    <div class="card">
+      <h2>🕐 Triple Clock Dashboard</h2>
+      <p>Di bagian atas halaman terdapat <strong>3 jam digital + 1 analog</strong> untuk memantau waktu di zona penting:</p>
+      <table>
+        <tr><th>Zona Waktu</th><th>Fungsi</th><th>Fitur Extra</th></tr>
+        <tr><td><strong>🇮🇩 Jakarta (WIB)</strong></td><td>Waktu Indonesia</td><td>Alarm + Countdown</td></tr>
+        <tr><td><strong>🇸🇬 Singapore (SGT)</strong></td><td>Waktu pasar Asia</td><td>Jam Analog 3D</td></tr>
+        <tr><td><strong>🇸🇦 Arab Saudi (AST)</strong></td><td>Waktu pasar Timur Tengah</td><td>Cuaca (Geo-lokasi)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>⏰ Cara Set Alarm</h2>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Isi jam (<span class="kbd">HH</span>) dan menit (<span class="kbd">MM</span>) di kolom Alarm.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Klik <span class="kbd">Set</span>. Status berubah menjadi "✓ AKTIF".</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Ketika waktu tiba, overlay alarm merah besar akan muncul dengan suara beep.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Klik <span class="kbd">🔕 STOP</span> untuk menghentikan alarm.</div></div>
+      <div class="warning">Alarm berbasis waktu Jakarta (WIB). Pastikan browser tidak di-mute agar suara terdengar.</div>
+    </div>
+
+    <div class="card">
+      <h2>⏱️ Countdown Timer</h2>
+      <p>Masukkan jumlah <strong>detik</strong> di kolom Countdown → klik <span class="kbd">Mulai</span>. Berguna untuk timer trading atau reminder.</p>
+    </div>
+
+    <div class="card">
+      <h2>🌤️ Weather (Cuaca)</h2>
+      <p>Klik tombol <span class="kbd">📍 Lokasi</span> untuk mendeteksi lokasi kamu via browser dan menampilkan suhu serta kondisi cuaca real-time dari Open-Meteo API.</p>
+    </div>
+  </div>
+
+  <!-- SECTION: KURS -->
+  <div id="kurs" class="section">
+    <div class="card">
+      <h2>💱 Tabel Kurs Utama</h2>
+      <p>Tabel pertama menampilkan <strong>seluruh data historis</strong> 6 mata uang (USD, SGD, AUD, JPY, EUR, CHF) dengan kolom Buy & Sell. Data diurutkan dari awal periode (19 April 2025) hingga terbaru.</p>
+      <div class="tip">Scroll horizontal jika tabel terlalu lebar di layar mobile. Tabel ini otomatis diperbarui saat kamu menambah data via CSV.</div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Tabel Spread & Filter Tanggal</h2>
+      <p>Section ini menampilkan <strong>selisih harga jual dan beli (Spread)</strong> untuk analisis likuiditas dan margin BCA.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Pilih <strong>Dari Tanggal</strong> dan <strong>s/d Tanggal</strong> di dropdown.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Tabel otomatis memfilter hanya data di rentang tersebut.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Klik <span class="kbd">🔄 Reset 30 Hari</span> untuk kembali ke default 30 hari terakhir.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Klik <span class="kbd">📥 Export CSV</span> untuk mengunduh data spread dalam format CSV.</div></div>
+      <div class="tip">Spread tinggi (warna merah pada kolom) menandakan volatilitas besar atau likuiditas rendah pada mata uang tersebut.</div>
+    </div>
+
+    <div class="card">
+      <h2>📉 Grafik Individual Mata Uang</h2>
+      <p>Terdapat <strong>6 grafik</strong> terpisah untuk masing-masing mata uang. Masing-masing menampilkan garis <span style="color:#2e7d32; font-weight:700;">Buy (Hijau)</span> dan <span style="color:#c62828; font-weight:700;">Sell (Merah)</span>.</p>
+      <ul style="padding-left:20px; margin-top:10px;">
+        <li><strong>USD/IDR</strong> — Biru tua</li>
+        <li><strong>SGD/IDR</strong> — Merah</li>
+        <li><strong>AUD/IDR</strong> — Kuning/oranye</li>
+        <li><strong>JPY/IDR</strong> — Hijau</li>
+        <li><strong>EUR/IDR</strong> — Ungu</li>
+        <li><strong>CHF/IDR</strong> — Oranye tua</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION: PERBANDINGAN -->
+  <div id="compare" class="section">
+    <div class="card">
+      <h2>📊 Google Finance Style Compare — Kurs</h2>
+      <p>Fitur ini menampilkan <strong>perubahan persentase (%)</strong> dari titik awal (base 0%), persis seperti tampilan Google Finance. Sangat cocok untuk melihat mata uang mana yang paling melemah/menguat relatif terhadap Rupiah.</p>
+      
+      <h3>Mode Beli vs Jual</h3>
+      <p>Gunakan tombol toggle <span class="kbd">Beli</span> / <span class="kbd">Jual</span> untuk beralih antara harga beli atau harga jual sebagai dasar perhitungan.</p>
+      
+      <h3>Filter Rentang (Range)</h3>
+      <p>Ada dua versi grafik Google Finance Style:</p>
+      <ul style="padding-left:20px;">
+        <li><strong>Full Period</strong> — Menggunakan seluruh data historis yang tersedia.</li>
+        <li><strong>Filter Range</strong> — Menggunakan rentang tanggal yang kamu pilih di filter Spread Table.</li>
+      </ul>
+      <div class="tip">Jika garis naik ke atas, artinya IDR melemah terhadap mata uang tersebut (butuh lebih banyak Rupiah untuk membeli 1 unit valas).</div>
+    </div>
+
+    <div class="card">
+      <h2>🔍 Cara Membandingkan Hanya 2 Mata Uang (Misal: AUD vs JPY)</h2>
+      <p>Secara default semua 6 mata uang ditampilkan. Untuk fokus pada perbandingan spesifik:</p>
+      
+      <div class="step"><div class="step-num">1</div><div class="step-content">Lihat grafik <strong>Google Finance Style Compare — Kurs (Filter Range)</strong> atau <strong>(Full)</strong>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Klik legend (nama mata uang)</strong> di atas grafik untuk hide/show garis.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Klik sekali pada legend <span class="highlight">USD</span>, <span class="highlight">SGD</span>, <span class="highlight">EUR</span>, <span class="highlight">CHF</span> untuk menyembunyikannya.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Biarkan hanya <span class="highlight">AUD</span> dan <span class="highlight">JPY</span> yang aktif. Sekarang grafik hanya menampilkan perbandingan kedua mata uang tersebut!</div></div>
+
+      <div class="compare-demo">
+        <div class="curr-box" style="background:#f9a825;">AUD</div>
+        <div class="vs">VS</div>
+        <div class="curr-box" style="background:#2e7d32;">JPY</div>
+      </div>
+
+      <div class="tip">💡 Trik: Klik legend lagi untuk mengembalikan garis yang tersembunyi. Ini berlaku untuk SEMUA grafik Chart.js di halaman (individual, compare, maupun alert).</div>
+      <div class="warning">Fitur hide/show legend adalah bawaan Chart.js. Jika legend tidak merespons klik, coba klik tepat pada teks nama mata uang (bukan garis warnanya).</div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Normalized Multi-Mata Uang</h2>
+      <p>Grafik <strong>Perbandingan Multi-Mata Uang — Harga Beli (Normalized)</strong> dan <strong>Harga Jual</strong> menggunakan base 100. Ini memudahkan perbandingan karena semua mata uang dimulai dari titik yang sama meski nilai absolutnya berbeda (misal: USD 16.000 vs JPY 100).</p>
+    </div>
+  </div>
+
+  <!-- SECTION: SAHAM -->
+  <div id="saham" class="section">
+    <div class="card">
+      <h2>📈 Saham BMRI & BBCA</h2>
+      <p>Dashboard juga memantau 2 saham blue-chip:</p>
+      <div class="grid-2">
+        <div style="border-left:4px solid #1e3a5f; padding-left:16px;">
+          <h3 style="color:#1e3a5f;">BMRI (Bank Mandiri)</h3>
+          <p>Grafik Close (solid biru) dan Open (dash biru). Data hanya tersedia hari kerja (Sen–Jumat).</p>
+        </div>
+        <div style="border-left:4px solid #e67e22; padding-left:16px;">
+          <h3 style="color:#e67e22;">BBCA (BCA)</h3>
+          <p>Grafik Close (solid oranye) dan Open (dash oranye). Data hanya tersedia hari kerja (Sen–Jumat).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Filter Tabel & Grafik Saham</h2>
+      <p>Sama seperti filter kurs, kamu bisa memilih rentang tanggal khusus untuk saham:</p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Pilih <strong>Dari Tanggal</strong> & <strong>s/d Tanggal</strong> di section Saham.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Baris tabel berwarna <span style="color:#2e7d32; font-weight:700;">hijau</span> = Close > Open (naik), <span style="color:#c62828; font-weight:700;">merah</span> = Close < Open (turun).</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Grafik otomatis menyesuaikan dengan rentang yang dipilih.</div></div>
+      <div class="tip">Tombol <span class="kbd">📥 Export CSV</span> juga tersedia untuk data saham.</div>
+    </div>
+
+    <div class="card">
+      <h2>📈 Google Finance Style — Saham</h2>
+      <p>Lihat perubahan persentase saham BMRI vs BBCA dari titik awal periode. Toggle antara mode <span class="kbd">Close</span> dan <span class="kbd">Open</span>.</p>
+    </div>
+  </div>
+
+  <!-- SECTION: TOOLS -->
+  <div id="tools" class="section">
+    <div class="card">
+      <h2>🏆 Best & Worst Performer</h2>
+      <p>Ranking otomatis yang menunjukkan mata uang/saham dengan performa terbaik dan terburuk sejak tanggal base yang kamu pilih.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Pilih <strong>Base Tanggal</strong> di dropdown.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Klik <span class="kbd">Update Ranking</span>.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Card hijau (#1) = Winner. Card merah (terakhir) = Loser.</div></div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Volatility Gauge</h2>
+      <p>Grafik spread (selisih Sell-Buy) semua mata uang dalam satu canvas. Spread lebar = volatilitas tinggi / risiko likuiditas.</p>
+      <div class="tip">Statistik di bawah grafik menampilkan rata-rata, tertinggi, dan terendah spread per mata uang.</div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Correlation Matrix</h2>
+      <p>Matriks korelasi Pearson antara <strong>6 mata uang (harga beli)</strong> vs <strong>4 data saham</strong> (BMRI Close/Open, BBCA Close/Open).</p>
+      <table>
+        <tr><th>Nilai r</th><th>Arti</th></tr>
+        <tr><td><span style="color:#2e7d32; font-weight:700;">+1.0</span></td><td>Bergerak sangat searah</td></tr>
+        <tr><td><span style="color:#c62828; font-weight:700;">-1.0</span></td><td>Bergerak berlawanan</td></tr>
+        <tr><td>0</td><td>Tidak ada hubungan linear</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>🔔 Price Alert Simulator</h2>
+      <p>Masukkan target harga untuk memunculkan <strong>garis merah horizontal</strong> di grafik sebagai visual marker.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-content">Isi target di kolom: USD, SGD, AUD, BMRI, BBCA.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Klik <span class="kbd">Apply Alerts</span>.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Garis merah putus-putus akan muncul di grafik Alert.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Klik <span class="kbd">Clear</span> untuk menghapus semua garis alert.</div></div>
+    </div>
+
+    <div class="card">
+      <h2>🔍 Dynamic Base & Zoom</h2>
+      <p>Grafik interaktif dengan fitur <strong>zoom scroll</strong> dan <strong>drag pan</strong>:</p>
+      <ul style="padding-left:20px;">
+        <li><strong>Scroll mouse</strong> → Zoom in/out pada sumbu X (waktu).</li>
+        <li><strong>Drag klik-kiri</strong> → Geser (pan) ke kiri/kanan.</li>
+        <li><strong>Reset Zoom</strong> → Klik tombol reset untuk kembali ke tampilan awal.</li>
+        <li><strong>Export Grafik</strong> → Download gambar PNG dari grafik yang sedang ditampilkan.</li>
+      </ul>
+      <div class="tip">Tooltip menampilkan harga asli + persentase perubahan relatif terhadap base tanggal yang kamu pilih.</div>
+    </div>
+
+    <div class="card">
+      <h2>🌙 Dark Mode</h2>
+      <p>Klik tombol <span class="kbd">🌙 Dark Mode</span> di pojok kanan atas untuk beralih ke tema gelap. Klik lagi untuk kembali ke Light Mode.</p>
+    </div>
+  </div>
+
+  <!-- SECTION: TIPS -->
+  <div id="tips" class="section">
+    <div class="card">
+      <h2>🎯 Tips Produktivitas</h2>
+      <div class="tip"><strong>Rutin backup:</strong> Setiap kali selesai update data harian, ketik command <span class="kbd">HTML</span> untuk download file terbaru sebagai cadangan.</div>
+      <div class="tip"><strong>Update sore hari:</strong> Data kurs BCA biasanya stabil setelah pukul 14:00 WIB. Input data di waktu tersebut untuk konsistensi.</div>
+      <div class="tip"><strong>Gunakan NONBCA untuk cross-check:</strong> Bandingkan data manual BCA kamu dengan data API Frankfurter untuk memastikan tidak ada typo saat input.</div>
+      <div class="tip"><strong>Perbandingan AUD vs JPY:</strong> Gunakan grafik Google Finance Style, lalu klik legend mata uang lain untuk hide. Ini lebih bersih daripada melihat 6 garis sekaligus.</div>
+    </div>
+
+    <div class="card">
+      <h2>🛠️ Troubleshooting</h2>
+      <table>
+        <tr><th>Masalah</th><th>Solusi</th></tr>
+        <tr><td>Grafik tidak muncul setelah CSV</td><td>Pastikan tekan <span class="kbd">SIMPAN & REFRESH</span>, atau ketik <span class="kbd">REFRESH</span> di command box.</td></tr>
+        <tr><td>Secret mode tidak aktif setelah 7 tap</td><td>Pastikan jeda antar tap kurang dari 1,5 detik. Hindari mengeklik tombol atau link saat men-tap.</td></tr>
+        <tr><td>Data saham tidak tersedia akhir pekan</td><td>Normal. Pasar saham tutup Sabtu-Minggu. Biarkan kolom saham kosong saat input CSV di hari libur.</td></tr>
+        <tr><td>NONBCA blank / tidak load</td><td>Pastikan koneksi internet aktif. Mode NONBCA membutuhkan fetch API ke frankfurter.dev.</td></tr>
+        <tr><td>File HTML hasil download corrupt</td><td>Jangan edit file hasil download dengan text editor biasa yang bisa merusak encoding. Langsung buka di browser.</td></tr>
+        <tr><td>Alarm tidak bersuara</td><td>Browser mungkin memblokir audio autoplay. Klik mana saja di halaman sekali untuk mengaktifkan AudioContext sebelum alarm tiba.</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="text-align:center; background: linear-gradient(135deg, #1e3a5f, #2c4f7c); color:#fff;">
+      <h2 style="color:#fff;">🎉 Selamat Menguasai Graph.html!</h2>
+      <p style="opacity:.9; margin:12px 0;">Semoga panduan ini memudahkan update harian dan analisis kurs & saham kamu.</p>
+      <p style="font-size:14px; opacity:.7;">❤️ Dibuat dengan cermat oleh Brother Kimi</p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  function showSection(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if(el) el.classList.add('active');
+    // Close sidebar on mobile after click
+    if(window.innerWidth <= 900) {
+      document.querySelector('.sidebar').classList.remove('open');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
