@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Grafik Pergerakan Nilai Tukar & Saham</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js">
-    </script>	
-    <style>
-        :root {
+ <head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8"/>
+  <title>
+   Grafik Pergerakan Nilai Tukar &amp; Saham
+  </title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js">
+  </script>
+  <style>
+   :root {
             --bg: #f4f6f9;
             --card-bg: #fff;
             --text: #2c3e50;
@@ -509,10 +512,9 @@
         #secretCommand.visible {
             display: block;
         }
-    </style>
-
-    <style>
-#tripleClockTop {
+  </style>
+  <style>
+   #tripleClockTop {
     width: 100%;
     padding: 10px 15px 18px;
 }
@@ -815,216 +817,499 @@
 @media (max-width: 1000px) {#tripleClockTop .clock-wrapper {flex-direction: column;
                 gap: 20px;}#tripleClockTop .clock-box {min-width: 100%;}#tripleClockTop .digital-time {font-size: 42px;}#tripleClockTop .analog-clock {width: 220px;
                 height: 220px;}}
-    </style>
-</head>
-<body>
+  </style>
+  <style>
+   /* General responsive styles */
+body { margin: 0; padding: 0; }
+img, canvas {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Helps prevent extra space below images/canvases */
+}
 
-    <!-- ===== SECRET COMMAND INPUT ===== -->
-    <input type="text" id="secretCommand" placeholder="Ketik: CSV / REFRESH / HTML" class="visible" />
-
-    <!-- ===== DARK MODE BUTTON ===== -->
-    <div class="theme-toggle">
-        <button onclick="toggleDarkMode()" id="themeBtn">🌙 Dark Mode</button>
+/* Responsive tables */
+@media screen and (max-width: 768px) {
+    .responsive-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* For iOS smooth scrolling */
+    }
+}
+  </style>
+ </head>
+ <body>
+  <!-- ===== SECRET COMMAND INPUT ===== -->
+  <input class="visible" id="secretCommand" placeholder="Ketik: CSV / REFRESH / HTML / NONBCA / player" type="text"/>
+  <button id="closeSecretBtn" onclick="document.getElementById('secretCommand').style.display='none'; this.style.display='none';" style="position: fixed; top: 10px; left: calc(50% + 160px); z-index: 10002; padding: 7px 12px; background-color: #e94560; color: white; border: 2px solid white; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; font-family: 'Courier New', monospace; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">X CLOSE</button>
+  <!-- ===== DARK MODE BUTTON ===== -->
+  <div class="theme-toggle">
+   <button id="themeBtn" onclick="toggleDarkMode()">
+    🌙 Dark Mode
+   </button>
+  </div>
+  <!-- ===== SECRET PANEL ===== -->
+  <div id="secretPanel">
+   <button class="close-btn" onclick="closeSecretPanel()">
+    ×
+   </button>
+   <h3>
+    🔴 MISI RAHASIA 🔴
+   </h3>
+   <div id="secretFormContent">
+    <p class="info-text">
+     Ketik
+     <strong>
+      CSV
+     </strong>
+     di command box untuk membuka form input data baru.
+    </p>
+    <p class="info-text">
+     Ketik
+     <strong>
+      REFRESH
+     </strong>
+     untuk memproses data &amp; update grafik.
+    </p>
+    <p class="info-text">
+     Ketik
+     <strong>
+      HTML
+     </strong>
+     untuk download file HTML baru.
+    </p>
+    <p class="info-text" style="color:#63b3ed;">
+     Ketik
+     <strong>
+      NONBCA
+     </strong>
+     untuk membersihkan layar lalu memuat mode nonbca.
+    </p>
+   </div>
+   <div id="csvForm" style="display:none;">
+    <label>
+     📅 Tanggal &amp; Jam (format: DD/MM HH:MM)
+    </label>
+    <input id="inputTanggal" placeholder="contoh: 16/05 14:30" type="text"/>
+    <label>
+     💵 USD Buy
+    </label>
+    <input id="inputUsdBuy" step="any" type="number"/>
+    <label>
+     💵 USD Sell
+    </label>
+    <input id="inputUsdSell" step="any" type="number"/>
+    <label>
+     🇸🇬 SGD Buy
+    </label>
+    <input id="inputSgdBuy" step="any" type="number"/>
+    <label>
+     🇸🇬 SGD Sell
+    </label>
+    <input id="inputSgdSell" step="any" type="number"/>
+    <label>
+     🇦🇺 AUD Buy
+    </label>
+    <input id="inputAudBuy" step="any" type="number"/>
+    <label>
+     🇦🇺 AUD Sell
+    </label>
+    <input id="inputAudSell" step="any" type="number"/>
+    <label>
+     🇯🇵 JPY Buy
+    </label>
+    <input id="inputJpyBuy" step="any" type="number"/>
+    <label>
+     🇯🇵 JPY Sell
+    </label>
+    <input id="inputJpySell" step="any" type="number"/>
+    <label>
+     🇪🇺 EUR Buy
+    </label>
+    <input id="inputEurBuy" step="any" type="number"/>
+    <label>
+     🇪🇺 EUR Sell
+    </label>
+    <input id="inputEurSell" step="any" type="number"/>
+    <label>
+     🇨🇭 CHF Buy
+    </label>
+    <input id="inputChfBuy" step="any" type="number"/>
+    <label>
+     🇨🇭 CHF Sell
+    </label>
+    <input id="inputChfSell" step="any" type="number"/>
+    <hr style="border-color:#e94560;margin:10px 0;"/>
+    <p class="info-text" style="color:#ff6b81;">
+     📊 Saham (opsional, hanya hari kerja Sen-Jumat)
+    </p>
+    <label>
+     📈 BMRI Open
+    </label>
+    <input id="inputBmriOpen" step="any" type="number"/>
+    <label>
+     📈 BMRI Close
+    </label>
+    <input id="inputBmriClose" step="any" type="number"/>
+    <label>
+     📈 BBCA Open
+    </label>
+    <input id="inputBbcaOpen" step="any" type="number"/>
+    <label>
+     📈 BBCA Close
+    </label>
+    <input id="inputBbcaClose" step="any" type="number"/>
+    <button class="btn-execute" onclick="processCSVData()">
+     💾 SIMPAN DATA
+    </button>
+    <button class="btn-execute" onclick="processAndRefresh()" style="background:#0f3460;margin-top:5px;">
+     🔄 SIMPAN &amp; REFRESH
+    </button>
+   </div>
+  </div>
+  <div id="tripleClockTop">
+   <div class="clock-wrapper">
+    <!-- ========== KIRI: JAKARTA (WIB) + ALARM + COUNTDOWN ========== -->
+    <div class="clock-box">
+     <div class="timezone-label">
+      🇮🇩 Jakarta (WIB)
+     </div>
+     <div class="digital-time" id="jakartaTime">
+      00:00:00
+     </div>
+     <div class="date-display" id="jakartaDate">
+      -- --- ----
+     </div>
+     <div class="day-display" id="jakartaDay">
+      LOADING...
+     </div>
+     <!-- Alarm Section -->
+     <div class="feature-section">
+      <div class="section-title">
+       ⏰ Alarm
+      </div>
+      <div class="time-display" id="alarmDisplay">
+       --:--
+      </div>
+      <div class="status-text" id="alarmStatus">
+       Tidak Aktif
+      </div>
+      <div class="input-group">
+       <input id="alarmHour" maxlength="2" placeholder="HH" type="text" value="07"/>
+       <span style="color: #fff; font-size: 20px; align-self: center;">
+        :
+       </span>
+       <input id="alarmMinute" maxlength="2" placeholder="MM" type="text" value="00"/>
+      </div>
+      <div class="btn-group">
+       <button class="btn btn-set" onclick="setAlarm()">
+        Set
+       </button>
+       <button class="btn btn-cancel" onclick="cancelAlarm()">
+        Batal
+       </button>
+      </div>
+     </div>
+     <!-- Countdown Section -->
+     <div class="feature-section">
+      <div class="section-title">
+       ⏱️ Countdown
+      </div>
+      <div class="time-display" id="countdownDisplay">
+       00:00:00
+      </div>
+      <div class="input-group">
+       <input id="countdownSeconds" min="1" placeholder="Detik" type="number" value="300"/>
+      </div>
+      <div class="btn-group">
+       <button class="btn btn-set" onclick="startCountdown()">
+        Mulai
+       </button>
+       <button class="btn btn-cancel" onclick="stopCountdown()">
+        Stop
+       </button>
+      </div>
+     </div>
     </div>
-
-    <!-- ===== SECRET PANEL ===== -->
-    <div id="secretPanel">
-        <button class="close-btn" onclick="closeSecretPanel()">×</button>
-        <h3>🔴 MISI RAHASIA 🔴</h3>
-        <div id="secretFormContent">
-            <p class="info-text">Ketik <strong>CSV</strong> di command box untuk membuka form input data baru.</p>
-            <p class="info-text">Ketik <strong>REFRESH</strong> untuk memproses data & update grafik.</p>
-            <p class="info-text">Ketik <strong>HTML</strong> untuk download file HTML baru.</p>
-        </div>
-        <div id="csvForm" style="display:none;">
-            <label>📅 Tanggal & Jam (format: DD/MM HH:MM)</label>
-            <input type="text" id="inputTanggal" placeholder="contoh: 16/05 14:30" />
-            
-            <label>💵 USD Buy</label><input type="number" id="inputUsdBuy" step="any" />
-            <label>💵 USD Sell</label><input type="number" id="inputUsdSell" step="any" />
-            
-            <label>🇸🇬 SGD Buy</label><input type="number" id="inputSgdBuy" step="any" />
-            <label>🇸🇬 SGD Sell</label><input type="number" id="inputSgdSell" step="any" />
-            
-            <label>🇦🇺 AUD Buy</label><input type="number" id="inputAudBuy" step="any" />
-            <label>🇦🇺 AUD Sell</label><input type="number" id="inputAudSell" step="any" />
-            
-            <label>🇯🇵 JPY Buy</label><input type="number" id="inputJpyBuy" step="any" />
-            <label>🇯🇵 JPY Sell</label><input type="number" id="inputJpySell" step="any" />
-            
-            <label>🇪🇺 EUR Buy</label><input type="number" id="inputEurBuy" step="any" />
-            <label>🇪🇺 EUR Sell</label><input type="number" id="inputEurSell" step="any" />
-            
-            <label>🇨🇭 CHF Buy</label><input type="number" id="inputChfBuy" step="any" />
-            <label>🇨🇭 CHF Sell</label><input type="number" id="inputChfSell" step="any" />
-            
-            <hr style="border-color:#e94560;margin:10px 0;">
-            <p class="info-text" style="color:#ff6b81;">📊 Saham (opsional, hanya hari kerja Sen-Jumat)</p>
-            
-            <label>📈 BMRI Open</label><input type="number" id="inputBmriOpen" step="any" />
-            <label>📈 BMRI Close</label><input type="number" id="inputBmriClose" step="any" />
-            
-            <label>📈 BBCA Open</label><input type="number" id="inputBbcaOpen" step="any" />
-            <label>📈 BBCA Close</label><input type="number" id="inputBbcaClose" step="any" />
-            
-            <button class="btn-execute" onclick="processCSVData()">💾 SIMPAN DATA</button>
-            <button class="btn-execute" style="background:#0f3460;margin-top:5px;" onclick="processAndRefresh()">🔄 SIMPAN & REFRESH</button>
-        </div>
+    <!-- ========== TENGAH: SINGAPORE (SGT) + ANALOG CLOCK ========== -->
+    <div class="analog-clock-container">
+     <div class="analog-clock" id="analogClock">
+      <div class="clock-face" id="clockFace">
+      </div>
+      <div class="clock-hand hour-hand" id="hourHand">
+      </div>
+      <div class="clock-hand minute-hand" id="minuteHand">
+      </div>
+      <div class="clock-hand second-hand" id="secondHand">
+      </div>
+      <div class="clock-center">
+      </div>
+     </div>
+     <div style="margin-top: 15px; text-align: center;">
+      <div class="timezone-label">
+       🇸🇬 Singapore (SGT)
+      </div>
+      <div class="digital-time" id="singaporeTime">
+       00:00:00
+      </div>
+      <div class="date-display" id="singaporeDate">
+       -- --- ----
+      </div>
+      <div class="day-display" id="singaporeDay">
+       LOADING...
+      </div>
+     </div>
     </div>
-
-<div id="tripleClockTop">
-<div class="clock-wrapper">
-        <!-- ========== KIRI: JAKARTA (WIB) + ALARM + COUNTDOWN ========== -->
-        <div class="clock-box">
-            <div class="timezone-label">🇮🇩 Jakarta (WIB)</div>
-            <div class="digital-time" id="jakartaTime">00:00:00</div>
-            <div class="date-display" id="jakartaDate">-- --- ----</div>
-            <div class="day-display" id="jakartaDay">LOADING...</div>
-            
-            <!-- Alarm Section -->
-            <div class="feature-section">
-                <div class="section-title">⏰ Alarm</div>
-                <div class="time-display" id="alarmDisplay">--:--</div>
-                <div class="status-text" id="alarmStatus">Tidak Aktif</div>
-                
-                <div class="input-group">
-                    <input type="text" id="alarmHour" maxlength="2" placeholder="HH" value="07">
-                    <span style="color: #fff; font-size: 20px; align-self: center;">:</span>
-                    <input type="text" id="alarmMinute" maxlength="2" placeholder="MM" value="00">
-                </div>
-                
-                <div class="btn-group">
-                    <button class="btn btn-set" onclick="setAlarm()">Set</button>
-                    <button class="btn btn-cancel" onclick="cancelAlarm()">Batal</button>
-                </div>
-            </div>
-
-            <!-- Countdown Section -->
-            <div class="feature-section">
-                <div class="section-title">⏱️ Countdown</div>
-                <div class="time-display" id="countdownDisplay">00:00:00</div>
-                
-                <div class="input-group">
-                    <input type="number" id="countdownSeconds" placeholder="Detik" min="1" value="300">
-                </div>
-                
-                <div class="btn-group">
-                    <button class="btn btn-set" onclick="startCountdown()">Mulai</button>
-                    <button class="btn btn-cancel" onclick="stopCountdown()">Stop</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== TENGAH: SINGAPORE (SGT) + ANALOG CLOCK ========== -->
-        <div class="analog-clock-container">
-            <div class="analog-clock" id="analogClock">
-                <div class="clock-face" id="clockFace"></div>
-                <div class="clock-hand hour-hand" id="hourHand"></div>
-                <div class="clock-hand minute-hand" id="minuteHand"></div>
-                <div class="clock-hand second-hand" id="secondHand"></div>
-                <div class="clock-center"></div>
-            </div>
-            
-            <div style="margin-top: 15px; text-align: center;">
-                <div class="timezone-label">🇸🇬 Singapore (SGT)</div>
-                <div class="digital-time" id="singaporeTime">00:00:00</div>
-                <div class="date-display" id="singaporeDate">-- --- ----</div>
-                <div class="day-display" id="singaporeDay">LOADING...</div>
-            </div>
-        </div>
-
-        <!-- ========== KANAN: ARAB SAUDI (AST) + WEATHER ========== -->
-        <div class="clock-box">
-            <div class="timezone-label">🇸🇦 Arab Saudi (AST)</div>
-            <select id="saudiTimezoneSelect" class="timezone-select" onchange="updateAllClocks()"></select>
-            <div class="digital-time" id="saudiTime">00:00:00</div>
-            <div class="date-display" id="saudiDate">-- --- ----</div>
-            <div class="day-display" id="saudiDay">LOADING...</div>
-            
-            <!-- Weather Section -->
-            <div class="feature-section">
-                <div class="section-title">🌤️ Weather</div>
-                <div class="weather-icon" id="weatherIcon">🌍</div>
-                <div class="weather-temp" id="weatherTemp">--°C</div>
-                <div class="weather-details" id="weatherDetails">
-                    Klik tombol untuk deteksi
-                </div>
-                <button class="btn-geo" onclick="detectLocation()">📍 Lokasi</button>
-            </div>
-        </div>
+    <!-- ========== KANAN: ARAB SAUDI (AST) + WEATHER ========== -->
+    <div class="clock-box">
+     <div class="timezone-label">
+      🇸🇦 Arab Saudi (AST)
+     </div>
+     <select class="timezone-select" id="saudiTimezoneSelect" onchange="updateAllClocks()">
+     </select>
+     <div class="digital-time" id="saudiTime">
+      00:00:00
+     </div>
+     <div class="date-display" id="saudiDate">
+      -- --- ----
+     </div>
+     <div class="day-display" id="saudiDay">
+      LOADING...
+     </div>
+     <!-- Weather Section -->
+     <div class="feature-section">
+      <div class="section-title">
+       🌤️ Weather
+      </div>
+      <div class="weather-icon" id="weatherIcon">
+       🌍
+      </div>
+      <div class="weather-temp" id="weatherTemp">
+       --°C
+      </div>
+      <div class="weather-details" id="weatherDetails">
+       Klik tombol untuk deteksi
+      </div>
+      <button class="btn-geo" onclick="detectLocation()">
+       📍 Lokasi
+      </button>
+     </div>
     </div>
-
-    <!-- Alarm Overlay -->
-    <div class="overlay-bg" id="overlayBg"></div>
-    <div class="alarm-overlay" id="alarmOverlay">
-        <div class="alarm-message">⏰ ALARM!</div>
-        <div class="alarm-time-show" id="alarmRingTime">--:--</div>
-        <button class="btn-stop" onclick="stopAlarm()">🔕 STOP</button>
+   </div>
+   <!-- Alarm Overlay -->
+   <div class="overlay-bg" id="overlayBg">
+   </div>
+   <div class="alarm-overlay" id="alarmOverlay">
+    <div class="alarm-message">
+     ⏰ ALARM!
     </div>
-</div>
-
-    <div class="container">
-        <h1>Grafik Pergerakan Nilai Tukar & Saham</h1>
-        <h2>Periode 19 April 2025 s/d 18 Mei 2026</h2>
-
-        <!-- ==================== TABEL UTAMA (SEMUA DATA KURS) ==================== -->
-        <div class="table-wrapper">
-            <table id="summaryTable">
-                <thead>
-                    <tr>
-                        <th>Tanggal & Waktu</th>
-                        <th>USD Buy</th><th>USD Sell</th>
-                        <th>SGD Buy</th><th>SGD Sell</th>
-                        <th>AUD Buy</th><th>AUD Sell</th>
-                        <th>JPY Buy</th><th>JPY Sell</th>
-                        <th>EUR Buy</th><th>EUR Sell</th>
-                        <th>CHF Buy</th><th>CHF Sell</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-
-        <!-- ==================== TABEL SPREAD KURS DENGAN RANGE TANGGAL ==================== -->
-        <div class="section-title">📊 Perbandingan Spread Harga Beli & Jual BCA</div>
-        <div class="chart-note">
-            * Pilih rentang tanggal untuk melihat tabel spread.
-            Default menampilkan <strong>30 hari terakhir</strong>.
-        </div>
-        <div class="range-group">
-            <label><strong>Dari Tanggal:</strong></label>
-            <select id="spreadStartDate" onchange="updateSpreadTable()"></select>
-            <label><strong>s/d Tanggal:</strong></label>
-            <select id="spreadEndDate" onchange="updateSpreadTable()"></select>
-            <button class="export-btn" onclick="resetSpreadRange()">🔄 Reset 30 Hari</button>
-            <button class="export-btn" onclick="exportSpreadTableCSV()">📥 Export CSV</button>
-        </div>
-        <div class="table-wrapper">
-            <table id="spreadTable">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Tanggal</th>
-                        <th colspan="4" style="background:#1565c0;">USD</th>
-                        <th colspan="4" style="background:#c62828;">SGD</th>
-                        <th colspan="4" style="background:#f9a825;color:#000;">AUD</th>
-                        <th colspan="4" style="background:#2e7d32;">JPY</th>
-                        <th colspan="4" style="background:#6a1b9a;">EUR</th>
-                        <th colspan="4" style="background:#e65100;">CHF</th>
-                    </tr>
-                    <tr>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                        <th>Buy</th><th>Sell</th><th>Spread</th><th>Spread%</th>
-                    </tr>
-                </thead>
-                <tbody id="spreadTableBody"></tbody>
-            </table>
-        </div>
-		
-		<!-- 🔥 GOOGLE FINANCE STYLE CHART 🔥 
+    <div class="alarm-time-show" id="alarmRingTime">
+     --:--
+    </div>
+    <button class="btn-stop" onclick="stopAlarm()">
+     🔕 STOP
+    </button>
+   </div>
+  </div>
+  <div class="container">
+   <h1>
+    Grafik Pergerakan Nilai Tukar &amp; Saham
+   </h1>
+   <h2>
+    Periode 19 April 2025 s/d 20 Mei 2026
+   </h2>
+   <!-- ==================== TABEL UTAMA (SEMUA DATA KURS) ==================== -->
+   <div class="table-wrapper">
+    <div class_="responsive-table-container">
+     <table id="summaryTable">
+      <thead>
+       <tr>
+        <th>
+         Tanggal &amp; Waktu
+        </th>
+        <th>
+         USD Buy
+        </th>
+        <th>
+         USD Sell
+        </th>
+        <th>
+         SGD Buy
+        </th>
+        <th>
+         SGD Sell
+        </th>
+        <th>
+         AUD Buy
+        </th>
+        <th>
+         AUD Sell
+        </th>
+        <th>
+         JPY Buy
+        </th>
+        <th>
+         JPY Sell
+        </th>
+        <th>
+         EUR Buy
+        </th>
+        <th>
+         EUR Sell
+        </th>
+        <th>
+         CHF Buy
+        </th>
+        <th>
+         CHF Sell
+        </th>
+       </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <!-- ==================== TABEL SPREAD KURS DENGAN RANGE TANGGAL ==================== -->
+   <div class="section-title">
+    📊 Perbandingan Spread Harga Beli &amp; Jual BCA
+   </div>
+   <div class="chart-note">
+    * Pilih rentang tanggal untuk melihat tabel spread.
+            Default menampilkan
+    <strong>
+     30 hari terakhir
+    </strong>
+    .
+   </div>
+   <div class="range-group">
+    <label>
+     <strong>
+      Dari Tanggal:
+     </strong>
+    </label>
+    <select id="spreadStartDate" onchange="updateSpreadTable()">
+    </select>
+    <label>
+     <strong>
+      s/d Tanggal:
+     </strong>
+    </label>
+    <select id="spreadEndDate" onchange="updateSpreadTable()">
+    </select>
+    <button class="export-btn" onclick="resetSpreadRange()">
+     🔄 Reset 30 Hari
+    </button>
+    <button class="export-btn" onclick="exportSpreadTableCSV()">
+     📥 Export CSV
+    </button>
+   </div>
+   <div class="table-wrapper">
+    <div class_="responsive-table-container">
+     <table id="spreadTable">
+      <thead>
+       <tr>
+        <th rowspan="2">
+         Tanggal
+        </th>
+        <th colspan="4" style="background:#1565c0;">
+         USD
+        </th>
+        <th colspan="4" style="background:#c62828;">
+         SGD
+        </th>
+        <th colspan="4" style="background:#f9a825;color:#000;">
+         AUD
+        </th>
+        <th colspan="4" style="background:#2e7d32;">
+         JPY
+        </th>
+        <th colspan="4" style="background:#6a1b9a;">
+         EUR
+        </th>
+        <th colspan="4" style="background:#e65100;">
+         CHF
+        </th>
+       </tr>
+       <tr>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+        <th>
+         Buy
+        </th>
+        <th>
+         Sell
+        </th>
+        <th>
+         Spread
+        </th>
+        <th>
+         Spread%
+        </th>
+       </tr>
+      </thead>
+      <tbody id="spreadTableBody">
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <!-- 🔥 GOOGLE FINANCE STYLE CHART 🔥 
 <div style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
     <h3 style="text-align: center; color: #333; margin-bottom: 10px;">📈 Perbandingan Saham - Google Finance Style (%)</h3>
     <p style="text-align: center; font-size: 12px; color: #666; margin-bottom: 15px;">
@@ -1033,9 +1318,8 @@
     </p>
     <canvas id="chartGoogleFinance" height="120"></canvas>
 </div>-->
-
-<script>
-let financeChartInstance = null;
+   <script>
+    let financeChartInstance = null;
 
 function renderGoogleFinanceChart() {
     const table = document.getElementById('tabelSaham');
@@ -1126,225 +1410,430 @@ function renderGoogleFinanceChart() {
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(renderGoogleFinanceChart, 1000);
 });
-</script>
-<!-- 🔥 END CHART 🔥 -->
-		
-        <div class="stats-box spread-high-box" id="spreadHighInfo"></div>
-        <div class="stats-box spread-low-box" id="spreadLowInfo"></div>
-
-        <!-- Grafik Spread Kurs -->
-        <div class="section-title">📉 Grafik Selisih Spread (Sell - Buy)</div>
-        <div class="chart-note">* Spread = selisih harga jual BCA dikurangi harga beli BCA.</div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="spreadChart"></canvas></div>
-        </div>
-
-        <!-- ==================== GOOGLE FINANCE STYLE COMPARE — KURS (FILTER RANGE) ==================== -->
-        <div class="section-title">📈 Google Finance Style Compare — Kurs (Filter Range)</div>
-        <div class="chart-note">
-            * Perubahan (%) dari awal rentang tanggal terpilih. Naik = IDR melemah.
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="gfCurrencyRangeChart"></canvas></div>
-        </div>
-
-        <!-- ==================== TABEL & GRAFIK SAHAM DENGAN FILTER RANGE ==================== -->
-        <div class="section-title">📊 Tabel Harga Saham BMRI & BBCA (Filter Tanggal)</div>
-        <div class="chart-note">
-            * Pilih rentang tanggal untuk menampilkan tabel dan grafik saham.
-            Baris <span style="color:#2e7d32;font-weight:700;">hijau</span> = Close &gt; Open (naik),
-            <span style="color:#c62828;font-weight:700;">merah</span> = Close &lt; Open (turun).
-            <br><strong>* Harga saham hanya tersedia hari Senin-Jumat. Sabtu, Minggu & hari libur tidak ada data.</strong>
-        </div>
-        <div class="range-group">
-            <label><strong>Dari Tanggal:</strong></label>
-            <select id="stockStartDate" onchange="updateStockFilter()"></select>
-            <label><strong>s/d Tanggal:</strong></label>
-            <select id="stockEndDate" onchange="updateStockFilter()"></select>
-            <button class="export-btn" onclick="resetStockRange()">🔄 Reset Semua</button>
-            <button class="export-btn" onclick="exportStockTableCSV()">📥 Export CSV</button>
-        </div>
-        <div class="table-wrapper">
-            <table id="stockFilterTable">
-                <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>BMRI Open</th><th>BMRI Close</th><th>BMRI Spread</th><th>BMRI Spread%</th>
-                        <th>BBCA Open</th><th>BBCA Close</th><th>BBCA Spread</th><th>BBCA Spread%</th>
-                    </tr>
-                </thead>
-                <tbody id="stockFilterTableBody"></tbody>
-            </table>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="stockFilterChart"></canvas></div>
-        </div>
-
-        <!-- ==================== PERBANDINGAN SAHAM — GOOGLE FINANCE STYLE COMPARE ==================== -->
-        <div class="section-title">📈 Perbandingan Saham — Google Finance Style (Perubahan %)</div>
-        <div class="chart-note">
-            * Grafik perubahan persentase dari titik awal. Mengikuti format compare seperti grafik kurs.
-            <br><strong>* Hanya menampilkan data hari kerja (Senin-Jumat). Tidak ada gap/anjlok ke nol saat akhir pekan.</strong>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="stockCompareGFStyleChart"></canvas></div>
-        </div>
-
-        <!-- ==================== GRAFIK MATA UANG (Buy vs Sell) ==================== -->
-        <div class="section-title">💱 Nilai Tukar Mata Uang (Buy vs Sell)</div>
-        <div class="charts" id="currencyCharts">
-            <div class="chart-box"><canvas id="usdChart"></canvas></div>
-            <div class="chart-box"><canvas id="sgdChart"></canvas></div>
-            <div class="chart-box"><canvas id="audChart"></canvas></div>
-            <div class="chart-box"><canvas id="jpyChart"></canvas></div>
-            <div class="chart-box"><canvas id="eurChart"></canvas></div>
-            <div class="chart-box"><canvas id="chfChart"></canvas></div>
-        </div>
-
-        <!-- ==================== GRAFIK SAHAM ==================== -->
-        <div class="section-title">📊 Harga Saham BMRI & BBCA (Close vs Open)</div>
-        <div class="charts" id="stockCharts">
-            <div class="chart-box"><canvas id="bmriChart"></canvas></div>
-            <div class="chart-box"><canvas id="bbcaChart"></canvas></div>
-        </div>
-
-        <!-- ==================== NORMALIZED COMPARE — BELI & JUAL ==================== -->
-        <div class="section-title">📊 Perbandingan Multi-Mata Uang — Harga Beli (Normalized)</div>
-        <div class="chart-note">* Base 100 = harga awal. Naik = IDR melemah.</div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="compareBuyChart"></canvas></div>
-        </div>
-        <div class="section-title">📊 Perbandingan Multi-Mata Uang — Harga Jual (Normalized)</div>
-        <div class="chart-note">* Base 100 = harga awal.</div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="compareSellChart"></canvas></div>
-        </div>
-
-        <!-- ==================== PERBANDINGAN SAHAM ==================== -->
-        <div class="section-title">📈 Perbandingan Saham — Harga Close</div>
-        <div class="chart-note">* Support & Resistance periode penuh.</div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="compareStockCloseChart"></canvas></div>
-        </div>
-        <div class="section-title">📈 Perbandingan Saham — Harga Open</div>
-        <div class="chart-note">* Support & Resistance periode penuh.</div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="compareStockOpenChart"></canvas></div>
-        </div>
-
-        <!-- ==================== GOOGLE FINANCE STYLE — KURS (FULL) ==================== -->
-        <div class="section-title">📈 Google Finance Style Compare — Kurs</div>
-        <div class="toggle-group">
-            <button id="btn-curr-buy" class="active" onclick="switchCurrencyMode('buy')">Beli</button>
-            <button id="btn-curr-sell" onclick="switchCurrencyMode('sell')">Jual</button>
-        </div>
-        <div class="summary-cards" id="currencySummaryCards"></div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="gfCurrencyChart"></canvas></div>
-        </div>
-
-        <!-- ==================== GOOGLE FINANCE STYLE — SAHAM (FULL) ==================== -->
-        <div class="section-title">📈 Google Finance Style Compare — Saham</div>
-        <div class="toggle-group">
-            <button id="btn-stock-close" class="active" onclick="switchStockMode('close')">Close</button>
-            <button id="btn-stock-open" onclick="switchStockMode('open')">Open</button>
-        </div>
-        <div class="summary-cards" id="stockSummaryCards"></div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="gfStockChart"></canvas></div>
-        </div>
-
-        <hr>
-
-        <!-- ==================== BEST & WORST PERFORMER ==================== -->
-        <div class="section-title">🏆 Best & Worst Performer</div>
-        <div class="chart-note">* Diurutkan berdasarkan % perubahan sejak Base Date.</div>
-        <div class="range-group">
-            <label>Base Tanggal:</label>
-            <select id="perfBaseSelect"></select>
-            <button class="export-btn" onclick="updatePerformers()">Update Ranking</button>
-        </div>
-        <div class="performer-cards" id="performerCards"></div>
-
-        <!-- ==================== VOLATILITY GAUGE ==================== -->
-        <div class="section-title">📊 Volatility Gauge — Spread Buy vs Sell</div>
-        <div class="chart-note">
-            * Spread = Selisih harga jual - harga beli.
+   </script>
+   <!-- 🔥 END CHART 🔥 -->
+   <div class="stats-box spread-high-box" id="spreadHighInfo">
+   </div>
+   <div class="stats-box spread-low-box" id="spreadLowInfo">
+   </div>
+   <!-- Grafik Spread Kurs -->
+   <div class="section-title">
+    📉 Grafik Selisih Spread (Sell - Buy)
+   </div>
+   <div class="chart-note">
+    * Spread = selisih harga jual BCA dikurangi harga beli BCA.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="spreadChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== GOOGLE FINANCE STYLE COMPARE — KURS (FILTER RANGE) ==================== -->
+   <div class="section-title">
+    📈 Google Finance Style Compare — Kurs (Filter Range)
+   </div>
+   <div class="chart-note">
+    * Perubahan (%) dari awal rentang tanggal terpilih. Naik = IDR melemah.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="gfCurrencyRangeChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== TABEL & GRAFIK SAHAM DENGAN FILTER RANGE ==================== -->
+   <div class="section-title">
+    📊 Tabel Harga Saham BMRI &amp; BBCA (Filter Tanggal)
+   </div>
+   <div class="chart-note">
+    * Pilih rentang tanggal untuk menampilkan tabel dan grafik saham.
+            Baris
+    <span style="color:#2e7d32;font-weight:700;">
+     hijau
+    </span>
+    = Close &gt; Open (naik),
+    <span style="color:#c62828;font-weight:700;">
+     merah
+    </span>
+    = Close &lt; Open (turun).
+    <br/>
+    <strong>
+     * Harga saham hanya tersedia hari Senin-Jumat. Sabtu, Minggu &amp; hari libur tidak ada data.
+    </strong>
+   </div>
+   <div class="range-group">
+    <label>
+     <strong>
+      Dari Tanggal:
+     </strong>
+    </label>
+    <select id="stockStartDate" onchange="updateStockFilter()">
+    </select>
+    <label>
+     <strong>
+      s/d Tanggal:
+     </strong>
+    </label>
+    <select id="stockEndDate" onchange="updateStockFilter()">
+    </select>
+    <button class="export-btn" onclick="resetStockRange()">
+     🔄 Reset Semua
+    </button>
+    <button class="export-btn" onclick="exportStockTableCSV()">
+     📥 Export CSV
+    </button>
+   </div>
+   <div class="table-wrapper">
+    <div class_="responsive-table-container">
+     <table id="stockFilterTable">
+      <thead>
+       <tr>
+        <th>
+         Tanggal
+        </th>
+        <th>
+         BMRI Open
+        </th>
+        <th>
+         BMRI Close
+        </th>
+        <th>
+         BMRI Spread
+        </th>
+        <th>
+         BMRI Spread%
+        </th>
+        <th>
+         BBCA Open
+        </th>
+        <th>
+         BBCA Close
+        </th>
+        <th>
+         BBCA Spread
+        </th>
+        <th>
+         BBCA Spread%
+        </th>
+       </tr>
+      </thead>
+      <tbody id="stockFilterTableBody">
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="stockFilterChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== PERBANDINGAN SAHAM — GOOGLE FINANCE STYLE COMPARE ==================== -->
+   <div class="section-title">
+    📈 Perbandingan Saham — Google Finance Style (Perubahan %)
+   </div>
+   <div class="chart-note">
+    * Grafik perubahan persentase dari titik awal. Mengikuti format compare seperti grafik kurs.
+    <br/>
+    <strong>
+     * Hanya menampilkan data hari kerja (Senin-Jumat). Tidak ada gap/anjlok ke nol saat akhir pekan.
+    </strong>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="stockCompareGFStyleChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== GRAFIK MATA UANG (Buy vs Sell) ==================== -->
+   <div class="section-title">
+    💱 Nilai Tukar Mata Uang (Buy vs Sell)
+   </div>
+   <div class="charts" id="currencyCharts">
+    <div class="chart-box">
+     <canvas id="usdChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="sgdChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="audChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="jpyChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="eurChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="chfChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== GRAFIK SAHAM ==================== -->
+   <div class="section-title">
+    📊 Harga Saham BMRI &amp; BBCA (Close vs Open)
+   </div>
+   <div class="charts" id="stockCharts">
+    <div class="chart-box">
+     <canvas id="bmriChart">
+     </canvas>
+    </div>
+    <div class="chart-box">
+     <canvas id="bbcaChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== NORMALIZED COMPARE — BELI & JUAL ==================== -->
+   <div class="section-title">
+    📊 Perbandingan Multi-Mata Uang — Harga Beli (Normalized)
+   </div>
+   <div class="chart-note">
+    * Base 100 = harga awal. Naik = IDR melemah.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="compareBuyChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="section-title">
+    📊 Perbandingan Multi-Mata Uang — Harga Jual (Normalized)
+   </div>
+   <div class="chart-note">
+    * Base 100 = harga awal.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="compareSellChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== PERBANDINGAN SAHAM ==================== -->
+   <div class="section-title">
+    📈 Perbandingan Saham — Harga Close
+   </div>
+   <div class="chart-note">
+    * Support &amp; Resistance periode penuh.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="compareStockCloseChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="section-title">
+    📈 Perbandingan Saham — Harga Open
+   </div>
+   <div class="chart-note">
+    * Support &amp; Resistance periode penuh.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="compareStockOpenChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== GOOGLE FINANCE STYLE — KURS (FULL) ==================== -->
+   <div class="section-title">
+    📈 Google Finance Style Compare — Kurs
+   </div>
+   <div class="toggle-group">
+    <button class="active" id="btn-curr-buy" onclick="switchCurrencyMode('buy')">
+     Beli
+    </button>
+    <button id="btn-curr-sell" onclick="switchCurrencyMode('sell')">
+     Jual
+    </button>
+   </div>
+   <div class="summary-cards" id="currencySummaryCards">
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="gfCurrencyChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== GOOGLE FINANCE STYLE — SAHAM (FULL) ==================== -->
+   <div class="section-title">
+    📈 Google Finance Style Compare — Saham
+   </div>
+   <div class="toggle-group">
+    <button class="active" id="btn-stock-close" onclick="switchStockMode('close')">
+     Close
+    </button>
+    <button id="btn-stock-open" onclick="switchStockMode('open')">
+     Open
+    </button>
+   </div>
+   <div class="summary-cards" id="stockSummaryCards">
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="gfStockChart">
+     </canvas>
+    </div>
+   </div>
+   <hr/>
+   <!-- ==================== BEST & WORST PERFORMER ==================== -->
+   <div class="section-title">
+    🏆 Best &amp; Worst Performer
+   </div>
+   <div class="chart-note">
+    * Diurutkan berdasarkan % perubahan sejak Base Date.
+   </div>
+   <div class="range-group">
+    <label>
+     Base Tanggal:
+    </label>
+    <select id="perfBaseSelect">
+    </select>
+    <button class="export-btn" onclick="updatePerformers()">
+     Update Ranking
+    </button>
+   </div>
+   <div class="performer-cards" id="performerCards">
+   </div>
+   <!-- ==================== VOLATILITY GAUGE ==================== -->
+   <div class="section-title">
+    📊 Volatility Gauge — Spread Buy vs Sell
+   </div>
+   <div class="chart-note">
+    * Spread = Selisih harga jual - harga beli.
             Semakin lebar = semakin berisiko / kurang likuid.
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="volatilityChart"></canvas></div>
-        </div>
-        <div class="stats-box" id="volatilityStats"></div>
-
-        <!-- ==================== CORRELATION MATRIX ==================== -->
-        <div class="section-title">📊 Correlation Matrix — Mata Uang vs Saham</div>
-        <div class="chart-note">
-            * Korelasi Pearson: +1 = searah, -1 = berlawanan, 0 = tidak berkorelasi.
-        </div>
-        <div class="table-wrapper">
-            <table class="corr-table" id="corrTable"></table>
-        </div>
-
-        <!-- ==================== DYNAMIC STATS SUMMARY ==================== -->
-        <div class="section-title">📋 Dynamic Stats Summary</div>
-        <div class="chart-note">
-            * Ringkasan otomatis titik harga tertinggi & terendah yang pernah tercatat.
-        </div>
-        <div id="dynamicStatsContainer"></div>
-
-        <!-- ==================== PRICE ALERT SIMULATOR ==================== -->
-        <div class="section-title">🔔 Visual Price Alert Simulator</div>
-        <div class="chart-note">
-            * Masukkan target harga, lalu klik Apply.
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="volatilityChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="stats-box" id="volatilityStats">
+   </div>
+   <!-- ==================== CORRELATION MATRIX ==================== -->
+   <div class="section-title">
+    📊 Correlation Matrix — Mata Uang vs Saham
+   </div>
+   <div class="chart-note">
+    * Korelasi Pearson: +1 = searah, -1 = berlawanan, 0 = tidak berkorelasi.
+   </div>
+   <div class="table-wrapper">
+    <div class_="responsive-table-container">
+     <table class="corr-table" id="corrTable">
+     </table>
+    </div>
+   </div>
+   <!-- ==================== DYNAMIC STATS SUMMARY ==================== -->
+   <div class="section-title">
+    📋 Dynamic Stats Summary
+   </div>
+   <div class="chart-note">
+    * Ringkasan otomatis titik harga tertinggi &amp; terendah yang pernah tercatat.
+   </div>
+   <div id="dynamicStatsContainer">
+   </div>
+   <!-- ==================== PRICE ALERT SIMULATOR ==================== -->
+   <div class="section-title">
+    🔔 Visual Price Alert Simulator
+   </div>
+   <div class="chart-note">
+    * Masukkan target harga, lalu klik Apply.
             Garis merah akan muncul di grafik sebagai garis target.
-        </div>
-        <div class="alert-group">
-            <label>USD:</label> <input type="number" id="alertUSD" placeholder="17500">
-            <label>SGD:</label> <input type="number" id="alertSGD" placeholder="14000">
-            <label>AUD:</label> <input type="number" id="alertAUD" placeholder="13000">
-            <label>BMRI:</label> <input type="number" id="alertBMRI" placeholder="5000">
-            <label>BBCA:</label> <input type="number" id="alertBBCA" placeholder="7000">
-            <button class="export-btn" onclick="applyAlerts()">Apply Alerts</button>
-            <button class="export-btn" onclick="clearAlerts()">Clear</button>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="alertCurrencyChart"></canvas></div>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="alertStockChart"></canvas></div>
-        </div>
-
-        <!-- ==================== DYNAMIC BASE & ZOOM ==================== -->
-        <div class="section-title">🔍 Dynamic Base & Zoom</div>
-        <div class="chart-note">
-            * Pilih titik awal, scroll zoom, drag geser.
+   </div>
+   <div class="alert-group">
+    <label>
+     USD:
+    </label>
+    <input id="alertUSD" placeholder="17500" type="number"/>
+    <label>
+     SGD:
+    </label>
+    <input id="alertSGD" placeholder="14000" type="number"/>
+    <label>
+     AUD:
+    </label>
+    <input id="alertAUD" placeholder="13000" type="number"/>
+    <label>
+     BMRI:
+    </label>
+    <input id="alertBMRI" placeholder="5000" type="number"/>
+    <label>
+     BBCA:
+    </label>
+    <input id="alertBBCA" placeholder="7000" type="number"/>
+    <button class="export-btn" onclick="applyAlerts()">
+     Apply Alerts
+    </button>
+    <button class="export-btn" onclick="clearAlerts()">
+     Clear
+    </button>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="alertCurrencyChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="alertStockChart">
+     </canvas>
+    </div>
+   </div>
+   <!-- ==================== DYNAMIC BASE & ZOOM ==================== -->
+   <div class="section-title">
+    🔍 Dynamic Base &amp; Zoom
+   </div>
+   <div class="chart-note">
+    * Pilih titik awal, scroll zoom, drag geser.
             Tooltip tampil harga asli + % perubahan.
-        </div>
-        <div class="range-group">
-            <label>Base Tanggal:</label>
-            <select id="baseDateSelect" onchange="updateDynamicCharts()"></select>
-            <button id="resetZoomCurrency" class="export-btn">Reset Zoom</button>
-            <button class="export-btn" onclick="exportChart('dynamicCurrencyChart')">Export Grafik</button>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="dynamicCurrencyChart"></canvas></div>
-        </div>
-        <div class="range-group">
-            <button id="resetZoomStock" class="export-btn">Reset Zoom</button>
-            <button class="export-btn" onclick="exportChart('dynamicStockChart')">Export Grafik Saham</button>
-        </div>
-        <div class="charts">
-            <div class="chart-box full-width"><canvas id="dynamicStockChart"></canvas></div>
-        </div>
-
-        <div class="footer-note">
-            * Data nilai tukar & saham diperbarui hingga 18 Mei 2026 (sumber: Kurs BCA)
-        </div>
-    </div><!-- end .container -->
-
-    <script>
-        /* ============================================================
+   </div>
+   <div class="range-group">
+    <label>
+     Base Tanggal:
+    </label>
+    <select id="baseDateSelect" onchange="updateDynamicCharts()">
+    </select>
+    <button class="export-btn" id="resetZoomCurrency">
+     Reset Zoom
+    </button>
+    <button class="export-btn" onclick="exportChart('dynamicCurrencyChart')">
+     Export Grafik
+    </button>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="dynamicCurrencyChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="range-group">
+    <button class="export-btn" id="resetZoomStock">
+     Reset Zoom
+    </button>
+    <button class="export-btn" onclick="exportChart('dynamicStockChart')">
+     Export Grafik Saham
+    </button>
+   </div>
+   <div class="charts">
+    <div class="chart-box full-width">
+     <canvas id="dynamicStockChart">
+     </canvas>
+    </div>
+   </div>
+   <div class="footer-note">
+    * Data nilai tukar &amp; saham diperbarui hingga 20 Mei 2026 (sumber: Kurs BCA)
+   </div>
+  </div>
+  <!-- end .container -->
+  <script>
+   /* ============================================================
            DATA UTAMA
            ============================================================ */
 
@@ -1379,7 +1868,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "16/04 07:04", "18/04 07:01", "21/04 08:11", "27/04 21:08",
             "28/04 18:47", "01/05 22:57", "05/05 09:14", "06/05 22:16",
             "10/05 18:52", "11/05 18:52", "12/05 23:53", "13/05 21:59",
-            "14/05 23:17", "15/05 21:58", "18/05 23:37"
+            "14/05 23:17", "15/05 21:58", "18/05 23:37", "20/05 20:02"
         ];
 
         let globalCurrencyData = {
@@ -1399,7 +1888,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     16952, 16915, 16915, 16915, 16915, 16985, 16935, 16945,
                     16945, 16995, 17030, 16965, 17035, 17070, 17070, 17070,
                     17095, 17070, 17075, 17175, 17215, 17295, 17402, 17290,
-                    17330, 17350, 17445, 17445, 17445, 17445, 17625
+                    17330, 17350, 17445, 17445, 17445, 17445, 17625, 17630
                 ],
                 sell: [
                     16875, 16820, 16870, 16890, 16885, 16895, 16880, 16840,
@@ -1416,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     17022, 17085, 17085, 17105, 17105, 17085, 17015, 17055,
                     17055, 17065, 17130, 17045, 17135, 17170, 17170, 17170,
                     17175, 17180, 17155, 17255, 17295, 17395, 17422, 17420,
-                    17430, 17450, 17545, 17535, 17535, 17595, 17695
+                    17430, 17450, 17545, 17535, 17535, 17595, 17695, 17740
                 ]
             },
             sgd: {
@@ -1435,7 +1924,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     13240, 13225, 13194, 13161, 13172, 13164, 13134, 13109,
                     13091, 13160, 13206, 13233, 13294, 13313, 13341, 13350,
                     13373, 13365, 13426, 13404, 13381, 13519, 13620, 13548,
-                    13596, 13586, 13608, 13595, 13577, 13515, 13674
+                    13596, 13586, 13608, 13595, 13577, 13515, 13674, 13656
                 ],
                 sell: [
                     12879, 12919, 12896, 12877, 12865, 12860, 12872, 12842,
@@ -1452,7 +1941,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     13335, 13398, 13367, 13380, 13476, 13354, 13328, 13350,
                     13332, 13349, 13442, 13452, 13527, 13547, 13575, 13578,
                     13392, 13599, 13517, 13635, 13612, 13758, 13658, 13812,
-                    13836, 13826, 13904, 13884, 13865, 13862, 13945
+                    13836, 13826, 13904, 13884, 13865, 13862, 13945, 13960
                 ]
             },
             aud: {
@@ -1471,7 +1960,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     11949, 12003, 11954, 11774, 11700, 11707, 11655, 11617,
                     11583, 11677, 11763, 11840, 11923, 11923, 12020, 12069,
                     12156, 12134, 12234, 12235, 12205, 12383, 12442, 12404,
-                    12448, 12457, 12495, 12582, 12467, 12337, 12488
+                    12448, 12457, 12495, 12582, 12467, 12337, 12488, 12427
                 ],
                 sell: [
                     10775, 10835, 10799, 10820, 10827, 10768, 10790, 10813,
@@ -1488,7 +1977,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     12028, 12154, 12104, 12076, 12082, 11895, 11885, 11891,
                     11862, 11879, 12060, 12109, 12206, 12206, 12287, 12338,
                     12241, 12415, 12326, 12519, 12477, 12633, 12497, 12704,
-                    12741, 12745, 12829, 12857, 12801, 12731, 12803
+                    12741, 12745, 12829, 12857, 12801, 12731, 12803, 12767
                 ]
             },
             jpy: {
@@ -1507,7 +1996,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     106.28, 106.08, 105.81, 105.60, 105.56, 106.45, 106.13, 105.45,
                     105.38, 105.76, 105.89, 106.15, 106.13, 106.13, 106.38, 106.68,
                     106.80, 106.83, 107.36, 107.00, 106.91, 109.50, 110.60, 109.73,
-                    109.75, 109.56, 109.67, 109.46, 109.28, 109.83, 109.86
+                    109.75, 109.56, 109.67, 109.46, 109.28, 109.83, 109.86, 109.78
                 ],
                 sell: [
                     118.75, 119.48, 119.88, 118.97, 118.43, 118.33, 118.52, 117.79,
@@ -1524,7 +2013,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     107.22, 107.65, 107.37, 108.15, 109.06, 108.10, 107.88, 107.76,
                     107.69, 107.41, 108.22, 108.24, 108.37, 108.37, 108.63, 108.79,
                     108.94, 109.07, 108.00, 109.26, 109.08, 111.79, 110.90, 112.23,
-                    112.11, 111.92, 112.39, 112.11, 111.94, 111.89, 112.40
+                    112.11, 111.92, 112.39, 112.11, 111.94, 111.89, 112.40, 112.63
                 ]
             },
             eur: {
@@ -1543,7 +2032,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     19463, 19504, 19467, 19493, 19489, 19579, 19551, 19443,
                     19414, 19516, 19362, 19659, 19846, 19846, 19962, 20021,
                     20059, 19961, 20100, 20050, 19977, 20213, 20318, 20200,
-                    20302, 20304, 20324, 20264, 20213, 20120, 20375
+                    20302, 20304, 20324, 20264, 20213, 20120, 20375, 20277
                 ],
                 sell: [
                     19238, 19409, 19376, 19233, 19180, 19188, 19213, 19126,
@@ -1560,7 +2049,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     19552, 19710, 19672, 19846, 19957, 19855, 19849, 19803,
                     19774, 19789, 19993, 19997, 20199, 20199, 20319, 20353,
                     20391, 20327, 20234, 20396, 20329, 20572, 20377, 20582,
-                    20664, 20658, 20761, 20692, 20640, 20630, 20778
+                    20664, 20658, 20761, 20692, 20640, 20630, 20778, 20728
                 ]
             },
             chf: {
@@ -1579,7 +2068,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     21478, 21514, 21405, 21393, 21333, 21216, 21214, 21081,
                     21054, 21169, 21216, 21305, 21450, 21450, 21643, 21720,
                     21724, 21700, 21896, 21748, 21619, 22033, 22151, 22048,
-                    22173, 22147, 22164, 22113, 22099, 21987, 22270
+                    22173, 22147, 22164, 22113, 22099, 21987, 22270, 22114
                 ],
                 sell: [
                     20695, 20922, 20760, 20537, 20419, 20431, 20460, 20306,
@@ -1596,13 +2085,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     21624, 21778, 21673, 21798, 21867, 21539, 21544, 21490,
                     21474, 21493, 21615, 21680, 21849, 21849, 22063, 22105,
                     22127, 22106, 22064, 22162, 22011, 22472, 22255, 22489,
-                    22594, 22557, 22662, 22592, 22580, 22579, 22728
+                    22594, 22557, 22662, 22592, 22580, 22579, 22728, 22630
                 ]
             }
         };
 
         let globalBmriDates = [
-            "18/05", "13/05", "12/05", "11/05", "08/05", "07/05", "06/05",
+            "20/05", "19/05", "18/05", "13/05", "12/05", "11/05", "08/05", "07/05", "06/05",
             "05/05", "04/05", "30/04", "29/04", "28/04",
             "27/04", "24/04", "23/04", "21/04", "20/04",
             "17/04", "16/04", "15/04", "14/04", "13/04",
@@ -1613,7 +2102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBmriClose = [
-            4130, 4200, 4240, 4250, 4250, 4630, 4640,
+            4230, 4130, 4130, 4200, 4240, 4250, 4250, 4630, 4640,
             4510, 4490, 4420, 4390, 4430,
             4430, 4400, 4500, 4630, 4750,
             4700, 4620, 4620, 4640, 4650,
@@ -1624,7 +2113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBmriOpen = [
-            4170, 4230, 4230, 4270, 4300, 4650, 4570,
+            4150, 4130, 4170, 4230, 4230, 4270, 4300, 4650, 4570,
             4530, 4420, 4430, 4430, 4440,
             4420, 4500, 4630, 4760, 4700,
             4610, 4640, 4680, 4670, 4750,
@@ -1637,7 +2126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let globalBbcaDates = globalBmriDates;
 
         let globalBbcaClose = [
-            6125, 6100, 6100, 6125, 6150, 6175, 6225,
+            5975, 5950, 6125, 6100, 6100, 6125, 6150, 6175, 6225,
             5950, 5950, 5900, 5850, 5975,
             6000, 5975, 6050, 6425, 6450,
             6500, 6475, 6525, 6425, 6550,
@@ -1648,7 +2137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBbcaOpen = [
-            5950, 6125, 6125, 6125, 6225, 6225, 6000,
+            5975, 6050, 5950, 6125, 6125, 6125, 6225, 6225, 6000,
             5950, 5900, 5800, 5950, 6000,
             6025, 6025, 6400, 6450, 6475,
             6475, 6450, 6575, 6500, 6775,
@@ -3412,6 +3901,69 @@ function update3DClock() {
             document.getElementById('secretCommand').classList.remove('visible');
         }
 
+        function resetGraphHpMemory() {
+            const probableStateKeys = [
+                'alarmActive', 'alarmGain', 'alarmInterval', 'alarmOscillator', 'alarmRinging', 'alarmTime',
+                'alertCurrencyChart', 'alertStockChart',
+                'bbcaBase', 'bbcaClose', 'bbcaCloseVal', 'bbcaData', 'bbcaDates', 'bbcaOpen', 'bbcaOpenVal',
+                'bmriBase', 'bmriClose', 'bmriCloseVal', 'bmriData', 'bmriDates', 'bmriOpen', 'bmriOpenVal',
+                'countdownActive', 'countdownInterval', 'countdownSeconds',
+                'currentAlerts', 'currentCurrencyMode', 'currentHour', 'currentMinute', 'currentStockMode',
+                'currencies', 'currencyColors', 'currencyData', 'chartConfigs',
+                'financeChartInstance', 'gfCurrencyRangeChartInstance', 'spreadChartInstance',
+                'globalBbcaClose', 'globalBbcaDates', 'globalBbcaOpen',
+                'globalBmriClose', 'globalBmriDates', 'globalBmriOpen',
+                'globalCurrencyData', 'globalDates',
+                'historicalData', 'mainChartInstance', 'stockChartInstance',
+                'selectedCurrency', 'selectedRange', 'selectedStockRange',
+                'spreadData', 'spreadLabels', 'tableData', 'timezoneData'
+            ];
+
+            probableStateKeys.forEach((key) => {
+                try {
+                    if (window[key] && typeof window[key].destroy === 'function') {
+                        window[key].destroy();
+                    } else if (Array.isArray(window[key])) {
+                        window[key].length = 0;
+                    } else if (window[key] && typeof window[key] === 'object') {
+                        for (const prop of Object.keys(window[key])) {
+                            try { delete window[key][prop]; } catch (_) {}
+                        }
+                    }
+                    window[key] = null;
+                } catch (_) {}
+            });
+
+            try { clearInterval(window.alarmInterval); } catch (_) {}
+            try { clearInterval(window.countdownInterval); } catch (_) {}
+            try { clearTimeout(window.alarmTimeout); } catch (_) {}
+        }
+
+        function getNonbcaHtml() {
+            const source = document.getElementById('nonbcaSource');
+            return source ? source.value : '';
+        }
+
+        function launchNonbcaMode() {
+            const html = getNonbcaHtml();
+            if (!html) {
+                alert('Sumber nonbca tidak ditemukan.');
+                return;
+            }
+
+            resetGraphHpMemory();
+            document.body.innerHTML = '';
+
+            const frame = document.createElement('iframe');
+            frame.id = 'nonbcaFrame';
+            frame.title = 'NONBCA Mode';
+            frame.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;border:0;background:#fff;';
+            frame.setAttribute('allowfullscreen', 'true');
+            frame.srcdoc = html;
+
+            document.body.appendChild(frame);
+        }
+
         // Command handler
         document.getElementById('secretCommand').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -3426,6 +3978,8 @@ function update3DClock() {
                     processRefreshOnly();
                 } else if (cmd === 'HTML') {
                     downloadFullHTML();
+                } else if (cmd === 'NONBCA') {
+                    launchNonbcaMode();
                 }
             }
         });
@@ -3519,10 +4073,9 @@ function update3DClock() {
         }
 
         initAll();
-    </script>
-
-    <script>
-// ========== AUDIO CONTEXT FOR ALARM SOUND ==========
+  </script>
+  <script>
+   // ========== AUDIO CONTEXT FOR ALARM SOUND ==========
         let audioContext = null;
         let alarmOscillator = null;
         let alarmGain = null;
@@ -3907,6 +4460,881 @@ function update3DClock() {
         populateTimezoneDropdown();
         updateAllClocks();
         setInterval(updateAllClocks, 1000);
-    </script>
+  </script>
+  <textarea id="nonbcaSource" style="display:none;"><!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Forex Compare | IDR vs 12 Mata Uang (Seperti Google Finance)</title>
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f7fc;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            padding: 24px 20px;
+            color: #1a2c3e;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            border: 1px solid #eef2f8;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 2px solid #eef2f8;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f5e8e, #2c4f7c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .date-panel {
+            background: #f8fafd;
+            border-radius: 48px;
+            padding: 12px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+        .date-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .date-input label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #4a627a;
+            text-transform: uppercase;
+        }
+        input[type="date"] {
+            padding: 10px 16px;
+            border-radius: 48px;
+            border: 1px solid #cbdde9;
+            background: white;
+            font-weight: 500;
+        }
+        button {
+            background: #1f6392;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #0e4a6f;
+            transform: scale(0.97);
+        }
+        .btn-reset {
+            background: #4b5563;
+        }
+        .chart-mode {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            background: #f0f4fa;
+            padding: 8px 16px;
+            border-radius: 48px;
+            width: fit-content;
+        }
+        .mode-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .mode-option input {
+            cursor: pointer;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .stat-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 14px 18px;
+            border: 1px solid #eef2f8;
+        }
+        .stat-item h4 {
+            font-size: 0.85rem;
+            color: #5b6e8c;
+            margin-bottom: 8px;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2c3e;
+        }
+        .stat-change {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .positive {
+            color: #0e7b32;
+            background: #e8f5e9;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 24px;
+        }
+        .negative {
+            color: #c62828;
+            background: #ffebee;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 24px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+        th {
+            background: #f1f5f9;
+            padding: 14px 12px;
+            text-align: right;
+            font-weight: 600;
+            color: #2c3e5c;
+        }
+        td {
+            padding: 12px 12px;
+            border-bottom: 1px solid #eef2f8;
+            text-align: right;
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+            font-weight: 600;
+            background: white;
+            position: sticky;
+            left: 0;
+        }
+        .heatmap-note {
+            background: #f9fafc;
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: #4a5b7a;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6c7e97;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+        .loader {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            gap: 12px;
+            align-items: center;
+        }
+        .legend-hint {
+            background: #eef2ff;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+        }
+    </style>
+
+    <!-- Bootstrap CSS for general responsiveness and utility classes -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General responsive rules for images, SVGs, and Plotly containers */
+        img, svg, .js-plotly-plot, .plotly, .modebar-container {
+            max-width: 100% !important;
+            height: auto !important;
+            display: block; /* Helps with centering and layout */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Specific styles for Plotly graph containers, if they have a fixed height */
+        .plotly-graph-container { /* If there's a div wrapping the plotly output */
+            width: 100%;
+            height: auto; /* Allow height to adjust */
+            min-height: 300px; /* Ensure a minimum height on small screens */
+        }
+
+        /* Responsive Table CSS */
+        table { /* Targeting all tables, adjust if specific class is needed */
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table th, table td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        table th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #333;
+        }
+
+        @media screen and (max-width: 768px) {
+            /* Hide table headers on small screens */
+            table thead {
+                display: none;
+            }
+            /* Make table rows and cells act like blocks */
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+            /* Add margin and styling to rows for better separation */
+            table tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                display: block;
+                border-radius: 5px;
+                background-color: #fff;
+            }
+            /* Position cell content and label */
+            table td {
+                text-align: right;
+                padding-left: 50%; /* Make space for the pseudo-element label */
+                position: relative;
+            }
+            /* Use data-label for pseudo-element (need to add data-label in HTML tables for this to work perfectly) */
+            table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: calc(50% - 10px);
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: #555;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-line"></i> IDR vs 12 Mata Uang (USD, SGD, JPY, AUD, CHF, EUR, HKD, CNY, GBP, KRW, MYR, NZD)</h2>
+            <div class="legend-hint"><i class="fas fa-mouse-pointer"></i> Klik legenda grafik untuk sembunyikan/tampilkan garis</div>
+        </div>
+
+        <div class="date-panel">
+            <div class="date-input">
+                <label>📅 Mulai</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="date-input">
+                <label>📅 Akhir</label>
+                <input type="date" id="endDate">
+            </div>
+            <button id="applyBtn"><i class="fas fa-chart-simple"></i> Terapkan</button>
+            <button id="resetBtn" class="btn-reset"><i class="fas fa-undo-alt"></i> Reset 30 Hari</button>
+        </div>
+
+        <!-- Mode grafik (Nominal vs Indexed) -->
+        <div class="chart-mode">
+            <label class="mode-option">
+                <input type="radio" name="chartMode" value="nominal" checked> 📊 Nominal (IDR)
+            </label>
+            <label class="mode-option">
+                <input type="radio" name="chartMode" value="indexed"> 📈 Perubahan % (Indexed = 100 awal) — seperti Google Finance
+            </label>
+        </div>
+
+        <!-- Grafik utama -->
+        <div id="mainChart" style="width:100%; height:500px;"></div>
+
+        <!-- Ringkasan perubahan (seperti Google Finance) -->
+        <div id="statsSummary" class="stats-grid">
+            <div class="loader">⏳ Memuat statistik...</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-table"></i> Data Historis Kurs (IDR per 1 unit valas)</h2>
+        </div>
+        <div class="table-wrapper">
+            <table id="ratesTable">
+                <thead id="tableHeader"><tr><th>Tanggal</th></tr></thead>
+                <tbody id="tableBody"><tr><td class="loader">Memuat data...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-border-all"></i> Matriks Korelasi (Heatmap) & Penjelasan</h2>
+        </div>
+        <div id="heatmapChart" style="width:100%; height:500px;"></div>
+        <div class="heatmap-note">
+            📊 <strong>Cara baca heatmap:</strong> 
+            <span style="background:#2166ac; color:white; padding:2px 8px; border-radius:12px;">+1 (biru)</span> = kedua mata uang bergerak sangat searah (naik/turun bersama).
+            <span style="background:#f4a582; color:black; padding:2px 8px; border-radius:12px;">-1 (merah)</span> = bergerak berlawanan.
+            <span style="background:#f7f7f7;">0 (putih)</span> = tidak ada hubungan linear.
+        </div>
+    </div>
+    <div class="footer">
+        ⚡ Data dari API Frankfurter (gratis, update harian). Mode "Perubahan %" menampilkan pergerakan relatif seperti Google Finance.
+    </div>
+</div>
+
+<script>
+    // ======================== KONFIGURASI 12 MATA UANG ========================
+    const currencies = [
+        { code: "USD", name: "USD/IDR" },
+        { code: "SGD", name: "SGD/IDR" },
+        { code: "JPY", name: "JPY/IDR" },
+        { code: "AUD", name: "AUD/IDR" },
+        { code: "CHF", name: "CHF/IDR" },
+        { code: "EUR", name: "EUR/IDR" },
+        { code: "HKD", name: "HKD/IDR" },
+        { code: "CNY", name: "CNY/IDR" },
+        { code: "GBP", name: "GBP/IDR" },
+        { code: "KRW", name: "KRW/IDR" },
+        { code: "MYR", name: "MYR/IDR" },
+        { code: "NZD", name: "NZD/IDR" }
+    ];
+
+    let historicalData = [];
+    let currentChartMode = "indexed"; // default indexed seperti Google Finance
+
+    // Helper formatting
+    const formatRp = (val) => {
+        if (val === undefined || val === null || isNaN(val)) return "N/A";
+        return "Rp " + Math.round(val).toLocaleString('id-ID');
+    };
+    const formatPct = (val) => {
+        if (val === undefined || isNaN(val)) return "0%";
+        return (val > 0 ? "+" : "") + val.toFixed(2) + "%";
+    };
+
+    // ======================== FETCH DATA DARI API FRANKFURTER.DEV ========================
+    async function fetchRates(startDate, endDate) {
+        const url = `https://api.frankfurter.dev/v1/${startDate}..${endDate}?base=USD`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const json = await response.json();
+            if (!json.rates) throw new Error("Data rates kosong");
+
+            const dates = Object.keys(json.rates).sort();
+            const result = [];
+            for (let dt of dates) {
+                const daily = json.rates[dt];
+                const idrRate = daily["IDR"];
+                if (!idrRate) continue;
+
+                const row = { tanggal: dt };
+                for (let curr of currencies) {
+                    if (curr.code === "USD") {
+                        row[curr.code] = idrRate;
+                    } else {
+                        const foreignPerUsd = daily[curr.code];
+                        if (foreignPerUsd && foreignPerUsd > 0) {
+                            row[curr.code] = idrRate / foreignPerUsd;
+                        } else {
+                            row[curr.code] = null;
+                        }
+                    }
+                }
+                result.push(row);
+            }
+            return result;
+        } catch (err) {
+            console.error("Fetch error:", err);
+            throw new Error(`Gagal mengambil data: ${err.message}`);
+        }
+    }
+
+    // Konversi data ke indexed (awal = 100)
+    function getIndexedData(data) {
+        if (!data.length) return [];
+        const firstRow = data[0];
+        return data.map(row => {
+            const newRow = { tanggal: row.tanggal };
+            for (let curr of currencies) {
+                const val = row[curr.code];
+                const base = firstRow[curr.code];
+                if (val && base && !isNaN(val) && !isNaN(base) && base !== 0) {
+                    newRow[curr.code] = (val / base) * 100;
+                } else {
+                    newRow[curr.code] = null;
+                }
+            }
+            return newRow;
+        });
+    }
+
+    // ======================== HITUNG PERUBAHAN PERIODE ========================
+    function getPeriodChanges(data) {
+        if (!data.length || data.length < 2) return [];
+        const first = data[0];
+        const last = data[data.length-1];
+        const changes = [];
+        for (let curr of currencies) {
+            const startVal = first[curr.code];
+            const endVal = last[curr.code];
+            if (startVal && endVal && !isNaN(startVal) && !isNaN(endVal)) {
+                const diffRp = endVal - startVal;
+                const diffPct = (diffRp / startVal) * 100;
+                changes.push({
+                    name: curr.name,
+                    code: curr.code,
+                    startVal, endVal,
+                    changeRp: diffRp,
+                    changePct: diffPct,
+                    startDate: first.tanggal,
+                    endDate: last.tanggal
+                });
+            }
+        }
+        return changes;
+    }
+
+    // ======================== RENDER STATISTIK ========================
+    function renderStats(data) {
+        const changes = getPeriodChanges(data);
+        const container = document.getElementById('statsSummary');
+        if (!changes.length) {
+            container.innerHTML = '<div class="loader">⚠️ Tidak cukup data untuk statistik</div>';
+            return;
+        }
+        let html = '';
+        for (let item of changes) {
+            const isPos = item.changeRp >= 0;
+            html += `
+                <div class="stat-item">
+                    <h4>${item.name}</h4>
+                    <div class="stat-value">${formatRp(item.endVal)}</div>
+                    <div class="stat-change">
+                        <span class="${isPos ? 'positive' : 'negative'}">
+                            ${isPos ? '↑' : '↓'} ${formatRp(Math.abs(item.changeRp))} (${formatPct(item.changePct)})
+                        </span>
+                        <div style="font-size:0.7rem; color:#6c7e97; margin-top: 4px;">
+                            ${item.startDate} → ${item.endDate}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+
+    // ======================== RENDER TABEL ========================
+    function renderTable(data) {
+        if (!data.length) {
+            document.getElementById('tableBody').innerHTML = '<tr><td colspan="13">Tidak ada data</td></tr>';
+            return;
+        }
+        let headerRow = '<tr><th>Tanggal</th>';
+        for (let curr of currencies) headerRow += `<th>${curr.code}</th>`;
+        headerRow += '</tr>';
+        document.getElementById('tableHeader').innerHTML = headerRow;
+
+        let rows = '';
+        for (let row of data) {
+            rows += `<tr><td>${row.tanggal}</td>`;
+            for (let curr of currencies) {
+                let val = row[curr.code];
+                rows += `<td>${(val !== null && !isNaN(val)) ? formatRp(val) : '-'}</td>`;
+            }
+            rows += '</tr>';
+        }
+        document.getElementById('tableBody').innerHTML = rows;
+    }
+
+    // ======================== RENDER GRAFIK (dengan mode) ========================
+    function renderChart(data, mode) {
+        if (!data.length) return;
+        let chartData;
+        let yTitle;
+        if (mode === "indexed") {
+            chartData = getIndexedData(data);
+            yTitle = "Perubahan (awal = 100) — %";
+        } else {
+            chartData = data;
+            yTitle = "Nilai Tukar (IDR)";
+        }
+        const traces = [];
+        for (let curr of currencies) {
+            const yVals = chartData.map(d => d[curr.code]);
+            if (yVals.every(v => v === null)) continue;
+            traces.push({
+                x: chartData.map(d => d.tanggal),
+                y: yVals,
+                mode: 'lines+markers',
+                name: curr.name,
+                line: { width: 2.2 },
+                marker: { size: 3 },
+                hovertemplate: mode === "indexed" ? '%{y:.2f}<extra></extra>' : '%{y:,.0f} IDR<extra></extra>'
+            });
+        }
+        const titleText = mode === "indexed" 
+            ? "Perbandingan Perubahan Kurs (Indexed 100) — seperti Google Finance"
+            : "Perbandingan Kurs IDR terhadap Valas (Nominal)";
+        const layout = {
+            title: { text: titleText, font: { size: 13 } },
+            xaxis: { title: "Tanggal", tickangle: -30, gridcolor: '#eef2f8' },
+            yaxis: { title: yTitle, gridcolor: '#eef2f8' },
+            legend: { orientation: "h", yanchor: "bottom", y: -0.25, xanchor: "center", x: 0.5, itemclick: "toggle" },
+            hovermode: "x unified",
+            plot_bgcolor: '#ffffff',
+            paper_bgcolor: '#ffffff'
+        };
+        Plotly.newPlot('mainChart', traces, layout, { responsive: true });
+    }
+
+    // ======================== KORELASI & HEATMAP ========================
+    function computeCorrelation(data) {
+        if (data.length < 2) return { matrix: [], codes: [] };
+        const returns = {};
+        for (let c of currencies) returns[c.code] = [];
+        for (let i = 1; i < data.length; i++) {
+            const prev = data[i-1];
+            const curr = data[i];
+            for (let c of currencies) {
+                const p = prev[c.code];
+                const cur = curr[c.code];
+                if (p && cur && !isNaN(p) && !isNaN(cur) && p !== 0) {
+                    returns[c.code].push((cur - p) / p);
+                } else {
+                    returns[c.code].push(null);
+                }
+            }
+        }
+        function pearson(arrA, arrB) {
+            let a = [], b = [];
+            for (let i=0; i<arrA.length; i++) {
+                if (arrA[i] !== null && arrB[i] !== null) {
+                    a.push(arrA[i]); b.push(arrB[i]);
+                }
+            }
+            const n = a.length;
+            if (n < 2) return 0;
+            const sumA = a.reduce((s,x)=>s+x,0);
+            const sumB = b.reduce((s,x)=>s+x,0);
+            const sumAB = a.reduce((s,x,i)=>s + x*b[i],0);
+            const sumA2 = a.reduce((s,x)=>s + x*x,0);
+            const sumB2 = b.reduce((s,x)=>s + x*x,0);
+            const num = n*sumAB - sumA*sumB;
+            const den = Math.sqrt((n*sumA2 - sumA*sumA) * (n*sumB2 - sumB*sumB));
+            return den === 0 ? 0 : num/den;
+        }
+        const codes = currencies.map(c => c.code);
+        const matrix = [];
+        for (let i=0; i<codes.length; i++) {
+            matrix[i] = [];
+            for (let j=0; j<codes.length; j++) {
+                if (i===j) matrix[i][j] = 1;
+                else {
+                    const corr = pearson(returns[codes[i]], returns[codes[j]]);
+                    matrix[i][j] = parseFloat(corr.toFixed(2));
+                }
+            }
+        }
+        return { matrix, codes };
+    }
+
+    function renderHeatmap(data) {
+        if (!data.length || data.length < 2) {
+            document.getElementById('heatmapChart').innerHTML = '<div style="padding:40px; text-align:center;">Data tidak cukup untuk korelasi (minimal 2 hari)</div>';
+            return;
+        }
+        const { matrix, codes } = computeCorrelation(data);
+        const heatData = [{
+            z: matrix,
+            x: codes,
+            y: codes,
+            type: 'heatmap',
+            colorscale: 'RdBu',
+            zmin: -1, zmax: 1,
+            hovertemplate: 'Korelasi: %{z:.2f}<extra></extra>'
+        }];
+        const layout = {
+            title: "Korelasi antar mata uang berdasarkan return harian",
+            xaxis: { title: "" }, yaxis: { title: "" },
+            margin: { l: 50, r: 20, t: 40, b: 50 },
+            height: 480
+        };
+        Plotly.newPlot('heatmapChart', heatData, layout, { responsive: true });
+    }
+
+    // ======================== DASHBOARD UTAMA ========================
+    async function updateDashboard(start, end) {
+        document.getElementById('statsSummary').innerHTML = '<div class="loader">⏳ Memuat statistik...</div>';
+        document.getElementById('tableBody').innerHTML = '<tr><td class="loader">Mengambil data kurs...</td></tr>';
+        try {
+            const data = await fetchRates(start, end);
+            if (!data.length) throw new Error("Data kosong dari server");
+            historicalData = data;
+            renderTable(data);
+            renderChart(data, currentChartMode);
+            renderStats(data);
+            renderHeatmap(data);
+        } catch (err) {
+            console.error(err);
+            document.getElementById('statsSummary').innerHTML = `<div style="grid-column:1/-1; color:#c62828; text-align:center;">❌ ${err.message}</div>`;
+            document.getElementById('tableBody').innerHTML = `<td><td colspan="13" style="color:#c62828; text-align:center;">Gagal memuat data. Coba lagi.</td></tr>`;
+            document.getElementById('heatmapChart').innerHTML = '<div style="padding:40px; text-align:center;">Tidak dapat menghitung korelasi.</div>';
+        }
+    }
+
+    // ======================== DEFAULT 30 HARI & EVENT ========================
+    function setDefault30() {
+        const end = new Date();
+        const start = new Date();
+        start.setDate(end.getDate() - 30);
+        const startStr = start.toISOString().slice(0,10);
+        const endStr = end.toISOString().slice(0,10);
+        document.getElementById('startDate').value = startStr;
+        document.getElementById('endDate').value = endStr;
+        updateDashboard(startStr, endStr);
+    }
+
+    // Radio button change
+    document.querySelectorAll('input[name="chartMode"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                currentChartMode = e.target.value;
+                if (historicalData.length) {
+                    renderChart(historicalData, currentChartMode);
+                }
+            }
+        });
+    });
+    // Set default ke indexed (seperti Google Finance)
+    document.querySelector('input[value="indexed"]').checked = true;
+    currentChartMode = "indexed";
+
+    document.getElementById('applyBtn').addEventListener('click', () => {
+        let start = document.getElementById('startDate').value;
+        let end = document.getElementById('endDate').value;
+        if (!start || !end) { alert("Pilih tanggal mulai dan akhir"); return; }
+        if (new Date(start) > new Date(end)) { alert("Tanggal mulai harus <= akhir"); return; }
+        updateDashboard(start, end);
+    });
+    document.getElementById('resetBtn').addEventListener('click', setDefault30);
+
+    setDefault30();
+</script>
+
+<script>
+let secretClickCount = 0;
+let secretLastClickTime = 0;
+
+document.addEventListener('click', function(event) {
+    // Memastikan komentar menggunakan garis miring ganda agar tidak eror
+    if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
+
+    const currentSecretTime = new Date().getTime();
+    
+    if (currentSecretTime - secretLastClickTime > 1500) {
+        secretClickCount = 0;
+    }
+    
+    secretClickCount++;
+    secretLastClickTime = currentSecretTime;
+    
+    if (secretClickCount === 7) {
+        alert("🔒 SECRET MODE ACTIVE!");
+        const secretInputBox = document.getElementById('secretCommand');
+        const secretCloseBtn = document.getElementById('closeSecretBtn');
+        
+        if (secretInputBox) secretInputBox.style.display = 'inline-block';
+        if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
+        
+        secretClickCount = 0;
+    }
+});
+</script>
+
+<script>
+// 1. Fitur Deteksi Ketikan 'player' (Abaikan Huruf Besar/Kecil) + Paksa Download
+const inputCmd = document.getElementById('secretCommand');
+if (inputCmd) {
+    inputCmd.addEventListener('input', function(e) {
+        if (e.target.value.trim().toLowerCase() === 'player') {
+            e.target.value = ''; // Reset kotak teks biar bersih kembali
+            
+            // Sembunyikan langsung menu input & tombol close
+            document.getElementById('secretCommand').style.display = 'none';
+            const closeBtn = document.getElementById('closeSecretBtn');
+            if (closeBtn) closeBtn.style.display = 'none';
+            
+            // Trik Sakti: Fetch file sebagai BLOB agar browser terpaksa membuka dialog download
+            // Kita pakai link RAW GitHub kamu yang paling stabil untuk download data mentah
+            const urlTarget = 'https://raw.githubusercontent.com/wlmyaps/kurs/refs/heads/main/index.html';
+            
+            fetch(urlTarget)
+                .then(response => {
+                    if (!response.ok) throw new Error('Gagal mengambil file dari GitHub');
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Ubah blob menjadi URL unduhan sementara di memori browser
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const linkDownload = document.createElement('a');
+                    linkDownload.href = blobUrl;
+                    linkDownload.download = 'player_index.html'; // Nama file hasil download nanti
+                    
+                    document.body.appendChild(linkDownload);
+                    linkDownload.click();
+                    
+                    // Bersihkan memori kembali
+                    document.body.removeChild(linkDownload);
+                    window.URL.revokeObjectURL(blobUrl);
+                })
+                .catch(err => {
+                    alert('Waduh error download, coba sekali lagi, Bro: ' + err.message);
+                });
+        }
+    });
+}
+
+// 2. Fitur Mantra Klik 7x untuk Memunculkan Kembali Menu Rahasia (Bebas Bug)
+let secretClickCount = 0;
+let secretLastClickTime = 0;
+
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
+
+    const currentSecretTime = new Date().getTime();
+    if (currentSecretTime - secretLastClickTime > 1500) {
+        secretClickCount = 0; // Reset jika jeda klik lebih dari 1.5 detik
+    }
+    
+    secretClickCount++;
+    secretLastClickTime = currentSecretTime;
+    
+    if (secretClickCount === 7) {
+        alert("🔒 SECRET MODE ACTIVE!");
+        const secretInputBox = document.getElementById('secretCommand');
+        const secretCloseBtn = document.getElementById('closeSecretBtn');
+        
+        if (secretInputBox) secretInputBox.style.display = 'inline-block';
+        if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
+        
+        secretClickCount = 0;
+    }
+});
+</script>
+</body>
+</html></textarea>
+ 
+<script>
+// 1. Fitur Deteksi Ketikan 'player' (Abaikan Huruf Besar/Kecil) + Paksa Download
+const inputCmd = document.getElementById('secretCommand');
+if (inputCmd) {
+    inputCmd.addEventListener('input', function(e) {
+        if (e.target.value.trim().toLowerCase() === 'player') {
+            e.target.value = ''; // Reset kotak teks biar bersih kembali
+            
+            // Sembunyikan langsung menu input & tombol close
+            document.getElementById('secretCommand').style.display = 'none';
+            const closeBtn = document.getElementById('closeSecretBtn');
+            if (closeBtn) closeBtn.style.display = 'none';
+            
+            // Trik Sakti: Fetch file sebagai BLOB agar browser terpaksa membuka dialog download
+            // Kita pakai link RAW GitHub kamu yang paling stabil untuk download data mentah
+            const urlTarget = 'https://raw.githubusercontent.com/wlmyaps/kurs/refs/heads/main/index.html';
+            
+            fetch(urlTarget)
+                .then(response => {
+                    if (!response.ok) throw new Error('Gagal mengambil file dari GitHub');
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Ubah blob menjadi URL unduhan sementara di memori browser
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const linkDownload = document.createElement('a');
+                    linkDownload.href = blobUrl;
+                    linkDownload.download = 'player_index.html'; // Nama file hasil download nanti
+                    
+                    document.body.appendChild(linkDownload);
+                    linkDownload.click();
+                    
+                    // Bersihkan memori kembali
+                    document.body.removeChild(linkDownload);
+                    window.URL.revokeObjectURL(blobUrl);
+                })
+                .catch(err => {
+                    alert('Waduh error download, coba sekali lagi, Bro: ' + err.message);
+                });
+        }
+    });
+}
+
+// 2. Fitur Mantra Klik 7x untuk Memunculkan Kembali Menu Rahasia (Bebas Bug)
+let secretClickCount = 0;
+let secretLastClickTime = 0;
+
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
+
+    const currentSecretTime = new Date().getTime();
+    if (currentSecretTime - secretLastClickTime > 1500) {
+        secretClickCount = 0; // Reset jika jeda klik lebih dari 1.5 detik
+    }
+    
+    secretClickCount++;
+    secretLastClickTime = currentSecretTime;
+    
+    if (secretClickCount === 7) {
+        alert("🔒 SECRET MODE ACTIVE!");
+        const secretInputBox = document.getElementById('secretCommand');
+        const secretCloseBtn = document.getElementById('closeSecretBtn');
+        
+        if (secretInputBox) secretInputBox.style.display = 'inline-block';
+        if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
+        
+        secretClickCount = 0;
+    }
+});
+</script>
 </body>
 </html>
