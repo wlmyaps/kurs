@@ -83,7 +83,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         body::before {
             content: '';
             position: fixed;
@@ -103,7 +102,6 @@
             margin: 0 auto;
         }
 
-        /* ===== WIDGET BAR (Jam & Cuaca) ===== */
         .widget-bar {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -146,7 +144,6 @@
             opacity: 0.6;
         }
 
-        /* Digital Clock */
         .clock-container {
             display: flex;
             flex-direction: column;
@@ -208,7 +205,6 @@
             text-transform: uppercase;
         }
 
-        /* Weather Widget */
         .weather-container {
             display: flex;
             flex-direction: column;
@@ -302,7 +298,6 @@
             padding: 10px;
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             margin-bottom: 20px;
@@ -356,7 +351,6 @@
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
-        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -397,7 +391,6 @@
             50% { opacity: 0.5; }
         }
 
-        /* ===== CONTROLS ===== */
         .controls-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -510,7 +503,6 @@
             box-shadow: 0 2px 8px var(--accent-glow);
         }
 
-        /* ===== STOCK SELECTOR ===== */
         .stock-selector {
             display: flex;
             flex-wrap: wrap;
@@ -579,7 +571,6 @@
             opacity: 0.2;
         }
 
-        /* ===== CHART ===== */
         #chart {
             background: var(--card);
             backdrop-filter: blur(6px);
@@ -606,7 +597,6 @@
             opacity: 0.6;
         }
 
-        /* ===== VALUES GRID ===== */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -692,7 +682,6 @@
             box-shadow: 0 0 4px var(--negative-glow);
         }
 
-        /* ===== SECTIONS ===== */
         .section {
             background: var(--card);
             backdrop-filter: blur(6px);
@@ -738,7 +727,6 @@
             color: var(--text);
         }
 
-        /* ===== TABLES ===== */
         .table-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -798,7 +786,6 @@
             text-shadow: 0 0 8px var(--negative-glow);
         }
 
-        /* ===== PORTFOLIO SECTION ===== */
         .portfolio-table-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -906,7 +893,6 @@
             font-weight: 800;
         }
 
-        /* ===== TOOLS GRID ===== */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -991,7 +977,6 @@
             font-size: 1.05rem;
         }
 
-        /* ===== ANALYSIS SECTIONS ===== */
         .analysis-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1055,7 +1040,6 @@
             margin-bottom: 6px;
         }
 
-        /* ===== PIE CHART CONTAINER ===== */
         .chart-container {
             position: relative;
             height: 260px;
@@ -1063,7 +1047,6 @@
             margin: 10px 0;
         }
 
-        /* ===== RANKING / VOLATILITY CARDS ===== */
         .metric-card {
             background: var(--value-card-bg);
             padding: 14px;
@@ -1094,7 +1077,6 @@
             font-size: 0.95rem;
         }
 
-        /* ===== FOOTER ===== */
         footer {
             text-align: center;
             font-size: 0.7rem;
@@ -1109,7 +1091,6 @@
             text-decoration: none;
         }
 
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -1129,56 +1110,44 @@
             background: #0ea5e9;
         }
 
-        /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 600px) {
             body { padding: 8px; }
-
             .header h1 { font-size: 1.2rem; }
-
             .dark-toggle {
                 position: static;
                 transform: none;
                 margin-top: 10px;
                 display: inline-block;
             }
-
             .header {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 8px;
             }
-
             .tools-grid {
                 grid-template-columns: 1fr;
             }
-
             .values-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .clock-box .num {
                 font-size: 1.5rem;
             }
-
             .weather-temp {
                 font-size: 2rem;
             }
-
             .portfolio-controls {
                 flex-direction: column;
             }
-
             .portfolio-controls > * {
                 width: 100%;
             }
-
             .controls-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1521,7 +1490,6 @@
         const weatherUnlock = document.getElementById('weatherUnlock');
 
         function getWeatherIcon(code) {
-            // WMO Weather interpretation codes
             if (code === 0) return '<i class="fas fa-sun weather-icon-main" style="color: #fbbf24;"></i>';
             if (code >= 1 && code <= 3) return '<i class="fas fa-cloud-sun weather-icon-main" style="color: #38bdf8;"></i>';
             if (code >= 45 && code <= 48) return '<i class="fas fa-smog weather-icon-main" style="color: #94a3b8;"></i>';
@@ -1580,7 +1548,6 @@
 
         window.requestWeather = function() {
             if (!navigator.geolocation) {
-                // Fallback ke Jakarta
                 fetchWeather(-6.2088, 106.8456, 'Jakarta (Default)');
                 return;
             }
@@ -1591,7 +1558,6 @@
                     fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Lokasi Anda');
                 },
                 (err) => {
-                    // Fallback ke Jakarta
                     fetchWeather(-6.2088, 106.8456, 'Jakarta (Default)');
                 },
                 { timeout: 10000 }
@@ -1606,63 +1572,22 @@
 
         // ======================= DAFTAR BANK =======================
        const BANK_SYMBOLS = [
-		"BBCA",  // kolom B (harga BBCA)
-		"BMRI",  // kolom C
-		"BBRI",  // kolom D
-		"BBNI",  // kolom E
-		"SUPA",  // kolom F
-		"BRIS",  // kolom G
-		"BBTN",  // kolom H
-		"ARTO",  // kolom I
-		"BACA",  // kolom J
-		"BBHI",  // kolom K
-		"GOTO",  // kolom L  ← diganti saham GOTO
-		"BBYB",  // kolom M
-		"BCAP",  // kolom N
-		"BDMN",  // kolom O
-		"BFIN",  // kolom P
-		"BGTG",  // kolom Q
-		"BINA",  // kolom R
-		"BJBR",  // kolom S
-		"BJTM",  // kolom T
-		"BNGA",  // kolom U
-		"BNII",  // kolom V
-		"BNLI",  // kolom W
-		"BTPN",  // kolom X
-		"BVIC",  // kolom Y
-		"CFIN",  // kolom Z
-		"DNET",  // kolom AA
-		"INPC",  // kolom AB
-		"MAYA",  // kolom AC
-		"MCOR",  // kolom AD
-		"MEGA",  // kolom AE
-		"MREI",  // kolom AF
-		"NISP",  // kolom AG
-		"PANS",  // kolom AH
-		"PNBN",  // kolom AI
-		"PNIN",  // kolom AJ
-		"PNLF",  // kolom AK
-		"SMMA",  // kolom AL
-		"SRTG",  // kolom AM
-		"TRIM",  // kolom AN
-		"VICO",  // kolom AO
-		"BTPS",  // kolom AP
-		"TUGU",  // kolom AQ
-		"BBSI",  // kolom AR
-		"AGRO",  // kolom AS
-		"BEKS",  // kolom AT
-		"BSWD"   // kolom AU
+		"BBCA", "BMRI", "BBRI", "BBNI", "SUPA", "BRIS", "BBTN", "ARTO", "BACA", "BBHI",
+		"GOTO", "BBYB", "BCAP", "BDMN", "BFIN", "BGTG", "BINA", "BJBR", "BJTM", "BNGA",
+		"BNII", "BNLI", "BTPN", "BVIC", "CFIN", "DNET", "INPC", "MAYA", "MCOR", "MEGA",
+		"MREI", "NISP", "PANS", "PNBN", "PNIN", "PNLF", "SMMA", "SRTG", "TRIM", "VICO",
+		"BTPS", "TUGU", "BBSI", "AGRO", "BEKS", "BSWD"
 	];
-        const CSV_URL =
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vTOMgH6Hgj-AAcsvjWuDsrm5WiB35FANpKYp1tvcBFqMG0u_9uQoET2fXIBB3kaOu6PRyZ7wYfCuZbT/pubhtml?gid=0&single=true';
-        const PROXY = 'https://baru.williamyaps.workers.dev/?target=';
-
+        const CSV_URL_PROXY = 'https://baru.williamyaps.workers.dev/?target=https://docs.google.com/spreadsheets/d/e/2PACX-1vTOMgH6Hgj-AAcsvjWuDsrm5WiB35FANpKYp1tvcBFqMG0u_9uQoET2fXIBB3kaOu6PRyZ7wYfCuZbT/pub?gid=0&single=true&output=csv';
+        const CSV_URL_GITHUB = 'https://raw.githubusercontent.com/wlmyaps/kurs/refs/heads/main/saham%20-%20Sheet1.csv';
+        
         let masterData = { dates: [], prices: {} };
         let selectedSymbols = ['BBCA', 'BMRI', 'BBRI', 'BBNI'];
         let viewMode = 'nominal';
         let chart = null;
         let portfolioData = [];
         let allocationChartInstance = null;
+        let currentDataSource = null; // 'google' atau 'github'
 
         // ======================= DARK / LIGHT MODE =======================
         function applyTheme(isDark) {
@@ -1675,7 +1600,6 @@
             }
             localStorage.setItem('idx-dashboard-theme', isDark ? 'dark' : 'light');
             if (chart) renderChart();
-            // Update Chart.js theme
             if (allocationChartInstance) updateAllocationChart();
         }
 
@@ -1697,9 +1621,8 @@
             return isNaN(num) ? null : num;
         }
 
-        // ======================= LOAD CSV =======================
-        async function loadCSV() {
-            const url = PROXY + encodeURIComponent(CSV_URL);
+        // ======================= FUNGSI LOAD CSV DARI URL =======================
+        async function loadCSVFromUrl(url) {
             const response = await fetch(url, { cache: 'no-cache' });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const csvText = await response.text();
@@ -1746,7 +1669,62 @@
             });
         }
 
-        // ======================= RENDER FUNCTIONS =======================
+        // ======================= LOAD DENGAN FALLBACK =======================
+        async function loadCSVWithFallback() {
+            // Tampilkan status sedang mencoba
+            document.getElementById('statusBar').innerHTML = `
+                <span class="status-pill"><span class="status-dot"></span> Mencoba Google Sheets (Live)...</span>
+                <span id="lastUpdate"></span>
+            `;
+            
+            try {
+                // Coba ambil dari Google Sheets via proxy
+                console.log("Mencoba mengambil data dari Google Sheets...");
+                const data = await loadCSVFromUrl(CSV_URL_PROXY);
+                masterData = data;
+                currentDataSource = 'google';
+                // Update status bar dengan sukses
+                document.getElementById('statusBar').innerHTML = `
+                    <span class="status-pill"><span class="status-dot" style="background: var(--positive);"></span> 🟢 Sumber: Google Sheets (Live)</span>
+                    <span class="status-pill"><i class="fas fa-cloud-sun"></i> Data real-time</span>
+                    <span class="status-pill"><i class="fas fa-clock"></i> ${moment().format('HH:mm:ss')}</span>
+                `;
+                console.log("Berhasil mengambil data dari Google Sheets");
+                return true;
+            } catch (error) {
+                console.warn("Gagal mengambil dari Google Sheets:", error);
+                // Coba ambil dari GitHub sebagai cadangan
+                document.getElementById('statusBar').innerHTML = `
+                    <span class="status-pill"><span class="status-dot" style="background: #f59e0b;"></span> ⚠️ Google gagal, mencoba GitHub (manual)...</span>
+                    <span id="lastUpdate"></span>
+                `;
+                try {
+                    console.log("Mencoba mengambil data dari GitHub...");
+                    const fallbackData = await loadCSVFromUrl(CSV_URL_GITHUB);
+                    masterData = fallbackData;
+                    currentDataSource = 'github';
+                    // Hitung umur file (perkiraan dari tanggal terakhir data)
+                    let lastDate = masterData.dates[masterData.dates.length-1];
+                    let daysOld = moment().diff(moment(lastDate), 'days');
+                    let warningMsg = daysOld > 7 ? ` ⚠️ Data sudah ${daysOld} hari (tidak up-to-date)` : '';
+                    document.getElementById('statusBar').innerHTML = `
+                        <span class="status-pill"><span class="status-dot" style="background: #f59e0b;"></span> 🟡 Sumber: GitHub (Manual Upload)</span>
+                        <span class="status-pill"><i class="fas fa-database"></i> Data statis · Terakhir: ${lastDate}${warningMsg}</span>
+                        <span class="status-pill"><i class="fas fa-clock"></i> ${moment().format('HH:mm:ss')}</span>
+                    `;
+                    console.log("Berhasil mengambil data dari GitHub (fallback)");
+                    return true;
+                } catch (fallbackError) {
+                    console.error("Gagal juga dari GitHub:", fallbackError);
+                    document.getElementById('statusBar').innerHTML = `
+                        <span class="status-pill" style="color:var(--negative);"><i class="fas fa-times-circle"></i> Gagal load semua sumber data. Cek koneksi.</span>
+                    `;
+                    throw new Error("Semua sumber data gagal");
+                }
+            }
+        }
+
+        // ======================= RENDER FUNCTIONS (tidak diubah) =======================
         function renderStockSelector(symbols) {
             const container = document.getElementById('stockSelector');
             container.innerHTML = '';
@@ -1879,7 +1857,6 @@
                 series
             };
 
-            // Fix mobile touch issue: disable zoom/pan on touch devices
             if (isMobile) {
                 options.chart.zoom.enabled = false;
                 options.chart.toolbar.tools.zoom = false;
@@ -2070,7 +2047,7 @@
             document.getElementById('macdContainer').innerHTML = out || '<div style="color:var(--text-secondary);padding:20px;text-align:center;"><i class="fas fa-inbox" style="font-size:1.5rem;display:block;margin-bottom:8px;"></i>Data tidak cukup (butuh minimal 26 hari)</div>';
         }
 
-        // ======================= PORTFOLIO & KALKULATOR =======================
+        // ======================= PORTFOLIO & KALKULATOR (tidak diubah) =======================
         function getLastPrices() {
             const last = {};
             for (let sym of BANK_SYMBOLS) {
@@ -2097,7 +2074,6 @@
             return sum / validPrices.length;
         }
 
-
         function updateAllocationChart() {
             const ctx = document.getElementById('allocationChart');
             if (!ctx) return;
@@ -2112,7 +2088,6 @@
             }
 
             if (portfolioData.length === 0) {
-                // Show empty state
                 return;
             }
 
@@ -2185,14 +2160,13 @@
                 return;
             }
 
-            // Calculate actual loss amounts
             const lossData = losers.map(s => {
                 const lastPrices = getLastPrices();
                 const last = lastPrices[s.code] || 0;
                 const marketVal = last * s.lots * 100;
                 const modal = s.avgPrice * s.lots * 100;
                 return { ...s, loss: marketVal - modal };
-            }).sort((a, b) => a.loss - b.loss); // Most negative first
+            }).sort((a, b) => a.loss - b.loss);
 
             const totalLossAbsolute = lossData.reduce((sum, s) => sum + Math.abs(s.loss), 0);
 
@@ -2263,7 +2237,6 @@
             const options = portfolioData.map((p,i) => `<option value="PORT_${i}">${p.code} (Avg Port: ${formatRupiah(p.avgPrice)})</option>`);
             document.getElementById('avgDownStockSelect').innerHTML = '<option value="">-- Pilih Saham --</option>' + options.join('');
 
-            // BEP Dropdown: Portfolio + All Stocks with 30-day average from CSV
             let bepHtml = '<option value="">-- Portfolio BEP --</option>';
             if (options.length) {
                 bepHtml += '<optgroup label="Portfolio Saya">' + options.join('') + '</optgroup>';
@@ -2292,7 +2265,6 @@
                 }
             });
 
-            // Update charts and analysis
             updateAllocationChart();
             updateContributorAnalysis();
         }
@@ -2376,7 +2348,6 @@
                 return; 
             }
             if (val === '') {
-                // Portfolio keseluruhan
                 let totalModal = 0, totalLembar = 0;
                 portfolioData.forEach(p => { totalModal += p.avgPrice * p.lots * 100; totalLembar += p.lots*100; });
                 if (totalLembar === 0) { 
@@ -2395,7 +2366,6 @@
                     </div>
                 `;
             } else if (val.startsWith('PORT_')) {
-                // Portfolio individual
                 let idx = parseInt(val.replace('PORT_',''));
                 let stock = portfolioData[idx];
                 if (!stock) {
@@ -2412,7 +2382,6 @@
                     <div style="font-size:0.85rem; color:var(--text-secondary);"><i class="fas fa-receipt"></i> Inklusi fee transaksi</div>
                 `;
             } else if (val.startsWith('CSV_')) {
-                // CSV-based 30-day average
                 let sym = val.replace('CSV_','');
                 let avg30 = get30DayAverage(sym);
                 let lastPrice = getLastPrices()[sym] || 0;
@@ -2421,7 +2390,6 @@
                     document.getElementById('bepResult').style.display = 'block';
                     return;
                 }
-                // BEP dihitung dari avg 30 hari sebagai "harga beli"
                 let bep = avg30 * (1 + feeBeli) / (1 - feeJual);
                 let diff = lastPrice - avg30;
                 let diffPct = avg30 ? (diff / avg30) * 100 : 0;
@@ -2504,22 +2472,19 @@
 
         async function init() {
             try {
-                const data = await loadCSV();
-                masterData = data;
-                document.getElementById('statusBar').innerHTML = `
-                    <span class="status-pill"><span class="status-dot"></span> ${data.symbols.length} bank loaded (${masterData.dates.length} hari)</span>
-                    <span class="status-pill"><i class="fas fa-server" style="color:var(--accent);"></i> Google Finance data by: William Yap</span>
-                    <span class="status-pill"><i class="fas fa-clock" style="color:var(--accent);"></i> ${moment().format('HH:mm:ss')}</span>
-                `;
+                // Gunakan fallback
+                await loadCSVWithFallback();
+                
                 const minDate = masterData.dates[0];
                 const maxDate = masterData.dates[masterData.dates.length-1];
                 document.getElementById('dateStart').value = minDate;
                 document.getElementById('dateEnd').value = maxDate;
                 document.getElementById('tableStart').value = minDate;
                 document.getElementById('tableEnd').value = maxDate;
-                selectedSymbols = selectedSymbols.filter(s => data.symbols.includes(s));
-                if (selectedSymbols.length === 0 && data.symbols.length) selectedSymbols = [data.symbols[0]];
-                renderStockSelector(data.symbols);
+                
+                selectedSymbols = selectedSymbols.filter(s => masterData.symbols.includes(s));
+                if (selectedSymbols.length === 0 && masterData.symbols.length) selectedSymbols = [masterData.symbols[0]];
+                renderStockSelector(masterData.symbols);
                 updateAll();
 
                 document.getElementById('btnRefresh').onclick = () => updateAll();
@@ -2553,11 +2518,11 @@
                 document.getElementById('dateEnd').onchange = updateAll;
                 resetPortfolioDefault();
 
-                // Verifikasi data terbaru di console
                 const lastIdx = masterData.dates.length - 1;
                 const lastDate = masterData.dates[lastIdx];
-                console.log('=== VERIFIKASI DATA CSV TERBARU ===');
-                console.log('Tanggal terakhir CSV:', lastDate);
+                console.log('=== VERIFIKASI DATA TERBARU ===');
+                console.log('Tanggal terakhir data:', lastDate);
+                console.log('Sumber data:', currentDataSource);
                 ['BBCA','BBRI','BMRI','BRIS'].forEach(s => {
                     const p = masterData.prices[s][lastIdx];
                     const avg30 = get30DayAverage(s);
@@ -2566,8 +2531,8 @@
                 console.log('====================================');
             } catch(e) {
                 console.error(e);
-                document.getElementById('statusBar').innerHTML = '<span class="status-pill" style="color:var(--negative);"><i class="fas fa-times-circle"></i> Gagal load CSV. Cek koneksi.</span>';
-                document.getElementById('stockSelector').innerHTML = '<div style="color:var(--negative);padding:12px;"><i class="fas fa-exclamation-triangle"></i> Gagal memuat data. pastikan <code>data sheets aktif</code></div>';
+                document.getElementById('statusBar').innerHTML = '<span class="status-pill" style="color:var(--negative);"><i class="fas fa-times-circle"></i> Gagal load semua sumber data. Periksa koneksi atau file CSV.</span>';
+                document.getElementById('stockSelector').innerHTML = '<div style="color:var(--negative);padding:12px;"><i class="fas fa-exclamation-triangle"></i> Gagal memuat data. Pastikan file CSV di GitHub tersedia dan formatnya benar.</div>';
             }
         }
 
