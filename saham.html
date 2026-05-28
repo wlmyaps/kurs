@@ -1572,13 +1572,13 @@
 
         // ======================= DAFTAR BANK =======================
        const BANK_SYMBOLS = [
-		"BBCA", "BMRI", "BBRI", "BBNI", "SUPA", "BRIS", "BBTN", "ARTO", "BACA", "BBHI",
+		"BBCA", "BMRI", "BBRI", "BBNI", "ASII", "BRIS", "BBTN", "ARTO", "BACA", "BBHI",
 		"GOTO", "BBYB", "BCAP", "BDMN", "BFIN", "BGTG", "BINA", "BJBR", "BJTM", "BNGA",
 		"BNII", "BNLI", "BTPN", "BVIC", "CFIN", "DNET", "INPC", "MAYA", "MCOR", "MEGA",
-		"MREI", "NISP", "PANS", "PNBN", "PNIN", "PNLF", "SMMA", "SRTG", "TRIM", "VICO",
+		"MREI", "NISP", "PANS", "PNBN", "PNIN", "PNLF", "TLKM", "SRTG", "TRIM", "VICO",
 		"BTPS", "TUGU", "BBSI", "AGRO", "BEKS", "BSWD"
 	];
-        const CSV_URL_PROXY = 'https://baru.williamyaps.workers.dev/?target=https://docs.google.com/spreadsheets/d/e/2PACX-1vTOMgH6Hgj-AAcsvjWuDsrm5WiB35FANpKYp1tvcBFqMG0u_9uQoET2fXIBB3kaOu6PRyZ7wYfCuZbT/pub?gid=0&single=true&output=csv';
+        const CSV_URL_PROXY = 'https://khususheet.loveofthegod.workers.dev/https://docs.google.com/spreadsheets/d/e/2PACX-1vTOMgH6Hgj-AAcsvjWuDsrm5WiB35FANpKYp1tvcBFqMG0u_9uQoET2fXIBB3kaOu6PRyZ7wYfCuZbT/pub?gid=0&single=true&output=csv';
         const CSV_URL_GITHUB = 'https://wlmyaps.github.io/kurs/saham%20-%20Sheet1.csv';
         
         let masterData = { dates: [], prices: {} };
@@ -1613,116 +1613,91 @@
         });
 
         function parsePrice(str) {
-            if (!str || str === '' || str === 'null') return NaN;
-            let cleaned = str.toString().replace(/Rp\s*/i, '').trim();
-            cleaned = cleaned.replace(/\./g, '');
-            cleaned = cleaned.replace(',', '.');
-            let num = parseFloat(cleaned);
-            return isNaN(num) ? null : num;
-        }
+    if (!str || str === '' || str === 'null') return null;
+    let cleaned = str.toString().replace(/Rp\s*/i, '').trim();
+    cleaned = cleaned.replace(/\./g, '');
+    cleaned = cleaned.replace(',', '.');
+    let num = parseFloat(cleaned);
+    return isNaN(num) ? null : num;
+}
 
         // ======================= FUNGSI LOAD CSV DARI URL =======================
         async function loadCSVFromUrl(url) {
-            const response = await fetch(url, { cache: 'no-cache' });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const csvText = await response.text();
-            return new Promise((resolve, reject) => {
-                Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: (results) => {
-                        const rows = results.data;
-                        if (!rows || rows.length < 2) return reject(new Error("CSV kosong"));
-                        const headers = Object.keys(rows[0]);
-                        const dateCol = headers[0];
-                        const dates = [];
-                        const priceMap = {};
-                        BANK_SYMBOLS.forEach(sym => { priceMap[sym] = []; });
-                        for (let row of rows) {
-                            const dateRaw = row[dateCol];
-                            if (!dateRaw) continue;
-                            const m = moment(dateRaw, ["M/D/YYYY HH:mm:ss", "YYYY-MM-DD", "M/D/YYYY"]);
-                            if (!m.isValid()) continue;
-                            dates.push(m.format('YYYY-MM-DD'));
-                            for (let i = 0; i < BANK_SYMBOLS.length; i++) {
-                                const sym = BANK_SYMBOLS[i];
-                                const colName = headers[i + 1];
-                                if (!colName) continue;
-                                let price = parsePrice(row[colName]);
-                                priceMap[sym].push(price);
-                            }
-                        }
-                        if (dates.length === 0) reject(new Error("Tidak ada data valid"));
-                        const combined = dates.map((d, idx) => ({
-                            date: d,
-                            prices: BANK_SYMBOLS.map(sym => priceMap[sym][idx])
-                        }));
-                        combined.sort((a, b) => moment(a.date).diff(moment(b.date)));
-                        const sortedDates = combined.map(c => c.date);
-                        BANK_SYMBOLS.forEach((sym, idx) => {
-                            priceMap[sym] = combined.map(c => c.prices[idx]);
-                        });
-                        resolve({ dates: sortedDates, prices: priceMap, symbols: BANK_SYMBOLS });
-                    },
-                    error: reject
+    const response = await fetch(url, { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const csvText = await response.text();
+    return new Promise((resolve, reject) => {
+        Papa.parse(csvText, {
+            header: false,   // MATIKAN header, kita baca berdasarkan indeks kolom
+            skipEmptyLines: true,
+            complete: (results) => {
+                const rows = results.data;
+                if (!rows || rows.length < 2) return reject(new Error("CSV kosong"));
+                const dataRows = rows.slice(1); // baris pertama (header) diabaikan
+                const dates = [];
+                const priceMap = {};
+                BANK_SYMBOLS.forEach(sym => { priceMap[sym] = []; });
+
+                for (let row of dataRows) {
+                    if (!row || row.length === 0) continue;
+                    const dateRaw = row[0];
+                    if (!dateRaw) continue;
+                    const m = moment(dateRaw, ["M/D/YYYY HH:mm:ss", "YYYY-MM-DD", "M/D/YYYY"]);
+                    if (!m.isValid()) continue;
+                    dates.push(m.format('YYYY-MM-DD'));
+                    // kolom 1 = BBCA, kolom 2 = BMRI, ... (sesuai urutan BANK_SYMBOLS)
+                    for (let i = 0; i < BANK_SYMBOLS.length; i++) {
+                        const sym = BANK_SYMBOLS[i];
+                        let rawPrice = row[i + 1]; // karena kolom 0 adalah tanggal
+                        let price = parsePrice(rawPrice);
+                        priceMap[sym].push(price);
+                    }
+                }
+                if (dates.length === 0) reject(new Error("Tidak ada data valid"));
+                const combined = dates.map((d, idx) => ({
+                    date: d,
+                    prices: BANK_SYMBOLS.map(sym => priceMap[sym][idx])
+                }));
+                combined.sort((a, b) => moment(a.date).diff(moment(b.date)));
+                const sortedDates = combined.map(c => c.date);
+                BANK_SYMBOLS.forEach((sym, idx) => {
+                    priceMap[sym] = combined.map(c => c.prices[idx]);
                 });
-            });
-        }
+                resolve({ dates: sortedDates, prices: priceMap, symbols: BANK_SYMBOLS });
+            },
+            error: reject
+        });
+    });
+}
 
         // ======================= LOAD DENGAN FALLBACK =======================
         async function loadCSVWithFallback() {
-            // Tampilkan status sedang mencoba
-            document.getElementById('statusBar').innerHTML = `
-                <span class="status-pill"><span class="status-dot"></span> Mencoba Google Sheets (Live)...</span>
-                <span id="lastUpdate"></span>
-            `;
-            
-            try {
-                // Coba ambil dari Google Sheets via proxy
-                console.log("Mencoba mengambil data dari Google Sheets...");
-                const data = await loadCSVFromUrl(CSV_URL_PROXY);
-                masterData = data;
-                currentDataSource = 'google';
-                // Update status bar dengan sukses
-                document.getElementById('statusBar').innerHTML = `
-                    <span class="status-pill"><span class="status-dot" style="background: var(--positive);"></span> 🟢 Sumber: Google Sheets (Live)</span>
-                    <span class="status-pill"><i class="fas fa-cloud-sun"></i> Data real-time</span>
-                    <span class="status-pill"><i class="fas fa-clock"></i> ${moment().format('HH:mm:ss')}</span>
-                `;
-                console.log("Berhasil mengambil data dari Google Sheets");
-                return true;
-            } catch (error) {
-                console.warn("Gagal mengambil dari Google Sheets:", error);
-                // Coba ambil dari GitHub sebagai cadangan
-                document.getElementById('statusBar').innerHTML = `
-                    <span class="status-pill"><span class="status-dot" style="background: #f59e0b;"></span> ⚠️ Google gagal, mencoba GitHub (manual)...</span>
-                    <span id="lastUpdate"></span>
-                `;
-                try {
-                    console.log("Mencoba mengambil data dari GitHub...");
-                    const fallbackData = await loadCSVFromUrl(CSV_URL_GITHUB);
-                    masterData = fallbackData;
-                    currentDataSource = 'github';
-                    // Hitung umur file (perkiraan dari tanggal terakhir data)
-                    let lastDate = masterData.dates[masterData.dates.length-1];
-                    let daysOld = moment().diff(moment(lastDate), 'days');
-                    let warningMsg = daysOld > 7 ? ` ⚠️ Data sudah ${daysOld} hari (tidak up-to-date)` : '';
-                    document.getElementById('statusBar').innerHTML = `
-                        <span class="status-pill"><span class="status-dot" style="background: #f59e0b;"></span> 🟡 Sumber: GitHub (Manual Upload)</span>
-                        <span class="status-pill"><i class="fas fa-database"></i> Data statis · Terakhir: ${lastDate}${warningMsg}</span>
-                        <span class="status-pill"><i class="fas fa-clock"></i> ${moment().format('HH:mm:ss')}</span>
-                    `;
-                    console.log("Berhasil mengambil data dari GitHub (fallback)");
-                    return true;
-                } catch (fallbackError) {
-                    console.error("Gagal juga dari GitHub:", fallbackError);
-                    document.getElementById('statusBar').innerHTML = `
-                        <span class="status-pill" style="color:var(--negative);"><i class="fas fa-times-circle"></i> Gagal load semua sumber data. Cek koneksi.</span>
-                    `;
-                    throw new Error("Semua sumber data gagal");
-                }
-            }
+    document.getElementById('statusBar').innerHTML = `<span class="status-pill"><span class="status-dot"></span> Mencoba Google Sheets (Live)...</span>`;
+    try {
+        const data = await loadCSVFromUrl(CSV_URL_PROXY);
+        masterData = data;
+        currentDataSource = 'google';
+        document.getElementById('statusBar').innerHTML = `<span class="status-pill"><span class="status-dot" style="background:var(--positive);"></span> 🟢 Sumber: Google Sheets (Live)</span><span class="status-pill"><i class="fas fa-cloud-sun"></i> Data real-time</span>`;
+        return true;
+    } catch (error) {
+        console.warn("Gagal Google Sheets, coba GitHub:", error);
+        document.getElementById('statusBar').innerHTML = `<span class="status-pill"><span class="status-dot" style="background:#f59e0b;"></span> ⚠️ Google gagal, mencoba GitHub...</span>`;
+        try {
+            const fallbackData = await loadCSVFromUrl(CSV_URL_GITHUB);
+            masterData = fallbackData;
+            currentDataSource = 'github';
+            let lastDate = masterData.dates[masterData.dates.length-1];
+            let daysOld = moment().diff(moment(lastDate), 'days');
+            let warning = daysOld > 7 ? ` ⚠️ Data sudah ${daysOld} hari (tidak up-to-date)` : '';
+            document.getElementById('statusBar').innerHTML = `<span class="status-pill"><span class="status-dot" style="background:#f59e0b;"></span> 🟡 Sumber: GitHub (Manual Upload)</span><span class="status-pill">Terakhir: ${lastDate}${warning}</span>`;
+            return true;
+        } catch (e) {
+            console.error("Semua sumber gagal:", e);
+            document.getElementById('statusBar').innerHTML = `<span class="status-pill" style="color:var(--negative);"><i class="fas fa-times-circle"></i> Gagal load semua sumber data.</span>`;
+            throw new Error("Semua sumber gagal");
         }
+    }
+}
 
         // ======================= RENDER FUNCTIONS (tidak diubah) =======================
         function renderStockSelector(symbols) {
