@@ -512,7 +512,14 @@
         #secretCommand.visible {
             display: block;
         }
-  </style>
+  
+.table-wrapper td{
+    white-space:nowrap;
+    font-size:13px;
+    font-weight:600;
+}
+
+</style>
   <style>
    #tripleClockTop {
     width: 100%;
@@ -817,7 +824,14 @@
 @media (max-width: 1000px) {#tripleClockTop .clock-wrapper {flex-direction: column;
                 gap: 20px;}#tripleClockTop .clock-box {min-width: 100%;}#tripleClockTop .digital-time {font-size: 42px;}#tripleClockTop .analog-clock {width: 220px;
                 height: 220px;}}
-  </style>
+  
+.table-wrapper td{
+    white-space:nowrap;
+    font-size:13px;
+    font-weight:600;
+}
+
+</style>
   <style>
    /* General responsive styles */
 body { margin: 0; padding: 0; }
@@ -834,7 +848,14 @@ img, canvas {
         -webkit-overflow-scrolling: touch; /* For iOS smooth scrolling */
     }
 }
-  </style>
+  
+.table-wrapper td{
+    white-space:nowrap;
+    font-size:13px;
+    font-weight:600;
+}
+
+</style>
  </head>
  <body>
   <!-- ===== SECRET COMMAND INPUT ===== -->
@@ -1114,7 +1135,7 @@ img, canvas {
     Grafik Pergerakan Nilai Tukar &amp; Saham
    </h1>
    <h2>
-    Periode 19 April 2025 s/d 20 Mei 2026
+    Periode 19 April 2025 s/d 31 Mei 2026
    </h2>
    <!-- ==================== TABEL UTAMA (SEMUA DATA KURS) ==================== -->
    <div class="table-wrapper">
@@ -1161,7 +1182,7 @@ img, canvas {
         <th>
          CHF Sell
         </th>
-       </tr>
+        </tr>
       </thead>
       <tbody id="tableBody">
       </tbody>
@@ -1228,8 +1249,8 @@ img, canvas {
         <th colspan="4" style="background:#e65100;">
          CHF
         </th>
-       </tr>
-       <tr>
+        </tr>
+        <tr>
         <th>
          Buy
         </th>
@@ -1302,116 +1323,13 @@ img, canvas {
         <th>
          Spread%
         </th>
-       </tr>
+         </tr>
       </thead>
       <tbody id="spreadTableBody">
       </tbody>
      </table>
     </div>
    </div>
-   <!-- 🔥 GOOGLE FINANCE STYLE CHART 🔥 
-<div style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    <h3 style="text-align: center; color: #333; margin-bottom: 10px;">📈 Perbandingan Saham - Google Finance Style (%)</h3>
-    <p style="text-align: center; font-size: 12px; color: #666; margin-bottom: 15px;">
-        * Grafik menampilkan perubahan persentase (%) dari harga awal periode yang dipilih.<br>
-        * BMRI (Biru) vs BBCA (Merah) — Base 0% = harga pertama di rentang tanggal.
-    </p>
-    <canvas id="chartGoogleFinance" height="120"></canvas>
-</div>-->
-   <script>
-    let financeChartInstance = null;
-
-function renderGoogleFinanceChart() {
-    const table = document.getElementById('tabelSaham');
-    if (!table) return;
-
-    const rows = table.querySelectorAll('tbody tr');
-    const labels = [];
-    const bmriData = [];
-    const bbcaData = [];
-    let bmriBase = null;
-    let bbcaBase = null;
-
-    // Loop dari data terlama ke terbaru
-    for (let i = rows.length - 1; i >= 0; i--) {
-        const cells = rows[i].querySelectorAll('td');
-        if (cells.length < 8) continue;
-
-        const date = cells[0].innerText.trim();
-        const bmriClose = parseInt(cells[2].innerText.replace(/[^0-9]/g, ''));
-        const bbcaClose = parseInt(cells[6].innerText.replace(/[^0-9]/g, ''));
-
-        if (!isNaN(bmriClose) && !isNaN(bbcaClose) && bmriClose > 0 && bbcaClose > 0) {
-            labels.push(date);
-            if (bmriBase === null) bmriBase = bmriClose;
-            if (bbcaBase === null) bbcaBase = bbcaClose;
-            
-            bmriData.push(((bmriClose - bmriBase) / bmriBase) * 100);
-            bbcaData.push(((bbcaClose - bbcaBase) / bbcaBase) * 100);
-        }
-    }
-
-    if (labels.length === 0) return;
-
-    const ctx = document.getElementById('chartGoogleFinance')?.getContext('2d');
-    if (!ctx) return;
-
-    if (financeChartInstance) financeChartInstance.destroy();
-
-    financeChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'BMRI',
-                    data: bmriData,
-                    borderColor: '#1a73e8',
-                    backgroundColor: 'rgba(26, 115, 232, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.1,
-                    pointRadius: 2
-                },
-                {
-                    label: 'BBCA',
-                    data: bbcaData,
-                    borderColor: '#ea4335',
-                    backgroundColor: 'rgba(234, 67, 53, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.1,
-                    pointRadius: 2
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            scales: {
-                y: {
-                    ticks: { callback: v => v.toFixed(1) + '%' },
-                    grid: { color: '#e0e0e0' }
-                },
-                x: { grid: { display: false } }
-            },
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: {
-                    callbacks: {
-                        label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`
-                    }
-                }
-            }
-        }
-    });
-}
-
-// Auto render saat halaman dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(renderGoogleFinanceChart, 1000);
-});
-   </script>
-   <!-- 🔥 END CHART 🔥 -->
    <div class="stats-box spread-high-box" id="spreadHighInfo">
    </div>
    <div class="stats-box spread-low-box" id="spreadLowInfo">
@@ -1516,7 +1434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <th>
          BBCA Spread%
         </th>
-       </tr>
+         </tr>
       </thead>
       <tbody id="stockFilterTableBody">
       </tbody>
@@ -1828,7 +1746,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
    </div>
    <div class="footer-note">
-    * Data nilai tukar &amp; saham diperbarui hingga 20 Mei 2026 (sumber: Kurs BCA)
+    * Data nilai tukar &amp; saham diperbarui hingga 31 Mei 2026 (sumber: Kurs BCA)
    </div>
   </div>
   <!-- end .container -->
@@ -1868,7 +1786,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "16/04 07:04", "18/04 07:01", "21/04 08:11", "27/04 21:08",
             "28/04 18:47", "01/05 22:57", "05/05 09:14", "06/05 22:16",
             "10/05 18:52", "11/05 18:52", "12/05 23:53", "13/05 21:59",
-            "14/05 23:17", "15/05 21:58", "18/05 23:37", "20/05 20:02"
+            "14/05 23:17", "15/05 21:58", "18/05 23:37", "20/05 20:02", "31/05 16:02"
         ];
 
         let globalCurrencyData = {
@@ -1888,7 +1806,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     16952, 16915, 16915, 16915, 16915, 16985, 16935, 16945,
                     16945, 16995, 17030, 16965, 17035, 17070, 17070, 17070,
                     17095, 17070, 17075, 17175, 17215, 17295, 17402, 17290,
-                    17330, 17350, 17445, 17445, 17445, 17445, 17625, 17630
+                    17330, 17350, 17445, 17445, 17445, 17445, 17625, 17630, 17800
                 ],
                 sell: [
                     16875, 16820, 16870, 16890, 16885, 16895, 16880, 16840,
@@ -1905,7 +1823,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     17022, 17085, 17085, 17105, 17105, 17085, 17015, 17055,
                     17055, 17065, 17130, 17045, 17135, 17170, 17170, 17170,
                     17175, 17180, 17155, 17255, 17295, 17395, 17422, 17420,
-                    17430, 17450, 17545, 17535, 17535, 17595, 17695, 17740
+                    17430, 17450, 17545, 17535, 17535, 17595, 17695, 17740, 17900
                 ]
             },
             sgd: {
@@ -1924,7 +1842,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     13240, 13225, 13194, 13161, 13172, 13164, 13134, 13109,
                     13091, 13160, 13206, 13233, 13294, 13313, 13341, 13350,
                     13373, 13365, 13426, 13404, 13381, 13519, 13620, 13548,
-                    13596, 13586, 13608, 13595, 13577, 13515, 13674, 13656
+                    13596, 13586, 13608, 13595, 13577, 13515, 13674, 13656, 13816
                 ],
                 sell: [
                     12879, 12919, 12896, 12877, 12865, 12860, 12872, 12842,
@@ -1941,7 +1859,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     13335, 13398, 13367, 13380, 13476, 13354, 13328, 13350,
                     13332, 13349, 13442, 13452, 13527, 13547, 13575, 13578,
                     13392, 13599, 13517, 13635, 13612, 13758, 13658, 13812,
-                    13836, 13826, 13904, 13884, 13865, 13862, 13945, 13960
+                    13836, 13826, 13904, 13884, 13865, 13862, 13945, 13960, 14146
                 ]
             },
             aud: {
@@ -1960,7 +1878,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     11949, 12003, 11954, 11774, 11700, 11707, 11655, 11617,
                     11583, 11677, 11763, 11840, 11923, 11923, 12020, 12069,
                     12156, 12134, 12234, 12235, 12205, 12383, 12442, 12404,
-                    12448, 12457, 12495, 12582, 12467, 12337, 12488, 12427
+                    12448, 12457, 12495, 12582, 12467, 12337, 12488, 12427, 12666
                 ],
                 sell: [
                     10775, 10835, 10799, 10820, 10827, 10768, 10790, 10813,
@@ -1977,7 +1895,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     12028, 12154, 12104, 12076, 12082, 11895, 11885, 11891,
                     11862, 11879, 12060, 12109, 12206, 12206, 12287, 12338,
                     12241, 12415, 12326, 12519, 12477, 12633, 12497, 12704,
-                    12741, 12745, 12829, 12857, 12801, 12731, 12803, 12767
+                    12741, 12745, 12829, 12857, 12801, 12731, 12803, 12767, 12978
                 ]
             },
             jpy: {
@@ -1996,7 +1914,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     106.28, 106.08, 105.81, 105.60, 105.56, 106.45, 106.13, 105.45,
                     105.38, 105.76, 105.89, 106.15, 106.13, 106.13, 106.38, 106.68,
                     106.80, 106.83, 107.36, 107.00, 106.91, 109.50, 110.60, 109.73,
-                    109.75, 109.56, 109.67, 109.46, 109.28, 109.83, 109.86, 109.78
+                    109.75, 109.56, 109.67, 109.46, 109.28, 109.83, 109.86, 109.78, 110.78
                 ],
                 sell: [
                     118.75, 119.48, 119.88, 118.97, 118.43, 118.33, 118.52, 117.79,
@@ -2013,7 +1931,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     107.22, 107.65, 107.37, 108.15, 109.06, 108.10, 107.88, 107.76,
                     107.69, 107.41, 108.22, 108.24, 108.37, 108.37, 108.63, 108.79,
                     108.94, 109.07, 108.00, 109.26, 109.08, 111.79, 110.90, 112.23,
-                    112.11, 111.92, 112.39, 112.11, 111.94, 111.89, 112.40, 112.63
+                    112.11, 111.92, 112.39, 112.11, 111.94, 111.89, 112.40, 112.63, 113.36
                 ]
             },
             eur: {
@@ -2032,7 +1950,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     19463, 19504, 19467, 19493, 19489, 19579, 19551, 19443,
                     19414, 19516, 19362, 19659, 19846, 19846, 19962, 20021,
                     20059, 19961, 20100, 20050, 19977, 20213, 20318, 20200,
-                    20302, 20304, 20324, 20264, 20213, 20120, 20375, 20277
+                    20302, 20304, 20324, 20264, 20213, 20120, 20375, 20277, 20569
                 ],
                 sell: [
                     19238, 19409, 19376, 19233, 19180, 19188, 19213, 19126,
@@ -2049,7 +1967,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     19552, 19710, 19672, 19846, 19957, 19855, 19849, 19803,
                     19774, 19789, 19993, 19997, 20199, 20199, 20319, 20353,
                     20391, 20327, 20234, 20396, 20329, 20572, 20377, 20582,
-                    20664, 20658, 20761, 20692, 20640, 20630, 20778, 20728
+                    20664, 20658, 20761, 20692, 20640, 20630, 20778, 20728, 21055
                 ]
             },
             chf: {
@@ -2068,7 +1986,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     21478, 21514, 21405, 21393, 21333, 21216, 21214, 21081,
                     21054, 21169, 21216, 21305, 21450, 21450, 21643, 21720,
                     21724, 21700, 21896, 21748, 21619, 22033, 22151, 22048,
-                    22173, 22147, 22164, 22113, 22099, 21987, 22270, 22114
+                    22173, 22147, 22164, 22113, 22099, 21987, 22270, 22114, 22593
                 ],
                 sell: [
                     20695, 20922, 20760, 20537, 20419, 20431, 20460, 20306,
@@ -2085,13 +2003,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     21624, 21778, 21673, 21798, 21867, 21539, 21544, 21490,
                     21474, 21493, 21615, 21680, 21849, 21849, 22063, 22105,
                     22127, 22106, 22064, 22162, 22011, 22472, 22255, 22489,
-                    22594, 22557, 22662, 22592, 22580, 22579, 22728, 22630
+                    22594, 22557, 22662, 22592, 22580, 22579, 22728, 22630, 23109
                 ]
             }
         };
 
         let globalBmriDates = [
-            "20/05", "19/05", "18/05", "13/05", "12/05", "11/05", "08/05", "07/05", "06/05",
+            "29/05", "26/05", "25/05", "22/05", "21/05", "20/05", "19/05", "18/05", "13/05", "12/05", "11/05", "08/05", "07/05", "06/05",
             "05/05", "04/05", "30/04", "29/04", "28/04",
             "27/04", "24/04", "23/04", "21/04", "20/04",
             "17/04", "16/04", "15/04", "14/04", "13/04",
@@ -2102,7 +2020,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBmriClose = [
-            4230, 4130, 4130, 4200, 4240, 4250, 4250, 4630, 4640,
+            4080, 4130, 4220, 4120, 4170, 4230, 4130, 4130, 4200, 4240, 4250, 4250, 4630, 4640,
             4510, 4490, 4420, 4390, 4430,
             4430, 4400, 4500, 4630, 4750,
             4700, 4620, 4620, 4640, 4650,
@@ -2113,7 +2031,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBmriOpen = [
-            4150, 4130, 4170, 4230, 4230, 4270, 4300, 4650, 4570,
+            4120, 4210, 4160, 4140, 4280, 4150, 4130, 4170, 4230, 4230, 4270, 4300, 4650, 4570,
             4530, 4420, 4430, 4430, 4440,
             4420, 4500, 4630, 4760, 4700,
             4610, 4640, 4680, 4670, 4750,
@@ -2126,7 +2044,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let globalBbcaDates = globalBmriDates;
 
         let globalBbcaClose = [
-            5975, 5950, 6125, 6100, 6100, 6125, 6150, 6175, 6225,
+            5700, 5975, 6100, 5900, 5950, 5975, 5950, 6125, 6100, 6100, 6125, 6150, 6175, 6225,
             5950, 5950, 5900, 5850, 5975,
             6000, 5975, 6050, 6425, 6450,
             6500, 6475, 6525, 6425, 6550,
@@ -2137,7 +2055,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         let globalBbcaOpen = [
-            5975, 6050, 5950, 6125, 6125, 6125, 6225, 6225, 6000,
+            5700, 5975, 6100, 5900, 5950, 5975, 6050, 5950, 6125, 6125, 6125, 6225, 6225, 6000,
             5950, 5900, 5800, 5950, 6000,
             6025, 6025, 6400, 6450, 6475,
             6475, 6450, 6575, 6500, 6775,
@@ -3429,14 +3347,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 corrHtml += `<tr><th>${corrLabels[idx]}</th>`;
                 stockAssets.forEach(stock => {
                     if (currLast38[key].length === 0 || stock.data.length === 0) {
-                        corrHtml += `<td class="corr-neutral">N/A</td>`;
+                        corrHtml += `<td class="corr-neutral">N/A<\/td>`;
                         return;
                     }
                     const r = pearson(currLast38[key], stock.data);
                     let cls = 'corr-neutral';
                     if (r > 0.3) cls = 'corr-pos';
                     if (r < -0.3) cls = 'corr-neg';
-                    corrHtml += `<td class="${cls}">${r.toFixed(3)}</td>`;
+                    corrHtml += `<td class="${cls}">${r.toFixed(3)}<\/td>`;
                 });
                 corrHtml += '</tr>';
             });
@@ -4465,8 +4383,8 @@ function update3DClock() {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Forex Compare | IDR vs 12 Mata Uang (Seperti Google Finance)</title>
+    <meta name="viewport" content="width=1280, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Forex Compare | IDR vs 32 Mata Uang (Seperti Google Finance)</title>
     <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -4619,33 +4537,150 @@ function update3DClock() {
             padding: 2px 12px;
             border-radius: 24px;
         }
+        .performer-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .performer-card {
+            --accent: #1f5e8e;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            border: 1px solid #e8eef6;
+            border-left: 7px solid var(--accent);
+            border-radius: 20px;
+            padding: 16px 16px 14px;
+            min-height: 148px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+        .performer-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(31, 94, 142, 0.05), transparent 35%, transparent 100%);
+            pointer-events: none;
+        }
+        .performer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.10);
+        }
+        .performer-card.winner {
+            border-left-color: #16a34a;
+        }
+        .performer-card.loser {
+            border-left-color: #dc2626;
+        }
+        .performer-card .performer-rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(31, 94, 142, 0.10);
+            color: #1f5e8e;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            margin-bottom: 10px;
+        }
+        .performer-card .performer-name {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #1a2c3e;
+            margin-bottom: 6px;
+        }
+        .performer-card .performer-pct {
+            font-size: 1.3rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+        .performer-card .performer-meta {
+            font-size: 0.76rem;
+            color: #6c7e97;
+            line-height: 1.5;
+        }
+        .performer-card .performer-chip {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: #1f5e8e;
+            background: rgba(31, 94, 142, 0.08);
+        }
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(31, 94, 142, 0.15);
+            border: 1px solid #e2e8f0;
         }
         table {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.82rem;
+            background: white;
+        }
+        thead tr {
+            background: linear-gradient(135deg, #1f5e8e, #2c4f7c);
         }
         th {
-            background: #f1f5f9;
-            padding: 14px 12px;
-            text-align: right;
-            font-weight: 600;
-            color: #2c3e5c;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 0.8px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        th:first-child {
+            text-align: left;
+            padding-left: 16px;
+            border-top-left-radius: 16px;
+        }
+        th:last-child {
+            border-top-right-radius: 16px;
         }
         td {
-            padding: 12px 12px;
+            padding: 10px 10px;
             border-bottom: 1px solid #eef2f8;
             text-align: right;
+            font-size: 0.82rem;
+            color: #334155;
+            font-weight: 500;
+            transition: background-color 0.15s;
         }
-        th:first-child, td:first-child {
+        td:first-child {
             text-align: left;
-            font-weight: 600;
-            background: white;
+            font-weight: 700;
+            color: #1f5e8e;
+            background: #f8fafc;
+            padding-left: 16px;
             position: sticky;
             left: 0;
+            border-right: 2px solid #e2e8f0;
+        }
+        tbody tr:hover td {
+            background-color: #f1f5f9;
+        }
+        tbody tr:hover td:first-child {
+            background-color: #e2e8f0;
+        }
+        tr.alt-row td {
+            background-color: #f8fafc;
+        }
+        tr.alt-row td:first-child {
+            background-color: #f1f5f9;
         }
         .heatmap-note {
             background: #f9fafc;
@@ -4676,81 +4711,31 @@ function update3DClock() {
             border-radius: 40px;
             font-size: 0.7rem;
         }
-    </style>
-
-    <!-- Bootstrap CSS for general responsiveness and utility classes -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* General responsive rules for images, SVGs, and Plotly containers */
-        img, svg, .js-plotly-plot, .plotly, .modebar-container {
-            max-width: 100% !important;
-            height: auto !important;
-            display: block; /* Helps with centering and layout */
-            margin-left: auto;
-            margin-right: auto;
+        .performer-date-range {
+            background: #f0f4fa;
+            border-radius: 20px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            flex-wrap: wrap;
         }
-
-        /* Specific styles for Plotly graph containers, if they have a fixed height */
-        .plotly-graph-container { /* If there's a div wrapping the plotly output */
-            width: 100%;
-            height: auto; /* Allow height to adjust */
-            min-height: 300px; /* Ensure a minimum height on small screens */
+        .performer-date-range div {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
-
-        /* Responsive Table CSS */
-        table { /* Targeting all tables, adjust if specific class is needed */
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
+        .performer-date-range label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #4a627a;
+            text-transform: uppercase;
         }
-        table th, table td {
-            padding: 10px 8px;
-            border: 1px solid #ddd;
-            text-align: left;
-            font-size: 0.9em;
-        }
-        table th {
-            background-color: #e9ecef;
-            font-weight: bold;
-            color: #333;
-        }
-
-        @media screen and (max-width: 768px) {
-            /* Hide table headers on small screens */
-            table thead {
-                display: none;
-            }
-            /* Make table rows and cells act like blocks */
-            table, tbody, tr, td {
-                display: block;
-                width: 100%;
-            }
-            /* Add margin and styling to rows for better separation */
-            table tr {
-                margin-bottom: 15px;
-                border: 1px solid #ddd;
-                display: block;
-                border-radius: 5px;
-                background-color: #fff;
-            }
-            /* Position cell content and label */
-            table td {
-                text-align: right;
-                padding-left: 50%; /* Make space for the pseudo-element label */
-                position: relative;
-            }
-            /* Use data-label for pseudo-element (need to add data-label in HTML tables for this to work perfectly) */
-            table td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 6px;
-                width: calc(50% - 10px);
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-                color: #555;
-            }
+        .performer-date-range input {
+            padding: 8px 12px;
+            border-radius: 24px;
+            border: 1px solid #cbd5e1;
         }
     </style>
 </head>
@@ -4758,7 +4743,7 @@ function update3DClock() {
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2><i class="fas fa-chart-line"></i> IDR vs 12 Mata Uang (USD, SGD, JPY, AUD, CHF, EUR, HKD, CNY, GBP, KRW, MYR, NZD)</h2>
+            <h2><i class="fas fa-chart-line"></i> IDR vs 32 Mata Uang</h2>
             <div class="legend-hint"><i class="fas fa-mouse-pointer"></i> Klik legenda grafik untuk sembunyikan/tampilkan garis</div>
         </div>
 
@@ -4775,20 +4760,20 @@ function update3DClock() {
             <button id="resetBtn" class="btn-reset"><i class="fas fa-undo-alt"></i> Reset 30 Hari</button>
         </div>
 
-        <!-- Mode grafik (Nominal vs Indexed) -->
         <div class="chart-mode">
             <label class="mode-option">
                 <input type="radio" name="chartMode" value="nominal" checked> 📊 Nominal (IDR)
             </label>
             <label class="mode-option">
-                <input type="radio" name="chartMode" value="indexed"> 📈 Perubahan % (Indexed = 100 awal) — seperti Google Finance
+                <input type="radio" name="chartMode" value="indexed"> 📈 Perubahan % (Indexed = 100 awal)
             </label>
         </div>
 
-        <!-- Grafik utama -->
         <div id="mainChart" style="width:100%; height:500px;"></div>
+		
+		<!-- INFO TANGGAL DI BAWAH GRAFIK -->
+        <div id="dateRangeInfo" class="date-range-info" style="margin-top: 12px; text-align: center;"></div>
 
-        <!-- Ringkasan perubahan (seperti Google Finance) -->
         <div id="statsSummary" class="stats-grid">
             <div class="loader">⏳ Memuat statistik...</div>
         </div>
@@ -4797,6 +4782,18 @@ function update3DClock() {
     <div class="card">
         <div class="card-header">
             <h2><i class="fas fa-table"></i> Data Historis Kurs (IDR per 1 unit valas)</h2>
+        </div>
+        <div class="date-panel" style="margin:20px 0;display:flex;gap:12px;align-items:end;flex-wrap:wrap">
+            <div>
+                <label style="display:block;font-size:12px;font-weight:bold;margin-bottom:6px">📅 FILTER TABEL DARI</label>
+                <input type="date" id="tableStartDate" style="padding:10px;border:1px solid #cbd5e1;border-radius:12px">
+            </div>
+            <div>
+                <label style="display:block;font-size:12px;font-weight:bold;margin-bottom:6px">📅 SAMPAI</label>
+                <input type="date" id="tableEndDate" style="padding:10px;border:1px solid #cbd5e1;border-radius:12px">
+            </div>
+            <button id="applyTableBtn" style="padding:11px 18px;border:none;border-radius:12px;background:#1f5e8e;color:white;font-weight:bold">Filter Tabel</button>
+            <button id="resetTableBtn" style="padding:11px 18px;border:none;border-radius:12px;background:#475569;color:white;font-weight:bold">Reset</button>
         </div>
         <div class="table-wrapper">
             <table id="ratesTable">
@@ -4808,52 +4805,58 @@ function update3DClock() {
 
     <div class="card">
         <div class="card-header">
+            <h2>🏆 Best &amp; Worst Performer 32 Mata Uang</h2>
+        </div>
+        <div class="performer-date-range">
+            <div>
+                <label>📅 Mulai (base)</label>
+                <input type="date" id="perfStartDate">
+            </div>
+            <div>
+                <label>📅 Akhir</label>
+                <input type="date" id="perfEndDate">
+            </div>
+            <button id="updatePerfBtn" style="margin-bottom:0">Update Ranking</button>
+        </div>
+        <div id="bestWorstContainer" class="performer-cards"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
             <h2><i class="fas fa-border-all"></i> Matriks Korelasi (Heatmap) & Penjelasan</h2>
         </div>
         <div id="heatmapChart" style="width:100%; height:500px;"></div>
         <div class="heatmap-note">
             📊 <strong>Cara baca heatmap:</strong> 
-            <span style="background:#2166ac; color:white; padding:2px 8px; border-radius:12px;">+1 (biru)</span> = kedua mata uang bergerak sangat searah (naik/turun bersama).
-            <span style="background:#f4a582; color:black; padding:2px 8px; border-radius:12px;">-1 (merah)</span> = bergerak berlawanan.
-            <span style="background:#f7f7f7;">0 (putih)</span> = tidak ada hubungan linear.
+            <span style="background:#2166ac; color:white; padding:2px 8px; border-radius:12px;">+1 (biru)</span> = searah,
+            <span style="background:#f4a582; color:black; padding:2px 8px; border-radius:12px;">-1 (merah)</span> = berlawanan.
         </div>
     </div>
     <div class="footer">
-        ⚡ Data dari API Frankfurter (gratis, update harian). Mode "Perubahan %" menampilkan pergerakan relatif seperti Google Finance.
+        ⚡ Data dari API Frankfurter (gratis, update harian).
     </div>
 </div>
 
 <script>
-    // ======================== KONFIGURASI 12 MATA UANG ========================
+    // ======================== 32 MATA UANG ========================
     const currencies = [
-        { code: "USD", name: "USD/IDR" },
-        { code: "SGD", name: "SGD/IDR" },
-        { code: "JPY", name: "JPY/IDR" },
-        { code: "AUD", name: "AUD/IDR" },
-        { code: "CHF", name: "CHF/IDR" },
-        { code: "EUR", name: "EUR/IDR" },
-        { code: "HKD", name: "HKD/IDR" },
-        { code: "CNY", name: "CNY/IDR" },
-        { code: "GBP", name: "GBP/IDR" },
-        { code: "KRW", name: "KRW/IDR" },
-        { code: "MYR", name: "MYR/IDR" },
-        { code: "NZD", name: "NZD/IDR" }
-    ];
+        "AED","AUD","BGN","BRL","CAD","CHF","CNY","CZK","DKK","EUR","GBP","HKD","HRK","HUF","IDR","ILS","INR","ISK","JPY","KRW","MXN","MYR","NOK","NZD","PHP","PLN","RON","RUB","SEK","SGD","THB","TRY","USD","ZAR"
+    ].map(code => ({ code, name: `${code}/IDR` }));
 
     let historicalData = [];
-    let currentChartMode = "indexed"; // default indexed seperti Google Finance
+    let currentChartMode = "indexed";
 
-    // Helper formatting
-    const formatRp = (val) => {
+    const formatRp = (val, code) => {
         if (val === undefined || val === null || isNaN(val)) return "N/A";
-        return "Rp " + Math.round(val).toLocaleString('id-ID');
-    };
-    const formatPct = (val) => {
-        if (val === undefined || isNaN(val)) return "0%";
-        return (val > 0 ? "+" : "") + val.toFixed(2) + "%";
+        if (code === 'JPY' || code === 'KRW' || code === 'HUF') {
+            return "Rp " + val.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        } else {
+            return "Rp " + Math.round(val).toLocaleString('id-ID');
+        }
     };
 
-    // ======================== FETCH DATA DARI API FRANKFURTER.DEV ========================
+    const formatPct = (val) => (val > 0 ? "+" : "") + val.toFixed(2) + "%";
+
     async function fetchRates(startDate, endDate) {
         const url = `https://api.frankfurter.dev/v1/${startDate}..${endDate}?base=USD`;
         try {
@@ -4861,14 +4864,12 @@ function update3DClock() {
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const json = await response.json();
             if (!json.rates) throw new Error("Data rates kosong");
-
             const dates = Object.keys(json.rates).sort();
             const result = [];
             for (let dt of dates) {
                 const daily = json.rates[dt];
                 const idrRate = daily["IDR"];
                 if (!idrRate) continue;
-
                 const row = { tanggal: dt };
                 for (let curr of currencies) {
                     if (curr.code === "USD") {
@@ -4886,12 +4887,11 @@ function update3DClock() {
             }
             return result;
         } catch (err) {
-            console.error("Fetch error:", err);
+            console.error(err);
             throw new Error(`Gagal mengambil data: ${err.message}`);
         }
     }
 
-    // Konversi data ke indexed (awal = 100)
     function getIndexedData(data) {
         if (!data.length) return [];
         const firstRow = data[0];
@@ -4910,16 +4910,15 @@ function update3DClock() {
         });
     }
 
-    // ======================== HITUNG PERUBAHAN PERIODE ========================
-    function getPeriodChanges(data) {
-        if (!data.length || data.length < 2) return [];
-        const first = data[0];
-        const last = data[data.length-1];
+    function getPeriodChanges(data, startIdx, endIdx) {
+        if (!data.length || startIdx >= data.length || endIdx >= data.length || startIdx >= endIdx) return [];
+        const first = data[startIdx];
+        const last = data[endIdx];
         const changes = [];
         for (let curr of currencies) {
             const startVal = first[curr.code];
             const endVal = last[curr.code];
-            if (startVal && endVal && !isNaN(startVal) && !isNaN(endVal)) {
+            if (startVal && endVal && !isNaN(startVal) && !isNaN(endVal) && startVal !== 0) {
                 const diffRp = endVal - startVal;
                 const diffPct = (diffRp / startVal) * 100;
                 changes.push({
@@ -4936,28 +4935,75 @@ function update3DClock() {
         return changes;
     }
 
-    // ======================== RENDER STATISTIK ========================
+    function updateBestWorstFromStats(data, startDate, endDate) {
+        if (!data.length || data.length < 2) return;
+        // Cari tanggal terdekat: startIdx = indeks pertama dgn tanggal >= startDate
+        let startIdx = data.findIndex(d => d.tanggal >= startDate);
+        // endIdx = indeks terakhir dgn tanggal <= endDate
+        let endIdx = -1;
+        for (let i = data.length - 1; i >= 0; i--) {
+            if (data[i].tanggal <= endDate) { endIdx = i; break; }
+        }
+        if (startIdx === -1 || endIdx === -1 || startIdx >= endIdx) return;
+        const changes = getPeriodChanges(data, startIdx, endIdx);
+        if (!changes.length) return;
+        changes.sort((a, b) => b.changePct - a.changePct);
+        const container = document.getElementById('bestWorstContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        const palette = ['#1f5e8e','#0f766e','#7c3aed','#ea580c','#2563eb','#db2777','#059669','#b45309','#4f46e5','#dc2626','#0891b2','#6b7280','#d97706','#0284c7','#be185d','#65a30d','#9333ea','#e11d48','#16a34a','#ea580c','#0891b2','#475569','#0e7b32','#c2410c','#7e22ce','#0f766e','#b91c1c','#f59e0b','#14b8a6','#8b5cf6','#ec4899','#84cc16'];
+        changes.forEach((item, idx) => {
+            const positive = item.changePct > 0;
+            const negative = item.changePct < 0;
+            const sign = positive ? '+' : '';
+            const arrow = positive ? '▲' : (negative ? '▼' : '↔');
+            const rankClass = idx === 0 ? 'winner' : idx === changes.length - 1 ? 'loser' : '';
+            let changeText;
+            if (item.code === 'JPY' || item.code === 'KRW' || item.code === 'HUF') {
+                changeText = 'Rp ' + Math.abs(item.changeRp).toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                changeText = 'Rp ' + Math.round(Math.abs(item.changeRp)).toLocaleString('id-ID');
+            }
+            const changeSign = item.changeRp >= 0 ? '↑' : '↓';
+            const changeColor = item.changeRp >= 0 ? '#16a34a' : '#dc2626';
+            const card = document.createElement('div');
+            card.className = 'performer-card ' + rankClass;
+            card.style.setProperty('--accent', palette[idx % palette.length]);
+            card.innerHTML = `
+                <div class="performer-rank">#${idx + 1}</div>
+                <div class="performer-name">${item.name}</div>
+                <div class="performer-pct" style="color:${positive ? '#16a34a' : (negative ? '#dc2626' : '#475569')}">
+                    ${arrow} ${sign}${item.changePct.toFixed(2)}%
+                </div>
+                <div class="performer-meta">
+                    ${item.startDate} → ${item.endDate}<br>
+                    <span style="color:${changeColor};font-weight:700;">${changeSign} ${changeText}</span>
+                </div>
+                <div class="performer-chip">32 MATA UANG</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
     function renderStats(data) {
-        const changes = getPeriodChanges(data);
+        if (!data.length) return;
+        const changes = getPeriodChanges(data, 0, data.length-1);
         const container = document.getElementById('statsSummary');
         if (!changes.length) {
-            container.innerHTML = '<div class="loader">⚠️ Tidak cukup data untuk statistik</div>';
+            container.innerHTML = '<div class="loader">⚠️ Tidak cukup data</div>';
             return;
         }
         let html = '';
-        for (let item of changes) {
+        for (let item of changes.slice(0, 12)) {
             const isPos = item.changeRp >= 0;
             html += `
                 <div class="stat-item">
                     <h4>${item.name}</h4>
-                    <div class="stat-value">${formatRp(item.endVal)}</div>
+                    <div class="stat-value">${formatRp(item.endVal, item.code)}</div>
                     <div class="stat-change">
                         <span class="${isPos ? 'positive' : 'negative'}">
-                            ${isPos ? '↑' : '↓'} ${formatRp(Math.abs(item.changeRp))} (${formatPct(item.changePct)})
+                            ${isPos ? '↑' : '↓'} ${formatRp(Math.abs(item.changeRp), item.code)} (${formatPct(item.changePct)})
                         </span>
-                        <div style="font-size:0.7rem; color:#6c7e97; margin-top: 4px;">
-                            ${item.startDate} → ${item.endDate}
-                        </div>
                     </div>
                 </div>
             `;
@@ -4965,41 +5011,72 @@ function update3DClock() {
         container.innerHTML = html;
     }
 
-    // ======================== RENDER TABEL ========================
     function renderTable(data) {
         if (!data.length) {
-            document.getElementById('tableBody').innerHTML = '<tr><td colspan="13">Tidak ada data</td></tr>';
+            document.getElementById('tableBody').innerHTML = '<tr><td colspan="35">Tidak ada data</td></tr>';
             return;
         }
-        let headerRow = '<tr><th>Tanggal</th>';
-        for (let curr of currencies) headerRow += `<th>${curr.code}</th>`;
+        const headerColors = {
+            USD:'#1f77b4', SGD:'#0f766e', AUD:'#ea580c', JPY:'#7c3aed', CHF:'#2563eb', EUR:'#db2777',
+            HKD:'#059669', CNY:'#16a34a', GBP:'#4f46e5', KRW:'#dc2626', MYR:'#0891b2', NZD:'#6b7280',
+            AED:'#c2410c', BGN:'#65a30d', BRL:'#d97706', CAD:'#0284c7', CZK:'#be185d', DKK:'#84cc16',
+            HRK:'#e11d48', HUF:'#f59e0b', ILS:'#14b8a6', INR:'#8b5cf6', ISK:'#ec4899', MXN:'#b45309',
+            NOK:'#0f766e', PHP:'#475569', PLN:'#7e22ce', RON:'#f97316', RUB:'#c0262d', SEK:'#2e7d32',
+            THB:'#0891b2', TRY:'#d97706', ZAR:'#6b7280'
+        };
+        let headerRow = '<tr><th>TANGGAL</th>';
+        for (let curr of currencies) {
+            headerRow += `<th style="background:${headerColors[curr.code] || '#1f5e8e'};color:white">${curr.code}</th>`;
+        }
         headerRow += '</tr>';
         document.getElementById('tableHeader').innerHTML = headerRow;
-
         let rows = '';
-        for (let row of data) {
-            rows += `<tr><td>${row.tanggal}</td>`;
+        for (let i = 0; i < data.length; i++) {
+            const row = data[i];
+            const rowClass = (i % 2 === 1) ? 'class="alt-row"' : '';
+            rows += `<tr ${rowClass}><td>${row.tanggal}</td>`;
             for (let curr of currencies) {
-                let val = row[curr.code];
-                rows += `<td>${(val !== null && !isNaN(val)) ? formatRp(val) : '-'}</td>`;
+                const val = row[curr.code];
+                if (val === null || isNaN(val)) {
+                    rows += '<td>-</td>';
+                    continue;
+                }
+                let arrow = '';
+                if (i > 0) {
+                    const prev = data[i-1][curr.code];
+                    if (prev !== null && !isNaN(prev)) {
+                        if (val > prev) arrow = '↑ ';
+                        else if (val < prev) arrow = '↓ ';
+                        else arrow = '↔ ';
+                    }
+                }
+                let formatted;
+                if (curr.code === 'JPY' || curr.code === 'KRW' || curr.code === 'HUF') {
+                    formatted = val.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                } else {
+                    formatted = Math.round(val).toLocaleString('id-ID');
+                }
+                rows += `<td>${arrow}Rp ${formatted}</td>`;
             }
             rows += '</tr>';
         }
         document.getElementById('tableBody').innerHTML = rows;
     }
 
-    // ======================== RENDER GRAFIK (dengan mode) ========================
+    function filterTableByDate() {
+        const start = document.getElementById('tableStartDate').value;
+        const end = document.getElementById('tableEndDate').value;
+        if (!start || !end) {
+            renderTable(historicalData);
+            return;
+        }
+        const filtered = historicalData.filter(item => item.tanggal >= start && item.tanggal <= end);
+        renderTable(filtered);
+    }
+
     function renderChart(data, mode) {
         if (!data.length) return;
-        let chartData;
-        let yTitle;
-        if (mode === "indexed") {
-            chartData = getIndexedData(data);
-            yTitle = "Perubahan (awal = 100) — %";
-        } else {
-            chartData = data;
-            yTitle = "Nilai Tukar (IDR)";
-        }
+        const chartData = mode === "indexed" ? getIndexedData(data) : data;
         const traces = [];
         for (let curr of currencies) {
             const yVals = chartData.map(d => d[curr.code]);
@@ -5009,18 +5086,15 @@ function update3DClock() {
                 y: yVals,
                 mode: 'lines+markers',
                 name: curr.name,
-                line: { width: 2.2 },
-                marker: { size: 3 },
+                line: { width: 1.8 },
+                marker: { size: 2 },
                 hovertemplate: mode === "indexed" ? '%{y:.2f}<extra></extra>' : '%{y:,.0f} IDR<extra></extra>'
             });
         }
-        const titleText = mode === "indexed" 
-            ? "Perbandingan Perubahan Kurs (Indexed 100) — seperti Google Finance"
-            : "Perbandingan Kurs IDR terhadap Valas (Nominal)";
         const layout = {
-            title: { text: titleText, font: { size: 13 } },
+            title: mode === "indexed" ? "Perubahan Kurs (Indexed 100)" : "Kurs Nominal",
             xaxis: { title: "Tanggal", tickangle: -30, gridcolor: '#eef2f8' },
-            yaxis: { title: yTitle, gridcolor: '#eef2f8' },
+            yaxis: { title: mode === "indexed" ? "Indeks (100 awal)" : "IDR", gridcolor: '#eef2f8' },
             legend: { orientation: "h", yanchor: "bottom", y: -0.25, xanchor: "center", x: 0.5, itemclick: "toggle" },
             hovermode: "x unified",
             plot_bgcolor: '#ffffff',
@@ -5029,7 +5103,6 @@ function update3DClock() {
         Plotly.newPlot('mainChart', traces, layout, { responsive: true });
     }
 
-    // ======================== KORELASI & HEATMAP ========================
     function computeCorrelation(data) {
         if (data.length < 2) return { matrix: [], codes: [] };
         const returns = {};
@@ -5071,10 +5144,7 @@ function update3DClock() {
             matrix[i] = [];
             for (let j=0; j<codes.length; j++) {
                 if (i===j) matrix[i][j] = 1;
-                else {
-                    const corr = pearson(returns[codes[i]], returns[codes[j]]);
-                    matrix[i][j] = parseFloat(corr.toFixed(2));
-                }
+                else matrix[i][j] = parseFloat(pearson(returns[codes[i]], returns[codes[j]]).toFixed(2));
             }
         }
         return { matrix, codes };
@@ -5082,7 +5152,7 @@ function update3DClock() {
 
     function renderHeatmap(data) {
         if (!data.length || data.length < 2) {
-            document.getElementById('heatmapChart').innerHTML = '<div style="padding:40px; text-align:center;">Data tidak cukup untuk korelasi (minimal 2 hari)</div>';
+            document.getElementById('heatmapChart').innerHTML = '<div style="padding:40px;text-align:center;">Data tidak cukup</div>';
             return;
         }
         const { matrix, codes } = computeCorrelation(data);
@@ -5095,36 +5165,28 @@ function update3DClock() {
             zmin: -1, zmax: 1,
             hovertemplate: 'Korelasi: %{z:.2f}<extra></extra>'
         }];
-        const layout = {
-            title: "Korelasi antar mata uang berdasarkan return harian",
-            xaxis: { title: "" }, yaxis: { title: "" },
-            margin: { l: 50, r: 20, t: 40, b: 50 },
-            height: 480
-        };
+        const layout = { title: "Korelasi antar mata uang", xaxis: { title: "" }, yaxis: { title: "" }, margin: { l: 50, r: 20, t: 40, b: 50 }, height: 480 };
         Plotly.newPlot('heatmapChart', heatData, layout, { responsive: true });
     }
 
-    // ======================== DASHBOARD UTAMA ========================
     async function updateDashboard(start, end) {
-        document.getElementById('statsSummary').innerHTML = '<div class="loader">⏳ Memuat statistik...</div>';
-        document.getElementById('tableBody').innerHTML = '<tr><td class="loader">Mengambil data kurs...</td></tr>';
+        document.getElementById('statsSummary').innerHTML = '<div class="loader">⏳ Memuat...</div>';
         try {
             const data = await fetchRates(start, end);
-            if (!data.length) throw new Error("Data kosong dari server");
+            if (!data.length) throw new Error("Data kosong");
             historicalData = data;
             renderTable(data);
             renderChart(data, currentChartMode);
             renderStats(data);
             renderHeatmap(data);
+            const perfStart = document.getElementById('perfStartDate').value || start;
+            const perfEnd = document.getElementById('perfEndDate').value || end;
+            updateBestWorstFromStats(data, perfStart, perfEnd);
         } catch (err) {
-            console.error(err);
-            document.getElementById('statsSummary').innerHTML = `<div style="grid-column:1/-1; color:#c62828; text-align:center;">❌ ${err.message}</div>`;
-            document.getElementById('tableBody').innerHTML = `<td><td colspan="13" style="color:#c62828; text-align:center;">Gagal memuat data. Coba lagi.</td></tr>`;
-            document.getElementById('heatmapChart').innerHTML = '<div style="padding:40px; text-align:center;">Tidak dapat menghitung korelasi.</div>';
+            document.getElementById('statsSummary').innerHTML = `<div style="grid-column:1/-1;color:#c62828;">❌ ${err.message}</div>`;
         }
     }
 
-    // ======================== DEFAULT 30 HARI & EVENT ========================
     function setDefault30() {
         const end = new Date();
         const start = new Date();
@@ -5133,208 +5195,165 @@ function update3DClock() {
         const endStr = end.toISOString().slice(0,10);
         document.getElementById('startDate').value = startStr;
         document.getElementById('endDate').value = endStr;
+        document.getElementById('perfStartDate').value = startStr;
+        document.getElementById('perfEndDate').value = endStr;
         updateDashboard(startStr, endStr);
     }
 
-    // Radio button change
     document.querySelectorAll('input[name="chartMode"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
             if (e.target.checked) {
                 currentChartMode = e.target.value;
-                if (historicalData.length) {
-                    renderChart(historicalData, currentChartMode);
-                }
+                if (historicalData.length) renderChart(historicalData, currentChartMode);
             }
         });
     });
-    // Set default ke indexed (seperti Google Finance)
     document.querySelector('input[value="indexed"]').checked = true;
     currentChartMode = "indexed";
 
     document.getElementById('applyBtn').addEventListener('click', () => {
         let start = document.getElementById('startDate').value;
         let end = document.getElementById('endDate').value;
-        if (!start || !end) { alert("Pilih tanggal mulai dan akhir"); return; }
+        if (!start || !end) return;
         if (new Date(start) > new Date(end)) { alert("Tanggal mulai harus <= akhir"); return; }
         updateDashboard(start, end);
     });
+    document.getElementById('applyTableBtn')?.addEventListener('click', filterTableByDate);
+    document.getElementById('resetTableBtn')?.addEventListener('click', () => renderTable(historicalData));
     document.getElementById('resetBtn').addEventListener('click', setDefault30);
+    document.getElementById('updatePerfBtn').addEventListener('click', async () => {
+        const start = document.getElementById('perfStartDate').value || document.getElementById('startDate').value;
+        const end = document.getElementById('perfEndDate').value || document.getElementById('endDate').value;
+        if (!start || !end) return;
+        if (new Date(start) > new Date(end)) { alert("Tanggal mulai harus <= akhir"); return; }
+        const container = document.getElementById('bestWorstContainer');
+        // Cek apakah tanggal yang dipilih sudah ada di historicalData
+        const dataStart = historicalData.length ? historicalData[0].tanggal : null;
+        const dataEnd = historicalData.length ? historicalData[historicalData.length-1].tanggal : null;
+        const withinRange = dataStart && dataEnd && start >= dataStart && end <= dataEnd;
+        if (withinRange) {
+            updateBestWorstFromStats(historicalData, start, end);
+        } else {
+            // Fetch data baru untuk rentang tanggal yang dipilih
+            container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text);">\u23F3 Memuat data ranking...</div>';
+            try {
+                const perfData = await fetchRates(start, end);
+                if (!perfData.length || perfData.length < 2) {
+                    container.innerHTML = '<div style="padding:20px;text-align:center;color:#c62828;">\u274C Data tidak cukup untuk rentang tanggal ini</div>';
+                    return;
+                }
+                updateBestWorstFromStats(perfData, start, end);
+            } catch(err) {
+                container.innerHTML = '<div style="padding:20px;text-align:center;color:#c62828;">\u274C ' + err.message + '</div>';
+            }
+        }
+    });
 
     setDefault30();
 </script>
-
-<script>
-let secretClickCount = 0;
-let secretLastClickTime = 0;
-
-document.addEventListener('click', function(event) {
-    // Memastikan komentar menggunakan garis miring ganda agar tidak eror
-    if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
-
-    const currentSecretTime = new Date().getTime();
-    
-    if (currentSecretTime - secretLastClickTime > 1500) {
-        secretClickCount = 0;
-    }
-    
-    secretClickCount++;
-    secretLastClickTime = currentSecretTime;
-    
-    if (secretClickCount === 7) {
-        alert("🔒 SECRET MODE ACTIVE!");
-        const secretInputBox = document.getElementById('secretCommand');
-        const secretCloseBtn = document.getElementById('closeSecretBtn');
-        
-        if (secretInputBox) secretInputBox.style.display = 'inline-block';
-        if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
-        
-        secretClickCount = 0;
-    }
-});
-</script>
-
-<script>
-// 1. Fitur Deteksi Ketikan 'player' (Abaikan Huruf Besar/Kecil) + Paksa Download
-const inputCmd = document.getElementById('secretCommand');
-if (inputCmd) {
-    inputCmd.addEventListener('input', function(e) {
-        if (e.target.value.trim().toLowerCase() === 'player') {
-            e.target.value = ''; // Reset kotak teks biar bersih kembali
-            
-            // Sembunyikan langsung menu input & tombol close
-            document.getElementById('secretCommand').style.display = 'none';
-            const closeBtn = document.getElementById('closeSecretBtn');
-            if (closeBtn) closeBtn.style.display = 'none';
-            
-            // Trik Sakti: Fetch file sebagai BLOB agar browser terpaksa membuka dialog download
-            // Kita pakai link RAW GitHub kamu yang paling stabil untuk download data mentah
-            const urlTarget = 'https://raw.githubusercontent.com/wlmyaps/kurs/refs/heads/main/index.html';
-            
-            fetch(urlTarget)
-                .then(response => {
-                    if (!response.ok) throw new Error('Gagal mengambil file dari GitHub');
-                    return response.blob();
-                })
-                .then(blob => {
-                    // Ubah blob menjadi URL unduhan sementara di memori browser
-                    const blobUrl = window.URL.createObjectURL(blob);
-                    const linkDownload = document.createElement('a');
-                    linkDownload.href = blobUrl;
-                    linkDownload.download = 'player_index.html'; // Nama file hasil download nanti
-                    
-                    document.body.appendChild(linkDownload);
-                    linkDownload.click();
-                    
-                    // Bersihkan memori kembali
-                    document.body.removeChild(linkDownload);
-                    window.URL.revokeObjectURL(blobUrl);
-                })
-                .catch(err => {
-                    alert('Waduh error download, coba sekali lagi, Bro: ' + err.message);
-                });
-        }
-    });
-}
-
-// 2. Fitur Mantra Klik 7x untuk Memunculkan Kembali Menu Rahasia (Bebas Bug)
-let secretClickCount = 0;
-let secretLastClickTime = 0;
-
-document.addEventListener('click', function(event) {
-    if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
-
-    const currentSecretTime = new Date().getTime();
-    if (currentSecretTime - secretLastClickTime > 1500) {
-        secretClickCount = 0; // Reset jika jeda klik lebih dari 1.5 detik
-    }
-    
-    secretClickCount++;
-    secretLastClickTime = currentSecretTime;
-    
-    if (secretClickCount === 7) {
-        alert("🔒 SECRET MODE ACTIVE!");
-        const secretInputBox = document.getElementById('secretCommand');
-        const secretCloseBtn = document.getElementById('closeSecretBtn');
-        
-        if (secretInputBox) secretInputBox.style.display = 'inline-block';
-        if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
-        
-        secretClickCount = 0;
-    }
-});
-</script>
 </body>
 </html></textarea>
- 
+
 <script>
 // 1. Fitur Deteksi Ketikan 'player' (Abaikan Huruf Besar/Kecil) + Paksa Download
 const inputCmd = document.getElementById('secretCommand');
 if (inputCmd) {
     inputCmd.addEventListener('input', function(e) {
         if (e.target.value.trim().toLowerCase() === 'player') {
-            e.target.value = ''; // Reset kotak teks biar bersih kembali
-            
-            // Sembunyikan langsung menu input & tombol close
+            e.target.value = '';
             document.getElementById('secretCommand').style.display = 'none';
             const closeBtn = document.getElementById('closeSecretBtn');
             if (closeBtn) closeBtn.style.display = 'none';
-            
-            // Trik Sakti: Fetch file sebagai BLOB agar browser terpaksa membuka dialog download
-            // Kita pakai link RAW GitHub kamu yang paling stabil untuk download data mentah
             const urlTarget = 'https://raw.githubusercontent.com/wlmyaps/kurs/refs/heads/main/index.html';
-            
             fetch(urlTarget)
                 .then(response => {
                     if (!response.ok) throw new Error('Gagal mengambil file dari GitHub');
                     return response.blob();
                 })
                 .then(blob => {
-                    // Ubah blob menjadi URL unduhan sementara di memori browser
                     const blobUrl = window.URL.createObjectURL(blob);
                     const linkDownload = document.createElement('a');
                     linkDownload.href = blobUrl;
-                    linkDownload.download = 'player_index.html'; // Nama file hasil download nanti
-                    
+                    linkDownload.download = 'player_index.html';
                     document.body.appendChild(linkDownload);
                     linkDownload.click();
-                    
-                    // Bersihkan memori kembali
                     document.body.removeChild(linkDownload);
                     window.URL.revokeObjectURL(blobUrl);
                 })
-                .catch(err => {
-                    alert('Waduh error download, coba sekali lagi, Bro: ' + err.message);
-                });
+                .catch(err => alert('Error: ' + err.message));
         }
     });
 }
 
-// 2. Fitur Mantra Klik 7x untuk Memunculkan Kembali Menu Rahasia (Bebas Bug)
-let secretClickCount = 0;
-let secretLastClickTime = 0;
-
+secretClickCount = 0;
+secretLastClickTime = 0;
 document.addEventListener('click', function(event) {
     if (event.target.id === 'closeSecretBtn' || event.target.id === 'secretCommand') return;
-
-    const currentSecretTime = new Date().getTime();
-    if (currentSecretTime - secretLastClickTime > 1500) {
-        secretClickCount = 0; // Reset jika jeda klik lebih dari 1.5 detik
-    }
-    
+    const now = Date.now();
+    if (now - secretLastClickTime > 1500) secretClickCount = 0;
     secretClickCount++;
-    secretLastClickTime = currentSecretTime;
-    
+    secretLastClickTime = now;
     if (secretClickCount === 7) {
         alert("🔒 SECRET MODE ACTIVE!");
         const secretInputBox = document.getElementById('secretCommand');
         const secretCloseBtn = document.getElementById('closeSecretBtn');
-        
         if (secretInputBox) secretInputBox.style.display = 'inline-block';
         if (secretCloseBtn) secretCloseBtn.style.display = 'inline-block';
-        
         secretClickCount = 0;
     }
 });
 </script>
+
+<style>
+.rate-up { color:#16a34a !important; font-weight:bold; }
+.rate-down { color:#dc2626 !important; font-weight:bold; }
+.rate-flat { color:#000 !important; font-weight:bold; }
+.dark-mode .rate-flat { color:#fff !important; }
+</style>
+
+<script>
+function applyNonBCATableFormatting() {
+    const table = document.getElementById('ratesTable');
+    if (!table) return;
+    const rows = table.querySelectorAll('tbody tr');
+    if (!rows.length) return;
+    for (let col = 1; col < rows[0].cells.length; col++) {
+        let prev = null;
+        rows.forEach((row, rowIndex) => {
+            const cell = row.cells[col];
+            if (!cell) return;
+            let raw = cell.getAttribute('data-raw');
+            if (!raw) {
+                raw = cell.textContent.trim().replace(/[↑↓↔\s]/g, '');
+                cell.setAttribute('data-raw', raw);
+            }
+            const value = parseFloat(raw.replace(/[^0-9.-]/g, ''));
+            cell.classList.remove('rate-up','rate-down','rate-flat');
+            let arrow = '↔';
+            if (rowIndex === 0 || prev === null || isNaN(value)) {
+                cell.classList.add('rate-flat');
+            } else if (value > prev) {
+                arrow = '↑';
+                cell.classList.add('rate-up');
+            } else if (value < prev) {
+                arrow = '↓';
+                cell.classList.add('rate-down');
+            } else {
+                arrow = '↔';
+                cell.classList.add('rate-flat');
+            }
+            cell.innerHTML = '<span style="margin-right:4px;">' + arrow + '</span>' + raw;
+            prev = value;
+        });
+    }
+}
+setInterval(() => {
+    const table = document.getElementById('ratesTable');
+    if (table && table.querySelectorAll('tbody tr').length > 1) {
+        applyNonBCATableFormatting();
+    }
+}, 2000);
+</script>
+
 </body>
 </html>
