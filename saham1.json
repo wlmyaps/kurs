@@ -1,6 +1,6 @@
 {
   "tickers": [
-    "BBCA",
+    "SAHAM_1",
     "BMRI",
     "BBRI",
     "BBNI",
@@ -50,61 +50,9 @@
   ],
   "history": [
     {
-      "dateStr": "2025-07-07",
-      "prices": {
-        "BBCA": 8625,
-        "BMRI": 4740,
-        "BBRI": 3700,
-        "BBNI": 4000,
-        "ASII": 4680,
-        "BRIS": 2570,
-        "BBTN": 1085,
-        "ARTO": 1740,
-        "BACA": 130,
-        "BBHI": 850,
-        "GOTO": 60,
-        "BBYB": 218,
-        "BCAP": 54,
-        "BDMN": 2430,
-        "BFIN": 805,
-        "BGTG": 75,
-        "BINA": 4360,
-        "BJBR": 800,
-        "BJTM": 484,
-        "BNGA": 1675,
-        "BNII": 197,
-        "BNLI": 2650,
-        "BSIM": 910,
-        "BTPN": 2120,
-        "BVIC": 93,
-        "CFIN": 306,
-        "DNET": 9325,
-        "INPC": 146,
-        "MAYA": 181,
-        "MCOR": 66,
-        "MEGA": 1625,
-        "MREI": 810,
-        "NISP": 1330,
-        "PANS": 1665,
-        "PNBN": 1155,
-        "PNIN": 905,
-        "PNLF": 252,
-        "TLKM": 2700,
-        "SRTG": 1625,
-        "TRIM": 350,
-        "VICO": 192,
-        "BTPS": 1385,
-        "TUGU": 945,
-        "BBSI": 4030,
-        "AGRO": 199,
-        "BBMD": 2120,
-        "COMPOSITE": 6900.93
-      }
-    },
-    {
       "dateStr": "2025-07-08",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4720,
         "BBRI": 3670,
         "BBNI": 3970,
@@ -156,7 +104,7 @@
     {
       "dateStr": "2025-07-09",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4710,
         "BBRI": 3680,
         "BBNI": 4000,
@@ -201,14 +149,14 @@
         "TUGU": 985,
         "BBSI": 4020,
         "AGRO": 200,
-        "BBMD": 2080,
+        "BBMD": 2120,
         "COMPOSITE": 6943.92
       }
     },
     {
       "dateStr": "2025-07-10",
       "prices": {
-        "BBCA": 8600,
+        "SAHAM_1": 8600,
         "BMRI": 4820,
         "BBRI": 3870,
         "BBNI": 4110,
@@ -260,7 +208,7 @@
     {
       "dateStr": "2025-07-11",
       "prices": {
-        "BBCA": 8625,
+        "SAHAM_1": 8625,
         "BMRI": 4970,
         "BBRI": 3880,
         "BBNI": 4180,
@@ -305,14 +253,14 @@
         "TUGU": 985,
         "BBSI": 4020,
         "AGRO": 216,
-        "BBMD": 2090,
+        "BBMD": 2080,
         "COMPOSITE": 7047.44
       }
     },
     {
       "dateStr": "2025-07-14",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4690,
         "BBRI": 3780,
         "BBNI": 4040,
@@ -357,14 +305,14 @@
         "TUGU": 970,
         "BBSI": 4030,
         "AGRO": 212,
-        "BBMD": 2110,
+        "BBMD": 2090,
         "COMPOSITE": 7097.15
       }
     },
     {
       "dateStr": "2025-07-15",
       "prices": {
-        "BBCA": 8550,
+        "SAHAM_1": 8550,
         "BMRI": 4700,
         "BBRI": 3880,
         "BBNI": 4050,
@@ -409,14 +357,14 @@
         "TUGU": 970,
         "BBSI": 4030,
         "AGRO": 212,
-        "BBMD": 2180,
+        "BBMD": 2110,
         "COMPOSITE": 7140.47
       }
     },
     {
       "dateStr": "2025-07-16",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4690,
         "BBRI": 3880,
         "BBNI": 4130,
@@ -461,14 +409,14 @@
         "TUGU": 980,
         "BBSI": 4000,
         "AGRO": 212,
-        "BBMD": 2200,
+        "BBMD": 2180,
         "COMPOSITE": 7192.02
       }
     },
     {
       "dateStr": "2025-07-17",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4720,
         "BBRI": 3890,
         "BBNI": 4110,
@@ -520,7 +468,7 @@
     {
       "dateStr": "2025-07-18",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 4740,
         "BBRI": 3860,
         "BBNI": 4120,
@@ -565,14 +513,14 @@
         "TUGU": 1005,
         "BBSI": 4000,
         "AGRO": 210,
-        "BBMD": 2180,
+        "BBMD": 2200,
         "COMPOSITE": 7311.92
       }
     },
     {
       "dateStr": "2025-07-21",
       "prices": {
-        "BBCA": 8450,
+        "SAHAM_1": 8450,
         "BMRI": 4680,
         "BBRI": 3830,
         "BBNI": 4070,
@@ -617,14 +565,14 @@
         "TUGU": 985,
         "BBSI": 4010,
         "AGRO": 208,
-        "BBMD": 2200,
+        "BBMD": 2180,
         "COMPOSITE": 7398.19
       }
     },
     {
       "dateStr": "2025-07-22",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4660,
         "BBRI": 3840,
         "BBNI": 4050,
@@ -676,7 +624,7 @@
     {
       "dateStr": "2025-07-23",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 4680,
         "BBRI": 3800,
         "BBNI": 4100,
@@ -721,14 +669,14 @@
         "TUGU": 970,
         "BBSI": 3900,
         "AGRO": 206,
-        "BBMD": 2120,
+        "BBMD": 2200,
         "COMPOSITE": 7469.23
       }
     },
     {
       "dateStr": "2025-07-24",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4800,
         "BBRI": 3950,
         "BBNI": 4220,
@@ -773,14 +721,14 @@
         "TUGU": 980,
         "BBSI": 4000,
         "AGRO": 214,
-        "BBMD": 2180,
+        "BBMD": 2120,
         "COMPOSITE": 7530.9
       }
     },
     {
       "dateStr": "2025-07-25",
       "prices": {
-        "BBCA": 8450,
+        "SAHAM_1": 8450,
         "BMRI": 4690,
         "BBRI": 3880,
         "BBNI": 4090,
@@ -825,14 +773,14 @@
         "TUGU": 995,
         "BBSI": 4000,
         "AGRO": 214,
-        "BBMD": 2190,
+        "BBMD": 2180,
         "COMPOSITE": 7543.5
       }
     },
     {
       "dateStr": "2025-07-28",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4700,
         "BBRI": 3940,
         "BBNI": 4210,
@@ -877,14 +825,14 @@
         "TUGU": 1000,
         "BBSI": 3900,
         "AGRO": 214,
-        "BBMD": 2150,
+        "BBMD": 2190,
         "COMPOSITE": 7614.77
       }
     },
     {
       "dateStr": "2025-07-29",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4710,
         "BBRI": 3920,
         "BBNI": 4150,
@@ -929,14 +877,14 @@
         "TUGU": 980,
         "BBSI": 3900,
         "AGRO": 212,
-        "BBMD": 2170,
+        "BBMD": 2150,
         "COMPOSITE": 7617.91
       }
     },
     {
       "dateStr": "2025-07-30",
       "prices": {
-        "BBCA": 8375,
+        "SAHAM_1": 8375,
         "BMRI": 4620,
         "BBRI": 3780,
         "BBNI": 4120,
@@ -981,14 +929,14 @@
         "TUGU": 980,
         "BBSI": 4000,
         "AGRO": 212,
-        "BBMD": 2190,
+        "BBMD": 2170,
         "COMPOSITE": 7549.89
       }
     },
     {
       "dateStr": "2025-07-31",
       "prices": {
-        "BBCA": 8275,
+        "SAHAM_1": 8275,
         "BMRI": 4510,
         "BBRI": 3710,
         "BBNI": 4010,
@@ -1033,14 +981,14 @@
         "TUGU": 960,
         "BBSI": 4000,
         "AGRO": 208,
-        "BBMD": 2170,
+        "BBMD": 2190,
         "COMPOSITE": 7484.34
       }
     },
     {
       "dateStr": "2025-08-01",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4530,
         "BBRI": 3740,
         "BBNI": 4010,
@@ -1085,14 +1033,14 @@
         "TUGU": 960,
         "BBSI": 4010,
         "AGRO": 210,
-        "BBMD": 2150,
+        "BBMD": 2170,
         "COMPOSITE": 7537.77
       }
     },
     {
       "dateStr": "2025-08-04",
       "prices": {
-        "BBCA": 8275,
+        "SAHAM_1": 8275,
         "BMRI": 4620,
         "BBRI": 3710,
         "BBNI": 4010,
@@ -1137,14 +1085,14 @@
         "TUGU": 915,
         "BBSI": 4010,
         "AGRO": 212,
-        "BBMD": 2160,
+        "BBMD": 2150,
         "COMPOSITE": 7464.65
       }
     },
     {
       "dateStr": "2025-08-05",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 4750,
         "BBRI": 3740,
         "BBNI": 4220,
@@ -1189,14 +1137,14 @@
         "TUGU": 930,
         "BBSI": 4000,
         "AGRO": 210,
-        "BBMD": 2130,
+        "BBMD": 2160,
         "COMPOSITE": 7515.19
       }
     },
     {
       "dateStr": "2025-08-06",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4700,
         "BBRI": 3710,
         "BBNI": 4100,
@@ -1241,14 +1189,14 @@
         "TUGU": 935,
         "BBSI": 4010,
         "AGRO": 214,
-        "BBMD": 2090,
+        "BBMD": 2130,
         "COMPOSITE": 7503.75
       }
     },
     {
       "dateStr": "2025-08-07",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4680,
         "BBRI": 3710,
         "BBNI": 4120,
@@ -1293,14 +1241,14 @@
         "TUGU": 930,
         "BBSI": 4020,
         "AGRO": 212,
-        "BBMD": 2110,
+        "BBMD": 2090,
         "COMPOSITE": 7490.18
       }
     },
     {
       "dateStr": "2025-08-08",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4670,
         "BBRI": 3700,
         "BBNI": 4070,
@@ -1345,14 +1293,14 @@
         "TUGU": 940,
         "BBSI": 4010,
         "AGRO": 208,
-        "BBMD": 2100,
+        "BBMD": 2110,
         "COMPOSITE": 7533.39
       }
     },
     {
       "dateStr": "2025-08-11",
       "prices": {
-        "BBCA": 8550,
+        "SAHAM_1": 8550,
         "BMRI": 4720,
         "BBRI": 3810,
         "BBNI": 4200,
@@ -1397,14 +1345,14 @@
         "TUGU": 935,
         "BBSI": 4020,
         "AGRO": 218,
-        "BBMD": 2110,
+        "BBMD": 2100,
         "COMPOSITE": 7605.93
       }
     },
     {
       "dateStr": "2025-08-12",
       "prices": {
-        "BBCA": 8850,
+        "SAHAM_1": 8850,
         "BMRI": 4910,
         "BBRI": 4050,
         "BBNI": 4360,
@@ -1456,7 +1404,7 @@
     {
       "dateStr": "2025-08-13",
       "prices": {
-        "BBCA": 8925,
+        "SAHAM_1": 8925,
         "BMRI": 4870,
         "BBRI": 4080,
         "BBNI": 4370,
@@ -1501,14 +1449,14 @@
         "TUGU": 960,
         "BBSI": 4000,
         "AGRO": 240,
-        "BBMD": 2080,
+        "BBMD": 2110,
         "COMPOSITE": 7892.91
       }
     },
     {
       "dateStr": "2025-08-14",
       "prices": {
-        "BBCA": 8775,
+        "SAHAM_1": 8775,
         "BMRI": 4850,
         "BBRI": 4060,
         "BBNI": 4390,
@@ -1553,14 +1501,14 @@
         "TUGU": 980,
         "BBSI": 4000,
         "AGRO": 236,
-        "BBMD": 2110,
+        "BBMD": 2080,
         "COMPOSITE": 7931.25
       }
     },
     {
       "dateStr": "2025-08-15",
       "prices": {
-        "BBCA": 8700,
+        "SAHAM_1": 8700,
         "BMRI": 4850,
         "BBRI": 4120,
         "BBNI": 4370,
@@ -1612,7 +1560,7 @@
     {
       "dateStr": "2025-08-19",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4800,
         "BBRI": 4040,
         "BBNI": 4330,
@@ -1664,7 +1612,7 @@
     {
       "dateStr": "2025-08-20",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4950,
         "BBRI": 4150,
         "BBNI": 4430,
@@ -1709,14 +1657,14 @@
         "TUGU": 970,
         "BBSI": 4050,
         "AGRO": 244,
-        "BBMD": 2080,
+        "BBMD": 2110,
         "COMPOSITE": 7943.83
       }
     },
     {
       "dateStr": "2025-08-21",
       "prices": {
-        "BBCA": 8550,
+        "SAHAM_1": 8550,
         "BMRI": 4900,
         "BBRI": 4150,
         "BBNI": 4490,
@@ -1768,7 +1716,7 @@
     {
       "dateStr": "2025-08-22",
       "prices": {
-        "BBCA": 8450,
+        "SAHAM_1": 8450,
         "BMRI": 4890,
         "BBRI": 4100,
         "BBNI": 4390,
@@ -1813,14 +1761,14 @@
         "TUGU": 970,
         "BBSI": 4050,
         "AGRO": 240,
-        "BBMD": 2150,
+        "BBMD": 2080,
         "COMPOSITE": 7858.85
       }
     },
     {
       "dateStr": "2025-08-25",
       "prices": {
-        "BBCA": 8475,
+        "SAHAM_1": 8475,
         "BMRI": 4950,
         "BBRI": 4210,
         "BBNI": 4450,
@@ -1865,14 +1813,14 @@
         "TUGU": 990,
         "BBSI": 4000,
         "AGRO": 252,
-        "BBMD": 2140,
+        "BBMD": 2150,
         "COMPOSITE": 7926.91
       }
     },
     {
       "dateStr": "2025-08-26",
       "prices": {
-        "BBCA": 8250,
+        "SAHAM_1": 8250,
         "BMRI": 4900,
         "BBRI": 4170,
         "BBNI": 4540,
@@ -1917,14 +1865,14 @@
         "TUGU": 980,
         "BBSI": 4010,
         "AGRO": 248,
-        "BBMD": 2110,
+        "BBMD": 2140,
         "COMPOSITE": 7905.76
       }
     },
     {
       "dateStr": "2025-08-27",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4800,
         "BBRI": 4130,
         "BBNI": 4450,
@@ -1969,14 +1917,14 @@
         "TUGU": 975,
         "BBSI": 3990,
         "AGRO": 244,
-        "BBMD": 2120,
+        "BBMD": 2110,
         "COMPOSITE": 7936.18
       }
     },
     {
       "dateStr": "2025-08-28",
       "prices": {
-        "BBCA": 8325,
+        "SAHAM_1": 8325,
         "BMRI": 4770,
         "BBRI": 4140,
         "BBNI": 4460,
@@ -2021,14 +1969,14 @@
         "TUGU": 970,
         "BBSI": 4030,
         "AGRO": 244,
-        "BBMD": 2130,
+        "BBMD": 2120,
         "COMPOSITE": 7952.09
       }
     },
     {
       "dateStr": "2025-08-29",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 4730,
         "BBRI": 4050,
         "BBNI": 4380,
@@ -2073,14 +2021,14 @@
         "TUGU": 970,
         "BBSI": 4010,
         "AGRO": 236,
-        "BBMD": 2090,
+        "BBMD": 2130,
         "COMPOSITE": 7830.49
       }
     },
     {
       "dateStr": "2025-09-01",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4600,
         "BBRI": 3980,
         "BBNI": 4320,
@@ -2132,7 +2080,7 @@
     {
       "dateStr": "2025-09-02",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4570,
         "BBRI": 3960,
         "BBNI": 4310,
@@ -2177,14 +2125,14 @@
         "TUGU": 965,
         "BBSI": 4050,
         "AGRO": 230,
-        "BBMD": 2110,
+        "BBMD": 2090,
         "COMPOSITE": 7801.59
       }
     },
     {
       "dateStr": "2025-09-03",
       "prices": {
-        "BBCA": 7975,
+        "SAHAM_1": 7975,
         "BMRI": 4620,
         "BBRI": 4030,
         "BBNI": 4410,
@@ -2229,14 +2177,14 @@
         "TUGU": 965,
         "BBSI": 4020,
         "AGRO": 236,
-        "BBMD": 2140,
+        "BBMD": 2110,
         "COMPOSITE": 7885.86
       }
     },
     {
       "dateStr": "2025-09-04",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4680,
         "BBRI": 4000,
         "BBNI": 4370,
@@ -2281,14 +2229,14 @@
         "TUGU": 960,
         "BBSI": 4070,
         "AGRO": 232,
-        "BBMD": 2180,
+        "BBMD": 2140,
         "COMPOSITE": 7867.35
       }
     },
     {
       "dateStr": "2025-09-08",
       "prices": {
-        "BBCA": 7700,
+        "SAHAM_1": 7700,
         "BMRI": 4490,
         "BBRI": 3900,
         "BBNI": 4180,
@@ -2333,14 +2281,14 @@
         "TUGU": 950,
         "BBSI": 4030,
         "AGRO": 226,
-        "BBMD": 2120,
+        "BBMD": 2180,
         "COMPOSITE": 7766.85
       }
     },
     {
       "dateStr": "2025-09-09",
       "prices": {
-        "BBCA": 7525,
+        "SAHAM_1": 7525,
         "BMRI": 4310,
         "BBRI": 3790,
         "BBNI": 4080,
@@ -2385,14 +2333,14 @@
         "TUGU": 960,
         "BBSI": 4060,
         "AGRO": 226,
-        "BBMD": 2170,
+        "BBMD": 2120,
         "COMPOSITE": 7628.61
       }
     },
     {
       "dateStr": "2025-09-10",
       "prices": {
-        "BBCA": 7800,
+        "SAHAM_1": 7800,
         "BMRI": 4400,
         "BBRI": 3880,
         "BBNI": 4100,
@@ -2437,14 +2385,14 @@
         "TUGU": 960,
         "BBSI": 4000,
         "AGRO": 246,
-        "BBMD": 2100,
+        "BBMD": 2170,
         "COMPOSITE": 7699.01
       }
     },
     {
       "dateStr": "2025-09-11",
       "prices": {
-        "BBCA": 7850,
+        "SAHAM_1": 7850,
         "BMRI": 4480,
         "BBRI": 4080,
         "BBNI": 4420,
@@ -2489,14 +2437,14 @@
         "TUGU": 970,
         "BBSI": 4010,
         "AGRO": 248,
-        "BBMD": 2130,
+        "BBMD": 2100,
         "COMPOSITE": 7747.91
       }
     },
     {
       "dateStr": "2025-09-12",
       "prices": {
-        "BBCA": 7925,
+        "SAHAM_1": 7925,
         "BMRI": 4520,
         "BBRI": 4180,
         "BBNI": 4520,
@@ -2541,14 +2489,14 @@
         "TUGU": 970,
         "BBSI": 3930,
         "AGRO": 250,
-        "BBMD": 2110,
+        "BBMD": 2130,
         "COMPOSITE": 7854.06
       }
     },
     {
       "dateStr": "2025-09-15",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 4530,
         "BBRI": 4140,
         "BBNI": 4410,
@@ -2593,14 +2541,14 @@
         "TUGU": 970,
         "BBSI": 4000,
         "AGRO": 254,
-        "BBMD": 2090,
+        "BBMD": 2110,
         "COMPOSITE": 7937.12
       }
     },
     {
       "dateStr": "2025-09-16",
       "prices": {
-        "BBCA": 7925,
+        "SAHAM_1": 7925,
         "BMRI": 4480,
         "BBRI": 4130,
         "BBNI": 4370,
@@ -2645,14 +2593,14 @@
         "TUGU": 960,
         "BBSI": 4050,
         "AGRO": 244,
-        "BBMD": 2100,
+        "BBMD": 2090,
         "COMPOSITE": 7957.7
       }
     },
     {
       "dateStr": "2025-09-17",
       "prices": {
-        "BBCA": 7850,
+        "SAHAM_1": 7850,
         "BMRI": 4510,
         "BBRI": 4220,
         "BBNI": 4450,
@@ -2697,14 +2645,14 @@
         "TUGU": 955,
         "BBSI": 4000,
         "AGRO": 250,
-        "BBMD": 2110,
+        "BBMD": 2100,
         "COMPOSITE": 8025.18
       }
     },
     {
       "dateStr": "2025-09-18",
       "prices": {
-        "BBCA": 7700,
+        "SAHAM_1": 7700,
         "BMRI": 4420,
         "BBRI": 4250,
         "BBNI": 4340,
@@ -2749,14 +2697,14 @@
         "TUGU": 965,
         "BBSI": 4220,
         "AGRO": 244,
-        "BBMD": 2090,
+        "BBMD": 2110,
         "COMPOSITE": 8008.43
       }
     },
     {
       "dateStr": "2025-09-19",
       "prices": {
-        "BBCA": 7800,
+        "SAHAM_1": 7800,
         "BMRI": 4380,
         "BBRI": 4250,
         "BBNI": 4270,
@@ -2808,7 +2756,7 @@
     {
       "dateStr": "2025-09-22",
       "prices": {
-        "BBCA": 7725,
+        "SAHAM_1": 7725,
         "BMRI": 4420,
         "BBRI": 4160,
         "BBNI": 4210,
@@ -2853,14 +2801,14 @@
         "TUGU": 1030,
         "BBSI": 4380,
         "AGRO": 240,
-        "BBMD": 2120,
+        "BBMD": 2090,
         "COMPOSITE": 8040.04
       }
     },
     {
       "dateStr": "2025-09-23",
       "prices": {
-        "BBCA": 7875,
+        "SAHAM_1": 7875,
         "BMRI": 4410,
         "BBRI": 4140,
         "BBNI": 4200,
@@ -2905,14 +2853,14 @@
         "TUGU": 1025,
         "BBSI": 5000,
         "AGRO": 240,
-        "BBMD": 2060,
+        "BBMD": 2120,
         "COMPOSITE": 8125.2
       }
     },
     {
       "dateStr": "2025-09-24",
       "prices": {
-        "BBCA": 7775,
+        "SAHAM_1": 7775,
         "BMRI": 4390,
         "BBRI": 4170,
         "BBNI": 4190,
@@ -2957,14 +2905,14 @@
         "TUGU": 995,
         "BBSI": 4790,
         "AGRO": 234,
-        "BBMD": 2080,
+        "BBMD": 2060,
         "COMPOSITE": 8126.56
       }
     },
     {
       "dateStr": "2025-09-25",
       "prices": {
-        "BBCA": 7700,
+        "SAHAM_1": 7700,
         "BMRI": 4360,
         "BBRI": 4070,
         "BBNI": 4190,
@@ -3009,14 +2957,14 @@
         "TUGU": 995,
         "BBSI": 4790,
         "AGRO": 234,
-        "BBMD": 2090,
+        "BBMD": 2080,
         "COMPOSITE": 8040.67
       }
     },
     {
       "dateStr": "2025-09-26",
       "prices": {
-        "BBCA": 7625,
+        "SAHAM_1": 7625,
         "BMRI": 4420,
         "BBRI": 4040,
         "BBNI": 4180,
@@ -3061,14 +3009,14 @@
         "TUGU": 995,
         "BBSI": 4670,
         "AGRO": 242,
-        "BBMD": 2130,
+        "BBMD": 2090,
         "COMPOSITE": 8099.33
       }
     },
     {
       "dateStr": "2025-09-29",
       "prices": {
-        "BBCA": 7775,
+        "SAHAM_1": 7775,
         "BMRI": 4400,
         "BBRI": 3980,
         "BBNI": 4170,
@@ -3120,7 +3068,7 @@
     {
       "dateStr": "2025-09-30",
       "prices": {
-        "BBCA": 7625,
+        "SAHAM_1": 7625,
         "BMRI": 4400,
         "BBRI": 3900,
         "BBNI": 4100,
@@ -3172,7 +3120,7 @@
     {
       "dateStr": "2025-10-01",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 4380,
         "BBRI": 3810,
         "BBNI": 4050,
@@ -3224,7 +3172,7 @@
     {
       "dateStr": "2025-10-02",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 4360,
         "BBRI": 3710,
         "BBNI": 4040,
@@ -3269,14 +3217,14 @@
         "TUGU": 1040,
         "BBSI": 5100,
         "AGRO": 254,
-        "BBMD": 2120,
+        "BBMD": 2130,
         "COMPOSITE": 8071.08
       }
     },
     {
       "dateStr": "2025-10-03",
       "prices": {
-        "BBCA": 7525,
+        "SAHAM_1": 7525,
         "BMRI": 4310,
         "BBRI": 3690,
         "BBNI": 4040,
@@ -3321,14 +3269,14 @@
         "TUGU": 1025,
         "BBSI": 4630,
         "AGRO": 252,
-        "BBMD": 2040,
+        "BBMD": 2120,
         "COMPOSITE": 8118.3
       }
     },
     {
       "dateStr": "2025-10-06",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 4260,
         "BBRI": 3660,
         "BBNI": 4000,
@@ -3373,14 +3321,14 @@
         "TUGU": 1025,
         "BBSI": 4490,
         "AGRO": 246,
-        "BBMD": 2050,
+        "BBMD": 2040,
         "COMPOSITE": 8139.89
       }
     },
     {
       "dateStr": "2025-10-07",
       "prices": {
-        "BBCA": 7575,
+        "SAHAM_1": 7575,
         "BMRI": 4290,
         "BBRI": 3710,
         "BBNI": 3990,
@@ -3425,14 +3373,14 @@
         "TUGU": 1010,
         "BBSI": 4880,
         "AGRO": 240,
-        "BBMD": 2040,
+        "BBMD": 2050,
         "COMPOSITE": 8169.28
       }
     },
     {
       "dateStr": "2025-10-08",
       "prices": {
-        "BBCA": 7375,
+        "SAHAM_1": 7375,
         "BMRI": 4250,
         "BBRI": 3720,
         "BBNI": 3940,
@@ -3484,7 +3432,7 @@
     {
       "dateStr": "2025-10-09",
       "prices": {
-        "BBCA": 7550,
+        "SAHAM_1": 7550,
         "BMRI": 4390,
         "BBRI": 3860,
         "BBNI": 4100,
@@ -3536,7 +3484,7 @@
     {
       "dateStr": "2025-10-10",
       "prices": {
-        "BBCA": 7400,
+        "SAHAM_1": 7400,
         "BMRI": 4250,
         "BBRI": 3730,
         "BBNI": 3970,
@@ -3581,14 +3529,14 @@
         "TUGU": 1025,
         "BBSI": 4580,
         "AGRO": 236,
-        "BBMD": 2110,
+        "BBMD": 2040,
         "COMPOSITE": 8257.86
       }
     },
     {
       "dateStr": "2025-10-13",
       "prices": {
-        "BBCA": 7325,
+        "SAHAM_1": 7325,
         "BMRI": 4230,
         "BBRI": 3660,
         "BBNI": 3900,
@@ -3640,7 +3588,7 @@
     {
       "dateStr": "2025-10-14",
       "prices": {
-        "BBCA": 7250,
+        "SAHAM_1": 7250,
         "BMRI": 4090,
         "BBRI": 3550,
         "BBNI": 3800,
@@ -3685,14 +3633,14 @@
         "TUGU": 995,
         "BBSI": 4020,
         "AGRO": 222,
-        "BBMD": 2100,
+        "BBMD": 2110,
         "COMPOSITE": 8066.52
       }
     },
     {
       "dateStr": "2025-10-15",
       "prices": {
-        "BBCA": 7250,
+        "SAHAM_1": 7250,
         "BMRI": 4050,
         "BBRI": 3500,
         "BBNI": 3770,
@@ -3744,7 +3692,7 @@
     {
       "dateStr": "2025-10-16",
       "prices": {
-        "BBCA": 7300,
+        "SAHAM_1": 7300,
         "BMRI": 4090,
         "BBRI": 3530,
         "BBNI": 3850,
@@ -3789,14 +3737,14 @@
         "TUGU": 1000,
         "BBSI": 4050,
         "AGRO": 218,
-        "BBMD": 2090,
+        "BBMD": 2100,
         "COMPOSITE": 8124.76
       }
     },
     {
       "dateStr": "2025-10-17",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 4050,
         "BBRI": 3500,
         "BBNI": 3800,
@@ -3848,7 +3796,7 @@
     {
       "dateStr": "2025-10-20",
       "prices": {
-        "BBCA": 7875,
+        "SAHAM_1": 7875,
         "BMRI": 4300,
         "BBRI": 3680,
         "BBNI": 4040,
@@ -3900,7 +3848,7 @@
     {
       "dateStr": "2025-10-21",
       "prices": {
-        "BBCA": 8475,
+        "SAHAM_1": 8475,
         "BMRI": 4350,
         "BBRI": 3760,
         "BBNI": 4050,
@@ -3952,7 +3900,7 @@
     {
       "dateStr": "2025-10-22",
       "prices": {
-        "BBCA": 8200,
+        "SAHAM_1": 8200,
         "BMRI": 4330,
         "BBRI": 3700,
         "BBNI": 4030,
@@ -4004,7 +3952,7 @@
     {
       "dateStr": "2025-10-23",
       "prices": {
-        "BBCA": 8325,
+        "SAHAM_1": 8325,
         "BMRI": 4430,
         "BBRI": 3820,
         "BBNI": 4240,
@@ -4049,14 +3997,14 @@
         "TUGU": 1095,
         "BBSI": 3990,
         "AGRO": 226,
-        "BBMD": 2060,
+        "BBMD": 2090,
         "COMPOSITE": 8274.35
       }
     },
     {
       "dateStr": "2025-10-24",
       "prices": {
-        "BBCA": 8275,
+        "SAHAM_1": 8275,
         "BMRI": 4550,
         "BBRI": 3850,
         "BBNI": 4370,
@@ -4101,14 +4049,14 @@
         "TUGU": 1095,
         "BBSI": 4000,
         "AGRO": 226,
-        "BBMD": 2050,
+        "BBMD": 2060,
         "COMPOSITE": 8271.72
       }
     },
     {
       "dateStr": "2025-10-27",
       "prices": {
-        "BBCA": 8350,
+        "SAHAM_1": 8350,
         "BMRI": 4470,
         "BBRI": 3860,
         "BBNI": 4370,
@@ -4153,14 +4101,14 @@
         "TUGU": 1040,
         "BBSI": 3990,
         "AGRO": 228,
-        "BBMD": 2030,
+        "BBMD": 2050,
         "COMPOSITE": 8117.15
       }
     },
     {
       "dateStr": "2025-10-28",
       "prices": {
-        "BBCA": 8275,
+        "SAHAM_1": 8275,
         "BMRI": 4510,
         "BBRI": 3850,
         "BBNI": 4370,
@@ -4205,14 +4153,14 @@
         "TUGU": 1040,
         "BBSI": 3990,
         "AGRO": 228,
-        "BBMD": 2040,
+        "BBMD": 2030,
         "COMPOSITE": 8092.63
       }
     },
     {
       "dateStr": "2025-10-29",
       "prices": {
-        "BBCA": 8600,
+        "SAHAM_1": 8600,
         "BMRI": 4650,
         "BBRI": 3890,
         "BBNI": 4440,
@@ -4257,14 +4205,14 @@
         "TUGU": 1040,
         "BBSI": 3990,
         "AGRO": 234,
-        "BBMD": 2070,
+        "BBMD": 2040,
         "COMPOSITE": 8166.22
       }
     },
     {
       "dateStr": "2025-10-30",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4800,
         "BBRI": 3910,
         "BBNI": 4410,
@@ -4309,14 +4257,14 @@
         "TUGU": 1065,
         "BBSI": 4000,
         "AGRO": 236,
-        "BBMD": 2050,
+        "BBMD": 2070,
         "COMPOSITE": 8184.06
       }
     },
     {
       "dateStr": "2025-10-31",
       "prices": {
-        "BBCA": 8525,
+        "SAHAM_1": 8525,
         "BMRI": 4720,
         "BBRI": 3980,
         "BBNI": 4380,
@@ -4368,7 +4316,7 @@
     {
       "dateStr": "2025-11-03",
       "prices": {
-        "BBCA": 8650,
+        "SAHAM_1": 8650,
         "BMRI": 4760,
         "BBRI": 4040,
         "BBNI": 4430,
@@ -4420,7 +4368,7 @@
     {
       "dateStr": "2025-11-04",
       "prices": {
-        "BBCA": 8650,
+        "SAHAM_1": 8650,
         "BMRI": 4730,
         "BBRI": 3970,
         "BBNI": 4450,
@@ -4465,14 +4413,14 @@
         "TUGU": 1030,
         "BBSI": 4000,
         "AGRO": 224,
-        "BBMD": 2030,
+        "BBMD": 2050,
         "COMPOSITE": 8241.91
       }
     },
     {
       "dateStr": "2025-11-05",
       "prices": {
-        "BBCA": 8700,
+        "SAHAM_1": 8700,
         "BMRI": 4770,
         "BBRI": 3980,
         "BBNI": 4460,
@@ -4517,14 +4465,14 @@
         "TUGU": 1025,
         "BBSI": 3990,
         "AGRO": 224,
-        "BBMD": 2020,
+        "BBMD": 2030,
         "COMPOSITE": 8318.53
       }
     },
     {
       "dateStr": "2025-11-06",
       "prices": {
-        "BBCA": 8550,
+        "SAHAM_1": 8550,
         "BMRI": 4750,
         "BBRI": 4000,
         "BBNI": 4440,
@@ -4576,7 +4524,7 @@
     {
       "dateStr": "2025-11-07",
       "prices": {
-        "BBCA": 8675,
+        "SAHAM_1": 8675,
         "BMRI": 4750,
         "BBRI": 3980,
         "BBNI": 4500,
@@ -4621,14 +4569,14 @@
         "TUGU": 1035,
         "BBSI": 3990,
         "AGRO": 230,
-        "BBMD": 1990,
+        "BBMD": 2020,
         "COMPOSITE": 8394.59
       }
     },
     {
       "dateStr": "2025-11-10",
       "prices": {
-        "BBCA": 8575,
+        "SAHAM_1": 8575,
         "BMRI": 4730,
         "BBRI": 3930,
         "BBNI": 4420,
@@ -4673,14 +4621,14 @@
         "TUGU": 1025,
         "BBSI": 4000,
         "AGRO": 228,
-        "BBMD": 1980,
+        "BBMD": 1990,
         "COMPOSITE": 8391.24
       }
     },
     {
       "dateStr": "2025-11-11",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4680,
         "BBRI": 3890,
         "BBNI": 4420,
@@ -4725,14 +4673,14 @@
         "TUGU": 1020,
         "BBSI": 4000,
         "AGRO": 228,
-        "BBMD": 1970,
+        "BBMD": 1980,
         "COMPOSITE": 8366.52
       }
     },
     {
       "dateStr": "2025-11-12",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 4760,
         "BBRI": 3900,
         "BBNI": 4460,
@@ -4784,7 +4732,7 @@
     {
       "dateStr": "2025-11-13",
       "prices": {
-        "BBCA": 8375,
+        "SAHAM_1": 8375,
         "BMRI": 4700,
         "BBRI": 3870,
         "BBNI": 4420,
@@ -4829,14 +4777,14 @@
         "TUGU": 1025,
         "BBSI": 4000,
         "AGRO": 230,
-        "BBMD": 1960,
+        "BBMD": 1970,
         "COMPOSITE": 8372
       }
     },
     {
       "dateStr": "2025-11-14",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 4750,
         "BBRI": 3900,
         "BBNI": 4390,
@@ -4881,14 +4829,14 @@
         "TUGU": 1020,
         "BBSI": 4000,
         "AGRO": 228,
-        "BBMD": 1990,
+        "BBMD": 1960,
         "COMPOSITE": 8370.44
       }
     },
     {
       "dateStr": "2025-11-17",
       "prices": {
-        "BBCA": 8575,
+        "SAHAM_1": 8575,
         "BMRI": 4820,
         "BBRI": 3940,
         "BBNI": 4390,
@@ -4933,14 +4881,14 @@
         "TUGU": 1020,
         "BBSI": 3990,
         "AGRO": 230,
-        "BBMD": 1995,
+        "BBMD": 1990,
         "COMPOSITE": 8416.88
       }
     },
     {
       "dateStr": "2025-11-18",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4790,
         "BBRI": 3970,
         "BBNI": 4460,
@@ -4985,14 +4933,14 @@
         "TUGU": 1010,
         "BBSI": 3990,
         "AGRO": 228,
-        "BBMD": 1980,
+        "BBMD": 1995,
         "COMPOSITE": 8361.93
       }
     },
     {
       "dateStr": "2025-11-19",
       "prices": {
-        "BBCA": 8475,
+        "SAHAM_1": 8475,
         "BMRI": 4850,
         "BBRI": 4000,
         "BBNI": 4460,
@@ -5037,14 +4985,14 @@
         "TUGU": 1015,
         "BBSI": 4000,
         "AGRO": 226,
-        "BBMD": 1975,
+        "BBMD": 1980,
         "COMPOSITE": 8406.58
       }
     },
     {
       "dateStr": "2025-11-20",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 4940,
         "BBRI": 3990,
         "BBNI": 4460,
@@ -5089,14 +5037,14 @@
         "TUGU": 1070,
         "BBSI": 3930,
         "AGRO": 226,
-        "BBMD": 1980,
+        "BBMD": 1975,
         "COMPOSITE": 8419.92
       }
     },
     {
       "dateStr": "2025-11-21",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4950,
         "BBRI": 3960,
         "BBNI": 4390,
@@ -5141,14 +5089,14 @@
         "TUGU": 1080,
         "BBSI": 3990,
         "AGRO": 224,
-        "BBMD": 1975,
+        "BBMD": 1980,
         "COMPOSITE": 8414.35
       }
     },
     {
       "dateStr": "2025-11-24",
       "prices": {
-        "BBCA": 8475,
+        "SAHAM_1": 8475,
         "BMRI": 5100,
         "BBRI": 3980,
         "BBNI": 4390,
@@ -5200,7 +5148,7 @@
     {
       "dateStr": "2025-11-25",
       "prices": {
-        "BBCA": 8500,
+        "SAHAM_1": 8500,
         "BMRI": 5025,
         "BBRI": 3830,
         "BBNI": 4420,
@@ -5245,14 +5193,14 @@
         "TUGU": 1070,
         "BBSI": 3990,
         "AGRO": 226,
-        "BBMD": 1995,
+        "BBMD": 1975,
         "COMPOSITE": 8521.89
       }
     },
     {
       "dateStr": "2025-11-26",
       "prices": {
-        "BBCA": 8425,
+        "SAHAM_1": 8425,
         "BMRI": 5025,
         "BBRI": 3790,
         "BBNI": 4410,
@@ -5297,14 +5245,14 @@
         "TUGU": 1080,
         "BBSI": 4000,
         "AGRO": 224,
-        "BBMD": 2030,
+        "BBMD": 1995,
         "COMPOSITE": 8602.13
       }
     },
     {
       "dateStr": "2025-11-27",
       "prices": {
-        "BBCA": 8325,
+        "SAHAM_1": 8325,
         "BMRI": 4860,
         "BBRI": 3740,
         "BBNI": 4350,
@@ -5349,14 +5297,14 @@
         "TUGU": 1095,
         "BBSI": 3940,
         "AGRO": 240,
-        "BBMD": 2050,
+        "BBMD": 2030,
         "COMPOSITE": 8545.87
       }
     },
     {
       "dateStr": "2025-11-28",
       "prices": {
-        "BBCA": 8275,
+        "SAHAM_1": 8275,
         "BMRI": 4830,
         "BBRI": 3680,
         "BBNI": 4260,
@@ -5401,14 +5349,14 @@
         "TUGU": 1090,
         "BBSI": 3940,
         "AGRO": 230,
-        "BBMD": 1995,
+        "BBMD": 2050,
         "COMPOSITE": 8508.71
       }
     },
     {
       "dateStr": "2025-12-01",
       "prices": {
-        "BBCA": 8400,
+        "SAHAM_1": 8400,
         "BMRI": 4860,
         "BBRI": 3670,
         "BBNI": 4310,
@@ -5453,14 +5401,14 @@
         "TUGU": 1075,
         "BBSI": 3990,
         "AGRO": 228,
-        "BBMD": 2010,
+        "BBMD": 1995,
         "COMPOSITE": 8548.79
       }
     },
     {
       "dateStr": "2025-12-02",
       "prices": {
-        "BBCA": 8375,
+        "SAHAM_1": 8375,
         "BMRI": 4850,
         "BBRI": 3710,
         "BBNI": 4270,
@@ -5505,14 +5453,14 @@
         "TUGU": 1075,
         "BBSI": 3900,
         "AGRO": 236,
-        "BBMD": 2070,
+        "BBMD": 2010,
         "COMPOSITE": 8617.04
       }
     },
     {
       "dateStr": "2025-12-03",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4880,
         "BBRI": 3660,
         "BBNI": 4260,
@@ -5557,14 +5505,14 @@
         "TUGU": 1080,
         "BBSI": 3910,
         "AGRO": 230,
-        "BBMD": 2050,
+        "BBMD": 2070,
         "COMPOSITE": 8611.79
       }
     },
     {
       "dateStr": "2025-12-04",
       "prices": {
-        "BBCA": 8225,
+        "SAHAM_1": 8225,
         "BMRI": 4920,
         "BBRI": 3690,
         "BBNI": 4310,
@@ -5609,14 +5557,14 @@
         "TUGU": 1085,
         "BBSI": 3910,
         "AGRO": 230,
-        "BBMD": 2040,
+        "BBMD": 2050,
         "COMPOSITE": 8640.2
       }
     },
     {
       "dateStr": "2025-12-05",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4900,
         "BBRI": 3650,
         "BBNI": 4290,
@@ -5661,14 +5609,14 @@
         "TUGU": 1095,
         "BBSI": 3900,
         "AGRO": 232,
-        "BBMD": 2080,
+        "BBMD": 2040,
         "COMPOSITE": 8632.76
       }
     },
     {
       "dateStr": "2025-12-08",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4950,
         "BBRI": 3670,
         "BBNI": 4310,
@@ -5720,7 +5668,7 @@
     {
       "dateStr": "2025-12-09",
       "prices": {
-        "BBCA": 8100,
+        "SAHAM_1": 8100,
         "BMRI": 4890,
         "BBRI": 3680,
         "BBNI": 4320,
@@ -5765,14 +5713,14 @@
         "TUGU": 1120,
         "BBSI": 3900,
         "AGRO": 230,
-        "BBMD": 2040,
+        "BBMD": 2080,
         "COMPOSITE": 8657.18
       }
     },
     {
       "dateStr": "2025-12-10",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 4970,
         "BBRI": 3660,
         "BBNI": 4310,
@@ -5817,14 +5765,14 @@
         "TUGU": 1115,
         "BBSI": 3900,
         "AGRO": 230,
-        "BBMD": 1990,
+        "BBMD": 2040,
         "COMPOSITE": 8700.92
       }
     },
     {
       "dateStr": "2025-12-11",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4950,
         "BBRI": 3620,
         "BBNI": 4230,
@@ -5869,14 +5817,14 @@
         "TUGU": 1060,
         "BBSI": 3980,
         "AGRO": 228,
-        "BBMD": 2030,
+        "BBMD": 1990,
         "COMPOSITE": 8620.48
       }
     },
     {
       "dateStr": "2025-12-12",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4820,
         "BBRI": 3630,
         "BBNI": 4240,
@@ -5921,14 +5869,14 @@
         "TUGU": 1080,
         "BBSI": 4000,
         "AGRO": 230,
-        "BBMD": 2100,
+        "BBMD": 2030,
         "COMPOSITE": 8660.5
       }
     },
     {
       "dateStr": "2025-12-15",
       "prices": {
-        "BBCA": 8300,
+        "SAHAM_1": 8300,
         "BMRI": 4990,
         "BBRI": 3780,
         "BBNI": 4440,
@@ -5973,14 +5921,14 @@
         "TUGU": 1165,
         "BBSI": 4010,
         "AGRO": 248,
-        "BBMD": 2090,
+        "BBMD": 2100,
         "COMPOSITE": 8649.66
       }
     },
     {
       "dateStr": "2025-12-16",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 5000,
         "BBRI": 3690,
         "BBNI": 4400,
@@ -6025,14 +5973,14 @@
         "TUGU": 1150,
         "BBSI": 3910,
         "AGRO": 254,
-        "BBMD": 2050,
+        "BBMD": 2090,
         "COMPOSITE": 8686.47
       }
     },
     {
       "dateStr": "2025-12-17",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 5025,
         "BBRI": 3750,
         "BBNI": 4370,
@@ -6084,7 +6032,7 @@
     {
       "dateStr": "2025-12-18",
       "prices": {
-        "BBCA": 8175,
+        "SAHAM_1": 8175,
         "BMRI": 5150,
         "BBRI": 3780,
         "BBNI": 4380,
@@ -6129,14 +6077,14 @@
         "TUGU": 1115,
         "BBSI": 4000,
         "AGRO": 236,
-        "BBMD": 1955,
+        "BBMD": 2050,
         "COMPOSITE": 8618.2
       }
     },
     {
       "dateStr": "2025-12-19",
       "prices": {
-        "BBCA": 8050,
+        "SAHAM_1": 8050,
         "BMRI": 5175,
         "BBRI": 3770,
         "BBNI": 4340,
@@ -6188,7 +6136,7 @@
     {
       "dateStr": "2025-12-22",
       "prices": {
-        "BBCA": 8175,
+        "SAHAM_1": 8175,
         "BMRI": 5100,
         "BBRI": 3760,
         "BBNI": 4330,
@@ -6233,14 +6181,14 @@
         "TUGU": 1110,
         "BBSI": 3900,
         "AGRO": 228,
-        "BBMD": 1965,
+        "BBMD": 1955,
         "COMPOSITE": 8645.84
       }
     },
     {
       "dateStr": "2025-12-23",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 5050,
         "BBRI": 3770,
         "BBNI": 4290,
@@ -6285,14 +6233,14 @@
         "TUGU": 1130,
         "BBSI": 3900,
         "AGRO": 228,
-        "BBMD": 1990,
+        "BBMD": 1965,
         "COMPOSITE": 8584.78
       }
     },
     {
       "dateStr": "2025-12-24",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 5050,
         "BBRI": 3770,
         "BBNI": 4270,
@@ -6337,14 +6285,14 @@
         "TUGU": 1115,
         "BBSI": 4010,
         "AGRO": 228,
-        "BBMD": 1950,
+        "BBMD": 1990,
         "COMPOSITE": 8537.91
       }
     },
     {
       "dateStr": "2025-12-29",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 5075,
         "BBRI": 3780,
         "BBNI": 4260,
@@ -6389,14 +6337,14 @@
         "TUGU": 1180,
         "BBSI": 3950,
         "AGRO": 228,
-        "BBMD": 1995,
+        "BBMD": 1950,
         "COMPOSITE": 8644.26
       }
     },
     {
       "dateStr": "2025-12-30",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 5100,
         "BBRI": 3660,
         "BBNI": 4370,
@@ -6441,14 +6389,14 @@
         "TUGU": 1165,
         "BBSI": 3990,
         "AGRO": 230,
-        "BBMD": 1950,
+        "BBMD": 1995,
         "COMPOSITE": 8646.94
       }
     },
     {
       "dateStr": "2026-01-02",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 5075,
         "BBRI": 3640,
         "BBNI": 4260,
@@ -6493,14 +6441,14 @@
         "TUGU": 1185,
         "BBSI": 4000,
         "AGRO": 232,
-        "BBMD": 1960,
+        "BBMD": 1950,
         "COMPOSITE": 8748.13
       }
     },
     {
       "dateStr": "2026-01-05",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 5050,
         "BBRI": 3630,
         "BBNI": 4230,
@@ -6545,14 +6493,14 @@
         "TUGU": 1275,
         "BBSI": 4000,
         "AGRO": 240,
-        "BBMD": 1955,
+        "BBMD": 1960,
         "COMPOSITE": 8859.19
       }
     },
     {
       "dateStr": "2026-01-06",
       "prices": {
-        "BBCA": 8175,
+        "SAHAM_1": 8175,
         "BMRI": 4880,
         "BBRI": 3680,
         "BBNI": 4240,
@@ -6597,14 +6545,14 @@
         "TUGU": 1240,
         "BBSI": 3950,
         "AGRO": 246,
-        "BBMD": 2000,
+        "BBMD": 1955,
         "COMPOSITE": 8933.61
       }
     },
     {
       "dateStr": "2026-01-07",
       "prices": {
-        "BBCA": 8150,
+        "SAHAM_1": 8150,
         "BMRI": 4810,
         "BBRI": 3700,
         "BBNI": 4200,
@@ -6649,14 +6597,14 @@
         "TUGU": 1245,
         "BBSI": 4000,
         "AGRO": 246,
-        "BBMD": 1995,
+        "BBMD": 2000,
         "COMPOSITE": 8944.81
       }
     },
     {
       "dateStr": "2026-01-08",
       "prices": {
-        "BBCA": 8050,
+        "SAHAM_1": 8050,
         "BMRI": 4810,
         "BBRI": 3710,
         "BBNI": 4210,
@@ -6701,14 +6649,14 @@
         "TUGU": 1235,
         "BBSI": 4000,
         "AGRO": 246,
-        "BBMD": 2070,
+        "BBMD": 1995,
         "COMPOSITE": 8925.47
       }
     },
     {
       "dateStr": "2026-01-09",
       "prices": {
-        "BBCA": 8125,
+        "SAHAM_1": 8125,
         "BMRI": 4760,
         "BBRI": 3680,
         "BBNI": 4180,
@@ -6753,14 +6701,14 @@
         "TUGU": 1240,
         "BBSI": 3900,
         "AGRO": 240,
-        "BBMD": 1990,
+        "BBMD": 2070,
         "COMPOSITE": 8936.75
       }
     },
     {
       "dateStr": "2026-01-12",
       "prices": {
-        "BBCA": 8025,
+        "SAHAM_1": 8025,
         "BMRI": 4770,
         "BBRI": 3700,
         "BBNI": 4220,
@@ -6805,14 +6753,14 @@
         "TUGU": 1210,
         "BBSI": 3860,
         "AGRO": 242,
-        "BBMD": 2020,
+        "BBMD": 1990,
         "COMPOSITE": 8884.72
       }
     },
     {
       "dateStr": "2026-01-13",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 4820,
         "BBRI": 3720,
         "BBNI": 4340,
@@ -6857,14 +6805,14 @@
         "TUGU": 1250,
         "BBSI": 3900,
         "AGRO": 240,
-        "BBMD": 2030,
+        "BBMD": 2020,
         "COMPOSITE": 8948.3
       }
     },
     {
       "dateStr": "2026-01-14",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 4840,
         "BBRI": 3720,
         "BBNI": 4360,
@@ -6916,7 +6864,7 @@
     {
       "dateStr": "2026-01-15",
       "prices": {
-        "BBCA": 8075,
+        "SAHAM_1": 8075,
         "BMRI": 4990,
         "BBRI": 3820,
         "BBNI": 4540,
@@ -6961,14 +6909,14 @@
         "TUGU": 1210,
         "BBSI": 3820,
         "AGRO": 248,
-        "BBMD": 2000,
+        "BBMD": 2030,
         "COMPOSITE": 9075.41
       }
     },
     {
       "dateStr": "2026-01-19",
       "prices": {
-        "BBCA": 8125,
+        "SAHAM_1": 8125,
         "BMRI": 5000,
         "BBRI": 3840,
         "BBNI": 4620,
@@ -7020,7 +6968,7 @@
     {
       "dateStr": "2026-01-20",
       "prices": {
-        "BBCA": 8000,
+        "SAHAM_1": 8000,
         "BMRI": 5025,
         "BBRI": 3850,
         "BBNI": 4570,
@@ -7065,14 +7013,14 @@
         "TUGU": 1190,
         "BBSI": 3750,
         "AGRO": 244,
-        "BBMD": 1970,
+        "BBMD": 2000,
         "COMPOSITE": 9134.7
       }
     },
     {
       "dateStr": "2026-01-21",
       "prices": {
-        "BBCA": 7700,
+        "SAHAM_1": 7700,
         "BMRI": 4990,
         "BBRI": 3820,
         "BBNI": 4590,
@@ -7124,7 +7072,7 @@
     {
       "dateStr": "2026-01-22",
       "prices": {
-        "BBCA": 7650,
+        "SAHAM_1": 7650,
         "BMRI": 4980,
         "BBRI": 3810,
         "BBNI": 4590,
@@ -7169,14 +7117,14 @@
         "TUGU": 1165,
         "BBSI": 3720,
         "AGRO": 242,
-        "BBMD": 2020,
+        "BBMD": 1970,
         "COMPOSITE": 8992.18
       }
     },
     {
       "dateStr": "2026-01-23",
       "prices": {
-        "BBCA": 7650,
+        "SAHAM_1": 7650,
         "BMRI": 4990,
         "BBRI": 3850,
         "BBNI": 4600,
@@ -7221,14 +7169,14 @@
         "TUGU": 1190,
         "BBSI": 3950,
         "AGRO": 238,
-        "BBMD": 1950,
+        "BBMD": 2020,
         "COMPOSITE": 8951.01
       }
     },
     {
       "dateStr": "2026-01-26",
       "prices": {
-        "BBCA": 7650,
+        "SAHAM_1": 7650,
         "BMRI": 4910,
         "BBRI": 3850,
         "BBNI": 4530,
@@ -7273,14 +7221,14 @@
         "TUGU": 1180,
         "BBSI": 4010,
         "AGRO": 232,
-        "BBMD": 1940,
+        "BBMD": 1950,
         "COMPOSITE": 8975.33
       }
     },
     {
       "dateStr": "2026-01-27",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 4810,
         "BBRI": 3820,
         "BBNI": 4500,
@@ -7325,14 +7273,14 @@
         "TUGU": 1180,
         "BBSI": 4030,
         "AGRO": 230,
-        "BBMD": 1970,
+        "BBMD": 1940,
         "COMPOSITE": 8980.23
       }
     },
     {
       "dateStr": "2026-01-28",
       "prices": {
-        "BBCA": 7025,
+        "SAHAM_1": 7025,
         "BMRI": 4560,
         "BBRI": 3590,
         "BBNI": 4440,
@@ -7377,14 +7325,14 @@
         "TUGU": 1115,
         "BBSI": 4030,
         "AGRO": 212,
-        "BBMD": 2000,
+        "BBMD": 1970,
         "COMPOSITE": 8320.56
       }
     },
     {
       "dateStr": "2026-01-29",
       "prices": {
-        "BBCA": 7200,
+        "SAHAM_1": 7200,
         "BMRI": 4630,
         "BBRI": 3780,
         "BBNI": 4420,
@@ -7429,14 +7377,14 @@
         "TUGU": 1120,
         "BBSI": 4000,
         "AGRO": 208,
-        "BBMD": 1975,
+        "BBMD": 2000,
         "COMPOSITE": 8232.2
       }
     },
     {
       "dateStr": "2026-01-30",
       "prices": {
-        "BBCA": 7400,
+        "SAHAM_1": 7400,
         "BMRI": 4820,
         "BBRI": 3810,
         "BBNI": 4490,
@@ -7481,14 +7429,14 @@
         "TUGU": 1155,
         "BBSI": 4000,
         "AGRO": 218,
-        "BBMD": 1990,
+        "BBMD": 1975,
         "COMPOSITE": 8329.61
       }
     },
     {
       "dateStr": "2026-02-02",
       "prices": {
-        "BBCA": 7600,
+        "SAHAM_1": 7600,
         "BMRI": 4800,
         "BBRI": 3830,
         "BBNI": 4500,
@@ -7540,7 +7488,7 @@
     {
       "dateStr": "2026-02-03",
       "prices": {
-        "BBCA": 7650,
+        "SAHAM_1": 7650,
         "BMRI": 4830,
         "BBRI": 3800,
         "BBNI": 4590,
@@ -7585,14 +7533,14 @@
         "TUGU": 1180,
         "BBSI": 4060,
         "AGRO": 212,
-        "BBMD": 2020,
+        "BBMD": 1990,
         "COMPOSITE": 8122.6
       }
     },
     {
       "dateStr": "2026-02-04",
       "prices": {
-        "BBCA": 7800,
+        "SAHAM_1": 7800,
         "BMRI": 5000,
         "BBRI": 3870,
         "BBNI": 4630,
@@ -7637,14 +7585,14 @@
         "TUGU": 1190,
         "BBSI": 4160,
         "AGRO": 218,
-        "BBMD": 1945,
+        "BBMD": 2020,
         "COMPOSITE": 8146.72
       }
     },
     {
       "dateStr": "2026-02-05",
       "prices": {
-        "BBCA": 7800,
+        "SAHAM_1": 7800,
         "BMRI": 5050,
         "BBRI": 3850,
         "BBNI": 4570,
@@ -7689,14 +7637,14 @@
         "TUGU": 1250,
         "BBSI": 4180,
         "AGRO": 218,
-        "BBMD": 1980,
+        "BBMD": 1945,
         "COMPOSITE": 8103.88
       }
     },
     {
       "dateStr": "2026-02-06",
       "prices": {
-        "BBCA": 7675,
+        "SAHAM_1": 7675,
         "BMRI": 5050,
         "BBRI": 3780,
         "BBNI": 4530,
@@ -7741,14 +7689,14 @@
         "TUGU": 1235,
         "BBSI": 4150,
         "AGRO": 214,
-        "BBMD": 2000,
+        "BBMD": 1980,
         "COMPOSITE": 7935.26
       }
     },
     {
       "dateStr": "2026-02-09",
       "prices": {
-        "BBCA": 7500,
+        "SAHAM_1": 7500,
         "BMRI": 5000,
         "BBRI": 3770,
         "BBNI": 4520,
@@ -7793,14 +7741,14 @@
         "TUGU": 1250,
         "BBSI": 4180,
         "AGRO": 214,
-        "BBMD": 1945,
+        "BBMD": 2000,
         "COMPOSITE": 8031.87
       }
     },
     {
       "dateStr": "2026-02-10",
       "prices": {
-        "BBCA": 7475,
+        "SAHAM_1": 7475,
         "BMRI": 5100,
         "BBRI": 3780,
         "BBNI": 4510,
@@ -7845,14 +7793,14 @@
         "TUGU": 1280,
         "BBSI": 4100,
         "AGRO": 216,
-        "BBMD": 1980,
+        "BBMD": 1945,
         "COMPOSITE": 8131.74
       }
     },
     {
       "dateStr": "2026-02-11",
       "prices": {
-        "BBCA": 7450,
+        "SAHAM_1": 7450,
         "BMRI": 5025,
         "BBRI": 3800,
         "BBNI": 4480,
@@ -7904,7 +7852,7 @@
     {
       "dateStr": "2026-02-12",
       "prices": {
-        "BBCA": 7325,
+        "SAHAM_1": 7325,
         "BMRI": 5075,
         "BBRI": 3790,
         "BBNI": 4510,
@@ -7956,7 +7904,7 @@
     {
       "dateStr": "2026-02-13",
       "prices": {
-        "BBCA": 7200,
+        "SAHAM_1": 7200,
         "BMRI": 5075,
         "BBRI": 3780,
         "BBNI": 4480,
@@ -8001,14 +7949,14 @@
         "TUGU": 1380,
         "BBSI": 4140,
         "AGRO": 212,
-        "BBMD": 1900,
+        "BBMD": 1980,
         "COMPOSITE": 8212.27
       }
     },
     {
       "dateStr": "2026-02-18",
       "prices": {
-        "BBCA": 7275,
+        "SAHAM_1": 7275,
         "BMRI": 5275,
         "BBRI": 3830,
         "BBNI": 4490,
@@ -8053,14 +8001,14 @@
         "TUGU": 1450,
         "BBSI": 4190,
         "AGRO": 218,
-        "BBMD": 1930,
+        "BBMD": 1900,
         "COMPOSITE": 8310.23
       }
     },
     {
       "dateStr": "2026-02-19",
       "prices": {
-        "BBCA": 7175,
+        "SAHAM_1": 7175,
         "BMRI": 5075,
         "BBRI": 3770,
         "BBNI": 4450,
@@ -8112,7 +8060,7 @@
     {
       "dateStr": "2026-02-20",
       "prices": {
-        "BBCA": 7225,
+        "SAHAM_1": 7225,
         "BMRI": 5125,
         "BBRI": 3840,
         "BBNI": 4470,
@@ -8164,7 +8112,7 @@
     {
       "dateStr": "2026-02-23",
       "prices": {
-        "BBCA": 7300,
+        "SAHAM_1": 7300,
         "BMRI": 5275,
         "BBRI": 3900,
         "BBNI": 4500,
@@ -8216,7 +8164,7 @@
     {
       "dateStr": "2026-02-24",
       "prices": {
-        "BBCA": 7225,
+        "SAHAM_1": 7225,
         "BMRI": 5375,
         "BBRI": 3870,
         "BBNI": 4450,
@@ -8268,7 +8216,7 @@
     {
       "dateStr": "2026-02-25",
       "prices": {
-        "BBCA": 7325,
+        "SAHAM_1": 7325,
         "BMRI": 5300,
         "BBRI": 3970,
         "BBNI": 4500,
@@ -8320,7 +8268,7 @@
     {
       "dateStr": "2026-02-26",
       "prices": {
-        "BBCA": 7300,
+        "SAHAM_1": 7300,
         "BMRI": 5325,
         "BBRI": 3950,
         "BBNI": 4460,
@@ -8365,14 +8313,14 @@
         "TUGU": 1435,
         "BBSI": 4780,
         "AGRO": 210,
-        "BBMD": 1900,
+        "BBMD": 1930,
         "COMPOSITE": 8235.26
       }
     },
     {
       "dateStr": "2026-02-27",
       "prices": {
-        "BBCA": 7175,
+        "SAHAM_1": 7175,
         "BMRI": 5275,
         "BBRI": 3910,
         "BBNI": 4400,
@@ -8417,14 +8365,14 @@
         "TUGU": 1445,
         "BBSI": 4770,
         "AGRO": 208,
-        "BBMD": 2040,
+        "BBMD": 1900,
         "COMPOSITE": 8235.49
       }
     },
     {
       "dateStr": "2026-03-02",
       "prices": {
-        "BBCA": 7025,
+        "SAHAM_1": 7025,
         "BMRI": 5075,
         "BBRI": 3820,
         "BBNI": 4300,
@@ -8469,14 +8417,14 @@
         "TUGU": 1365,
         "BBSI": 4760,
         "AGRO": 196,
-        "BBMD": 2010,
+        "BBMD": 2040,
         "COMPOSITE": 8016.83
       }
     },
     {
       "dateStr": "2026-03-03",
       "prices": {
-        "BBCA": 7075,
+        "SAHAM_1": 7075,
         "BMRI": 5100,
         "BBRI": 3770,
         "BBNI": 4300,
@@ -8521,14 +8469,14 @@
         "TUGU": 1350,
         "BBSI": 4790,
         "AGRO": 195,
-        "BBMD": 2020,
+        "BBMD": 2010,
         "COMPOSITE": 7939.77
       }
     },
     {
       "dateStr": "2026-03-04",
       "prices": {
-        "BBCA": 6875,
+        "SAHAM_1": 6875,
         "BMRI": 4980,
         "BBRI": 3690,
         "BBNI": 4150,
@@ -8580,7 +8528,7 @@
     {
       "dateStr": "2026-03-05",
       "prices": {
-        "BBCA": 7100,
+        "SAHAM_1": 7100,
         "BMRI": 5125,
         "BBRI": 3750,
         "BBNI": 4280,
@@ -8625,14 +8573,14 @@
         "TUGU": 1300,
         "BBSI": 4730,
         "AGRO": 190,
-        "BBMD": 2000,
+        "BBMD": 2020,
         "COMPOSITE": 7710.54
       }
     },
     {
       "dateStr": "2026-03-06",
       "prices": {
-        "BBCA": 7000,
+        "SAHAM_1": 7000,
         "BMRI": 4980,
         "BBRI": 3670,
         "BBNI": 4270,
@@ -8677,14 +8625,14 @@
         "TUGU": 1265,
         "BBSI": 4730,
         "AGRO": 188,
-        "BBMD": 1990,
+        "BBMD": 2000,
         "COMPOSITE": 7585.69
       }
     },
     {
       "dateStr": "2026-03-09",
       "prices": {
-        "BBCA": 6875,
+        "SAHAM_1": 6875,
         "BMRI": 4820,
         "BBRI": 3570,
         "BBNI": 4290,
@@ -8729,14 +8677,14 @@
         "TUGU": 1245,
         "BBSI": 4760,
         "AGRO": 177,
-        "BBMD": 1915,
+        "BBMD": 1990,
         "COMPOSITE": 7337.37
       }
     },
     {
       "dateStr": "2026-03-10",
       "prices": {
-        "BBCA": 6975,
+        "SAHAM_1": 6975,
         "BMRI": 4910,
         "BBRI": 3560,
         "BBNI": 4260,
@@ -8788,7 +8736,7 @@
     {
       "dateStr": "2026-03-11",
       "prices": {
-        "BBCA": 6825,
+        "SAHAM_1": 6825,
         "BMRI": 4880,
         "BBRI": 3580,
         "BBNI": 4290,
@@ -8833,14 +8781,14 @@
         "TUGU": 1245,
         "BBSI": 4700,
         "AGRO": 185,
-        "BBMD": 1935,
+        "BBMD": 1915,
         "COMPOSITE": 7389.4
       }
     },
     {
       "dateStr": "2026-03-12",
       "prices": {
-        "BBCA": 6900,
+        "SAHAM_1": 6900,
         "BMRI": 4960,
         "BBRI": 3570,
         "BBNI": 4280,
@@ -8885,14 +8833,14 @@
         "TUGU": 1225,
         "BBSI": 4700,
         "AGRO": 181,
-        "BBMD": 2000,
+        "BBMD": 1935,
         "COMPOSITE": 7362.12
       }
     },
     {
       "dateStr": "2026-03-13",
       "prices": {
-        "BBCA": 6875,
+        "SAHAM_1": 6875,
         "BMRI": 4750,
         "BBRI": 3510,
         "BBNI": 4240,
@@ -8944,7 +8892,7 @@
     {
       "dateStr": "2026-03-16",
       "prices": {
-        "BBCA": 6750,
+        "SAHAM_1": 6750,
         "BMRI": 4700,
         "BBRI": 3480,
         "BBNI": 4320,
@@ -8989,14 +8937,14 @@
         "TUGU": 1215,
         "BBSI": 4710,
         "AGRO": 176,
-        "BBMD": 1915,
+        "BBMD": 2000,
         "COMPOSITE": 7022.29
       }
     },
     {
       "dateStr": "2026-03-17",
       "prices": {
-        "BBCA": 6775,
+        "SAHAM_1": 6775,
         "BMRI": 4730,
         "BBRI": 3480,
         "BBNI": 4390,
@@ -9041,14 +8989,14 @@
         "TUGU": 1230,
         "BBSI": 4750,
         "AGRO": 181,
-        "BBMD": 1895,
+        "BBMD": 1915,
         "COMPOSITE": 7106.84
       }
     },
     {
       "dateStr": "2026-03-25",
       "prices": {
-        "BBCA": 6900,
+        "SAHAM_1": 6900,
         "BMRI": 4970,
         "BBRI": 3540,
         "BBNI": 4040,
@@ -9093,14 +9041,14 @@
         "TUGU": 1270,
         "BBSI": 4690,
         "AGRO": 182,
-        "BBMD": 1900,
+        "BBMD": 1895,
         "COMPOSITE": 7302.12
       }
     },
     {
       "dateStr": "2026-03-26",
       "prices": {
-        "BBCA": 6875,
+        "SAHAM_1": 6875,
         "BMRI": 4840,
         "BBRI": 3490,
         "BBNI": 4000,
@@ -9145,14 +9093,14 @@
         "TUGU": 1290,
         "BBSI": 4720,
         "AGRO": 181,
-        "BBMD": 1930,
+        "BBMD": 1900,
         "COMPOSITE": 7164.09
       }
     },
     {
       "dateStr": "2026-03-27",
       "prices": {
-        "BBCA": 6700,
+        "SAHAM_1": 6700,
         "BMRI": 4760,
         "BBRI": 3420,
         "BBNI": 3900,
@@ -9204,7 +9152,7 @@
     {
       "dateStr": "2026-03-30",
       "prices": {
-        "BBCA": 6450,
+        "SAHAM_1": 6450,
         "BMRI": 4700,
         "BBRI": 3360,
         "BBNI": 3850,
@@ -9256,7 +9204,7 @@
     {
       "dateStr": "2026-03-31",
       "prices": {
-        "BBCA": 6450,
+        "SAHAM_1": 6450,
         "BMRI": 4720,
         "BBRI": 3330,
         "BBNI": 3760,
@@ -9301,14 +9249,14 @@
         "TUGU": 1250,
         "BBSI": 4600,
         "AGRO": 172,
-        "BBMD": 1915,
+        "BBMD": 1930,
         "COMPOSITE": 7048.22
       }
     },
     {
       "dateStr": "2026-04-01",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4720,
         "BBRI": 3350,
         "BBNI": 3720,
@@ -9353,14 +9301,14 @@
         "TUGU": 1260,
         "BBSI": 4700,
         "AGRO": 173,
-        "BBMD": 1955,
+        "BBMD": 1915,
         "COMPOSITE": 7184.44
       }
     },
     {
       "dateStr": "2026-04-02",
       "prices": {
-        "BBCA": 6575,
+        "SAHAM_1": 6575,
         "BMRI": 4650,
         "BBRI": 3320,
         "BBNI": 3700,
@@ -9405,14 +9353,14 @@
         "TUGU": 1280,
         "BBSI": 4700,
         "AGRO": 173,
-        "BBMD": 1865,
+        "BBMD": 1955,
         "COMPOSITE": 7026.78
       }
     },
     {
       "dateStr": "2026-04-06",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4610,
         "BBRI": 3310,
         "BBNI": 3640,
@@ -9457,14 +9405,14 @@
         "TUGU": 1255,
         "BBSI": 4620,
         "AGRO": 170,
-        "BBMD": 1955,
+        "BBMD": 1865,
         "COMPOSITE": 6989.43
       }
     },
     {
       "dateStr": "2026-04-07",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4510,
         "BBRI": 3230,
         "BBNI": 3510,
@@ -9509,14 +9457,14 @@
         "TUGU": 1235,
         "BBSI": 4720,
         "AGRO": 168,
-        "BBMD": 1980,
+        "BBMD": 1955,
         "COMPOSITE": 6971.03
       }
     },
     {
       "dateStr": "2026-04-08",
       "prices": {
-        "BBCA": 6750,
+        "SAHAM_1": 6750,
         "BMRI": 4670,
         "BBRI": 3340,
         "BBNI": 3780,
@@ -9561,14 +9509,14 @@
         "TUGU": 1260,
         "BBSI": 4700,
         "AGRO": 176,
-        "BBMD": 1960,
+        "BBMD": 1980,
         "COMPOSITE": 7279.21
       }
     },
     {
       "dateStr": "2026-04-09",
       "prices": {
-        "BBCA": 6475,
+        "SAHAM_1": 6475,
         "BMRI": 4570,
         "BBRI": 3280,
         "BBNI": 3710,
@@ -9613,14 +9561,14 @@
         "TUGU": 1240,
         "BBSI": 4700,
         "AGRO": 172,
-        "BBMD": 1910,
+        "BBMD": 1960,
         "COMPOSITE": 7307.59
       }
     },
     {
       "dateStr": "2026-04-10",
       "prices": {
-        "BBCA": 6700,
+        "SAHAM_1": 6700,
         "BMRI": 4670,
         "BBRI": 3390,
         "BBNI": 3730,
@@ -9665,14 +9613,14 @@
         "TUGU": 1250,
         "BBSI": 4740,
         "AGRO": 173,
-        "BBMD": 1990,
+        "BBMD": 1910,
         "COMPOSITE": 7458.5
       }
     },
     {
       "dateStr": "2026-04-13",
       "prices": {
-        "BBCA": 6575,
+        "SAHAM_1": 6575,
         "BMRI": 4600,
         "BBRI": 3370,
         "BBNI": 3680,
@@ -9724,7 +9672,7 @@
     {
       "dateStr": "2026-04-14",
       "prices": {
-        "BBCA": 6750,
+        "SAHAM_1": 6750,
         "BMRI": 4710,
         "BBRI": 3460,
         "BBNI": 3740,
@@ -9769,14 +9717,14 @@
         "TUGU": 1250,
         "BBSI": 4750,
         "AGRO": 177,
-        "BBMD": 1995,
+        "BBMD": 1990,
         "COMPOSITE": 7675.95
       }
     },
     {
       "dateStr": "2026-04-15",
       "prices": {
-        "BBCA": 6550,
+        "SAHAM_1": 6550,
         "BMRI": 4650,
         "BBRI": 3400,
         "BBNI": 3670,
@@ -9821,14 +9769,14 @@
         "TUGU": 1270,
         "BBSI": 4730,
         "AGRO": 178,
-        "BBMD": 1900,
+        "BBMD": 1995,
         "COMPOSITE": 7623.59
       }
     },
     {
       "dateStr": "2026-04-16",
       "prices": {
-        "BBCA": 6525,
+        "SAHAM_1": 6525,
         "BMRI": 4640,
         "BBRI": 3410,
         "BBNI": 3700,
@@ -9873,14 +9821,14 @@
         "TUGU": 1290,
         "BBSI": 4740,
         "AGRO": 230,
-        "BBMD": 2000,
+        "BBMD": 1900,
         "COMPOSITE": 7621.38
       }
     },
     {
       "dateStr": "2026-04-17",
       "prices": {
-        "BBCA": 6425,
+        "SAHAM_1": 6425,
         "BMRI": 4620,
         "BBRI": 3430,
         "BBNI": 3710,
@@ -9925,14 +9873,14 @@
         "TUGU": 1280,
         "BBSI": 4700,
         "AGRO": 204,
-        "BBMD": 1995,
+        "BBMD": 2000,
         "COMPOSITE": 7634
       }
     },
     {
       "dateStr": "2026-04-20",
       "prices": {
-        "BBCA": 6475,
+        "SAHAM_1": 6475,
         "BMRI": 4620,
         "BBRI": 3440,
         "BBNI": 3670,
@@ -9977,14 +9925,14 @@
         "TUGU": 1290,
         "BBSI": 4740,
         "AGRO": 197,
-        "BBMD": 1900,
+        "BBMD": 1995,
         "COMPOSITE": 7594.11
       }
     },
     {
       "dateStr": "2026-04-21",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4700,
         "BBRI": 3270,
         "BBNI": 3730,
@@ -10036,7 +9984,7 @@
     {
       "dateStr": "2026-04-22",
       "prices": {
-        "BBCA": 6450,
+        "SAHAM_1": 6450,
         "BMRI": 4750,
         "BBRI": 3240,
         "BBNI": 3830,
@@ -10081,14 +10029,14 @@
         "TUGU": 1310,
         "BBSI": 4700,
         "AGRO": 199,
-        "BBMD": 1905,
+        "BBMD": 1900,
         "COMPOSITE": 7541.61
       }
     },
     {
       "dateStr": "2026-04-23",
       "prices": {
-        "BBCA": 6425,
+        "SAHAM_1": 6425,
         "BMRI": 4630,
         "BBRI": 3160,
         "BBNI": 3870,
@@ -10140,7 +10088,7 @@
     {
       "dateStr": "2026-04-24",
       "prices": {
-        "BBCA": 6050,
+        "SAHAM_1": 6050,
         "BMRI": 4500,
         "BBRI": 3070,
         "BBNI": 3770,
@@ -10185,14 +10133,14 @@
         "TUGU": 1265,
         "BBSI": 4740,
         "AGRO": 181,
-        "BBMD": 2000,
+        "BBMD": 1905,
         "COMPOSITE": 7129.49
       }
     },
     {
       "dateStr": "2026-04-27",
       "prices": {
-        "BBCA": 5975,
+        "SAHAM_1": 5975,
         "BMRI": 4400,
         "BBRI": 3050,
         "BBNI": 3720,
@@ -10237,14 +10185,14 @@
         "TUGU": 1245,
         "BBSI": 4700,
         "AGRO": 184,
-        "BBMD": 1900,
+        "BBMD": 2000,
         "COMPOSITE": 7106.52
       }
     },
     {
       "dateStr": "2026-04-28",
       "prices": {
-        "BBCA": 6000,
+        "SAHAM_1": 6000,
         "BMRI": 4430,
         "BBRI": 3070,
         "BBNI": 3790,
@@ -10296,7 +10244,7 @@
     {
       "dateStr": "2026-04-29",
       "prices": {
-        "BBCA": 5975,
+        "SAHAM_1": 5975,
         "BMRI": 4430,
         "BBRI": 3070,
         "BBNI": 3800,
@@ -10348,7 +10296,7 @@
     {
       "dateStr": "2026-04-30",
       "prices": {
-        "BBCA": 5850,
+        "SAHAM_1": 5850,
         "BMRI": 4390,
         "BBRI": 2990,
         "BBNI": 3720,
@@ -10393,14 +10341,14 @@
         "TUGU": 1265,
         "BBSI": 4740,
         "AGRO": 181,
-        "BBMD": 1990,
+        "BBMD": 1900,
         "COMPOSITE": 6956.8
       }
     },
     {
       "dateStr": "2026-05-04",
       "prices": {
-        "BBCA": 5900,
+        "SAHAM_1": 5900,
         "BMRI": 4420,
         "BBRI": 3040,
         "BBNI": 3840,
@@ -10445,14 +10393,14 @@
         "TUGU": 1245,
         "BBSI": 4740,
         "AGRO": 180,
-        "BBMD": 1920,
+        "BBMD": 1990,
         "COMPOSITE": 6971.95
       }
     },
     {
       "dateStr": "2026-05-05",
       "prices": {
-        "BBCA": 5950,
+        "SAHAM_1": 5950,
         "BMRI": 4490,
         "BBRI": 3150,
         "BBNI": 3920,
@@ -10497,14 +10445,14 @@
         "TUGU": 1270,
         "BBSI": 4740,
         "AGRO": 185,
-        "BBMD": 1955,
+        "BBMD": 1920,
         "COMPOSITE": 7057.11
       }
     },
     {
       "dateStr": "2026-05-06",
       "prices": {
-        "BBCA": 5950,
+        "SAHAM_1": 5950,
         "BMRI": 4510,
         "BBRI": 3160,
         "BBNI": 3830,
@@ -10549,14 +10497,14 @@
         "TUGU": 1265,
         "BBSI": 4740,
         "AGRO": 182,
-        "BBMD": 1975,
+        "BBMD": 1955,
         "COMPOSITE": 7092.47
       }
     },
     {
       "dateStr": "2026-05-07",
       "prices": {
-        "BBCA": 6225,
+        "SAHAM_1": 6225,
         "BMRI": 4640,
         "BBRI": 3310,
         "BBNI": 3980,
@@ -10601,14 +10549,14 @@
         "TUGU": 1295,
         "BBSI": 4700,
         "AGRO": 191,
-        "BBMD": 1925,
+        "BBMD": 1975,
         "COMPOSITE": 7174.32
       }
     },
     {
       "dateStr": "2026-05-08",
       "prices": {
-        "BBCA": 6175,
+        "SAHAM_1": 6175,
         "BMRI": 4630,
         "BBRI": 3260,
         "BBNI": 3860,
@@ -10653,14 +10601,14 @@
         "TUGU": 1260,
         "BBSI": 4700,
         "AGRO": 182,
-        "BBMD": 1945,
+        "BBMD": 1925,
         "COMPOSITE": 6969.4
       }
     },
     {
       "dateStr": "2026-05-11",
       "prices": {
-        "BBCA": 6150,
+        "SAHAM_1": 6150,
         "BMRI": 4250,
         "BBRI": 3200,
         "BBNI": 3820,
@@ -10705,14 +10653,14 @@
         "TUGU": 1205,
         "BBSI": 4300,
         "AGRO": 182,
-        "BBMD": 1985,
+        "BBMD": 1945,
         "COMPOSITE": 6905.62
       }
     },
     {
       "dateStr": "2026-05-12",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4240,
         "BBRI": 3220,
         "BBNI": 3910,
@@ -10757,14 +10705,14 @@
         "TUGU": 1200,
         "BBSI": 4590,
         "AGRO": 180,
-        "BBMD": 1970,
+        "BBMD": 1985,
         "COMPOSITE": 6858.9
       }
     },
     {
       "dateStr": "2026-05-13",
       "prices": {
-        "BBCA": 6100,
+        "SAHAM_1": 6100,
         "BMRI": 4200,
         "BBRI": 3120,
         "BBNI": 3870,
@@ -10809,14 +10757,14 @@
         "TUGU": 1195,
         "BBSI": 4530,
         "AGRO": 179,
-        "BBMD": 2010,
+        "BBMD": 1970,
         "COMPOSITE": 6723.32
       }
     },
     {
       "dateStr": "2026-05-18",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4130,
         "BBRI": 3060,
         "BBNI": 3800,
@@ -10861,14 +10809,14 @@
         "TUGU": 1165,
         "BBSI": 4550,
         "AGRO": 173,
-        "BBMD": 1995,
+        "BBMD": 2010,
         "COMPOSITE": 6599.24
       }
     },
     {
       "dateStr": "2026-05-19",
       "prices": {
-        "BBCA": 5950,
+        "SAHAM_1": 5950,
         "BMRI": 4130,
         "BBRI": 3040,
         "BBNI": 3810,
@@ -10913,14 +10861,14 @@
         "TUGU": 1165,
         "BBSI": 4420,
         "AGRO": 168,
-        "BBMD": 2000,
+        "BBMD": 1995,
         "COMPOSITE": 6370.68
       }
     },
     {
       "dateStr": "2026-05-20",
       "prices": {
-        "BBCA": 5975,
+        "SAHAM_1": 5975,
         "BMRI": 4230,
         "BBRI": 3040,
         "BBNI": 3800,
@@ -10965,14 +10913,14 @@
         "TUGU": 1155,
         "BBSI": 4420,
         "AGRO": 169,
-        "BBMD": 1990,
+        "BBMD": 2000,
         "COMPOSITE": 6318.5
       }
     },
     {
       "dateStr": "2026-05-21",
       "prices": {
-        "BBCA": 5950,
+        "SAHAM_1": 5950,
         "BMRI": 4170,
         "BBRI": 3020,
         "BBNI": 3800,
@@ -11017,14 +10965,14 @@
         "TUGU": 1165,
         "BBSI": 4400,
         "AGRO": 160,
-        "BBMD": 1955,
+        "BBMD": 1990,
         "COMPOSITE": 6094.94
       }
     },
     {
       "dateStr": "2026-05-22",
       "prices": {
-        "BBCA": 5900,
+        "SAHAM_1": 5900,
         "BMRI": 4120,
         "BBRI": 3050,
         "BBNI": 3780,
@@ -11069,14 +11017,14 @@
         "TUGU": 1165,
         "BBSI": 4250,
         "AGRO": 160,
-        "BBMD": 1960,
+        "BBMD": 1955,
         "COMPOSITE": 6162.05
       }
     },
     {
       "dateStr": "2026-05-25",
       "prices": {
-        "BBCA": 6100,
+        "SAHAM_1": 6100,
         "BMRI": 4220,
         "BBRI": 3170,
         "BBNI": 3890,
@@ -11121,14 +11069,14 @@
         "TUGU": 1175,
         "BBSI": 4250,
         "AGRO": 167,
-        "BBMD": 2000,
+        "BBMD": 1960,
         "COMPOSITE": 6206.35
       }
     },
     {
       "dateStr": "2026-05-26",
       "prices": {
-        "BBCA": 5975,
+        "SAHAM_1": 5975,
         "BMRI": 4130,
         "BBRI": 3070,
         "BBNI": 3840,
@@ -11173,14 +11121,14 @@
         "TUGU": 1160,
         "BBSI": 3920,
         "AGRO": 164,
-        "BBMD": 1990,
+        "BBMD": 2000,
         "COMPOSITE": 6130.19
       }
     },
     {
       "dateStr": "2026-05-29",
       "prices": {
-        "BBCA": 5700,
+        "SAHAM_1": 5700,
         "BMRI": 4080,
         "BBRI": 2950,
         "BBNI": 3700,
@@ -11225,14 +11173,14 @@
         "TUGU": 1125,
         "BBSI": 3890,
         "AGRO": 165,
-        "BBMD": 2000,
+        "BBMD": 1990,
         "COMPOSITE": 6127.38
       }
     },
     {
       "dateStr": "2026-06-02",
       "prices": {
-        "BBCA": 5825,
+        "SAHAM_1": 5825,
         "BMRI": 4170,
         "BBRI": 3040,
         "BBNI": 3760,
@@ -11284,7 +11232,7 @@
     {
       "dateStr": "2026-06-03",
       "prices": {
-        "BBCA": 5525,
+        "SAHAM_1": 5525,
         "BMRI": 4050,
         "BBRI": 2900,
         "BBNI": 3570,
@@ -11329,14 +11277,14 @@
         "TUGU": 1090,
         "BBSI": 4570,
         "AGRO": 154,
-        "BBMD": 2040,
+        "BBMD": 2000,
         "COMPOSITE": 5941.07
       }
     },
     {
       "dateStr": "2026-06-04",
       "prices": {
-        "BBCA": 5425,
+        "SAHAM_1": 5425,
         "BMRI": 3970,
         "BBRI": 2810,
         "BBNI": 3420,
@@ -11388,7 +11336,7 @@
     {
       "dateStr": "2026-06-05",
       "prices": {
-        "BBCA": 5075,
+        "SAHAM_1": 5075,
         "BMRI": 3840,
         "BBRI": 2740,
         "BBNI": 3210,
@@ -11433,14 +11381,14 @@
         "TUGU": 1060,
         "BBSI": 4400,
         "AGRO": 142,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5594.77
       }
     },
     {
       "dateStr": "2026-06-08",
       "prices": {
-        "BBCA": 4850,
+        "SAHAM_1": 4850,
         "BMRI": 3710,
         "BBRI": 2590,
         "BBNI": 3010,
@@ -11485,14 +11433,14 @@
         "TUGU": 1020,
         "BBSI": 4590,
         "AGRO": 124,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5342.14
       }
     },
     {
       "dateStr": "2026-06-09",
       "prices": {
-        "BBCA": 5150,
+        "SAHAM_1": 5150,
         "BMRI": 4090,
         "BBRI": 2790,
         "BBNI": 3270,
@@ -11537,14 +11485,14 @@
         "TUGU": 1040,
         "BBSI": 4600,
         "AGRO": 133,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5746.65
       }
     },
     {
       "dateStr": "2026-06-10",
       "prices": {
-        "BBCA": 5650,
+        "SAHAM_1": 5650,
         "BMRI": 4260,
         "BBRI": 2880,
         "BBNI": 3450,
@@ -11589,14 +11537,14 @@
         "TUGU": 1060,
         "BBSI": 4640,
         "AGRO": 142,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5902.38
       }
     },
     {
       "dateStr": "2026-06-11",
       "prices": {
-        "BBCA": 5825,
+        "SAHAM_1": 5825,
         "BMRI": 4250,
         "BBRI": 2850,
         "BBNI": 3500,
@@ -11641,14 +11589,14 @@
         "TUGU": 1095,
         "BBSI": 4500,
         "AGRO": 140,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5886.03
       }
     },
     {
       "dateStr": "2026-06-12",
       "prices": {
-        "BBCA": 5925,
+        "SAHAM_1": 5925,
         "BMRI": 4200,
         "BBRI": 2850,
         "BBNI": 3560,
@@ -11693,14 +11641,14 @@
         "TUGU": 1090,
         "BBSI": 4770,
         "AGRO": 151,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6007.66
       }
     },
     {
       "dateStr": "2026-06-15",
       "prices": {
-        "BBCA": 6275,
+        "SAHAM_1": 6275,
         "BMRI": 4500,
         "BBRI": 2990,
         "BBNI": 3800,
@@ -11745,14 +11693,14 @@
         "TUGU": 1100,
         "BBSI": 4770,
         "AGRO": 157,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6254.97
       }
     },
     {
       "dateStr": "2026-06-17",
       "prices": {
-        "BBCA": 6275,
+        "SAHAM_1": 6275,
         "BMRI": 4490,
         "BBRI": 3080,
         "BBNI": 3800,
@@ -11797,14 +11745,14 @@
         "TUGU": 1145,
         "BBSI": 4750,
         "AGRO": 156,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6220.74
       }
     },
     {
       "dateStr": "2026-06-18",
       "prices": {
-        "BBCA": 6075,
+        "SAHAM_1": 6075,
         "BMRI": 4470,
         "BBRI": 2960,
         "BBNI": 3730,
@@ -11849,14 +11797,14 @@
         "TUGU": 1140,
         "BBSI": 4750,
         "AGRO": 153,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6172.34
       }
     },
     {
       "dateStr": "2026-06-19",
       "prices": {
-        "BBCA": 6300,
+        "SAHAM_1": 6300,
         "BMRI": 4310,
         "BBRI": 2930,
         "BBNI": 3670,
@@ -11901,14 +11849,14 @@
         "TUGU": 1125,
         "BBSI": 4550,
         "AGRO": 155,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6177.14
       }
     },
     {
       "dateStr": "2026-06-22",
       "prices": {
-        "BBCA": 6225,
+        "SAHAM_1": 6225,
         "BMRI": 4220,
         "BBRI": 2870,
         "BBNI": 3490,
@@ -11953,14 +11901,14 @@
         "TUGU": 1185,
         "BBSI": 4600,
         "AGRO": 150,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6116.69
       }
     },
     {
       "dateStr": "2026-06-23",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4120,
         "BBRI": 2910,
         "BBNI": 3430,
@@ -12005,14 +11953,14 @@
         "TUGU": 1170,
         "BBSI": 4610,
         "AGRO": 151,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6101.33
       }
     },
     {
       "dateStr": "2026-06-24",
       "prices": {
-        "BBCA": 5925,
+        "SAHAM_1": 5925,
         "BMRI": 3970,
         "BBRI": 2810,
         "BBNI": 3320,
@@ -12057,14 +12005,14 @@
         "TUGU": 1185,
         "BBSI": 4710,
         "AGRO": 147,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5883.88
       }
     },
     {
       "dateStr": "2026-06-25",
       "prices": {
-        "BBCA": 6025,
+        "SAHAM_1": 6025,
         "BMRI": 4000,
         "BBRI": 2850,
         "BBNI": 3350,
@@ -12109,14 +12057,14 @@
         "TUGU": 1190,
         "BBSI": 4610,
         "AGRO": 150,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5999.04
       }
     },
     {
       "dateStr": "2026-06-26",
       "prices": {
-        "BBCA": 6175,
+        "SAHAM_1": 6175,
         "BMRI": 3990,
         "BBRI": 2870,
         "BBNI": 3320,
@@ -12161,14 +12109,14 @@
         "TUGU": 1185,
         "BBSI": 4700,
         "AGRO": 146,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5896.13
       }
     },
     {
       "dateStr": "2026-06-29",
       "prices": {
-        "BBCA": 5925,
+        "SAHAM_1": 5925,
         "BMRI": 3940,
         "BBRI": 2840,
         "BBNI": 3260,
@@ -12213,14 +12161,14 @@
         "TUGU": 1175,
         "BBSI": 4710,
         "AGRO": 141,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5820.79
       }
     },
     {
       "dateStr": "2026-06-30",
       "prices": {
-        "BBCA": 5550,
+        "SAHAM_1": 5550,
         "BMRI": 3850,
         "BBRI": 2730,
         "BBNI": 3160,
@@ -12265,14 +12213,14 @@
         "TUGU": 1150,
         "BBSI": 4710,
         "AGRO": 134,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5643.19
       }
     },
     {
       "dateStr": "2026-07-01",
       "prices": {
-        "BBCA": 5600,
+        "SAHAM_1": 5600,
         "BMRI": 3810,
         "BBRI": 2670,
         "BBNI": 3100,
@@ -12317,14 +12265,14 @@
         "TUGU": 1165,
         "BBSI": 4720,
         "AGRO": 133,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5695.12
       }
     },
     {
       "dateStr": "2026-07-02",
       "prices": {
-        "BBCA": 5800,
+        "SAHAM_1": 5800,
         "BMRI": 3900,
         "BBRI": 2690,
         "BBNI": 3170,
@@ -12369,14 +12317,14 @@
         "TUGU": 1195,
         "BBSI": 4700,
         "AGRO": 134,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5744.56
       }
     },
     {
       "dateStr": "2026-07-03",
       "prices": {
-        "BBCA": 6050,
+        "SAHAM_1": 6050,
         "BMRI": 4010,
         "BBRI": 2710,
         "BBNI": 3250,
@@ -12421,14 +12369,14 @@
         "TUGU": 1205,
         "BBSI": 4700,
         "AGRO": 137,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5875.78
       }
     },
     {
       "dateStr": "2026-07-06",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4030,
         "BBRI": 2790,
         "BBNI": 3280,
@@ -12473,14 +12421,14 @@
         "TUGU": 1210,
         "BBSI": 4700,
         "AGRO": 141,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5916.07
       }
     },
     {
       "dateStr": "2026-07-07",
       "prices": {
-        "BBCA": 6300,
+        "SAHAM_1": 6300,
         "BMRI": 4070,
         "BBRI": 2860,
         "BBNI": 3470,
@@ -12525,14 +12473,14 @@
         "TUGU": 1200,
         "BBSI": 4690,
         "AGRO": 143,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5986.5
       }
     },
     {
       "dateStr": "2026-07-08",
       "prices": {
-        "BBCA": 6175,
+        "SAHAM_1": 6175,
         "BMRI": 3970,
         "BBRI": 2790,
         "BBNI": 3380,
@@ -12577,14 +12525,14 @@
         "TUGU": 1190,
         "BBSI": 4690,
         "AGRO": 144,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5873.37
       }
     },
     {
       "dateStr": "2026-07-09",
       "prices": {
-        "BBCA": 6200,
+        "SAHAM_1": 6200,
         "BMRI": 4040,
         "BBRI": 2780,
         "BBNI": 3420,
@@ -12629,14 +12577,14 @@
         "TUGU": 1245,
         "BBSI": 4690,
         "AGRO": 141,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5912.44
       }
     },
     {
       "dateStr": "2026-07-10",
       "prices": {
-        "BBCA": 6175,
+        "SAHAM_1": 6175,
         "BMRI": 4080,
         "BBRI": 2790,
         "BBNI": 3420,
@@ -12681,14 +12629,14 @@
         "TUGU": 1245,
         "BBSI": 4700,
         "AGRO": 141,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 5924.36
       }
     },
     {
       "dateStr": "2026-07-13",
       "prices": {
-        "BBCA": 6225,
+        "SAHAM_1": 6225,
         "BMRI": 4250,
         "BBRI": 2870,
         "BBNI": 3530,
@@ -12733,14 +12681,14 @@
         "TUGU": 1245,
         "BBSI": 4690,
         "AGRO": 142,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6037.84
       }
     },
     {
       "dateStr": "2026-07-14",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4160,
         "BBRI": 2800,
         "BBNI": 3470,
@@ -12785,14 +12733,14 @@
         "TUGU": 1275,
         "BBSI": 4690,
         "AGRO": 142,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6039.52
       }
     },
     {
       "dateStr": "2026-07-15",
       "prices": {
-        "BBCA": 6125,
+        "SAHAM_1": 6125,
         "BMRI": 4200,
         "BBRI": 2830,
         "BBNI": 3460,
@@ -12837,14 +12785,14 @@
         "TUGU": 1275,
         "BBSI": 4690,
         "AGRO": 145,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6041.97
       }
     },
     {
       "dateStr": "2026-07-16",
       "prices": {
-        "BBCA": 6225,
+        "SAHAM_1": 6225,
         "BMRI": 4310,
         "BBRI": 2860,
         "BBNI": 3500,
@@ -12889,14 +12837,14 @@
         "TUGU": 1245,
         "BBSI": 4690,
         "AGRO": 145,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6108.21
       }
     },
     {
       "dateStr": "2026-07-17",
       "prices": {
-        "BBCA": 6475,
+        "SAHAM_1": 6475,
         "BMRI": 4480,
         "BBRI": 2970,
         "BBNI": 3580,
@@ -12941,14 +12889,14 @@
         "TUGU": 1240,
         "BBSI": 4690,
         "AGRO": 152,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6175.54
       }
     },
     {
       "dateStr": "2026-07-20",
       "prices": {
-        "BBCA": 6475,
+        "SAHAM_1": 6475,
         "BMRI": 4450,
         "BBRI": 3020,
         "BBNI": 3590,
@@ -12993,14 +12941,14 @@
         "TUGU": 1235,
         "BBSI": 4700,
         "AGRO": 152,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6231.78
       }
     },
     {
       "dateStr": "2026-07-21",
       "prices": {
-        "BBCA": 6525,
+        "SAHAM_1": 6525,
         "BMRI": 4480,
         "BBRI": 3070,
         "BBNI": 3620,
@@ -13045,14 +12993,14 @@
         "TUGU": 1235,
         "BBSI": 4610,
         "AGRO": 154,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6340.02
       }
     },
     {
       "dateStr": "2026-07-22",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4420,
         "BBRI": 3020,
         "BBNI": 3610,
@@ -13097,14 +13045,14 @@
         "TUGU": 1230,
         "BBSI": 4650,
         "AGRO": 153,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6334.48
       }
     },
     {
       "dateStr": "2026-07-23",
       "prices": {
-        "BBCA": 6275,
+        "SAHAM_1": 6275,
         "BMRI": 4380,
         "BBRI": 2990,
         "BBNI": 3600,
@@ -13149,14 +13097,14 @@
         "TUGU": 1230,
         "BBSI": 4700,
         "AGRO": 152,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6315.31
       }
     },
     {
       "dateStr": "2026-07-24",
       "prices": {
-        "BBCA": 6275,
+        "SAHAM_1": 6275,
         "BMRI": 4130,
         "BBRI": 2960,
         "BBNI": 3520,
@@ -13199,16 +13147,16 @@
         "VICO": 140,
         "BTPS": 1005,
         "TUGU": 1220,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 147,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6196.43
       }
     },
     {
       "dateStr": "2026-07-27",
       "prices": {
-        "BBCA": 6300,
+        "SAHAM_1": 6300,
         "BMRI": 4160,
         "BBRI": 2950,
         "BBNI": 3520,
@@ -13251,16 +13199,16 @@
         "VICO": 141,
         "BTPS": 960,
         "TUGU": 1205,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 146,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6185.78
       }
     },
     {
       "dateStr": "2026-07-28",
       "prices": {
-        "BBCA": 6225,
+        "SAHAM_1": 6225,
         "BMRI": 4100,
         "BBRI": 2930,
         "BBNI": 3480,
@@ -13303,16 +13251,16 @@
         "VICO": 142,
         "BTPS": 970,
         "TUGU": 1195,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 144,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6130.59
       }
     },
     {
       "dateStr": "2026-07-29",
       "prices": {
-        "BBCA": 6275,
+        "SAHAM_1": 6275,
         "BMRI": 4090,
         "BBRI": 2920,
         "BBNI": 3460,
@@ -13355,16 +13303,16 @@
         "VICO": 141,
         "BTPS": 965,
         "TUGU": 1190,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 142,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6091.39
       }
     },
     {
       "dateStr": "2026-07-30",
       "prices": {
-        "BBCA": 6450,
+        "SAHAM_1": 6450,
         "BMRI": 4160,
         "BBRI": 2990,
         "BBNI": 3550,
@@ -13407,16 +13355,16 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1200,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 144,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6186.36
       }
     },
     {
       "dateStr": "2026-07-31",
       "prices": {
-        "BBCA": 6325,
+        "SAHAM_1": 6325,
         "BMRI": 4190,
         "BBRI": 3040,
         "BBNI": 3530,
@@ -13459,16 +13407,16 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1220,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 147,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6236.13
       }
     },
     {
       "dateStr": "2026-08-03",
       "prices": {
-        "BBCA": 6300,
+        "SAHAM_1": 6300,
         "BMRI": 4170,
         "BBRI": 3020,
         "BBNI": 3520,
@@ -13511,16 +13459,16 @@
         "VICO": 140,
         "BTPS": 995,
         "TUGU": 1220,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 143,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6234.5
       }
     },
     {
       "dateStr": "2026-08-04",
       "prices": {
-        "BBCA": 6500,
+        "SAHAM_1": 6500,
         "BMRI": 4260,
         "BBRI": 3060,
         "BBNI": 3660,
@@ -13563,16 +13511,16 @@
         "VICO": 140,
         "BTPS": 990,
         "TUGU": 1225,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 145,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6319.61
       }
     },
     {
       "dateStr": "2026-08-05",
       "prices": {
-        "BBCA": 6450,
+        "SAHAM_1": 6450,
         "BMRI": 4220,
         "BBRI": 3020,
         "BBNI": 3630,
@@ -13615,16 +13563,16 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1235,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 146,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6351.14
       }
     },
     {
       "dateStr": "2026-08-06",
       "prices": {
-        "BBCA": 6350,
+        "SAHAM_1": 6350,
         "BMRI": 4200,
         "BBRI": 3040,
         "BBNI": 3620,
@@ -13667,16 +13615,16 @@
         "VICO": 142,
         "BTPS": 990,
         "TUGU": 1230,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 148,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6343.71
       }
     },
     {
       "dateStr": "2026-08-07",
       "prices": {
-        "BBCA": 6375,
+        "SAHAM_1": 6375,
         "BMRI": 4240,
         "BBRI": 3130,
         "BBNI": 3630,
@@ -13719,16 +13667,16 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1230,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 153,
-        "BBMD": 2040,
+        "BBMD": 2020,
         "COMPOSITE": 6409.65
       }
     },
     {
       "dateStr": "2026-08-10",
       "prices": {
-        "BBCA": 6375,
+        "SAHAM_1": 6375,
         "BMRI": 4180,
         "BBRI": 3090,
         "BBNI": 3650,
@@ -13749,7 +13697,7 @@
         "BJTM": 515,
         "BNGA": 1650,
         "BNII": 194,
-        "BNLI": 2180,
+        "BNLI": 2150,
         "BSIM": 700,
         "BTPN": 2160,
         "BVIC": 91,
@@ -13771,10 +13719,114 @@
         "VICO": 142,
         "BTPS": 995,
         "TUGU": 1240,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 151,
-        "BBMD": 2040,
-        "COMPOSITE": 6409.65
+        "BBMD": 2020,
+        "COMPOSITE": 6365.37
+      }
+    },
+    {
+      "dateStr": "2026-08-11",
+      "prices": {
+        "SAHAM_1": 6300,
+        "BMRI": 4120,
+        "BBRI": 3090,
+        "BBNI": 3550,
+        "ASII": 4870,
+        "BRIS": 1770,
+        "BBTN": 1210,
+        "ARTO": 1230,
+        "BACA": 116,
+        "BBHI": 905,
+        "GOTO": 50,
+        "BBYB": 254,
+        "BCAP": 50,
+        "BDMN": 4200,
+        "BFIN": 875,
+        "BGTG": 110,
+        "BINA": 4040,
+        "BJBR": 785,
+        "BJTM": 510,
+        "BNGA": 1635,
+        "BNII": 193,
+        "BNLI": 2160,
+        "BSIM": 695,
+        "BTPN": 2160,
+        "BVIC": 92,
+        "CFIN": 348,
+        "DNET": 9700,
+        "INPC": 140,
+        "MAYA": 200,
+        "MCOR": 69,
+        "MEGA": 1985,
+        "MREI": 920,
+        "NISP": 1260,
+        "PANS": 1540,
+        "PNBN": 895,
+        "PNIN": 710,
+        "PNLF": 228,
+        "TLKM": 2610,
+        "SRTG": 1800,
+        "TRIM": 600,
+        "VICO": 142,
+        "BTPS": 980,
+        "TUGU": 1235,
+        "BBSI": 4610,
+        "AGRO": 149,
+        "BBMD": 2020,
+        "COMPOSITE": 6267.88
+      }
+    },
+    {
+      "dateStr": "2026-08-12",
+      "prices": {
+        "SAHAM_1": 6350,
+        "BMRI": 4130,
+        "BBRI": 3130,
+        "BBNI": 3580,
+        "ASII": 4860,
+        "BRIS": 1795,
+        "BBTN": 1210,
+        "ARTO": 1255,
+        "BACA": 117,
+        "BBHI": 900,
+        "GOTO": 50,
+        "BBYB": 256,
+        "BCAP": 50,
+        "BDMN": 4300,
+        "BFIN": 915,
+        "BGTG": 110,
+        "BINA": 4090,
+        "BJBR": 785,
+        "BJTM": 515,
+        "BNGA": 1640,
+        "BNII": 194,
+        "BNLI": 2160,
+        "BSIM": 695,
+        "BTPN": 2170,
+        "BVIC": 92,
+        "CFIN": 350,
+        "DNET": 9500,
+        "INPC": 140,
+        "MAYA": 199,
+        "MCOR": 69,
+        "MEGA": 1985,
+        "MREI": 920,
+        "NISP": 1270,
+        "PANS": 1555,
+        "PNBN": 895,
+        "PNIN": 720,
+        "PNLF": 230,
+        "TLKM": 2590,
+        "SRTG": 1830,
+        "TRIM": 590,
+        "VICO": 143,
+        "BTPS": 980,
+        "TUGU": 1275,
+        "BBSI": 4610,
+        "AGRO": 150,
+        "BBMD": 2020,
+        "COMPOSITE": 6267.88
       }
     }
   ]
