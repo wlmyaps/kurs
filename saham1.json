@@ -50,58 +50,6 @@
   ],
   "history": [
     {
-      "dateStr": "2025-07-22",
-      "prices": {
-        "BBCA": 8400,
-        "BMRI": 4660,
-        "BBRI": 3840,
-        "BBNI": 4050,
-        "ASII": 4690,
-        "BRIS": 2720,
-        "BBTN": 1175,
-        "ARTO": 1745,
-        "BACA": 130,
-        "BBHI": 1140,
-        "GOTO": 58,
-        "BBYB": 246,
-        "BCAP": 56,
-        "BDMN": 2420,
-        "BFIN": 770,
-        "BGTG": 79,
-        "BINA": 4330,
-        "BJBR": 815,
-        "BJTM": 492,
-        "BNGA": 1700,
-        "BNII": 199,
-        "BNLI": 2780,
-        "BSIM": 875,
-        "BTPN": 2120,
-        "BVIC": 86,
-        "CFIN": 312,
-        "DNET": 9125,
-        "INPC": 156,
-        "MAYA": 181,
-        "MCOR": 66,
-        "MEGA": 1625,
-        "MREI": 1045,
-        "NISP": 1340,
-        "PANS": 1420,
-        "PNBN": 1130,
-        "PNIN": 885,
-        "PNLF": 258,
-        "TLKM": 2850,
-        "SRTG": 1975,
-        "TRIM": 374,
-        "VICO": 158,
-        "BTPS": 1525,
-        "TUGU": 970,
-        "BBSI": 4000,
-        "AGRO": 204,
-        "BBMD": 2200,
-        "COMPOSITE": 7344.74
-      }
-    },
-    {
       "dateStr": "2025-07-23",
       "prices": {
         "BBCA": 8425,
@@ -147,7 +95,7 @@
         "VICO": 160,
         "BTPS": 1540,
         "TUGU": 970,
-        "BBSI": 3900,
+        "BBSI": 4000,
         "AGRO": 206,
         "BBMD": 2200,
         "COMPOSITE": 7469.23
@@ -199,7 +147,7 @@
         "VICO": 160,
         "BTPS": 1520,
         "TUGU": 980,
-        "BBSI": 4000,
+        "BBSI": 3900,
         "AGRO": 214,
         "BBMD": 2120,
         "COMPOSITE": 7530.9
@@ -303,7 +251,7 @@
         "VICO": 164,
         "BTPS": 1505,
         "TUGU": 1000,
-        "BBSI": 3900,
+        "BBSI": 4000,
         "AGRO": 214,
         "BBMD": 2190,
         "COMPOSITE": 7614.77
@@ -407,7 +355,7 @@
         "VICO": 160,
         "BTPS": 1405,
         "TUGU": 980,
-        "BBSI": 4000,
+        "BBSI": 3900,
         "AGRO": 212,
         "BBMD": 2170,
         "COMPOSITE": 7549.89
@@ -511,7 +459,7 @@
         "VICO": 160,
         "BTPS": 1410,
         "TUGU": 960,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 210,
         "BBMD": 2170,
         "COMPOSITE": 7537.77
@@ -615,7 +563,7 @@
         "VICO": 180,
         "BTPS": 1395,
         "TUGU": 930,
-        "BBSI": 4000,
+        "BBSI": 4010,
         "AGRO": 210,
         "BBMD": 2160,
         "COMPOSITE": 7515.19
@@ -667,7 +615,7 @@
         "VICO": 173,
         "BTPS": 1400,
         "TUGU": 935,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 214,
         "BBMD": 2130,
         "COMPOSITE": 7503.75
@@ -719,7 +667,7 @@
         "VICO": 171,
         "BTPS": 1375,
         "TUGU": 930,
-        "BBSI": 4020,
+        "BBSI": 4010,
         "AGRO": 212,
         "BBMD": 2090,
         "COMPOSITE": 7490.18
@@ -771,7 +719,7 @@
         "VICO": 169,
         "BTPS": 1440,
         "TUGU": 940,
-        "BBSI": 4010,
+        "BBSI": 4020,
         "AGRO": 208,
         "BBMD": 2110,
         "COMPOSITE": 7533.39
@@ -823,7 +771,7 @@
         "VICO": 173,
         "BTPS": 1470,
         "TUGU": 935,
-        "BBSI": 4020,
+        "BBSI": 4010,
         "AGRO": 218,
         "BBMD": 2100,
         "COMPOSITE": 7605.93
@@ -875,7 +823,7 @@
         "VICO": 172,
         "BTPS": 1530,
         "TUGU": 965,
-        "BBSI": 4000,
+        "BBSI": 4020,
         "AGRO": 252,
         "BBMD": 2110,
         "COMPOSITE": 7791.7
@@ -1031,7 +979,7 @@
         "VICO": 177,
         "BTPS": 1415,
         "TUGU": 970,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 226,
         "BBMD": 2110,
         "COMPOSITE": 7898.38
@@ -1083,7 +1031,7 @@
         "VICO": 177,
         "BTPS": 1455,
         "TUGU": 970,
-        "BBSI": 4030,
+        "BBSI": 4010,
         "AGRO": 230,
         "BBMD": 2110,
         "COMPOSITE": 7862.95
@@ -1135,7 +1083,7 @@
         "VICO": 177,
         "BTPS": 1465,
         "TUGU": 970,
-        "BBSI": 4050,
+        "BBSI": 4030,
         "AGRO": 244,
         "BBMD": 2110,
         "COMPOSITE": 7943.83
@@ -1187,7 +1135,7 @@
         "VICO": 177,
         "BTPS": 1455,
         "TUGU": 955,
-        "BBSI": 4020,
+        "BBSI": 4050,
         "AGRO": 240,
         "BBMD": 2080,
         "COMPOSITE": 7890.72
@@ -1239,7 +1187,7 @@
         "VICO": 190,
         "BTPS": 1430,
         "TUGU": 970,
-        "BBSI": 4050,
+        "BBSI": 4020,
         "AGRO": 240,
         "BBMD": 2080,
         "COMPOSITE": 7858.85
@@ -1291,7 +1239,7 @@
         "VICO": 197,
         "BTPS": 1435,
         "TUGU": 990,
-        "BBSI": 4000,
+        "BBSI": 4050,
         "AGRO": 252,
         "BBMD": 2150,
         "COMPOSITE": 7926.91
@@ -1343,7 +1291,7 @@
         "VICO": 186,
         "BTPS": 1435,
         "TUGU": 980,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 248,
         "BBMD": 2140,
         "COMPOSITE": 7905.76
@@ -1395,7 +1343,7 @@
         "VICO": 185,
         "BTPS": 1425,
         "TUGU": 975,
-        "BBSI": 3990,
+        "BBSI": 4010,
         "AGRO": 244,
         "BBMD": 2110,
         "COMPOSITE": 7936.18
@@ -1447,7 +1395,7 @@
         "VICO": 187,
         "BTPS": 1465,
         "TUGU": 970,
-        "BBSI": 4030,
+        "BBSI": 3990,
         "AGRO": 244,
         "BBMD": 2120,
         "COMPOSITE": 7952.09
@@ -1499,7 +1447,7 @@
         "VICO": 183,
         "BTPS": 1490,
         "TUGU": 970,
-        "BBSI": 4010,
+        "BBSI": 4030,
         "AGRO": 236,
         "BBMD": 2130,
         "COMPOSITE": 7830.49
@@ -1551,7 +1499,7 @@
         "VICO": 182,
         "BTPS": 1460,
         "TUGU": 965,
-        "BBSI": 4000,
+        "BBSI": 4010,
         "AGRO": 228,
         "BBMD": 2090,
         "COMPOSITE": 7736.07
@@ -1603,7 +1551,7 @@
         "VICO": 179,
         "BTPS": 1470,
         "TUGU": 965,
-        "BBSI": 4050,
+        "BBSI": 4000,
         "AGRO": 230,
         "BBMD": 2090,
         "COMPOSITE": 7801.59
@@ -1655,7 +1603,7 @@
         "VICO": 183,
         "BTPS": 1450,
         "TUGU": 965,
-        "BBSI": 4020,
+        "BBSI": 4050,
         "AGRO": 236,
         "BBMD": 2110,
         "COMPOSITE": 7885.86
@@ -1707,7 +1655,7 @@
         "VICO": 184,
         "BTPS": 1460,
         "TUGU": 960,
-        "BBSI": 4070,
+        "BBSI": 4020,
         "AGRO": 232,
         "BBMD": 2140,
         "COMPOSITE": 7867.35
@@ -1759,7 +1707,7 @@
         "VICO": 185,
         "BTPS": 1350,
         "TUGU": 950,
-        "BBSI": 4030,
+        "BBSI": 4070,
         "AGRO": 226,
         "BBMD": 2180,
         "COMPOSITE": 7766.85
@@ -1811,7 +1759,7 @@
         "VICO": 180,
         "BTPS": 1375,
         "TUGU": 960,
-        "BBSI": 4060,
+        "BBSI": 4030,
         "AGRO": 226,
         "BBMD": 2120,
         "COMPOSITE": 7628.61
@@ -1863,7 +1811,7 @@
         "VICO": 184,
         "BTPS": 1385,
         "TUGU": 960,
-        "BBSI": 4000,
+        "BBSI": 4060,
         "AGRO": 246,
         "BBMD": 2170,
         "COMPOSITE": 7699.01
@@ -1915,7 +1863,7 @@
         "VICO": 180,
         "BTPS": 1525,
         "TUGU": 970,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 248,
         "BBMD": 2100,
         "COMPOSITE": 7747.91
@@ -1967,7 +1915,7 @@
         "VICO": 206,
         "BTPS": 1500,
         "TUGU": 970,
-        "BBSI": 3930,
+        "BBSI": 4010,
         "AGRO": 250,
         "BBMD": 2130,
         "COMPOSITE": 7854.06
@@ -2019,7 +1967,7 @@
         "VICO": 206,
         "BTPS": 1485,
         "TUGU": 970,
-        "BBSI": 4000,
+        "BBSI": 3930,
         "AGRO": 254,
         "BBMD": 2110,
         "COMPOSITE": 7937.12
@@ -2071,7 +2019,7 @@
         "VICO": 202,
         "BTPS": 1460,
         "TUGU": 960,
-        "BBSI": 4050,
+        "BBSI": 4000,
         "AGRO": 244,
         "BBMD": 2090,
         "COMPOSITE": 7957.7
@@ -2123,7 +2071,7 @@
         "VICO": 202,
         "BTPS": 1505,
         "TUGU": 955,
-        "BBSI": 4000,
+        "BBSI": 4050,
         "AGRO": 250,
         "BBMD": 2100,
         "COMPOSITE": 8025.18
@@ -2175,7 +2123,7 @@
         "VICO": 198,
         "BTPS": 1460,
         "TUGU": 965,
-        "BBSI": 4220,
+        "BBSI": 4000,
         "AGRO": 244,
         "BBMD": 2110,
         "COMPOSITE": 8008.43
@@ -2227,7 +2175,7 @@
         "VICO": 200,
         "BTPS": 1435,
         "TUGU": 970,
-        "BBSI": 4400,
+        "BBSI": 4220,
         "AGRO": 240,
         "BBMD": 2090,
         "COMPOSITE": 8051.12
@@ -2279,7 +2227,7 @@
         "VICO": 198,
         "BTPS": 1400,
         "TUGU": 1030,
-        "BBSI": 4380,
+        "BBSI": 4400,
         "AGRO": 240,
         "BBMD": 2090,
         "COMPOSITE": 8040.04
@@ -2331,7 +2279,7 @@
         "VICO": 193,
         "BTPS": 1395,
         "TUGU": 1025,
-        "BBSI": 5000,
+        "BBSI": 4380,
         "AGRO": 240,
         "BBMD": 2120,
         "COMPOSITE": 8125.2
@@ -2383,7 +2331,7 @@
         "VICO": 192,
         "BTPS": 1390,
         "TUGU": 995,
-        "BBSI": 4790,
+        "BBSI": 5000,
         "AGRO": 234,
         "BBMD": 2060,
         "COMPOSITE": 8126.56
@@ -2487,7 +2435,7 @@
         "VICO": 184,
         "BTPS": 1390,
         "TUGU": 995,
-        "BBSI": 4670,
+        "BBSI": 4790,
         "AGRO": 242,
         "BBMD": 2090,
         "COMPOSITE": 8099.33
@@ -2539,7 +2487,7 @@
         "VICO": 186,
         "BTPS": 1375,
         "TUGU": 1010,
-        "BBSI": 4460,
+        "BBSI": 4670,
         "AGRO": 244,
         "BBMD": 2130,
         "COMPOSITE": 8123.25
@@ -2591,7 +2539,7 @@
         "VICO": 188,
         "BTPS": 1350,
         "TUGU": 1010,
-        "BBSI": 4360,
+        "BBSI": 4460,
         "AGRO": 240,
         "BBMD": 2130,
         "COMPOSITE": 8061.06
@@ -2643,7 +2591,7 @@
         "VICO": 186,
         "BTPS": 1415,
         "TUGU": 1050,
-        "BBSI": 4880,
+        "BBSI": 4360,
         "AGRO": 250,
         "BBMD": 2130,
         "COMPOSITE": 8043.82
@@ -2695,7 +2643,7 @@
         "VICO": 189,
         "BTPS": 1405,
         "TUGU": 1040,
-        "BBSI": 5100,
+        "BBSI": 4880,
         "AGRO": 254,
         "BBMD": 2130,
         "COMPOSITE": 8071.08
@@ -2747,7 +2695,7 @@
         "VICO": 186,
         "BTPS": 1430,
         "TUGU": 1025,
-        "BBSI": 4630,
+        "BBSI": 5100,
         "AGRO": 252,
         "BBMD": 2120,
         "COMPOSITE": 8118.3
@@ -2799,7 +2747,7 @@
         "VICO": 184,
         "BTPS": 1455,
         "TUGU": 1025,
-        "BBSI": 4490,
+        "BBSI": 4630,
         "AGRO": 246,
         "BBMD": 2040,
         "COMPOSITE": 8139.89
@@ -2851,7 +2799,7 @@
         "VICO": 186,
         "BTPS": 1420,
         "TUGU": 1010,
-        "BBSI": 4880,
+        "BBSI": 4490,
         "AGRO": 240,
         "BBMD": 2050,
         "COMPOSITE": 8169.28
@@ -2903,7 +2851,7 @@
         "VICO": 179,
         "BTPS": 1380,
         "TUGU": 1015,
-        "BBSI": 4950,
+        "BBSI": 4880,
         "AGRO": 236,
         "BBMD": 2040,
         "COMPOSITE": 8166.03
@@ -2955,7 +2903,7 @@
         "VICO": 182,
         "BTPS": 1410,
         "TUGU": 1035,
-        "BBSI": 4210,
+        "BBSI": 4950,
         "AGRO": 240,
         "BBMD": 2040,
         "COMPOSITE": 8250.94
@@ -3007,7 +2955,7 @@
         "VICO": 181,
         "BTPS": 1385,
         "TUGU": 1025,
-        "BBSI": 4580,
+        "BBSI": 4210,
         "AGRO": 236,
         "BBMD": 2040,
         "COMPOSITE": 8257.86
@@ -3059,7 +3007,7 @@
         "VICO": 190,
         "BTPS": 1355,
         "TUGU": 1010,
-        "BBSI": 4080,
+        "BBSI": 4580,
         "AGRO": 230,
         "BBMD": 2110,
         "COMPOSITE": 8227.2
@@ -3111,7 +3059,7 @@
         "VICO": 177,
         "BTPS": 1330,
         "TUGU": 995,
-        "BBSI": 4020,
+        "BBSI": 4080,
         "AGRO": 222,
         "BBMD": 2110,
         "COMPOSITE": 8066.52
@@ -3163,7 +3111,7 @@
         "VICO": 177,
         "BTPS": 1355,
         "TUGU": 1000,
-        "BBSI": 4110,
+        "BBSI": 4020,
         "AGRO": 222,
         "BBMD": 2100,
         "COMPOSITE": 8051.18
@@ -3215,7 +3163,7 @@
         "VICO": 180,
         "BTPS": 1315,
         "TUGU": 1000,
-        "BBSI": 4050,
+        "BBSI": 4110,
         "AGRO": 218,
         "BBMD": 2100,
         "COMPOSITE": 8124.76
@@ -3319,7 +3267,7 @@
         "VICO": 183,
         "BTPS": 1450,
         "TUGU": 1025,
-        "BBSI": 4090,
+        "BBSI": 4050,
         "AGRO": 222,
         "BBMD": 2090,
         "COMPOSITE": 8088.98
@@ -3371,7 +3319,7 @@
         "VICO": 181,
         "BTPS": 1400,
         "TUGU": 1115,
-        "BBSI": 4020,
+        "BBSI": 4090,
         "AGRO": 224,
         "BBMD": 2090,
         "COMPOSITE": 8238.08
@@ -3475,7 +3423,7 @@
         "VICO": 181,
         "BTPS": 1405,
         "TUGU": 1095,
-        "BBSI": 3990,
+        "BBSI": 4020,
         "AGRO": 226,
         "BBMD": 2090,
         "COMPOSITE": 8274.35
@@ -3527,7 +3475,7 @@
         "VICO": 184,
         "BTPS": 1370,
         "TUGU": 1095,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 226,
         "BBMD": 2060,
         "COMPOSITE": 8271.72
@@ -3579,7 +3527,7 @@
         "VICO": 182,
         "BTPS": 1380,
         "TUGU": 1040,
-        "BBSI": 3990,
+        "BBSI": 4000,
         "AGRO": 228,
         "BBMD": 2050,
         "COMPOSITE": 8117.15
@@ -3735,7 +3683,7 @@
         "VICO": 181,
         "BTPS": 1410,
         "TUGU": 1065,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 236,
         "BBMD": 2070,
         "COMPOSITE": 8184.06
@@ -3787,7 +3735,7 @@
         "VICO": 180,
         "BTPS": 1370,
         "TUGU": 1045,
-        "BBSI": 3990,
+        "BBSI": 4000,
         "AGRO": 232,
         "BBMD": 2050,
         "COMPOSITE": 8163.88
@@ -3891,7 +3839,7 @@
         "VICO": 182,
         "BTPS": 1370,
         "TUGU": 1030,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 224,
         "BBMD": 2050,
         "COMPOSITE": 8241.91
@@ -3943,7 +3891,7 @@
         "VICO": 184,
         "BTPS": 1370,
         "TUGU": 1025,
-        "BBSI": 3990,
+        "BBSI": 4000,
         "AGRO": 224,
         "BBMD": 2030,
         "COMPOSITE": 8318.53
@@ -4099,7 +4047,7 @@
         "VICO": 185,
         "BTPS": 1380,
         "TUGU": 1025,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 228,
         "BBMD": 1990,
         "COMPOSITE": 8391.24
@@ -4203,7 +4151,7 @@
         "VICO": 182,
         "BTPS": 1370,
         "TUGU": 1025,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 228,
         "BBMD": 1970,
         "COMPOSITE": 8388.57
@@ -4255,7 +4203,7 @@
         "VICO": 184,
         "BTPS": 1375,
         "TUGU": 1025,
-        "BBSI": 4000,
+        "BBSI": 4010,
         "AGRO": 230,
         "BBMD": 1970,
         "COMPOSITE": 8372
@@ -4359,7 +4307,7 @@
         "VICO": 183,
         "BTPS": 1375,
         "TUGU": 1020,
-        "BBSI": 3990,
+        "BBSI": 4000,
         "AGRO": 230,
         "BBMD": 1990,
         "COMPOSITE": 8416.88
@@ -4463,7 +4411,7 @@
         "VICO": 183,
         "BTPS": 1355,
         "TUGU": 1015,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 226,
         "BBMD": 1980,
         "COMPOSITE": 8406.58
@@ -4515,7 +4463,7 @@
         "VICO": 180,
         "BTPS": 1370,
         "TUGU": 1070,
-        "BBSI": 3930,
+        "BBSI": 4000,
         "AGRO": 226,
         "BBMD": 1975,
         "COMPOSITE": 8419.92
@@ -4567,7 +4515,7 @@
         "VICO": 182,
         "BTPS": 1360,
         "TUGU": 1080,
-        "BBSI": 3990,
+        "BBSI": 3930,
         "AGRO": 224,
         "BBMD": 1980,
         "COMPOSITE": 8414.35
@@ -4619,7 +4567,7 @@
         "VICO": 182,
         "BTPS": 1375,
         "TUGU": 1080,
-        "BBSI": 3950,
+        "BBSI": 3990,
         "AGRO": 224,
         "BBMD": 1975,
         "COMPOSITE": 8570.25
@@ -4671,7 +4619,7 @@
         "VICO": 180,
         "BTPS": 1355,
         "TUGU": 1070,
-        "BBSI": 3990,
+        "BBSI": 3950,
         "AGRO": 226,
         "BBMD": 1975,
         "COMPOSITE": 8521.89
@@ -4723,7 +4671,7 @@
         "VICO": 180,
         "BTPS": 1360,
         "TUGU": 1080,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 224,
         "BBMD": 1995,
         "COMPOSITE": 8602.13
@@ -4775,7 +4723,7 @@
         "VICO": 181,
         "BTPS": 1365,
         "TUGU": 1095,
-        "BBSI": 3940,
+        "BBSI": 4000,
         "AGRO": 240,
         "BBMD": 2030,
         "COMPOSITE": 8545.87
@@ -4879,7 +4827,7 @@
         "VICO": 190,
         "BTPS": 1360,
         "TUGU": 1075,
-        "BBSI": 3990,
+        "BBSI": 3940,
         "AGRO": 228,
         "BBMD": 1995,
         "COMPOSITE": 8548.79
@@ -4931,7 +4879,7 @@
         "VICO": 186,
         "BTPS": 1320,
         "TUGU": 1075,
-        "BBSI": 3900,
+        "BBSI": 3990,
         "AGRO": 236,
         "BBMD": 2010,
         "COMPOSITE": 8617.04
@@ -4983,7 +4931,7 @@
         "VICO": 188,
         "BTPS": 1320,
         "TUGU": 1080,
-        "BBSI": 3910,
+        "BBSI": 3900,
         "AGRO": 230,
         "BBMD": 2070,
         "COMPOSITE": 8611.79
@@ -5087,7 +5035,7 @@
         "VICO": 187,
         "BTPS": 1300,
         "TUGU": 1095,
-        "BBSI": 3900,
+        "BBSI": 3910,
         "AGRO": 232,
         "BBMD": 2040,
         "COMPOSITE": 8632.76
@@ -5139,7 +5087,7 @@
         "VICO": 208,
         "BTPS": 1300,
         "TUGU": 1110,
-        "BBSI": 3820,
+        "BBSI": 3900,
         "AGRO": 232,
         "BBMD": 2080,
         "COMPOSITE": 8710.7
@@ -5191,7 +5139,7 @@
         "VICO": 199,
         "BTPS": 1240,
         "TUGU": 1120,
-        "BBSI": 3900,
+        "BBSI": 3820,
         "AGRO": 230,
         "BBMD": 2080,
         "COMPOSITE": 8657.18
@@ -5295,7 +5243,7 @@
         "VICO": 204,
         "BTPS": 1175,
         "TUGU": 1060,
-        "BBSI": 3980,
+        "BBSI": 3900,
         "AGRO": 228,
         "BBMD": 1990,
         "COMPOSITE": 8620.48
@@ -5347,7 +5295,7 @@
         "VICO": 208,
         "BTPS": 1200,
         "TUGU": 1080,
-        "BBSI": 4000,
+        "BBSI": 3980,
         "AGRO": 230,
         "BBMD": 2030,
         "COMPOSITE": 8660.5
@@ -5399,7 +5347,7 @@
         "VICO": 228,
         "BTPS": 1240,
         "TUGU": 1165,
-        "BBSI": 4010,
+        "BBSI": 4000,
         "AGRO": 248,
         "BBMD": 2100,
         "COMPOSITE": 8649.66
@@ -5451,7 +5399,7 @@
         "VICO": 218,
         "BTPS": 1205,
         "TUGU": 1150,
-        "BBSI": 3910,
+        "BBSI": 4010,
         "AGRO": 254,
         "BBMD": 2090,
         "COMPOSITE": 8686.47
@@ -5503,7 +5451,7 @@
         "VICO": 218,
         "BTPS": 1210,
         "TUGU": 1135,
-        "BBSI": 3920,
+        "BBSI": 3910,
         "AGRO": 244,
         "BBMD": 2050,
         "COMPOSITE": 8677.34
@@ -5555,7 +5503,7 @@
         "VICO": 218,
         "BTPS": 1185,
         "TUGU": 1115,
-        "BBSI": 4000,
+        "BBSI": 3920,
         "AGRO": 236,
         "BBMD": 2050,
         "COMPOSITE": 8618.2
@@ -5607,7 +5555,7 @@
         "VICO": 216,
         "BTPS": 1200,
         "TUGU": 1095,
-        "BBSI": 3900,
+        "BBSI": 4000,
         "AGRO": 232,
         "BBMD": 1955,
         "COMPOSITE": 8609.55
@@ -5763,7 +5711,7 @@
         "VICO": 206,
         "BTPS": 1250,
         "TUGU": 1115,
-        "BBSI": 4010,
+        "BBSI": 3900,
         "AGRO": 228,
         "BBMD": 1990,
         "COMPOSITE": 8537.91
@@ -5815,7 +5763,7 @@
         "VICO": 208,
         "BTPS": 1200,
         "TUGU": 1180,
-        "BBSI": 3950,
+        "BBSI": 4010,
         "AGRO": 228,
         "BBMD": 1950,
         "COMPOSITE": 8644.26
@@ -5867,7 +5815,7 @@
         "VICO": 202,
         "BTPS": 1205,
         "TUGU": 1165,
-        "BBSI": 3990,
+        "BBSI": 3950,
         "AGRO": 230,
         "BBMD": 1995,
         "COMPOSITE": 8646.94
@@ -5919,7 +5867,7 @@
         "VICO": 210,
         "BTPS": 1210,
         "TUGU": 1185,
-        "BBSI": 4000,
+        "BBSI": 3990,
         "AGRO": 232,
         "BBMD": 1950,
         "COMPOSITE": 8748.13
@@ -6023,7 +5971,7 @@
         "VICO": 212,
         "BTPS": 1230,
         "TUGU": 1240,
-        "BBSI": 3950,
+        "BBSI": 4000,
         "AGRO": 246,
         "BBMD": 1955,
         "COMPOSITE": 8933.61
@@ -6075,7 +6023,7 @@
         "VICO": 204,
         "BTPS": 1240,
         "TUGU": 1245,
-        "BBSI": 4000,
+        "BBSI": 3950,
         "AGRO": 246,
         "BBMD": 2000,
         "COMPOSITE": 8944.81
@@ -6179,7 +6127,7 @@
         "VICO": 204,
         "BTPS": 1245,
         "TUGU": 1240,
-        "BBSI": 3900,
+        "BBSI": 4000,
         "AGRO": 240,
         "BBMD": 2070,
         "COMPOSITE": 8936.75
@@ -6231,7 +6179,7 @@
         "VICO": 196,
         "BTPS": 1245,
         "TUGU": 1210,
-        "BBSI": 3860,
+        "BBSI": 3900,
         "AGRO": 242,
         "BBMD": 1990,
         "COMPOSITE": 8884.72
@@ -6283,7 +6231,7 @@
         "VICO": 197,
         "BTPS": 1195,
         "TUGU": 1250,
-        "BBSI": 3900,
+        "BBSI": 3860,
         "AGRO": 240,
         "BBMD": 2020,
         "COMPOSITE": 8948.3
@@ -6335,7 +6283,7 @@
         "VICO": 198,
         "BTPS": 1165,
         "TUGU": 1235,
-        "BBSI": 3840,
+        "BBSI": 3900,
         "AGRO": 240,
         "BBMD": 2030,
         "COMPOSITE": 9032.58
@@ -6387,7 +6335,7 @@
         "VICO": 202,
         "BTPS": 1210,
         "TUGU": 1210,
-        "BBSI": 3820,
+        "BBSI": 3840,
         "AGRO": 248,
         "BBMD": 2030,
         "COMPOSITE": 9075.41
@@ -6439,7 +6387,7 @@
         "VICO": 204,
         "BTPS": 1220,
         "TUGU": 1210,
-        "BBSI": 3930,
+        "BBSI": 3820,
         "AGRO": 248,
         "BBMD": 2000,
         "COMPOSITE": 9133.87
@@ -6491,7 +6439,7 @@
         "VICO": 204,
         "BTPS": 1215,
         "TUGU": 1190,
-        "BBSI": 3750,
+        "BBSI": 3930,
         "AGRO": 244,
         "BBMD": 2000,
         "COMPOSITE": 9134.7
@@ -6543,7 +6491,7 @@
         "VICO": 204,
         "BTPS": 1210,
         "TUGU": 1155,
-        "BBSI": 3880,
+        "BBSI": 3750,
         "AGRO": 240,
         "BBMD": 1970,
         "COMPOSITE": 9010.33
@@ -6595,7 +6543,7 @@
         "VICO": 204,
         "BTPS": 1250,
         "TUGU": 1165,
-        "BBSI": 3720,
+        "BBSI": 3880,
         "AGRO": 242,
         "BBMD": 1970,
         "COMPOSITE": 8992.18
@@ -6647,7 +6595,7 @@
         "VICO": 204,
         "BTPS": 1265,
         "TUGU": 1190,
-        "BBSI": 3950,
+        "BBSI": 3720,
         "AGRO": 238,
         "BBMD": 2020,
         "COMPOSITE": 8951.01
@@ -6699,7 +6647,7 @@
         "VICO": 200,
         "BTPS": 1270,
         "TUGU": 1180,
-        "BBSI": 4010,
+        "BBSI": 3950,
         "AGRO": 232,
         "BBMD": 1950,
         "COMPOSITE": 8975.33
@@ -6751,7 +6699,7 @@
         "VICO": 200,
         "BTPS": 1255,
         "TUGU": 1180,
-        "BBSI": 4030,
+        "BBSI": 4010,
         "AGRO": 230,
         "BBMD": 1940,
         "COMPOSITE": 8980.23
@@ -6855,7 +6803,7 @@
         "VICO": 193,
         "BTPS": 1215,
         "TUGU": 1120,
-        "BBSI": 4000,
+        "BBSI": 4030,
         "AGRO": 208,
         "BBMD": 2000,
         "COMPOSITE": 8232.2
@@ -7011,7 +6959,7 @@
         "VICO": 183,
         "BTPS": 1235,
         "TUGU": 1180,
-        "BBSI": 4060,
+        "BBSI": 4000,
         "AGRO": 212,
         "BBMD": 1990,
         "COMPOSITE": 8122.6
@@ -7063,7 +7011,7 @@
         "VICO": 185,
         "BTPS": 1270,
         "TUGU": 1190,
-        "BBSI": 4160,
+        "BBSI": 4060,
         "AGRO": 218,
         "BBMD": 2020,
         "COMPOSITE": 8146.72
@@ -7115,7 +7063,7 @@
         "VICO": 187,
         "BTPS": 1260,
         "TUGU": 1250,
-        "BBSI": 4180,
+        "BBSI": 4160,
         "AGRO": 218,
         "BBMD": 1945,
         "COMPOSITE": 8103.88
@@ -7167,7 +7115,7 @@
         "VICO": 185,
         "BTPS": 1245,
         "TUGU": 1235,
-        "BBSI": 4150,
+        "BBSI": 4180,
         "AGRO": 214,
         "BBMD": 1980,
         "COMPOSITE": 7935.26
@@ -7219,7 +7167,7 @@
         "VICO": 181,
         "BTPS": 1225,
         "TUGU": 1250,
-        "BBSI": 4180,
+        "BBSI": 4150,
         "AGRO": 214,
         "BBMD": 2000,
         "COMPOSITE": 8031.87
@@ -7271,7 +7219,7 @@
         "VICO": 184,
         "BTPS": 1240,
         "TUGU": 1280,
-        "BBSI": 4100,
+        "BBSI": 4180,
         "AGRO": 216,
         "BBMD": 1945,
         "COMPOSITE": 8131.74
@@ -7323,7 +7271,7 @@
         "VICO": 187,
         "BTPS": 1225,
         "TUGU": 1340,
-        "BBSI": 4180,
+        "BBSI": 4100,
         "AGRO": 218,
         "BBMD": 1980,
         "COMPOSITE": 8290.97
@@ -7375,7 +7323,7 @@
         "VICO": 190,
         "BTPS": 1215,
         "TUGU": 1345,
-        "BBSI": 4170,
+        "BBSI": 4180,
         "AGRO": 216,
         "BBMD": 1980,
         "COMPOSITE": 8265.35
@@ -7427,7 +7375,7 @@
         "VICO": 191,
         "BTPS": 1210,
         "TUGU": 1380,
-        "BBSI": 4140,
+        "BBSI": 4170,
         "AGRO": 212,
         "BBMD": 1980,
         "COMPOSITE": 8212.27
@@ -7479,7 +7427,7 @@
         "VICO": 190,
         "BTPS": 1190,
         "TUGU": 1450,
-        "BBSI": 4190,
+        "BBSI": 4140,
         "AGRO": 218,
         "BBMD": 1900,
         "COMPOSITE": 8310.23
@@ -7531,7 +7479,7 @@
         "VICO": 185,
         "BTPS": 1190,
         "TUGU": 1440,
-        "BBSI": 4180,
+        "BBSI": 4190,
         "AGRO": 214,
         "BBMD": 1930,
         "COMPOSITE": 8274.08
@@ -7583,7 +7531,7 @@
         "VICO": 184,
         "BTPS": 1205,
         "TUGU": 1410,
-        "BBSI": 4200,
+        "BBSI": 4180,
         "AGRO": 212,
         "BBMD": 1930,
         "COMPOSITE": 8271.77
@@ -7635,7 +7583,7 @@
         "VICO": 185,
         "BTPS": 1205,
         "TUGU": 1465,
-        "BBSI": 4240,
+        "BBSI": 4200,
         "AGRO": 214,
         "BBMD": 1930,
         "COMPOSITE": 8396.08
@@ -7687,7 +7635,7 @@
         "VICO": 184,
         "BTPS": 1195,
         "TUGU": 1425,
-        "BBSI": 4210,
+        "BBSI": 4240,
         "AGRO": 212,
         "BBMD": 1930,
         "COMPOSITE": 8280.83
@@ -7739,7 +7687,7 @@
         "VICO": 186,
         "BTPS": 1170,
         "TUGU": 1420,
-        "BBSI": 5000,
+        "BBSI": 4210,
         "AGRO": 210,
         "BBMD": 1930,
         "COMPOSITE": 8322.23
@@ -7791,7 +7739,7 @@
         "VICO": 184,
         "BTPS": 1135,
         "TUGU": 1435,
-        "BBSI": 4780,
+        "BBSI": 5000,
         "AGRO": 210,
         "BBMD": 1930,
         "COMPOSITE": 8235.26
@@ -7843,7 +7791,7 @@
         "VICO": 185,
         "BTPS": 1150,
         "TUGU": 1445,
-        "BBSI": 4770,
+        "BBSI": 4780,
         "AGRO": 208,
         "BBMD": 1900,
         "COMPOSITE": 8235.49
@@ -7895,7 +7843,7 @@
         "VICO": 179,
         "BTPS": 1100,
         "TUGU": 1365,
-        "BBSI": 4760,
+        "BBSI": 4770,
         "AGRO": 196,
         "BBMD": 2040,
         "COMPOSITE": 8016.83
@@ -7947,7 +7895,7 @@
         "VICO": 179,
         "BTPS": 1105,
         "TUGU": 1350,
-        "BBSI": 4790,
+        "BBSI": 4760,
         "AGRO": 195,
         "BBMD": 2010,
         "COMPOSITE": 7939.77
@@ -7999,7 +7947,7 @@
         "VICO": 177,
         "BTPS": 1055,
         "TUGU": 1255,
-        "BBSI": 4780,
+        "BBSI": 4790,
         "AGRO": 187,
         "BBMD": 2020,
         "COMPOSITE": 7577.06
@@ -8051,7 +7999,7 @@
         "VICO": 177,
         "BTPS": 1085,
         "TUGU": 1300,
-        "BBSI": 4730,
+        "BBSI": 4780,
         "AGRO": 190,
         "BBMD": 2020,
         "COMPOSITE": 7710.54
@@ -8155,7 +8103,7 @@
         "VICO": 152,
         "BTPS": 1055,
         "TUGU": 1245,
-        "BBSI": 4760,
+        "BBSI": 4730,
         "AGRO": 177,
         "BBMD": 1990,
         "COMPOSITE": 7337.37
@@ -8207,7 +8155,7 @@
         "VICO": 159,
         "BTPS": 1080,
         "TUGU": 1250,
-        "BBSI": 4750,
+        "BBSI": 4760,
         "AGRO": 183,
         "BBMD": 1915,
         "COMPOSITE": 7440.91
@@ -8259,7 +8207,7 @@
         "VICO": 157,
         "BTPS": 1090,
         "TUGU": 1245,
-        "BBSI": 4700,
+        "BBSI": 4750,
         "AGRO": 185,
         "BBMD": 1915,
         "COMPOSITE": 7389.4
@@ -8415,7 +8363,7 @@
         "VICO": 146,
         "BTPS": 1035,
         "TUGU": 1215,
-        "BBSI": 4710,
+        "BBSI": 4700,
         "AGRO": 176,
         "BBMD": 2000,
         "COMPOSITE": 7022.29
@@ -8467,7 +8415,7 @@
         "VICO": 146,
         "BTPS": 1035,
         "TUGU": 1230,
-        "BBSI": 4750,
+        "BBSI": 4710,
         "AGRO": 181,
         "BBMD": 1915,
         "COMPOSITE": 7106.84
@@ -8519,7 +8467,7 @@
         "VICO": 147,
         "BTPS": 1075,
         "TUGU": 1270,
-        "BBSI": 4690,
+        "BBSI": 4750,
         "AGRO": 182,
         "BBMD": 1895,
         "COMPOSITE": 7302.12
@@ -8571,7 +8519,7 @@
         "VICO": 148,
         "BTPS": 1050,
         "TUGU": 1290,
-        "BBSI": 4720,
+        "BBSI": 4690,
         "AGRO": 181,
         "BBMD": 1900,
         "COMPOSITE": 7164.09
@@ -8623,7 +8571,7 @@
         "VICO": 150,
         "BTPS": 1055,
         "TUGU": 1270,
-        "BBSI": 4740,
+        "BBSI": 4720,
         "AGRO": 178,
         "BBMD": 1930,
         "COMPOSITE": 7097.06
@@ -8675,7 +8623,7 @@
         "VICO": 146,
         "BTPS": 1035,
         "TUGU": 1220,
-        "BBSI": 4700,
+        "BBSI": 4740,
         "AGRO": 175,
         "BBMD": 1930,
         "COMPOSITE": 7091.67
@@ -8727,7 +8675,7 @@
         "VICO": 146,
         "BTPS": 1065,
         "TUGU": 1250,
-        "BBSI": 4600,
+        "BBSI": 4700,
         "AGRO": 172,
         "BBMD": 1930,
         "COMPOSITE": 7048.22
@@ -8779,7 +8727,7 @@
         "VICO": 149,
         "BTPS": 1090,
         "TUGU": 1260,
-        "BBSI": 4700,
+        "BBSI": 4600,
         "AGRO": 173,
         "BBMD": 1915,
         "COMPOSITE": 7184.44
@@ -8883,7 +8831,7 @@
         "VICO": 158,
         "BTPS": 1065,
         "TUGU": 1255,
-        "BBSI": 4620,
+        "BBSI": 4700,
         "AGRO": 170,
         "BBMD": 1865,
         "COMPOSITE": 6989.43
@@ -8935,7 +8883,7 @@
         "VICO": 157,
         "BTPS": 1030,
         "TUGU": 1235,
-        "BBSI": 4720,
+        "BBSI": 4620,
         "AGRO": 168,
         "BBMD": 1955,
         "COMPOSITE": 6971.03
@@ -8987,7 +8935,7 @@
         "VICO": 157,
         "BTPS": 1065,
         "TUGU": 1260,
-        "BBSI": 4700,
+        "BBSI": 4720,
         "AGRO": 176,
         "BBMD": 1980,
         "COMPOSITE": 7279.21
@@ -9091,7 +9039,7 @@
         "VICO": 157,
         "BTPS": 1080,
         "TUGU": 1250,
-        "BBSI": 4740,
+        "BBSI": 4700,
         "AGRO": 173,
         "BBMD": 1910,
         "COMPOSITE": 7458.5
@@ -9143,7 +9091,7 @@
         "VICO": 160,
         "BTPS": 1075,
         "TUGU": 1255,
-        "BBSI": 4700,
+        "BBSI": 4740,
         "AGRO": 171,
         "BBMD": 1990,
         "COMPOSITE": 7500.19
@@ -9195,7 +9143,7 @@
         "VICO": 164,
         "BTPS": 1095,
         "TUGU": 1250,
-        "BBSI": 4750,
+        "BBSI": 4700,
         "AGRO": 177,
         "BBMD": 1990,
         "COMPOSITE": 7675.95
@@ -9247,7 +9195,7 @@
         "VICO": 163,
         "BTPS": 1095,
         "TUGU": 1270,
-        "BBSI": 4730,
+        "BBSI": 4750,
         "AGRO": 178,
         "BBMD": 1995,
         "COMPOSITE": 7623.59
@@ -9299,7 +9247,7 @@
         "VICO": 164,
         "BTPS": 1095,
         "TUGU": 1290,
-        "BBSI": 4740,
+        "BBSI": 4730,
         "AGRO": 230,
         "BBMD": 1900,
         "COMPOSITE": 7621.38
@@ -9351,7 +9299,7 @@
         "VICO": 167,
         "BTPS": 1095,
         "TUGU": 1280,
-        "BBSI": 4700,
+        "BBSI": 4740,
         "AGRO": 204,
         "BBMD": 2000,
         "COMPOSITE": 7634
@@ -9403,7 +9351,7 @@
         "VICO": 168,
         "BTPS": 1080,
         "TUGU": 1290,
-        "BBSI": 4740,
+        "BBSI": 4700,
         "AGRO": 197,
         "BBMD": 1995,
         "COMPOSITE": 7594.11
@@ -9455,7 +9403,7 @@
         "VICO": 171,
         "BTPS": 1075,
         "TUGU": 1310,
-        "BBSI": 4500,
+        "BBSI": 4740,
         "AGRO": 195,
         "BBMD": 1900,
         "COMPOSITE": 7559.38
@@ -9507,7 +9455,7 @@
         "VICO": 173,
         "BTPS": 1095,
         "TUGU": 1310,
-        "BBSI": 4700,
+        "BBSI": 4500,
         "AGRO": 199,
         "BBMD": 1900,
         "COMPOSITE": 7541.61
@@ -9559,7 +9507,7 @@
         "VICO": 168,
         "BTPS": 1080,
         "TUGU": 1290,
-        "BBSI": 4740,
+        "BBSI": 4700,
         "AGRO": 192,
         "BBMD": 1905,
         "COMPOSITE": 7378.61
@@ -9663,7 +9611,7 @@
         "VICO": 166,
         "BTPS": 1005,
         "TUGU": 1245,
-        "BBSI": 4700,
+        "BBSI": 4740,
         "AGRO": 184,
         "BBMD": 2000,
         "COMPOSITE": 7106.52
@@ -9715,7 +9663,7 @@
         "VICO": 163,
         "BTPS": 1015,
         "TUGU": 1240,
-        "BBSI": 4620,
+        "BBSI": 4700,
         "AGRO": 183,
         "BBMD": 1900,
         "COMPOSITE": 7072.39
@@ -9767,7 +9715,7 @@
         "VICO": 164,
         "BTPS": 1005,
         "TUGU": 1270,
-        "BBSI": 4740,
+        "BBSI": 4620,
         "AGRO": 186,
         "BBMD": 1900,
         "COMPOSITE": 7101.23
@@ -10027,7 +9975,7 @@
         "VICO": 170,
         "BTPS": 1020,
         "TUGU": 1295,
-        "BBSI": 4700,
+        "BBSI": 4740,
         "AGRO": 191,
         "BBMD": 1975,
         "COMPOSITE": 7174.32
@@ -10131,7 +10079,7 @@
         "VICO": 162,
         "BTPS": 1000,
         "TUGU": 1205,
-        "BBSI": 4300,
+        "BBSI": 4700,
         "AGRO": 182,
         "BBMD": 1945,
         "COMPOSITE": 6905.62
@@ -10183,7 +10131,7 @@
         "VICO": 160,
         "BTPS": 1005,
         "TUGU": 1200,
-        "BBSI": 4590,
+        "BBSI": 4300,
         "AGRO": 180,
         "BBMD": 1985,
         "COMPOSITE": 6858.9
@@ -10235,7 +10183,7 @@
         "VICO": 162,
         "BTPS": 1010,
         "TUGU": 1195,
-        "BBSI": 4530,
+        "BBSI": 4590,
         "AGRO": 179,
         "BBMD": 1970,
         "COMPOSITE": 6723.32
@@ -10287,7 +10235,7 @@
         "VICO": 160,
         "BTPS": 990,
         "TUGU": 1165,
-        "BBSI": 4550,
+        "BBSI": 4530,
         "AGRO": 173,
         "BBMD": 2010,
         "COMPOSITE": 6599.24
@@ -10339,7 +10287,7 @@
         "VICO": 147,
         "BTPS": 980,
         "TUGU": 1165,
-        "BBSI": 4420,
+        "BBSI": 4550,
         "AGRO": 168,
         "BBMD": 1995,
         "COMPOSITE": 6370.68
@@ -10443,7 +10391,7 @@
         "VICO": 144,
         "BTPS": 955,
         "TUGU": 1165,
-        "BBSI": 4400,
+        "BBSI": 4420,
         "AGRO": 160,
         "BBMD": 1990,
         "COMPOSITE": 6094.94
@@ -10495,7 +10443,7 @@
         "VICO": 138,
         "BTPS": 965,
         "TUGU": 1165,
-        "BBSI": 4250,
+        "BBSI": 4400,
         "AGRO": 160,
         "BBMD": 1955,
         "COMPOSITE": 6162.05
@@ -10599,7 +10547,7 @@
         "VICO": 142,
         "BTPS": 970,
         "TUGU": 1160,
-        "BBSI": 3920,
+        "BBSI": 4250,
         "AGRO": 164,
         "BBMD": 2000,
         "COMPOSITE": 6130.19
@@ -10651,7 +10599,7 @@
         "VICO": 142,
         "BTPS": 930,
         "TUGU": 1125,
-        "BBSI": 3890,
+        "BBSI": 3920,
         "AGRO": 165,
         "BBMD": 1990,
         "COMPOSITE": 6127.38
@@ -10703,7 +10651,7 @@
         "VICO": 143,
         "BTPS": 925,
         "TUGU": 1135,
-        "BBSI": 4470,
+        "BBSI": 3890,
         "AGRO": 164,
         "BBMD": 2000,
         "COMPOSITE": 6195.43
@@ -10755,7 +10703,7 @@
         "VICO": 144,
         "BTPS": 900,
         "TUGU": 1090,
-        "BBSI": 4570,
+        "BBSI": 4470,
         "AGRO": 154,
         "BBMD": 2000,
         "COMPOSITE": 5941.07
@@ -10859,7 +10807,7 @@
         "VICO": 127,
         "BTPS": 855,
         "TUGU": 1060,
-        "BBSI": 4400,
+        "BBSI": 4570,
         "AGRO": 142,
         "BBMD": 2020,
         "COMPOSITE": 5594.77
@@ -10911,7 +10859,7 @@
         "VICO": 126,
         "BTPS": 860,
         "TUGU": 1020,
-        "BBSI": 4590,
+        "BBSI": 4400,
         "AGRO": 124,
         "BBMD": 2020,
         "COMPOSITE": 5342.14
@@ -10963,7 +10911,7 @@
         "VICO": 136,
         "BTPS": 905,
         "TUGU": 1040,
-        "BBSI": 4600,
+        "BBSI": 4590,
         "AGRO": 133,
         "BBMD": 1955,
         "COMPOSITE": 5746.65
@@ -11015,7 +10963,7 @@
         "VICO": 135,
         "BTPS": 920,
         "TUGU": 1060,
-        "BBSI": 4640,
+        "BBSI": 4600,
         "AGRO": 142,
         "BBMD": 1950,
         "COMPOSITE": 5902.38
@@ -11067,7 +11015,7 @@
         "VICO": 135,
         "BTPS": 935,
         "TUGU": 1095,
-        "BBSI": 4500,
+        "BBSI": 4640,
         "AGRO": 140,
         "BBMD": 1950,
         "COMPOSITE": 5886.03
@@ -11119,7 +11067,7 @@
         "VICO": 142,
         "BTPS": 965,
         "TUGU": 1090,
-        "BBSI": 4770,
+        "BBSI": 4500,
         "AGRO": 151,
         "BBMD": 1995,
         "COMPOSITE": 6007.66
@@ -11223,9 +11171,9 @@
         "VICO": 140,
         "BTPS": 1005,
         "TUGU": 1145,
-        "BBSI": 4750,
+        "BBSI": 4770,
         "AGRO": 156,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6220.74
       }
     },
@@ -11277,7 +11225,7 @@
         "TUGU": 1140,
         "BBSI": 4750,
         "AGRO": 153,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6172.34
       }
     },
@@ -11327,9 +11275,9 @@
         "VICO": 141,
         "BTPS": 1000,
         "TUGU": 1125,
-        "BBSI": 4550,
+        "BBSI": 4750,
         "AGRO": 155,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6177.14
       }
     },
@@ -11379,9 +11327,9 @@
         "VICO": 140,
         "BTPS": 1020,
         "TUGU": 1185,
-        "BBSI": 4600,
+        "BBSI": 4550,
         "AGRO": 150,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6116.69
       }
     },
@@ -11431,9 +11379,9 @@
         "VICO": 142,
         "BTPS": 1000,
         "TUGU": 1170,
-        "BBSI": 4610,
+        "BBSI": 4600,
         "AGRO": 151,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6101.33
       }
     },
@@ -11483,9 +11431,9 @@
         "VICO": 139,
         "BTPS": 975,
         "TUGU": 1185,
-        "BBSI": 4710,
+        "BBSI": 4610,
         "AGRO": 147,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5883.88
       }
     },
@@ -11535,9 +11483,9 @@
         "VICO": 139,
         "BTPS": 985,
         "TUGU": 1190,
-        "BBSI": 4610,
+        "BBSI": 4710,
         "AGRO": 150,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5999.04
       }
     },
@@ -11587,9 +11535,9 @@
         "VICO": 136,
         "BTPS": 980,
         "TUGU": 1185,
-        "BBSI": 4700,
+        "BBSI": 4610,
         "AGRO": 146,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5896.13
       }
     },
@@ -11639,9 +11587,9 @@
         "VICO": 133,
         "BTPS": 970,
         "TUGU": 1175,
-        "BBSI": 4710,
+        "BBSI": 4700,
         "AGRO": 141,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5820.79
       }
     },
@@ -11693,7 +11641,7 @@
         "TUGU": 1150,
         "BBSI": 4710,
         "AGRO": 134,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5643.19
       }
     },
@@ -11743,9 +11691,9 @@
         "VICO": 131,
         "BTPS": 955,
         "TUGU": 1165,
-        "BBSI": 4720,
+        "BBSI": 4710,
         "AGRO": 133,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5695.12
       }
     },
@@ -11795,9 +11743,9 @@
         "VICO": 131,
         "BTPS": 965,
         "TUGU": 1195,
-        "BBSI": 4700,
+        "BBSI": 4720,
         "AGRO": 134,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5744.56
       }
     },
@@ -11849,7 +11797,7 @@
         "TUGU": 1205,
         "BBSI": 4700,
         "AGRO": 137,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5875.78
       }
     },
@@ -11901,7 +11849,7 @@
         "TUGU": 1210,
         "BBSI": 4700,
         "AGRO": 141,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5916.07
       }
     },
@@ -11951,9 +11899,9 @@
         "VICO": 131,
         "BTPS": 1000,
         "TUGU": 1200,
-        "BBSI": 4690,
+        "BBSI": 4700,
         "AGRO": 143,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5986.5
       }
     },
@@ -12005,7 +11953,7 @@
         "TUGU": 1190,
         "BBSI": 4690,
         "AGRO": 144,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5873.37
       }
     },
@@ -12057,7 +12005,7 @@
         "TUGU": 1245,
         "BBSI": 4690,
         "AGRO": 141,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5912.44
       }
     },
@@ -12107,9 +12055,9 @@
         "VICO": 134,
         "BTPS": 1005,
         "TUGU": 1245,
-        "BBSI": 4700,
+        "BBSI": 4690,
         "AGRO": 141,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 5924.36
       }
     },
@@ -12159,9 +12107,9 @@
         "VICO": 135,
         "BTPS": 1000,
         "TUGU": 1245,
-        "BBSI": 4690,
+        "BBSI": 4700,
         "AGRO": 142,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6037.84
       }
     },
@@ -12213,7 +12161,7 @@
         "TUGU": 1275,
         "BBSI": 4690,
         "AGRO": 142,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6039.52
       }
     },
@@ -12265,7 +12213,7 @@
         "TUGU": 1275,
         "BBSI": 4690,
         "AGRO": 145,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6041.97
       }
     },
@@ -12317,7 +12265,7 @@
         "TUGU": 1245,
         "BBSI": 4690,
         "AGRO": 145,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6108.21
       }
     },
@@ -12369,7 +12317,7 @@
         "TUGU": 1240,
         "BBSI": 4690,
         "AGRO": 152,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6175.54
       }
     },
@@ -12419,9 +12367,9 @@
         "VICO": 138,
         "BTPS": 1030,
         "TUGU": 1235,
-        "BBSI": 4700,
+        "BBSI": 4690,
         "AGRO": 152,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6231.78
       }
     },
@@ -12471,9 +12419,9 @@
         "VICO": 142,
         "BTPS": 1030,
         "TUGU": 1235,
-        "BBSI": 4610,
+        "BBSI": 4700,
         "AGRO": 154,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6340.02
       }
     },
@@ -12523,9 +12471,9 @@
         "VICO": 140,
         "BTPS": 1025,
         "TUGU": 1230,
-        "BBSI": 4650,
+        "BBSI": 4610,
         "AGRO": 153,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6334.48
       }
     },
@@ -12575,9 +12523,9 @@
         "VICO": 140,
         "BTPS": 1020,
         "TUGU": 1230,
-        "BBSI": 4700,
+        "BBSI": 4650,
         "AGRO": 152,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6315.31
       }
     },
@@ -12627,9 +12575,9 @@
         "VICO": 140,
         "BTPS": 1005,
         "TUGU": 1220,
-        "BBSI": 4610,
+        "BBSI": 4700,
         "AGRO": 147,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6196.43
       }
     },
@@ -12679,9 +12627,9 @@
         "VICO": 141,
         "BTPS": 960,
         "TUGU": 1205,
-        "BBSI": 4600,
+        "BBSI": 4610,
         "AGRO": 146,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6185.78
       }
     },
@@ -12731,9 +12679,9 @@
         "VICO": 142,
         "BTPS": 970,
         "TUGU": 1195,
-        "BBSI": 4700,
+        "BBSI": 4600,
         "AGRO": 144,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6130.59
       }
     },
@@ -12783,9 +12731,9 @@
         "VICO": 141,
         "BTPS": 965,
         "TUGU": 1190,
-        "BBSI": 4670,
+        "BBSI": 4700,
         "AGRO": 142,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6091.39
       }
     },
@@ -12835,9 +12783,9 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1200,
-        "BBSI": 4680,
+        "BBSI": 4670,
         "AGRO": 144,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6186.36
       }
     },
@@ -12887,9 +12835,9 @@
         "VICO": 141,
         "BTPS": 990,
         "TUGU": 1220,
-        "BBSI": 4670,
+        "BBSI": 4680,
         "AGRO": 147,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6236.13
       }
     },
@@ -12939,9 +12887,9 @@
         "VICO": 140,
         "BTPS": 995,
         "TUGU": 1220,
-        "BBSI": 4660,
+        "BBSI": 4670,
         "AGRO": 143,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6234.5
       }
     },
@@ -12993,7 +12941,7 @@
         "TUGU": 1225,
         "BBSI": 4660,
         "AGRO": 145,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6319.61
       }
     },
@@ -13045,7 +12993,7 @@
         "TUGU": 1235,
         "BBSI": 4660,
         "AGRO": 146,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6351.14
       }
     },
@@ -13097,7 +13045,7 @@
         "TUGU": 1230,
         "BBSI": 4660,
         "AGRO": 148,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6343.71
       }
     },
@@ -13149,7 +13097,7 @@
         "TUGU": 1230,
         "BBSI": 4660,
         "AGRO": 153,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6409.65
       }
     },
@@ -13201,7 +13149,7 @@
         "TUGU": 1240,
         "BBSI": 4660,
         "AGRO": 151,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6365.37
       }
     },
@@ -13253,7 +13201,7 @@
         "TUGU": 1235,
         "BBSI": 4660,
         "AGRO": 149,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6267.88
       }
     },
@@ -13305,7 +13253,7 @@
         "TUGU": 1275,
         "BBSI": 4660,
         "AGRO": 150,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6373.85
       }
     },
@@ -13357,7 +13305,7 @@
         "TUGU": 1280,
         "BBSI": 4660,
         "AGRO": 148,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6301.77
       }
     },
@@ -13409,7 +13357,7 @@
         "TUGU": 1390,
         "BBSI": 4660,
         "AGRO": 148,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6401.89
       }
     },
@@ -13461,7 +13409,7 @@
         "TUGU": 1425,
         "BBSI": 4660,
         "AGRO": 151,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6449.83
       }
     },
@@ -13513,7 +13461,7 @@
         "TUGU": 1385,
         "BBSI": 4660,
         "AGRO": 150,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6394.13
       }
     },
@@ -13565,7 +13513,7 @@
         "TUGU": 1365,
         "BBSI": 4660,
         "AGRO": 152,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6501.59
       }
     },
@@ -13617,7 +13565,7 @@
         "TUGU": 1370,
         "BBSI": 4660,
         "AGRO": 153,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6525.69
       }
     },
@@ -13669,7 +13617,7 @@
         "TUGU": 1380,
         "BBSI": 4660,
         "AGRO": 150,
-        "BBMD": 1990,
+        "BBMD": 1970,
         "COMPOSITE": 6501.67
       }
     },
@@ -13697,7 +13645,7 @@
         "BJTM": 520,
         "BNGA": 1665,
         "BNII": 191,
-        "BNLI": 2150,
+        "BNLI": 2160,
         "BSIM": 695,
         "BTPN": 2200,
         "BVIC": 91,
@@ -13721,8 +13669,60 @@
         "TUGU": 1315,
         "BBSI": 4660,
         "AGRO": 145,
-        "BBMD": 1990,
-        "COMPOSITE": 6501.67
+        "BBMD": 1970,
+        "COMPOSITE": 6405.69
+      }
+    },
+    {
+      "dateStr": "2026-08-27",
+      "prices": {
+        "BBCA": 6400,
+        "BMRI": 4210,
+        "BBRI": 3150,
+        "BBNI": 3710,
+        "ASII": 4790,
+        "BRIS": 1785,
+        "BBTN": 1220,
+        "ARTO": 1000,
+        "BACA": 117,
+        "BBHI": 900,
+        "GOTO": 50,
+        "BBYB": 248,
+        "BCAP": 50,
+        "BDMN": 4310,
+        "BFIN": 880,
+        "BGTG": 112,
+        "BINA": 4150,
+        "BJBR": 790,
+        "BJTM": 520,
+        "BNGA": 1680,
+        "BNII": 192,
+        "BNLI": 2160,
+        "BSIM": 725,
+        "BTPN": 2240,
+        "BVIC": 92,
+        "CFIN": 352,
+        "DNET": 9800,
+        "INPC": 143,
+        "MAYA": 198,
+        "MCOR": 68,
+        "MEGA": 1970,
+        "MREI": 920,
+        "NISP": 1245,
+        "PANS": 1570,
+        "PNBN": 895,
+        "PNIN": 735,
+        "PNLF": 228,
+        "TLKM": 2610,
+        "SRTG": 1955,
+        "TRIM": 600,
+        "VICO": 154,
+        "BTPS": 975,
+        "TUGU": 1335,
+        "BBSI": 4660,
+        "AGRO": 145,
+        "BBMD": 1970,
+        "COMPOSITE": 6405.69
       }
     }
   ]
