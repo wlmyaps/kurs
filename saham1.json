@@ -50,58 +50,6 @@
   ],
   "history": [
     {
-      "dateStr": "2025-09-15",
-      "prices": {
-        "BBCA": 8025,
-        "BMRI": 4530,
-        "BBRI": 4140,
-        "BBNI": 4410,
-        "ASII": 5625,
-        "BRIS": 2680,
-        "BBTN": 1390,
-        "ARTO": 2140,
-        "BACA": 138,
-        "BBHI": 1500,
-        "GOTO": 57,
-        "BBYB": 350,
-        "BCAP": 71,
-        "BDMN": 2510,
-        "BFIN": 805,
-        "BGTG": 110,
-        "BINA": 4500,
-        "BJBR": 770,
-        "BJTM": 520,
-        "BNGA": 1730,
-        "BNII": 210,
-        "BNLI": 3450,
-        "BSIM": 910,
-        "BTPN": 2090,
-        "BVIC": 115,
-        "CFIN": 314,
-        "DNET": 9125,
-        "INPC": 170,
-        "MAYA": 326,
-        "MCOR": 76,
-        "MEGA": 1665,
-        "MREI": 970,
-        "NISP": 1380,
-        "PANS": 1390,
-        "PNBN": 1135,
-        "PNIN": 835,
-        "PNLF": 252,
-        "TLKM": 3260,
-        "SRTG": 1910,
-        "TRIM": 372,
-        "VICO": 206,
-        "BTPS": 1485,
-        "TUGU": 970,
-        "BBSI": 4000,
-        "AGRO": 254,
-        "BBMD": 2120,
-        "COMPOSITE": 7937.12
-      }
-    },
-    {
       "dateStr": "2025-09-16",
       "prices": {
         "BBCA": 7925,
@@ -11121,7 +11069,7 @@
         "TUGU": 1235,
         "BBSI": 4670,
         "AGRO": 146,
-        "BBMD": 1900,
+        "BBMD": 1950,
         "COMPOSITE": 6351.14
       }
     },
@@ -11173,7 +11121,7 @@
         "TUGU": 1230,
         "BBSI": 4660,
         "AGRO": 148,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6343.71
       }
     },
@@ -11225,7 +11173,7 @@
         "TUGU": 1230,
         "BBSI": 4660,
         "AGRO": 153,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6409.65
       }
     },
@@ -11277,7 +11225,7 @@
         "TUGU": 1240,
         "BBSI": 4690,
         "AGRO": 151,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6365.37
       }
     },
@@ -11329,7 +11277,7 @@
         "TUGU": 1235,
         "BBSI": 4680,
         "AGRO": 149,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6267.88
       }
     },
@@ -11381,7 +11329,7 @@
         "TUGU": 1275,
         "BBSI": 4680,
         "AGRO": 150,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6373.85
       }
     },
@@ -11433,7 +11381,7 @@
         "TUGU": 1280,
         "BBSI": 4680,
         "AGRO": 148,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6301.77
       }
     },
@@ -11485,7 +11433,7 @@
         "TUGU": 1390,
         "BBSI": 4680,
         "AGRO": 148,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6401.89
       }
     },
@@ -11537,7 +11485,7 @@
         "TUGU": 1425,
         "BBSI": 4660,
         "AGRO": 151,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6449.83
       }
     },
@@ -11589,7 +11537,7 @@
         "TUGU": 1385,
         "BBSI": 4680,
         "AGRO": 150,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6394.13
       }
     },
@@ -11641,7 +11589,7 @@
         "TUGU": 1365,
         "BBSI": 4670,
         "AGRO": 152,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6501.59
       }
     },
@@ -11693,7 +11641,7 @@
         "TUGU": 1370,
         "BBSI": 4670,
         "AGRO": 153,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6525.69
       }
     },
@@ -11745,7 +11693,7 @@
         "TUGU": 1380,
         "BBSI": 4670,
         "AGRO": 150,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6501.67
       }
     },
@@ -11797,7 +11745,7 @@
         "TUGU": 1315,
         "BBSI": 4610,
         "AGRO": 145,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6405.69
       }
     },
@@ -11849,7 +11797,7 @@
         "TUGU": 1335,
         "BBSI": 4580,
         "AGRO": 145,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6521.75
       }
     },
@@ -11901,7 +11849,7 @@
         "TUGU": 1365,
         "BBSI": 4580,
         "AGRO": 146,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6518.12
       }
     },
@@ -11953,7 +11901,7 @@
         "TUGU": 1370,
         "BBSI": 4520,
         "AGRO": 147,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6525.48
       }
     },
@@ -12005,7 +11953,7 @@
         "TUGU": 1370,
         "BBSI": 4520,
         "AGRO": 151,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6599.94
       }
     },
@@ -12057,7 +12005,7 @@
         "TUGU": 1340,
         "BBSI": 4520,
         "AGRO": 153,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6595.78
       }
     },
@@ -12109,7 +12057,7 @@
         "TUGU": 1345,
         "BBSI": 4520,
         "AGRO": 155,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6667.89
       }
     },
@@ -12161,7 +12109,7 @@
         "TUGU": 1355,
         "BBSI": 4520,
         "AGRO": 153,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6636.48
       }
     },
@@ -12213,7 +12161,7 @@
         "TUGU": 1320,
         "BBSI": 4520,
         "AGRO": 155,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6619.67
       }
     },
@@ -12265,7 +12213,7 @@
         "TUGU": 1345,
         "BBSI": 4450,
         "AGRO": 154,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6686.44
       }
     },
@@ -12317,7 +12265,7 @@
         "TUGU": 1355,
         "BBSI": 4300,
         "AGRO": 151,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6678.2
       }
     },
@@ -12369,7 +12317,7 @@
         "TUGU": 1435,
         "BBSI": 4270,
         "AGRO": 150,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6589.34
       }
     },
@@ -12421,7 +12369,7 @@
         "TUGU": 1410,
         "BBSI": 4270,
         "AGRO": 149,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6541.38
       }
     },
@@ -12473,7 +12421,7 @@
         "TUGU": 1425,
         "BBSI": 4150,
         "AGRO": 149,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6534.69
       }
     },
@@ -12525,7 +12473,7 @@
         "TUGU": 1455,
         "BBSI": 4150,
         "AGRO": 148,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6461.15
       }
     },
@@ -12577,7 +12525,7 @@
         "TUGU": 1630,
         "BBSI": 4340,
         "AGRO": 146,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6436.85
       }
     },
@@ -12629,7 +12577,7 @@
         "TUGU": 1645,
         "BBSI": 4080,
         "AGRO": 145,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6462.43
       }
     },
@@ -12681,7 +12629,7 @@
         "TUGU": 1590,
         "BBSI": 4090,
         "AGRO": 145,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6441.16
       }
     },
@@ -12733,7 +12681,7 @@
         "TUGU": 1635,
         "BBSI": 4310,
         "AGRO": 143,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6384.73
       }
     },
@@ -12785,7 +12733,7 @@
         "TUGU": 1580,
         "BBSI": 3930,
         "AGRO": 141,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6277.04
       }
     },
@@ -12837,7 +12785,7 @@
         "TUGU": 1550,
         "BBSI": 3980,
         "AGRO": 143,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6374.91
       }
     },
@@ -12889,7 +12837,7 @@
         "TUGU": 1540,
         "BBSI": 3970,
         "AGRO": 140,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6298.61
       }
     },
@@ -12941,7 +12889,7 @@
         "TUGU": 1560,
         "BBSI": 3970,
         "AGRO": 140,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6241.89
       }
     },
@@ -12993,7 +12941,7 @@
         "TUGU": 1570,
         "BBSI": 3450,
         "AGRO": 134,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6147.86
       }
     },
@@ -13043,9 +12991,9 @@
         "VICO": 151,
         "BTPS": 945,
         "TUGU": 1510,
-        "BBSI": 3850,
+        "BBSI": 3230,
         "AGRO": 134,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6121.7
       }
     },
@@ -13095,9 +13043,9 @@
         "VICO": 151,
         "BTPS": 940,
         "TUGU": 1475,
-        "BBSI": 3650,
+        "BBSI": 3770,
         "AGRO": 134,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6071.14
       }
     },
@@ -13147,9 +13095,9 @@
         "VICO": 148,
         "BTPS": 940,
         "TUGU": 1375,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 134,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6009.5
       }
     },
@@ -13199,9 +13147,9 @@
         "VICO": 153,
         "BTPS": 930,
         "TUGU": 1410,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 135,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6036.89
       }
     },
@@ -13251,9 +13199,9 @@
         "VICO": 152,
         "BTPS": 940,
         "TUGU": 1545,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 136,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6118.86
       }
     },
@@ -13303,9 +13251,9 @@
         "VICO": 152,
         "BTPS": 960,
         "TUGU": 1515,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 140,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6192.93
       }
     },
@@ -13355,9 +13303,9 @@
         "VICO": 153,
         "BTPS": 960,
         "TUGU": 1525,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 140,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6146.72
       }
     },
@@ -13407,9 +13355,9 @@
         "VICO": 154,
         "BTPS": 960,
         "TUGU": 1460,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 135,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6031.28
       }
     },
@@ -13459,9 +13407,9 @@
         "VICO": 155,
         "BTPS": 975,
         "TUGU": 1510,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 134,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 6093.76
       }
     },
@@ -13511,9 +13459,9 @@
         "VICO": 153,
         "BTPS": 975,
         "TUGU": 1495,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 132,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 5936.15
       }
     },
@@ -13563,9 +13511,9 @@
         "VICO": 152,
         "BTPS": 990,
         "TUGU": 1485,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 131,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 5925.98
       }
     },
@@ -13615,9 +13563,9 @@
         "VICO": 156,
         "BTPS": 1020,
         "TUGU": 1465,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 131,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 5943.02
       }
     },
@@ -13667,9 +13615,9 @@
         "VICO": 150,
         "BTPS": 1020,
         "TUGU": 1450,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 128,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 5863.78
       }
     },
@@ -13697,7 +13645,7 @@
         "BJTM": 488,
         "BNGA": 1505,
         "BNII": 174,
-        "BNLI": 1535,
+        "BNLI": 1555,
         "BSIM": 745,
         "BTPN": 2400,
         "BVIC": 73,
@@ -13719,114 +13667,166 @@
         "VICO": 134,
         "BTPS": 880,
         "TUGU": 1250,
-        "BBSI": 3650,
+        "BBSI": 3580,
         "AGRO": 109,
-        "BBMD": 1900,
+        "BBMD": 2050,
         "COMPOSITE": 5185.1
       }
     },
     {
       "dateStr": "2026-10-19",
       "prices": {
-        "BBCA": 4740,
-        "BMRI": 3560,
-        "BBRI": 2620,
-        "BBNI": 3080,
-        "ASII": 4400,
-        "BRIS": 1055,
-        "BBTN": 895,
-        "ARTO": 600,
-        "BACA": 89,
-        "BBHI": 550,
-        "GOTO": 25,
-        "BBYB": 159,
-        "BCAP": 23,
-        "BDMN": 4410,
-        "BFIN": 710,
+        "BBCA": 4820,
+        "BMRI": 3360,
+        "BBRI": 2540,
+        "BBNI": 2960,
+        "ASII": 4130,
+        "BRIS": 1020,
+        "BBTN": 850,
+        "ARTO": 585,
+        "BACA": 87,
+        "BBHI": 585,
+        "GOTO": 24,
+        "BBYB": 153,
+        "BCAP": 22,
+        "BDMN": 4400,
+        "BFIN": 715,
         "BGTG": 83,
-        "BINA": 3880,
-        "BJBR": 695,
+        "BINA": 3950,
+        "BJBR": 685,
         "BJTM": 472,
-        "BNGA": 1545,
-        "BNII": 174,
-        "BNLI": 1690,
-        "BSIM": 1055,
-        "BTPN": 2120,
-        "BVIC": 71,
+        "BNGA": 1460,
+        "BNII": 164,
+        "BNLI": 1700,
+        "BSIM": 930,
+        "BTPN": 2270,
+        "BVIC": 70,
         "CFIN": 324,
-        "DNET": 9300,
-        "INPC": 120,
-        "MAYA": 153,
-        "MCOR": 58,
-        "MEGA": 1915,
+        "DNET": 9525,
+        "INPC": 117,
+        "MAYA": 160,
+        "MCOR": 56,
+        "MEGA": 1885,
         "MREI": 920,
-        "NISP": 1130,
-        "PANS": 1575,
-        "PNBN": 730,
-        "PNIN": 585,
-        "PNLF": 165,
-        "TLKM": 2010,
-        "SRTG": 1535,
-        "TRIM": 615,
+        "NISP": 1080,
+        "PANS": 1545,
+        "PNBN": 715,
+        "PNIN": 570,
+        "PNLF": 162,
+        "TLKM": 1770,
+        "SRTG": 1460,
+        "TRIM": 585,
         "VICO": 134,
-        "BTPS": 930,
-        "TUGU": 1335,
-        "BBSI": 3650,
-        "AGRO": 109,
-        "BBMD": 1900,
-        "COMPOSITE": 5185.1
+        "BTPS": 890,
+        "TUGU": 1290,
+        "BBSI": 3580,
+        "AGRO": 104,
+        "BBMD": 2050,
+        "COMPOSITE": 4996.61
       }
     },
     {
       "dateStr": "2026-10-20",
       "prices": {
-        "BBCA": 5100,
-        "BMRI": 3690,
-        "BBRI": 2750,
-        "BBNI": 3180,
-        "ASII": 4500,
-        "BRIS": 1060,
-        "BBTN": 900,
+        "BBCA": 5150,
+        "BMRI": 3700,
+        "BBRI": 2780,
+        "BBNI": 3160,
+        "ASII": 4420,
+        "BRIS": 1040,
+        "BBTN": 905,
         "ARTO": 595,
         "BACA": 91,
-        "BBHI": 605,
+        "BBHI": 580,
         "GOTO": 26,
         "BBYB": 163,
         "BCAP": 23,
-        "BDMN": 4480,
+        "BDMN": 4630,
         "BFIN": 745,
-        "BGTG": 92,
-        "BINA": 3900,
-        "BJBR": 725,
-        "BJTM": 505,
+        "BGTG": 90,
+        "BINA": 3910,
+        "BJBR": 720,
+        "BJTM": 500,
         "BNGA": 1550,
-        "BNII": 174,
-        "BNLI": 1690,
-        "BSIM": 880,
-        "BTPN": 2240,
-        "BVIC": 73,
-        "CFIN": 344,
-        "DNET": 9400,
-        "INPC": 124,
-        "MAYA": 157,
-        "MCOR": 60,
-        "MEGA": 1900,
+        "BNII": 177,
+        "BNLI": 1765,
+        "BSIM": 820,
+        "BTPN": 2230,
+        "BVIC": 74,
+        "CFIN": 338,
+        "DNET": 9800,
+        "INPC": 122,
+        "MAYA": 159,
+        "MCOR": 58,
+        "MEGA": 1850,
         "MREI": 920,
-        "NISP": 1145,
-        "PANS": 1595,
-        "PNBN": 750,
+        "NISP": 1150,
+        "PANS": 1600,
+        "PNBN": 730,
         "PNIN": 575,
         "PNLF": 168,
-        "TLKM": 2060,
-        "SRTG": 1585,
+        "TLKM": 2090,
+        "SRTG": 1560,
+        "TRIM": 640,
+        "VICO": 136,
+        "BTPS": 945,
+        "TUGU": 1345,
+        "BBSI": 3580,
+        "AGRO": 114,
+        "BBMD": 2050,
+        "COMPOSITE": 4996.61
+      }
+    },
+    {
+      "dateStr": "2026-10-21",
+      "prices": {
+        "BBCA": 5275,
+        "BMRI": 3700,
+        "BBRI": 2810,
+        "BBNI": 3250,
+        "ASII": 4560,
+        "BRIS": 1040,
+        "BBTN": 940,
+        "ARTO": 605,
+        "BACA": 93,
+        "BBHI": 580,
+        "GOTO": 26,
+        "BBYB": 163,
+        "BCAP": 24,
+        "BDMN": 4860,
+        "BFIN": 745,
+        "BGTG": 89,
+        "BINA": 3880,
+        "BJBR": 720,
+        "BJTM": 500,
+        "BNGA": 1770,
+        "BNII": 174,
+        "BNLI": 1765,
+        "BSIM": 835,
+        "BTPN": 2270,
+        "BVIC": 72,
+        "CFIN": 340,
+        "DNET": 9775,
+        "INPC": 127,
+        "MAYA": 164,
+        "MCOR": 57,
+        "MEGA": 1885,
+        "MREI": 920,
+        "NISP": 1165,
+        "PANS": 1565,
+        "PNBN": 735,
+        "PNIN": 580,
+        "PNLF": 164,
+        "TLKM": 2120,
+        "SRTG": 1625,
         "TRIM": 645,
-        "VICO": 139,
-        "BTPS": 965,
-        "TUGU": 1355,
-        "BBSI": 3650,
-        "AGRO": 113,
-        "BBMD": 1900,
-        "COMPOSITE": 5185.1
+        "VICO": 140,
+        "BTPS": 975,
+        "TUGU": 1365,
+        "BBSI": 3580,
+        "AGRO": 112,
+        "BBMD": 2050,
+        "COMPOSITE": 4996.61
       }
     }
   ]
