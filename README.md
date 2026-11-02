@@ -39,13 +39,8 @@ https://raw.githubusercontent.com/wlmyaps/kurs/main/saham%20-%20Sheet1.csv
 
 🛠️ Cara Kerja (Khususheet)
 
-Investing.com -> Cloudflare Worker (khususheet.loveofthegod.workers.dev) 
+Cloudflare Worker (khususheet.loveofthegod.workers.dev) 
 -> Google Sheet (manual open 1 menit) -> GitHub Repo
-
-Worker dibuat 5 tahun lalu, login via GitHub wlmyaps
-Butuh interaksi manusia asli (buka Sheet) biar Cloudflare gak nge-block
-Buka Sheet sebelum jam 16:30 WIB = data lama, buka setelah jam 16:30 = data baru ke-push dalam 3 menit
-HP mati 5 detik setelah buka pun tetep ke-push, karena proses jalan di server
 
 Kalau suatu hari aku meninggal, data berhenti di tanggal itu 😂
 
