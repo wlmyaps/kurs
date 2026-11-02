@@ -57,7 +57,6 @@ Grafik 3D Waterfall GAU/IDR 27 titik harian + tabel warna Close/Open/High/Low
 
 📜 License
 
-Data source: Investing.com (via proxy)
-Repo by William Yap - Medan
+Repo by William Yap
 
-Last update: 02/11/2026
+Last update: Senin s/d Jumat
