@@ -13095,7 +13095,7 @@
         "VICO": 141,
         "BTPS": 980,
         "TUGU": 1375,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 112,
         "BBMD": 2000,
         "COMPOSITE": 5328.36
@@ -13147,7 +13147,7 @@
         "VICO": 148,
         "BTPS": 970,
         "TUGU": 1385,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 117,
         "BBMD": 2000,
         "COMPOSITE": 5387.91
@@ -13199,7 +13199,7 @@
         "VICO": 145,
         "BTPS": 1000,
         "TUGU": 1380,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 118,
         "BBMD": 2000,
         "COMPOSITE": 5439.26
@@ -13251,7 +13251,7 @@
         "VICO": 144,
         "BTPS": 1000,
         "TUGU": 1360,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 116,
         "BBMD": 2000,
         "COMPOSITE": 5373.09
@@ -13303,7 +13303,7 @@
         "VICO": 139,
         "BTPS": 970,
         "TUGU": 1380,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 113,
         "BBMD": 2000,
         "COMPOSITE": 5266.13
@@ -13355,7 +13355,7 @@
         "VICO": 142,
         "BTPS": 970,
         "TUGU": 1410,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 115,
         "BBMD": 2000,
         "COMPOSITE": 5282.31
@@ -13407,7 +13407,7 @@
         "VICO": 141,
         "BTPS": 970,
         "TUGU": 1335,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 111,
         "BBMD": 2000,
         "COMPOSITE": 5098.06
@@ -13459,7 +13459,7 @@
         "VICO": 141,
         "BTPS": 1000,
         "TUGU": 1245,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 108,
         "BBMD": 2000,
         "COMPOSITE": 5057.05
@@ -13511,7 +13511,7 @@
         "VICO": 137,
         "BTPS": 995,
         "TUGU": 1250,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 108,
         "BBMD": 2000,
         "COMPOSITE": 5096.83
@@ -13563,7 +13563,7 @@
         "VICO": 139,
         "BTPS": 975,
         "TUGU": 1225,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 103,
         "BBMD": 2000,
         "COMPOSITE": 4904.29
@@ -13615,7 +13615,7 @@
         "VICO": 134,
         "BTPS": 980,
         "TUGU": 1230,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 103,
         "BBMD": 2000,
         "COMPOSITE": 4919.77
@@ -13667,7 +13667,7 @@
         "VICO": 135,
         "BTPS": 1015,
         "TUGU": 1215,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 104,
         "BBMD": 2000,
         "COMPOSITE": 5030.26
@@ -13719,7 +13719,7 @@
         "VICO": 138,
         "BTPS": 1005,
         "TUGU": 1240,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 104,
         "BBMD": 2000,
         "COMPOSITE": 5050.43
@@ -13771,10 +13771,62 @@
         "VICO": 138,
         "BTPS": 1035,
         "TUGU": 1230,
-        "BBSI": 3000,
+        "BBSI": 2980,
         "AGRO": 105,
         "BBMD": 2000,
-        "COMPOSITE": 5050.43
+        "COMPOSITE": 5073.77
+      }
+    },
+    {
+      "dateStr": "2026-11-10",
+      "prices": {
+        "BBCA": 5300,
+        "BMRI": 3750,
+        "BBRI": 2820,
+        "BBNI": 3400,
+        "ASII": 5350,
+        "BRIS": 1130,
+        "BBTN": 975,
+        "ARTO": 505,
+        "BACA": 88,
+        "BBHI": 600,
+        "GOTO": 25,
+        "BBYB": 156,
+        "BCAP": 19,
+        "BDMN": 4700,
+        "BFIN": 725,
+        "BGTG": 83,
+        "BINA": 3620,
+        "BJBR": 710,
+        "BJTM": 494,
+        "BNGA": 1510,
+        "BNII": 161,
+        "BNLI": 1305,
+        "BSIM": 770,
+        "BTPN": 2420,
+        "BVIC": 73,
+        "CFIN": 340,
+        "DNET": 9800,
+        "INPC": 114,
+        "MAYA": 163,
+        "MCOR": 55,
+        "MEGA": 1945,
+        "MREI": 920,
+        "NISP": 1140,
+        "PANS": 1550,
+        "PNBN": 720,
+        "PNIN": 540,
+        "PNLF": 158,
+        "TLKM": 2040,
+        "SRTG": 1725,
+        "TRIM": 580,
+        "VICO": 139,
+        "BTPS": 1015,
+        "TUGU": 1215,
+        "BBSI": 2980,
+        "AGRO": 106,
+        "BBMD": 2000,
+        "COMPOSITE": 5073.77
       }
     }
   ]
